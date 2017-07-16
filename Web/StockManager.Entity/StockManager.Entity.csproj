@@ -1,0 +1,105 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="14.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{3B6E80E2-C6D2-49A5-9962-D6F02AED37B9}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>StockManage.Entity</RootNamespace>
+    <AssemblyName>StockManage.Entity</AssemblyName>
+    <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Net.Http" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Access.DTO\ADJUSTMENT.cs" />
+    <Compile Include="Access.DTO\ADJUSTMENT_DETAIL.cs" />
+    <Compile Include="Access.DTO\BOOK.cs" />
+    <Compile Include="Access.DTO\CURRENCY.cs" />
+    <Compile Include="Access.DTO\CUSTOMER.cs" />
+    <Compile Include="Access.DTO\CUSTOMER_GROUP.cs" />
+    <Compile Include="Access.DTO\CUSTOMER_TYPE.cs" />
+    <Compile Include="Access.DTO\DEPARTMENT.cs" />
+    <Compile Include="Access.DTO\EMPLOYEE.cs" />
+    <Compile Include="Access.DTO\FORM.cs" />
+    <Compile Include="Access.DTO\INVENTORY.cs" />
+    <Compile Include="Access.DTO\INVENTORY_DETAIL.cs" />
+    <Compile Include="Page.cs" />
+    <Compile Include="Access.DTO\PRODUCT.cs" />
+    <Compile Include="Access.DTO\PRODUCT_BUILD.cs" />
+    <Compile Include="Access.DTO\PRODUCT_GROUP.cs" />
+    <Compile Include="Access.DTO\PRODUCT_PRICE.cs" />
+    <Compile Include="Access.DTO\PRODUCT_TYPE.cs" />
+    <Compile Include="Access.DTO\PRODUCT_UNIT.cs" />
+    <Compile Include="Service.Contract\Product\Request\GetProducts_Request.cs" />
+    <Compile Include="Service.Contract\Product\Response\GetProducts_Response.cs" />
+    <Compile Include="Service.Contract\Product\DTO_Mapper\Product\GetProducts_DTO_Maper.cs" />
+    <Compile Include="ResponseBase.cs" />
+    <Compile Include="RequestBase.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Access.DTO\PROVIDER.cs" />
+    <Compile Include="Access.DTO\REFTYPE.cs" />
+    <Compile Include="Access.DTO\REPORT.cs" />
+    <Compile Include="Access.DTO\REPORT_GROUP.cs" />
+    <Compile Include="Access.DTO\STOCK.cs" />
+    <Compile Include="Access.DTO\STOCK_BUILD.cs" />
+    <Compile Include="Access.DTO\STOCK_BUILD_DETAIL.cs" />
+    <Compile Include="Access.DTO\STOCK_INWARD.cs" />
+    <Compile Include="Access.DTO\STOCK_INWARD_DETAIL.cs" />
+    <Compile Include="Access.DTO\STOCK_OUTWARD.cs" />
+    <Compile Include="Access.DTO\STOCK_OUTWARD_DETAIL.cs" />
+    <Compile Include="Access.DTO\STOCK_TRANSFER.cs" />
+    <Compile Include="Access.DTO\STOCK_TRANSFER_DETAIL.cs" />
+    <Compile Include="Access.DTO\sysdiagram.cs" />
+    <Compile Include="Access.DTO\SYS_COMPANY.cs" />
+    <Compile Include="Access.DTO\SYS_GROUP.cs" />
+    <Compile Include="Access.DTO\SYS_GROUP_OBJECT.cs" />
+    <Compile Include="Access.DTO\SYS_INFO.cs" />
+    <Compile Include="Access.DTO\SYS_LOG.cs" />
+    <Compile Include="Access.DTO\SYS_OBJECT.cs" />
+    <Compile Include="Access.DTO\SYS_OPTION.cs" />
+    <Compile Include="Access.DTO\SYS_RULE.cs" />
+    <Compile Include="Access.DTO\SYS_USER.cs" />
+    <Compile Include="Access.DTO\SYS_USER_RULE.cs" />
+    <Compile Include="Access.DTO\TRANS_REF.cs" />
+    <Compile Include="Access.DTO\UNIT.cs" />
+    <Compile Include="Access.DTO\UNITCONVERT.cs" />
+  </ItemGroup>
+  <ItemGroup />
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

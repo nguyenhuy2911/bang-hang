@@ -1,0 +1,198 @@
+﻿@model StockManager.Web.Models.IMPORT_New_UpDate_Form_Model
+
+@{
+    ViewBag.Title = "Import_New";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<div class="col-md-12 col-sm-12 col-xs-12">
+    <div class="x_panel col-md-12 col-sm-12 col-xs-12">
+        <div class="x_title">
+            <h2>Thông tin phiếu nhập<small></small></h2>
+            <ul class="nav navbar-right panel_toolbox">
+                <li>
+                    <a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
+                </li>
+            </ul>
+            <div class="clearfix"></div>
+        </div>
+        <div class="x_content ">
+            <form class="form-horizontal form-label-left">
+                <div class="form-group">
+                    <label class="control-label font-normal col-md-2 col-sm-2 col-xs-12">Nhân viên: </label>
+                    <label class="control-label col-md-2 col-sm-2 col-xs-12">
+                        xxx
+                    </label>
+                    <label class="control-label font-normal col-md-1 col-sm-1 col-xs-12">Ngày:  </label>
+                    <label class="control-label col-md-2 col-sm-2 col-xs-12">
+                        xxx
+                    </label>
+                </div>
+                <div class="form-group">
+                    <label class="control-label font-normal col-md-2 col-sm-2 col-xs-12">
+                        Tên Kho: @*<span class="required">*</span>*@
+                    </label>
+                    <div class="col-md-3 col-sm-3 col-xs-12">
+                        <select class="form-control"></select>
+                    </div>
+
+                </div>
+                <div class="form-group">
+                    <label class="control-label font-normal col-md-2 col-sm-2 col-xs-12">
+                        Mô tả: @*<span class="required">*</span>*@
+                    </label>
+                    <div class="col-md-6 col-sm-6 col-xs-12">
+                        <textarea class="form-control" rows="3" placeholder=''></textarea>
+                    </div>
+                </div>
+
+            </form>
+        </div>
+    </div>
+</div>
+<div class="col-md-6 col-sm-6 col-xs-12">
+    <div class="x_panel col-md-12 col-sm-12 col-xs-12">
+        <div class="x_title">
+            <h2 class="col-md-7 col-sm-7 col-xs-12">Danh sách hàng hóa <small></small></h2>
+            <ul class="nav navbar-right panel_toolbox">
+                <li>
+                    <a class="btn btn-link filter-bar" data-toggle="collapse" data-target="#searh-bar"><i class="fa fa-2x fa-filter"></i> Tìm kiếm</a>
+                </li>
+                <li>
+                    <a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
+                </li>
+            </ul>
+            <div class="clearfix"></div>
+            <div id="searh-bar" class="collapse col-md-12 col-sm-12 col-xs-12">
+                <fieldset class="fieldset">
+                    <legend>Thông tin tìm kiếm</legend>
+                    <div class="row-fluid">
+                        <form class="form-horizontal form-label-left">
+                            <div class="form-group">
+                                <div class="col-md-4 col-sm-4 col-xs-12">
+                                    <input type="text" placeholder="" class="form-control col-md-12 col-sm-12 col-xs-12">
+                                </div>
+                                <div class="col-md-4 col-sm-4 col-xs-12">
+                                    <input type="text" placeholder="" class="form-control col-md-12 col-sm-12 col-xs-12">
+                                </div>
+                                <div class="col-md-4 col-sm-2 col-xs-12">
+                                    <button id="btn_Search" type="button" class="btn btn-dark col-md-12 col-sm-12 col-xs-12">
+                                        <i class="fa fa-search" aria-hidden="true"></i>@Common.Utilies.getResourceString("Search")
+                                    </button>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </fieldset>
+            </div>
+            <div class="clearfix"></div>
+        </div>
+        <div class="x_content ">
+            <form class="form-horizontal form-label-left">
+                <div class="form-group">
+                    <label class="control-label font-normal col-md2 col-sm-2 col-xs-12">Item code:  </label>
+                    <label class="col-md-4 col-sm-4 col-xs-12">
+                        <input type="text" class="form-control " />
+                    </label>
+                    <label class="col-md-4 col-sm-4 col-xs-12">
+                        <input type="button" class="btn btn-primary" value="Thêm">
+                    </label>
+                </div>
+            </form>
+            <div class="col-md-12 col-sm-12 col-xs-12 form-group">
+                <div class="table-responsive">
+                    <table class="table table-striped jambo_table bulk_action">
+                        <thead>
+                            <tr class="headings">
+                                <th class="column-title">Tên sản phẩm </th>
+                                <th class="column-title">Item Code </th>
+                                <th class="column-title">Tồn kho </th>
+                                <th class="column-title">Action </th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr class="even pointer">
+                                <td>Sản phẩm 6</td>
+                                <td></td>
+                                <td></td>
+                                <td>
+                                    <input type="button" class="btn btn-primary col-md-12 col-sm-12 col-xs-12" value="Thêm">
+                                </td>
+                            </tr>
+                            <tr class="odd pointer">
+                                <td>Sản phẩm 7</td>
+                                <td></td>
+                                <td></td>
+                                <td>
+                                    <input type="button" class="btn btn-primary col-md-12 col-sm-12 col-xs-12" value="Thêm">
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</div>
+<div class="col-md-6 col-sm-6 col-xs-12">
+    <div class="x_panel col-md-12 col-sm-12 col-xs-12">
+        <div class="x_title">
+            <h2 class="col-md-7 col-sm-7 col-xs-12">hàng hóa nhập kho <small></small></h2>
+            <ul class="nav navbar-right panel_toolbox">
+                <li>
+                    <a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
+                </li>
+            </ul>
+            <div class="clearfix"></div>
+        </div>
+        <div class="x_content ">
+            <div class="col-md-12 col-sm-12 col-xs-12 form-group">
+
+
+                <div class="col-md-12 col-sm-12 col-xs-12">
+                    <div class="table-responsive">
+                        <table class="table table-striped jambo_table bulk_action">
+                            <thead>
+                                <tr class="headings">
+                                    <th class="column-title">Tên sản phẩm </th>
+                                    <th class="column-title">Item Code </th>
+                                    <th class="column-title">Tồn kho </th>
+                                    <th class="column-title">Action </th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr class="even pointer">
+                                    <td>Sản phẩm 6</td>
+                                    <td></td>
+                                    <td></td>
+                                    <td>
+                                        <input type="button" class="btn btn-danger col-md-12 col-sm-12 col-xs-12" value="Xóa">
+                                    </td>
+                                </tr>
+                                <tr class="odd pointer">
+                                    <td>Sản phẩm 7</td>
+                                    <td></td>
+                                    <td></td>
+                                    <td>
+                                        <input type="button" class="btn btn-danger col-md-12 col-sm-12 col-xs-12" value="Xóa">
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="form-group">
+    <div class="col-md-1 col-sm-2 col-xs-12 col-md-offset-9">
+        <button type="submit" class="btn btn-warning col-md-12 col-sm-12 col-xs-12">Hủy</button>
+    </div>
+    <div class="col-md-1 col-sm-2 col-xs-12">
+        <button type="submit" class="btn btn-success col-md-12 col-sm-12 col-xs-12">Lưu</button>
+    </div>
+</div>
+
+<script src="~/Scripts/Function/IMPORT/IMPORT_New.js"></script>

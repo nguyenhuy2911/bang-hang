@@ -1,0 +1,247 @@
+﻿
+.card {
+    background: #FFF none repeat scroll 0% 0%;
+    box-shadow: 0px 1px 3px rgba(0, 0, 0, 0.3);
+    margin-bottom: 30px;
+}
+
+.border-bottom {
+    border-bottom: 2px solid #DDD;
+}
+
+.custom_carousel .controls ul.nav {
+    background: #fff !important;
+}
+
+.custom_carousel .item {
+    color: #000;
+    background-color: #fff;
+    padding: 20px 0;
+}
+
+.custom_carousel .controls {
+    overflow-x: auto;
+    overflow-y: hidden;
+    padding: 0;
+    margin: 0;
+    white-space: nowrap;
+    text-align: center;
+    position: relative;
+    background: #fff;
+}
+
+    .custom_carousel .controls li {
+        display: table-cell;
+        width: 1%;
+        max-width: 90px;
+        border-bottom: 2px solid #DDD;
+    }
+
+        .custom_carousel .controls li::after {
+            content: '';
+            display: block;
+            margin: auto;
+            margin-bottom: -3px;
+            height: 2px;
+            width: 0px;
+            background: transparent;
+            transition: width .5s ease, background-color .5s ease;
+        }
+
+        .custom_carousel .controls li:not(.active):hover:after {
+            width: 100%;
+            height: 5px;
+            background: #4caf50;
+        }
+
+        .custom_carousel .controls li.active a {
+            border-bottom: 5px solid #4caf50;
+        }
+
+
+
+.btn {
+    box-shadow: 5px 3px 8px 0px rgba(0, 0, 0, 0.18);
+    /*box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1), 0 1px 2px rgba(0, 0, 0, 0.18);*/
+    font-size: 12px;
+    font-weight: 600;
+    text-transform: uppercase;
+    transition: box-shadow 0.28s cubic-bezier(0.4, 0, 0.2, 1);
+    -webkit-border-radius: 2px;
+    -moz-border-radius: 2px;
+    -ms-border-radius: 2px;
+    -o-border-radius: 2px;
+    border-radius: 2px;
+    overflow: hidden;
+    position: relative;
+    user-select: none;
+    padding: 8px 14px 7px 14px;
+}
+
+    .btn:hover {
+        box-shadow: 0 3px 6px rgba(0, 0, 0, 0.2), 0 3px 6px rgba(0, 0, 0, 0.26);
+    }
+
+.search-form .btn:not(.md-skip):not(.bs-select-all):not(.bs-deselect-all),
+.btn-theme-panel .btn:not(.md-skip):not(.bs-select-all):not(.bs-deselect-all) {
+    box-shadow: none !important;
+    overflow: visible;
+}
+
+.btn:not(.md-skip):not(.bs-select-all):not(.bs-deselect-all).btn-link {
+    box-shadow: none;
+    color: #337ab7;
+}
+
+    .btn:not(.md-skip):not(.bs-select-all):not(.bs-deselect-all).btn-link:hover {
+        text-decoration: none;
+    }
+
+.btn > i {
+    margin-top: 0;
+    margin-left: 3px;
+    margin-right: 3px;
+}
+
+.btn:not(.md-skip):not(.bs-select-all):not(.bs-deselect-all).btn-sm {
+    font-size: 11px;
+    padding: 6px 18px 6px 18px;
+}
+
+.btn:not(.md-skip):not(.bs-select-all):not(.bs-deselect-all).btn-xs {
+    font-size: 11px;
+    padding: 3px 8px 3px 8px;
+}
+
+.btn:not(.md-skip):not(.bs-select-all):not(.bs-deselect-all).btn-lg {
+    font-size: 16px;
+    padding: 12px 26px 10px 26px;
+}
+
+.radio input[type="radio"] {
+    cursor: pointer;
+}
+
+.checkbox input[type="checkbox"] {
+    cursor: pointer;
+}
+
+.no-background {
+    background-color: transparent !important;
+}
+
+.no-border {
+    border: none !important;
+}
+
+.custometab a:hover, a:focus {
+    text-decoration: none;
+    outline: none;
+}
+
+.custometab .tab .nav-tabs {
+    border-bottom: 1px solid #b6367f;
+}
+
+    .custometab .tab .nav-tabs li {
+        margin: 0 2px 0 0;
+        position: relative;
+    }
+
+        .custometab .tab .nav-tabs li.active:before {
+            content: "";
+            position: absolute;
+            bottom: -28px;
+            left: 51px;
+            border: 14px solid transparent;
+            border-top-color: #b6367f;
+        }
+
+        .custometab .tab .nav-tabs li.active:after {
+            content: "";
+            position: absolute;
+            bottom: -24px;
+            left: 53px;
+            border: 12px solid transparent;
+            border-top-color: #fff;
+        }
+
+        .custometab .tab .nav-tabs li a {
+            border: none;
+            padding: 13px 35px;
+            font-size: 14px;
+            color: #777;
+            background: transparent;
+            border-radius: 0;
+        }
+
+            .custometab .tab .nav-tabs li a:hover {
+                color: #b6367f;
+            }
+
+            .custometab .tab .nav-tabs li a i {
+                display: block;
+                text-align: center;
+                margin-bottom: 5px;
+            }
+
+        .custometab .tab .nav-tabs li.active a,
+        .custometab .tab .nav-tabs li.active a:focus,
+        .custometab .tab .nav-tabs li.active a:hover {
+            border: none;
+            background: transparent;
+            color: #b6367f;
+            transition: background 0.20s linear 0s;
+        }
+
+.custometab .tab .tab-content {
+    padding-top: 15px;
+}
+
+    .custometab .tab .tab-content h3 {
+        font-size: 26px;
+    }
+
+fieldset {
+    border: 1px solid #03a9f4 !important;
+    margin: 0;
+    xmin-width: 0;
+    padding: 10px;
+    position: relative;
+    border-radius: 4px;
+    background-color: #f5f5f5;
+    padding-left: 10px !important;
+    text-align: -webkit-right;
+    margin-bottom: 10px;
+}
+
+legend {
+    font-size: 14px;
+    font-weight: bold;
+    margin-bottom: 0px;
+    width: 35%;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    padding: 5px 5px 5px 10px;
+    background-color: #03a9f4;
+    text-align: -webkit-center;
+    color: #fff;
+}
+
+@media only screen and (max-width: 479px) {
+    .custometab .tab .nav-tabs li a {
+        padding: 10px;
+    }
+
+    .custometab .tab .nav-tabs li.active:before {
+        left: 28px;
+        bottom: -24px;
+        border-width: 12px;
+    }
+
+    .custometab .tab .nav-tabs li.active:after {
+        left: 30px;
+        bottom: -20px;
+        border-width: 10px;
+    }
+}

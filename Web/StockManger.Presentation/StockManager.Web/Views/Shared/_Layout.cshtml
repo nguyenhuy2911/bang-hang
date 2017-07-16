@@ -1,0 +1,76 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge">
+    <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
+    <title></title>
+    <!-- Favicon-->
+    <link rel="icon" href="favicon.ico" type="image/x-icon">
+    <!-- Google Fonts -->
+
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet" type="text/css">
+    <link href="https://fonts.googleapis.com/css?family=Oswald" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Cuprum" rel="stylesheet">
+    @Styles.Render("~/Template/Admin/css")
+    @Scripts.Render("~/Script/Common")
+    @Scripts.Render("~/Template/Admin/js")
+</head>
+
+<body class="theme-red">
+    <!-- Page Loader -->
+    <div class="page-loader-wrapper">
+        <div class="loader">
+            <div class="preloader">
+                <div class="spinner-layer pl-red">
+                    <div class="circle-clipper left">
+                        <div class="circle"></div>
+                    </div>
+                    <div class="circle-clipper right">
+                        <div class="circle"></div>
+                    </div>
+                </div>
+            </div>
+            <p>Please wait...</p>
+        </div>
+    </div>
+    <!-- #END# Page Loader -->
+    <!-- Overlay For Sidebars -->
+    <div class="overlay"></div>
+    <!-- #END# Overlay For Sidebars -->
+    <!-- Search Bar -->
+    @*<div class="search-bar">
+            <div class="search-icon">
+                <i class="material-icons">search</i>
+            </div>
+            <input type="text" placeholder="START TYPING...">
+            <div class="close-search">
+                <i class="material-icons">close</i>
+            </div>
+        </div>*@
+    <!-- #END# Search Bar -->
+    <!-- Top Bar -->
+    @Html.Partial("~/Views/Shared/_Topbar.cshtml")
+    <!-- #Top Bar -->
+    <section>
+        <!-- Left Sidebar -->
+        @Html.Partial("~/Views/Shared/_Leftsidebar.cshtml")
+        <!-- #END# Left Sidebar -->
+        <!-- Right Sidebar -->
+        @Html.Partial("~/Views/Shared/_Rightsidebar.cshtml")
+        <!-- #END# Right Sidebar -->
+    </section>
+    <section class="content">
+        @RenderBody()
+
+        <div class="spinner">
+            <div class="bounce1 bg-pink"></div>
+            <div class="bounce2 bg-pink"></div>
+            <div class="bounce3 bg-pink"></div>
+        </div>
+
+
+    </section>
+    @Scripts.Render("~/Admin/Setup/js")
+</body>
+</html>
