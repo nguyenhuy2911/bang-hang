@@ -44,3 +44,7 @@ a.filter-bar {
         -webkit-transform: rotate(360deg);
         transform: rotate(360deg);
     }
+
+.modal-body {
+    padding: 0px;
+}

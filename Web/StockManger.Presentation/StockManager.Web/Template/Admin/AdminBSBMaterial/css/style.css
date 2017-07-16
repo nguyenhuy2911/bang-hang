@@ -5593,7 +5593,7 @@ section.content {
 
     .modal .modal-content .modal-body {
         color: #777;
-        padding: 15px 25px;
+        /*padding: 15px 25px;*/
     }
 
 .modal .modal-footer {
