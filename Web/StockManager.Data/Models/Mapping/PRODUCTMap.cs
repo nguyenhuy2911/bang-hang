@@ -121,7 +121,7 @@ namespace StockManager.Data.Models.Mapping
             this.HasOptional(t => t.PRODUCT_GROUP)
                 .WithMany(t => t.PRODUCTs)
                 .HasForeignKey(d => d.Product_Group_ID);
-            this.HasOptional(t => t.UNIT1)
+            this.HasOptional(t => t.UNIT)
                 .WithMany(t => t.PRODUCTs)
                 .HasForeignKey(d => d.Unit);
 

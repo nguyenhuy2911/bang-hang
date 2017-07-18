@@ -19,32 +19,8 @@ namespace StockManager.Web
                 url: "dash-board",
                 defaults: new { controller = "DashBoard", action = "Index" }
             );
-
-            /** --------------------------------------- Merchandise ---------------------------*/
-            routes.MapRoute(
-                name: "product-list",
-                url: "product-list",
-                defaults: new { controller = "Product", action = "Product_FormList" }
-            );
-
-            routes.MapRoute(
-                            name: "get-products",
-                            url: "get-products",
-                            defaults: new { controller = "Product", action = "GetProducts" }
-            );
-
-            routes.MapRoute(
-                            name: "product-create-form",
-                            url: "product-create-form",
-                            defaults: new { controller = "Product", action = "Product_Create_Form" }
-            );
-
-
-            routes.MapRoute(
-                            name: "merchandise-new-assemble",
-                            url: "merchandise-new-assemble",
-                            defaults: new { controller = "MERCHANDISE", action = "MERCHANDISE_NEWASESEMBLED_Form" }
-            );
+            
+          
             /** --------------------------------------- VENDOR -------------------------------*/
             routes.MapRoute(
                 name: "vendor-list",
@@ -102,12 +78,13 @@ namespace StockManager.Web
                             url: "inventory-new-form",
                             defaults: new { controller = "INVENTORY", action = "INVENTORY_NEW_Form" }
             );
+            routes.MapMvcAttributeRoutes();
             routes.MapRoute(
                 name: "Default",
                 url: "{controller}/{action}/{id}",
                 defaults: new { controller = "Home", action = "Index", id = UrlParameter.Optional }
             );
-
+          
         }
     }
 }

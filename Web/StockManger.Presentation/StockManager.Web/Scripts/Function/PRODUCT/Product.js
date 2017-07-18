@@ -20,7 +20,7 @@ PRODUCT.prototype.getProducts = function () {
     var $this = this;
     $.ajax({
         type: "GET",
-        url: "get-products",
+        url: "/product/get-products",
         data: { date: new Date() },
         dataType: "json",
         success: function (response) {
@@ -46,7 +46,10 @@ PRODUCT.prototype.loadToDataTable = function (response) {
 };
 
 PRODUCT.prototype.loadCreateForm = function () {
-    $("#div-crud-modal .modal-body").load("/product-create-form");
+    $("#div-crud-modal").loading();
+    $("#div-crud-modal .modal-body").load("/product/product-create-form", function () {
+        $("#div-crud-modal").loading("stop");
+    });
 }
 
 $(function () {

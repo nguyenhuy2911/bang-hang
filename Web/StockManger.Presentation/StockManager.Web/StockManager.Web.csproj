@@ -481,8 +481,8 @@
     <Content Include="Scripts\jquery.js" />
     <Content Include="Scripts\jquery.validate.js" />
     <Content Include="Scripts\jquery.validate.min.js" />
-    <Content Include="Scripts\systemjs-angular-loader.js" />
-    <Content Include="Scripts\systemjs.config.js" />
+    <Content Include="Scripts\Lip\jquery-loading\jquery.loading.css" />
+    <Content Include="Scripts\Lip\jquery-loading\jquery.loading.js" />
     <Content Include="Template\Admin\AdminBSBMaterial\css\materialize.css" />
     <Content Include="Template\Admin\AdminBSBMaterial\css\style.css" />
     <Content Include="Template\Admin\AdminBSBMaterial\css\style.min.css" />

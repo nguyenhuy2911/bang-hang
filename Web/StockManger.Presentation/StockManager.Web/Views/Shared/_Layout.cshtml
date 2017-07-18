@@ -21,15 +21,10 @@
     <!-- Page Loader -->
     <div class="page-loader-wrapper">
         <div class="loader">
-            <div class="preloader">
-                <div class="spinner-layer pl-red">
-                    <div class="circle-clipper left">
-                        <div class="circle"></div>
-                    </div>
-                    <div class="circle-clipper right">
-                        <div class="circle"></div>
-                    </div>
-                </div>
+            <div class="spinner">
+                <div class="bounce1 bg-pink"></div>
+                <div class="bounce2 bg-pink"></div>
+                <div class="bounce3 bg-pink"></div>
             </div>
             <p>Please wait...</p>
         </div>
@@ -62,14 +57,6 @@
     </section>
     <section class="content">
         @RenderBody()
-
-        <div class="spinner">
-            <div class="bounce1 bg-pink"></div>
-            <div class="bounce2 bg-pink"></div>
-            <div class="bounce3 bg-pink"></div>
-        </div>
-
-
     </section>
     @Scripts.Render("~/Admin/Setup/js")
 </body>

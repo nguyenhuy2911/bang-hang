@@ -6,6 +6,7 @@ using System.Web.Mvc;
 
 namespace StockManager.Web.Controllers
 {
+    [RoutePrefix("product")]
     public class ProductController : BaseController
     {
         private readonly IProductService _IProductService;
@@ -14,6 +15,7 @@ namespace StockManager.Web.Controllers
             this._IProductService = productService;
         }
 
+        [Route]
         public ActionResult Product_FormList()
         {
             if (!CheckLogin())
@@ -25,6 +27,7 @@ namespace StockManager.Web.Controllers
         }
 
         [HttpGet]
+        [Route("get-products")]
         public string GetProducts()
         {
             var response = GetProducts_Data();
@@ -44,10 +47,21 @@ namespace StockManager.Web.Controllers
             return View();
         }
 
+        [Route("product-create-form")]
         public ActionResult Product_Create_Form()
         {
             return View("~/Views/Admin/PRODUCT/Product_Crud_Form.cshtml");
         }
+
+        [HttpPost]
+        [Route("product-create")]
+        public string Product_New()
+        {
+            var response = GetProducts_Data();
+            string json = JsonConvert.SerializeObject(response);
+            return json;
+        }
+
 
         public ActionResult MERCHANDISE_NEWASESEMBLED_Form()
         {
