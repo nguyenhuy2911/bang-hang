@@ -22,7 +22,8 @@ namespace StockManager.Web
                         "~/Template/Admin/AdminBSBMaterial/plugins/jquery/jquery.min.js",
                         "~/Template/Admin/AdminBSBMaterial/plugins/bootstrap/js/bootstrap.js",
                         "~/Template/Admin/AdminBSBMaterial/plugins/jquery-slimscroll/jquery.slimscroll.js",
-                        "~/Template/Admin/AdminBSBMaterial/plugins/node-waves/waves.js"
+                        "~/Template/Admin/AdminBSBMaterial/plugins/node-waves/waves.js",
+                        "~/Template/Admin/AdminBSBMaterial/plugins/tinymce/tinymce.min.js"
             ));
 
             bundles.Add(new StyleBundle("~/Template/Admin/css").Include(
@@ -43,6 +44,7 @@ namespace StockManager.Web
             bundles.Add(new ScriptBundle("~/Script/Common").Include(
                         "~/Scripts/jquery-3.1.1.min.js",                        
                         "~/Scripts/Common/Helper.js",
+                         "~/Scripts/Common/initPlugin.js",
                         "~/Scripts/Function/BaseFunction.js"
 
             ));
@@ -73,7 +75,7 @@ namespace StockManager.Web
             var productScript = new List<string>();
             productScript.AddRange(DataTableScript);
             productScript.AddRange(SelectScript);
-            productScript.AddRange(CkeditorScript);
+         //   productScript.AddRange(CkeditorScript);
             productScript.Add("~/Scripts/Function/PRODUCT/Product.js");
             bundles.Add(new ScriptBundle("~/Script/Function/Product").Include(
                           productScript.ToArray()
@@ -121,19 +123,6 @@ namespace StockManager.Web
                 return new string[]
                 {
                     "~/Template/Admin/AdminBSBMaterial/plugins/bootstrap-select/js/bootstrap-select.min.js"
-                };
-            }
-        }
-
-        private static string[] CkeditorScript
-        {
-            get
-            {
-                return new string[]
-                {
-                    "~/Template/Admin/AdminBSBMaterial/plugins/ckeditor/ckeditor.js",
-                    "~/Template/Admin/AdminBSBMaterial/plugins/tinymce/tinymce.min.js",
-                   // "~/Template/Admin/AdminBSBMaterial/js/pages/forms/editors.js"
                 };
             }
         }

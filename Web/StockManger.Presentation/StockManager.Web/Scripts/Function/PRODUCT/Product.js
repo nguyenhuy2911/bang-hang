@@ -47,6 +47,7 @@ PRODUCT.prototype.loadToDataTable = function (response) {
 
 PRODUCT.prototype.loadCreateForm = function () {
     $("#div-crud-modal").loading();
+    $("#div-crud-modal .modal-body").html("");
     $("#div-crud-modal .modal-body").load("/product/product-create-form", function () {
         $("#div-crud-modal").loading("stop");
     });

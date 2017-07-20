@@ -465,7 +465,7 @@
     <Content Include="Content\Themes\Admin\jquery\src\.jshintrc" />
     <None Include="Scripts\jquery-3.1.1.intellisense.js" />
     <Content Include="Scripts\Common\Helper.js" />
-    <Content Include="Scripts\Common\dataTableExtention.js" />
+    <Content Include="Scripts\Common\initPlugin.js" />
     <Content Include="Scripts\Function\BaseFunction.js" />
     <Content Include="Scripts\Function\IMPORT\IMPORT_New.js" />
     <Content Include="Scripts\Function\PRODUCT\Product.js" />

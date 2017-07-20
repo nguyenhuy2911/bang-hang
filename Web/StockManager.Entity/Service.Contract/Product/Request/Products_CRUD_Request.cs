@@ -1,9 +1,9 @@
 ﻿using System.ComponentModel.DataAnnotations;
 namespace StockManager.Entity.Service.Contract
 {
-    public class Products_Create_Request : RequestBase
+    public class Products_CRUD_Request : RequestBase
     {
-        public Products_Create_Request()
+        public Products_CRUD_Request()
         {
            
         }
@@ -24,5 +24,7 @@ namespace StockManager.Entity.Service.Contract
 
         [Required]
         public string UserID { get; set; }
+        public string Description { get; set; }
+
     }
 }

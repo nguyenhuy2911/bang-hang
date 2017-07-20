@@ -60,7 +60,7 @@
     <Compile Include="Access.DTO\PRODUCT_PRICE.cs" />
     <Compile Include="Access.DTO\PRODUCT_TYPE.cs" />
     <Compile Include="Access.DTO\PRODUCT_UNIT.cs" />
-    <Compile Include="Service.Contract\Product\Request\Products_Create_Request.cs" />
+    <Compile Include="Service.Contract\Product\Request\Products_CRUD_Request.cs" />
     <Compile Include="Service.Contract\Product\Request\GetProducts_Request.cs" />
     <Compile Include="Service.Contract\Product\Response\GetProducts_Response.cs" />
     <Compile Include="Service.Contract\Product\DTO_Mapper\Product\GetProducts_DTO_Maper.cs" />
