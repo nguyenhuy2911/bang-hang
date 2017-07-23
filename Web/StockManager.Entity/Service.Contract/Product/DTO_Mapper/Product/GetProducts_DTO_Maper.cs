@@ -20,7 +20,7 @@ namespace StockManager.Entity.Service.Contract
         public string Provider_ID { get; set; }
         public string Origin { get; set; }
         public string Barcode { get; set; }
-        public string Unit { get; set; }
+        public string Unit_ID { get; set; }
         public string UnitConvert { get; set; }
         public decimal? UnitRate { get; set; }
         public decimal? Org_Price { get; set; }

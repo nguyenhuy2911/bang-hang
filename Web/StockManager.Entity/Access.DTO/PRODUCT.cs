@@ -24,7 +24,7 @@ namespace StockManager.Entity
         public string Provider_ID { get; set; }
         public string Origin { get; set; }
         public string Barcode { get; set; }
-        public string Unit { get; set; }
+        public string Unit_ID { get; set; }
         public string UnitConvert { get; set; }
         public Nullable<decimal> UnitRate { get; set; }
         public Nullable<decimal> Org_Price { get; set; }
@@ -66,7 +66,7 @@ namespace StockManager.Entity
         public virtual  ICollection<ADJUSTMENT_DETAIL> ADJUSTMENT_DETAIL { get; set; }
         public virtual ICollection<INVENTORY_DETAIL> INVENTORY_DETAIL { get; set; }
         public virtual PRODUCT_GROUP PRODUCT_GROUP { get; set; }
-        public virtual UNIT UNIT { get; set; }
+        public virtual UNIT UNIT1 { get; set; }
         public virtual ICollection<STOCK_INWARD_DETAIL> STOCK_INWARD_DETAIL { get; set; }
         public virtual ICollection<STOCK_OUTWARD_DETAIL> STOCK_OUTWARD_DETAIL { get; set; }
         public virtual ICollection<STOCK_TRANSFER_DETAIL> STOCK_TRANSFER_DETAIL { get; set; }

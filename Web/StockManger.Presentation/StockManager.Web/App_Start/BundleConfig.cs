@@ -23,7 +23,9 @@ namespace StockManager.Web
                         "~/Template/Admin/AdminBSBMaterial/plugins/bootstrap/js/bootstrap.js",
                         "~/Template/Admin/AdminBSBMaterial/plugins/jquery-slimscroll/jquery.slimscroll.js",
                         "~/Template/Admin/AdminBSBMaterial/plugins/node-waves/waves.js",
-                        "~/Template/Admin/AdminBSBMaterial/plugins/tinymce/tinymce.min.js"
+                        "~/Template/Admin/AdminBSBMaterial/plugins/tinymce/tinymce.min.js",
+                        "~/Template/Admin/AdminBSBMaterial/plugins/ckeditor/ckeditor.js"
+
             ));
 
             bundles.Add(new StyleBundle("~/Template/Admin/css").Include(

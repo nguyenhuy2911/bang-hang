@@ -385,6 +385,7 @@ $.AdminBSB.dropdownMenu = {
 
 $.AdminBSB.Tinymce = {
     setup: function (selector) {
+        tinymce.remove();
         tinymce.init({
             selector: selector,
             theme: "modern",

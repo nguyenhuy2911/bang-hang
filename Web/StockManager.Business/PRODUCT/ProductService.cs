@@ -41,8 +41,8 @@ namespace StockManager.Business
         }
         public GetProducts_Response GetProducts(GetProducts_Request request)
         {           
-            var response = _IProductRepository.GetAll(request.Page, x => x.Product_ID, false);
-            var retData = Mapper.Map<ResponseBase<List<PRODUCT>>, GetProducts_Response>(response);           
+            var products = _IProductRepository.GetAll(request.Page, x => x.Product_ID, false);
+            var retData = Mapper.Map<ResponseBase<List<PRODUCT>>, GetProducts_Response>(products);           
             return retData;
         }
 

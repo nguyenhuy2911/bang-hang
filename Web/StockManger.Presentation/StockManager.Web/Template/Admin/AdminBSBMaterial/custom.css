@@ -45,6 +45,11 @@ a.filter-bar {
         transform: rotate(360deg);
     }
 
+/* ******************************************** Modal ****************************************** */
+.modal .modal-body .mce-tinymce .mce-container-body {
+    border-right: 1px solid rgba(185, 179, 179, 0);
+}
+
 .modal-body {
     padding: 0px;
 }

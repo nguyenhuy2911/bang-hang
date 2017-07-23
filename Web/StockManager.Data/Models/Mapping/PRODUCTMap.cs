@@ -35,7 +35,7 @@ namespace StockManager.Data.Models.Mapping
             this.Property(t => t.Barcode)
                 .HasMaxLength(20);
 
-            this.Property(t => t.Unit)
+            this.Property(t => t.Unit_ID)
                 .HasMaxLength(20);
 
             this.Property(t => t.UnitConvert)
@@ -77,7 +77,7 @@ namespace StockManager.Data.Models.Mapping
             this.Property(t => t.Provider_ID).HasColumnName("Provider_ID");
             this.Property(t => t.Origin).HasColumnName("Origin");
             this.Property(t => t.Barcode).HasColumnName("Barcode");
-            this.Property(t => t.Unit).HasColumnName("Unit");
+            this.Property(t => t.Unit_ID).HasColumnName("Unit_ID");
             this.Property(t => t.UnitConvert).HasColumnName("UnitConvert");
             this.Property(t => t.UnitRate).HasColumnName("UnitRate");
             this.Property(t => t.Org_Price).HasColumnName("Org_Price");
@@ -121,9 +121,9 @@ namespace StockManager.Data.Models.Mapping
             this.HasOptional(t => t.PRODUCT_GROUP)
                 .WithMany(t => t.PRODUCTs)
                 .HasForeignKey(d => d.Product_Group_ID);
-            this.HasOptional(t => t.UNIT)
+            this.HasOptional(t => t.UNIT1)
                 .WithMany(t => t.PRODUCTs)
-                .HasForeignKey(d => d.Unit);
+                .HasForeignKey(d => d.Unit_ID);
 
         }
     }

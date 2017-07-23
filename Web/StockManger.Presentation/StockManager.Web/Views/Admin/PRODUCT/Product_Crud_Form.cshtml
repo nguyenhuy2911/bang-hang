@@ -75,20 +75,24 @@
                                 </h2>
                             </div>
                             <div class="body">
-                                @Html.TextAreaFor(m => m.Description, new { @id = "txt_Description" })
+                                @Html.TextAreaFor(m => m.Description, new { @id = "txt_Description", @class = "txt-description" })
                             </div>
                         </div>
                     </div>
                 </div>
+
             </div>
         </div>
     </div>
 </div>
+
 <script>
-    $(function () {     
+    $(function () {
         $.AdminBSB.input.activate();
         $.AdminBSB.select.activate();
-        $.AdminBSB.Tinymce.setup("textarea#txt_Description");
+
+        $.AdminBSB.Tinymce.setup("textarea.txt-description");
+
     })
 </script>
 

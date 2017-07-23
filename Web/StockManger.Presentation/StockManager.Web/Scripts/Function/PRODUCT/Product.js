@@ -37,7 +37,7 @@ PRODUCT.prototype.loadToDataTable = function (response) {
         columns: [
             { data: "Product_ID", title: "Product ID" },
             { data: "Product_Name", title: "Product Name" },
-            { data: "Unit", title: "Unit" },
+            { data: "Unit_ID", title: "Unit" },
             { data: "Quantity", title: "Quantity" }
         ],
         select: true
@@ -50,6 +50,7 @@ PRODUCT.prototype.loadCreateForm = function () {
     $("#div-crud-modal .modal-body").html("");
     $("#div-crud-modal .modal-body").load("/product/product-create-form", function () {
         $("#div-crud-modal").loading("stop");
+       
     });
 }
 
