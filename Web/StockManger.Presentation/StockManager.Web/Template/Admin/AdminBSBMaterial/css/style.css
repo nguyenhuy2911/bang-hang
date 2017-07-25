@@ -10854,3 +10854,10 @@ html.ie11 .bs-searchbox .form-control {
     width: 99%;
     height:auto;    
 }
+
+.form-group span.error {    
+    display: block;
+    margin-top: 5px;
+    font-weight: normal;
+    color: #F44336;
+}

@@ -44,12 +44,16 @@ namespace StockManager.Web
             // ----------------------------- Common ----------------------------------------------- //
 
             bundles.Add(new ScriptBundle("~/Script/Common").Include(
-                        "~/Scripts/jquery-3.1.1.min.js",                        
+                        "~/Scripts/jquery-3.1.1.min.js",
+                        "~/Scripts/modernizr-2.6.2.js",
                         "~/Scripts/Common/Helper.js",
                          "~/Scripts/Common/initPlugin.js",
                         "~/Scripts/Function/BaseFunction.js"
 
             ));
+
+            bundles.Add(new ScriptBundle("~/bundles/jqueryval").Include(
+                       "~/Scripts/jquery.validate*"));
 
             // --------------------------------  Setup --------------------------------------------- //
 
@@ -70,6 +74,7 @@ namespace StockManager.Web
             var productStyles = new List<string>();
             productStyles.AddRange(DataTableStyle);
             productStyles.AddRange(SelectStyle);
+            productStyles.AddRange(UploadFileStyle);
             bundles.Add(new StyleBundle("~/Styles/Function/Product").Include(
                           productStyles.ToArray()
            ));
@@ -77,8 +82,10 @@ namespace StockManager.Web
             var productScript = new List<string>();
             productScript.AddRange(DataTableScript);
             productScript.AddRange(SelectScript);
-         //   productScript.AddRange(CkeditorScript);
+            productScript.AddRange(UploadFileScript);
+            //   productScript.AddRange(CkeditorScript);
             productScript.Add("~/Scripts/Function/PRODUCT/Product.js");
+          
             bundles.Add(new ScriptBundle("~/Script/Function/Product").Include(
                           productScript.ToArray()
             ));
@@ -125,6 +132,27 @@ namespace StockManager.Web
                 return new string[]
                 {
                     "~/Template/Admin/AdminBSBMaterial/plugins/bootstrap-select/js/bootstrap-select.min.js"
+                };
+            }
+        }
+
+        private static string[] UploadFileStyle
+        {
+            get
+            {
+                return new string[]
+                {
+                    "~/Template/Admin/AdminBSBMaterial/plugins/dropzone/dropzone.css"
+                };
+            }
+        }
+        private static string[] UploadFileScript
+        {
+            get
+            {
+                return new string[]
+                {
+                    "~/Template/Admin/AdminBSBMaterial/plugins/dropzone/dropzone.js"
                 };
             }
         }

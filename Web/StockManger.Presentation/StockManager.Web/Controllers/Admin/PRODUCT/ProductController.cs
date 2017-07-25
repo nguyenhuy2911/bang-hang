@@ -2,6 +2,7 @@
 using StockManager.Business;
 using StockManager.Entity.Service.Contract;
 using StockManager.Web.Models;
+using StockManager.Web.Models.PRODUCT;
 using System.Web.Mvc;
 
 namespace StockManager.Web.Controllers
@@ -55,8 +56,10 @@ namespace StockManager.Web.Controllers
 
         [HttpPost]
         [Route("product-create")]
-        public string Product_New()
+        public string Product_New(Products_CRUD_ViewModel model)
         {
+            if (!ModelState.IsValid)
+                return string.Empty;
             var response = GetProducts_Data();
             string json = JsonConvert.SerializeObject(response);
             return json;
