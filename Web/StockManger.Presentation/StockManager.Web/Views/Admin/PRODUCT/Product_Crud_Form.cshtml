@@ -64,23 +64,21 @@
                                     <div class="col-sm-3">
                                         <div class="form-group">
                                             <div class="form-line">
-                                                <label class="form-label">Đơn vị tính</label>
-                                                <select class="form-control show-tick">
-                                                    <option value="">-- Đơn vị tính --</option>
-                                                    <option value="10">10</option>
-                                                    <option value="20">20</option>
-                                                    <option value="30">30</option>
-                                                    <option value="40">40</option>
-                                                    <option value="50">50</option>
-                                                </select>
+                                                @*<label class="form-label">Đơn vị tính</label>*@
+                                                @Html.DropDownListFor(m => m.Unit, Model.Units, new { @class = "form-control show-tick" })
 
                                             </div>
+                                            @Html.ValidationMessageFor(model => model.Unit, null, new { @class = "error" })
                                         </div>
                                     </div>
                                 </div>
+                               
+
                             </div>
                         </div>
+                        
                     </div>
+                    
                     <div class="row clearfix">
                         <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
                             <div class="card">
@@ -97,7 +95,7 @@
                         </div>
                     </div>
                 </form>
-                <div class="row clearfix">
+                <div class="row clearfix" style="display:none">
                     <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
                         <div class="card">
                             <div class="header">
@@ -105,7 +103,7 @@
                                     Hình ảnh
                                     <small>Upload file</small>
                                 </h2>
-                                
+
                             </div>
                             <div class="body">
                                 <form action="/" id="frmFileUpload" class="dropzone" method="post" enctype="multipart/form-data">
@@ -134,7 +132,9 @@
 <script>
     $(function () {
         $.AdminBSB.input.activate();
+        $.AdminBSB.dropdownMenu.activate();
         $.AdminBSB.select.activate();
+        
         $.AdminBSB.Tinymce.setup("textarea.txt-description");
         $("#frmFileUpload").dropzone({
             removedfile: function (file) {
@@ -145,11 +145,10 @@
                         _ref.parentNode.removeChild(file.previewElement);
                     }
                 }
-                return this._updateMaxFilesReachedClass();               
+                return this._updateMaxFilesReachedClass();
             },
-            
+
         });
     })
 </script>
-<script src="~/Scripts/jquery.validate.js"></script>
-<script src="~/Scripts/jquery.validate.unobtrusive.js"></script>
+@Scripts.Render("~/bundles/jqueryval")

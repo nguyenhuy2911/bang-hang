@@ -18,26 +18,20 @@ namespace StockManager.Web
         {
             // -------------------------  Bundles Template --------------------------------------- //
 
-            bundles.Add(new ScriptBundle("~/Template/Admin/js").Include(
-                        "~/Template/Admin/AdminBSBMaterial/plugins/jquery/jquery.min.js",
-                        "~/Template/Admin/AdminBSBMaterial/plugins/bootstrap/js/bootstrap.js",
-                        "~/Template/Admin/AdminBSBMaterial/plugins/jquery-slimscroll/jquery.slimscroll.js",
-                        "~/Template/Admin/AdminBSBMaterial/plugins/node-waves/waves.js",
-                        "~/Template/Admin/AdminBSBMaterial/plugins/tinymce/tinymce.min.js",
-                        "~/Template/Admin/AdminBSBMaterial/plugins/ckeditor/ckeditor.js"
-
-            ));
-
             bundles.Add(new StyleBundle("~/Template/Admin/css").Include(
-                       "~/Template/Admin/AdminBSBMaterial/font-awesome/css/font-awesome.min.css",
-                       "~/Template/Admin/AdminBSBMaterial/plugins/bootstrap/css/bootstrap.css",
-                       "~/Template/Admin/AdminBSBMaterial/plugins/node-waves/waves.css",
-                       "~/Template/Admin/AdminBSBMaterial/plugins/animate-css/animate.css",
+                        "~/Template/Admin/AdminBSBMaterial/plugins/bootstrap/css/bootstrap.css",
+                        "~/Template/Admin/AdminBSBMaterial/plugins/node-waves/waves.css",
+                        "~/Template/Admin/AdminBSBMaterial/plugins/animate-css/animate.css",
+                        "~/Template/Admin/AdminBSBMaterial/plugins/bootstrap-material-datetimepicker/css/bootstrap-material-datetimepicker.css",
+                        "~/Template/Admin/AdminBSBMaterial/plugins/waitme/waitMe.css",
+                        "~/Template/Admin/AdminBSBMaterial/plugins/bootstrap-select/css/bootstrap-select.css",
+                        "~/Template/Admin/AdminBSBMaterial/plugins/multi-select/css/multi-select.css",
+                        "~/Template/Admin/AdminBSBMaterial/css/style.css",
+                        "~/Template/Admin/AdminBSBMaterial/css/themes/all-themes.css",
+                        "~/Template/Admin/AdminBSBMaterial/font-awesome/css/font-awesome.min.css",                       
                        // "~/Template/Admin/AdminBSBMaterial/plugins/morrisjs/morris.css",
-                       "~/Template/Admin/AdminBSBMaterial/css/themes/all-themes.css",
-                       "~/Template/Admin/AdminBSBMaterial/css/style.css",
-                       "~/Template/Admin/AdminBSBMaterial/custom.css",
-                       "~/Scripts/Lip/jquery-loading/jquery.loading.css"
+                        "~/Template/Admin/AdminBSBMaterial/custom.css",
+                        "~/Scripts/Lip/jquery-loading/jquery.loading.css"
 
            ));
 
@@ -45,7 +39,7 @@ namespace StockManager.Web
 
             bundles.Add(new ScriptBundle("~/Script/Common").Include(
                         "~/Scripts/jquery-3.1.1.min.js",
-                        "~/Scripts/modernizr-2.6.2.js",
+                        "~/Scripts/modernizr-2.6.2.js",                        
                         "~/Scripts/Common/Helper.js",
                          "~/Scripts/Common/initPlugin.js",
                         "~/Scripts/Function/BaseFunction.js"
@@ -58,9 +52,19 @@ namespace StockManager.Web
             // --------------------------------  Setup --------------------------------------------- //
 
             bundles.Add(new ScriptBundle("~/Admin/Setup/js").Include(
-                        "~/Template/Admin/AdminBSBMaterial/js/admin.js",
-                        "~/Scripts/Lip/jquery-loading/jquery.loading.js"
-            ));
+                        "~/Template/Admin/AdminBSBMaterial/plugins/jquery/jquery.min.js",
+                        "~/Template/Admin/AdminBSBMaterial/plugins/bootstrap/js/bootstrap.js",
+                         "~/Template/Admin/AdminBSBMaterial/plugins/bootstrap-select/js/bootstrap-select.js",
+                        "~/Template/Admin/AdminBSBMaterial/plugins/jquery-slimscroll/jquery.slimscroll.js",
+                        "~/Template/Admin/AdminBSBMaterial/plugins/node-waves/waves.js",
+                        "~/Template/Admin/AdminBSBMaterial/plugins/autosize/autosize.js",
+                        "~/Template/Admin/AdminBSBMaterial/plugins/momentjs/moment.js",
+                        "~/Template/Admin/AdminBSBMaterial/plugins/bootstrap-material-datetimepicker/js/bootstrap-material-datetimepicker.js",
+                        "~/Template/Admin/AdminBSBMaterial/plugins/tinymce/tinymce.min.js",
+                        "~/Template/Admin/AdminBSBMaterial/plugins/ckeditor/ckeditor.js",
+                        "~/Scripts/Lip/jquery-loading/jquery.loading.js",
+                        "~/Template/Admin/AdminBSBMaterial/js/admin.js"
+                        ));
 
             // Page 
             // ------------------------- DASHBOARD ----------------------------------------------//
@@ -72,8 +76,7 @@ namespace StockManager.Web
             // ------------------------- PRODUCT ----------------------------------------------//
 
             var productStyles = new List<string>();
-            productStyles.AddRange(DataTableStyle);
-            productStyles.AddRange(SelectStyle);
+            productStyles.AddRange(DataTableStyle);          
             productStyles.AddRange(UploadFileStyle);
             bundles.Add(new StyleBundle("~/Styles/Function/Product").Include(
                           productStyles.ToArray()
@@ -81,7 +84,6 @@ namespace StockManager.Web
 
             var productScript = new List<string>();
             productScript.AddRange(DataTableScript);
-            productScript.AddRange(SelectScript);
             productScript.AddRange(UploadFileScript);
             //   productScript.AddRange(CkeditorScript);
             productScript.Add("~/Scripts/Function/PRODUCT/Product.js");
@@ -111,27 +113,6 @@ namespace StockManager.Web
                     "~/Template/Admin/AdminBSBMaterial/plugins/jquery-datatable/jquery.dataTables.js",
                     "~/Template/Admin/AdminBSBMaterial/plugins/jquery-datatable/skin/bootstrap/js/dataTables.bootstrap.js",
                     "~/Scripts/Common/dataTableExtention.js"
-                };
-            }
-        }
-
-        private static string[] SelectStyle
-        {
-            get
-            {
-                return new string[]
-                {
-                    "~/Template/Admin/AdminBSBMaterial/plugins/bootstrap-select/css/bootstrap-select.min.css"
-                };
-            }
-        }
-        private static string[] SelectScript
-        {
-            get
-            {
-                return new string[]
-                {
-                    "~/Template/Admin/AdminBSBMaterial/plugins/bootstrap-select/js/bootstrap-select.min.js"
                 };
             }
         }

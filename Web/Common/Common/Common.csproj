@@ -48,6 +48,8 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="PredicateBuilder.cs" />
+    <Compile Include="Enum\ACTIVE.cs" />
     <Compile Include="QueryableExtensions.cs" />
     <Compile Include="DALExcell.cs" />
     <Compile Include="GridColumn.cs" />

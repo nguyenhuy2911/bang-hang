@@ -153,7 +153,8 @@
     <Compile Include="Controllers\Admin\VENDOR\VENDORController.cs" />
     <Compile Include="Controllers\Admin\WAREHOUSETRANSFER\WAREHOUSETRANSFERController.cs" />
     <Compile Include="Mapping\AutoMapperConfiguration.cs" />
-    <Compile Include="Mapping\ServiceToWebMappingProfile.cs" />
+    <Compile Include="Mapping\ServiceToDomainMappingProfile.cs" />
+    <Compile Include="Mapping\DomainToServiceMappingProfile.cs" />
     <Compile Include="Models\INVENTORY\INVENTORY_Form_Model.cs" />
     <Compile Include="Models\INVENTORY\INVENTORY_New_UpDate_Form_Model.cs" />
     <Compile Include="Models\PRODUCT\Products_CRUD_ViewModel.cs" />
@@ -3634,7 +3635,7 @@
     <Content Include="Template\Admin\AdminBSBMaterial\plugins\morrisjs\spec\viz\test.html" />
     <Content Include="Template\Admin\AdminBSBMaterial\plugins\morrisjs\spec\viz\visual_specs.js" />
     <Content Include="Template\Admin\AdminBSBMaterial\plugins\multi-select\css\multi-select.css" />
-    <Content Include="Template\Admin\AdminBSBMaterial\plugins\multi-select\img\switch.png" />
+    <Content Include="Template\Admin\AdminBSBMaterial\plugins\multi-select\css\img\switch.png" />
     <Content Include="Template\Admin\AdminBSBMaterial\plugins\multi-select\js\jquery.multi-select.js" />
     <Content Include="Template\Admin\AdminBSBMaterial\plugins\nestable\jquery-nestable.css" />
     <Content Include="Template\Admin\AdminBSBMaterial\plugins\nestable\jquery.nestable.js" />

@@ -12,7 +12,8 @@ namespace StockManager.Web.Mapping
         {
             Mapper.Initialize(x =>
             {
-                x.AddProfile<ServiceToWebMappingProfile>();
+                x.AddProfile<DomainToServiceMappingProfile>();
+                x.AddProfile<ServiceToDomainMappingProfile>();
             });
         }
     }

@@ -63,6 +63,10 @@ namespace StockManager.Data
         public DbSet<UNIT> Units { get; set; }
         public DbSet<UNITCONVERT> UnitConverts { get; set; }
 
+        public virtual void Commit()
+        {
+            base.SaveChanges();
+        }
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
             modelBuilder.Configurations.Add(new ADJUSTMENTMap());

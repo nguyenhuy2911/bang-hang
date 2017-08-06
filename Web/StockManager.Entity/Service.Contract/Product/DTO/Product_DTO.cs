@@ -1,15 +1,9 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
 
 namespace StockManager.Entity.Service.Contract
 {
-    public class GetProducts_DTO_Maper
+    public class Product_DTO
     {
-        public GetProducts_DTO_Maper()
-        {
-        }
         public int Product_ID { get; set; }
         public string Product_Name { get; set; }
         public string Product_NameEN { get; set; }

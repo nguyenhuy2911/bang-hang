@@ -6,7 +6,7 @@ using System.Linq.Expressions;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace StockManager.Data
+namespace StockManager.Data.Infrastructure
 {
     public interface IRepositoryBase<T> where T : class
     {
@@ -19,6 +19,6 @@ namespace StockManager.Data
         // T Get(Expression<Func<T, bool>> where);
         IEnumerable<T> GetAll();
         ResponseBase<List<T>> GetAll(Page pager, Expression<Func<T, object>> order, bool ascending);
-        ResponseBase<T> GetPage(Page pager, Expression<Func<T, bool>> where, Expression<Func<T, object>> order, bool ascending);
+        Task<ResponseBase<List<T>>>  GetPage(Page pager, Expression<Func<T, bool>> where = null, Expression<Func<T, object>> order = null, bool ascending = false);
     }
 }

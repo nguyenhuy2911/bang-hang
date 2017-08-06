@@ -1,8 +1,12 @@
 ﻿using Newtonsoft.Json;
 using StockManager.Business;
+using StockManager.Entity;
 using StockManager.Entity.Service.Contract;
 using StockManager.Web.Models;
 using StockManager.Web.Models.PRODUCT;
+using System.Collections.Generic;
+using System.Linq;
+using System.Threading.Tasks;
 using System.Web.Mvc;
 
 namespace StockManager.Web.Controllers
@@ -11,9 +15,24 @@ namespace StockManager.Web.Controllers
     public class ProductController : BaseController
     {
         private readonly IProductService _IProductService;
-        public ProductController(IProductService productService)
+        private readonly IUnitService _IUnitService;
+
+        private List<Get_Unit_DTO_Maper> _listUnit { get; set; }
+
+        private  void SetListUnit()
+        {
+            if (_listUnit == null)
+            {               
+                _listUnit = GetUnits_For_CRUD();
+            }
+
+        }
+
+        public ProductController(IProductService productService, IUnitService unitService)
         {
             this._IProductService = productService;
+            this._IUnitService = unitService;
+            this.SetListUnit();
         }
 
         [Route]
@@ -36,7 +55,7 @@ namespace StockManager.Web.Controllers
             return json;
         }
 
-        private GetProducts_Response GetProducts_Data()
+        private Get_Products_Response GetProducts_Data()
         {
             var request = new GetProducts_Request();
             var response = _IProductService.GetProducts(request);
@@ -51,7 +70,27 @@ namespace StockManager.Web.Controllers
         [Route("product-create-form")]
         public ActionResult Product_Create_Form()
         {
-            return View("~/Views/Admin/PRODUCT/Product_Crud_Form.cshtml");
+            var model = new Products_CRUD_ViewModel();          
+            model.Units.Add(new SelectListItem() { Text = "Chọn", Value = "-1" });
+            if (_listUnit != null)
+            {
+                model.Units.AddRange(_listUnit.Select(i =>
+                                                           new SelectListItem()
+                                                           {
+                                                               Text = i.Unit_Name,
+                                                               Value = i.Unit_ID
+                                                           }).ToList());
+            }
+
+
+            return View("~/Views/Admin/PRODUCT/Product_Crud_Form.cshtml", model);
+        }
+
+        private List<Get_Unit_DTO_Maper> GetUnits_For_CRUD()
+        {
+          
+            var request = new Get_Unit_Request();
+            return _IUnitService.GetUnits(request)?.Results;
         }
 
         [HttpPost]
@@ -64,7 +103,6 @@ namespace StockManager.Web.Controllers
             string json = JsonConvert.SerializeObject(response);
             return json;
         }
-
 
         public ActionResult MERCHANDISE_NEWASESEMBLED_Form()
         {

@@ -5,20 +5,20 @@ using System.Collections.Generic;
 
 namespace StockManager.Web.Mapping
 {
-    public class ServiceToWebMappingProfile : Profile
+    public class ServiceToDomainMappingProfile : Profile
     {
         public override string ProfileName
         {
             get
             {
-                return "ServiceToWebMappingProfile";
+                return "ServiceToDomainMappingProfile";
             }
         }
 
-        public ServiceToWebMappingProfile()
+        public ServiceToDomainMappingProfile()
         {
-            CreateMap<ResponseBase<List<PRODUCT>>, GetProducts_Response>();
-            CreateMap<PRODUCT, GetProducts_DTO_Maper>();
+            CreateMap<CRUD_Product_Request, PRODUCT>();
+            
         }
     }
 }

@@ -10,7 +10,7 @@ using System.Threading.Tasks;
 using Common;
 using System.Data.Entity.Infrastructure;
 
-namespace StockManager.Data
+namespace StockManager.Data.Infrastructure
 {
     public class RepositoryBase<T> where T : class
     {
@@ -70,7 +70,7 @@ namespace StockManager.Data
             };
             try
             {
-                var query = dbset.SortBy(order, ascending).Skip(pager.Skip).Take(pager.PageSize);               
+                var query = dbset.SortBy(order, ascending).Skip(pager.Skip).Take(pager.PageSize);
                 var result = query.ToList();
                 var totalRow = dbset.Count();
                 return
@@ -91,23 +91,61 @@ namespace StockManager.Data
 
         }
 
-        public virtual ResponseBase<T> GetPage(Page pager, Expression<Func<T, bool>> where, Expression<Func<T, object>> order, bool ascending)
+        public virtual async Task< ResponseBase<List<T>>> GetPage(Page pager, Expression<Func<T, bool>> where = null, Expression<Func<T, object>> order = null, bool ascending = false)
         {
 
-            var query = dbset;
-            if (where != null)
-                query.Where(where);
-            if (order != null)
-                query.SortBy(order, ascending);
-
-            query.Take(pager.PageSize).Skip(pager.Skip);
-            var total = dbset.Count(where);
+            var getDataAsync = await this.GetDatas(pager, where, order, ascending);
+            var getTotalRowAsync = await this.GetTotalCount(where);
+           
             return
-                new ResponseBase<T>()
+                new ResponseBase<List<T>>()
                 {
-                    Results = (T)query,
-                    TotalRow = total
+                    Results = getDataAsync,
+                    TotalRow = getTotalRowAsync
                 };
+        }
+
+        private async Task<int> GetTotalCount(Expression<Func<T, bool>> where = null)
+        {
+            try
+            {
+
+                var query = dbset;
+                if (where != null)
+                {
+                    var total = query.Count(where);
+                    return  total;
+                }
+                else
+                    return  dbset.Count();
+            }
+            catch (Exception ex)
+            {
+
+                return 0;
+            }
+        }
+
+        private async Task<List<T>> GetDatas(Page pager, Expression<Func<T, bool>> where = null, Expression<Func<T, object>> order = null, bool ascending = false)
+        {
+            try
+            {
+
+                var query = dbset;
+                if (where != null)
+                    query.Where(where);
+                if (order != null)
+                    query.SortBy(order, ascending);
+
+                query.Take(pager.PageSize).Skip(pager.Skip);
+                var result = query.ToList();
+                return  result;
+            }
+            catch (Exception ex)
+            {
+
+                return new List<T>();
+            }
         }
 
     }

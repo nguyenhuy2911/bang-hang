@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace StockManager.Data
+namespace StockManager.Data.Infrastructure
 {
     public interface IDataBaseFactory : IDisposable
     {

@@ -7,8 +7,8 @@
     <ProjectGuid>{3B6E80E2-C6D2-49A5-9962-D6F02AED37B9}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>StockManage.Entity</RootNamespace>
-    <AssemblyName>StockManage.Entity</AssemblyName>
+    <RootNamespace>StockManager.Entity</RootNamespace>
+    <AssemblyName>StockManager.Entity</AssemblyName>
     <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
   </PropertyGroup>
@@ -60,10 +60,14 @@
     <Compile Include="Access.DTO\PRODUCT_PRICE.cs" />
     <Compile Include="Access.DTO\PRODUCT_TYPE.cs" />
     <Compile Include="Access.DTO\PRODUCT_UNIT.cs" />
-    <Compile Include="Service.Contract\Product\Request\Products_CRUD_Request.cs" />
-    <Compile Include="Service.Contract\Product\Request\GetProducts_Request.cs" />
-    <Compile Include="Service.Contract\Product\Response\GetProducts_Response.cs" />
-    <Compile Include="Service.Contract\Product\DTO_Mapper\Product\GetProducts_DTO_Maper.cs" />
+    <Compile Include="Service.Contract\Product\DTO\CRUD_Product_DTO.cs" />
+    <Compile Include="Service.Contract\Product\DTO\Product_DTO.cs" />
+    <Compile Include="Service.Contract\Product\Response\CRUD_Product_Response.cs" />
+    <Compile Include="Service.Contract\Unit\DTO\Unit_DTO.cs" />
+    <Compile Include="Service.Contract\Product\Request\CRUD_Product_Request.cs" />
+    <Compile Include="Service.Contract\Product\Request\Get_Products_Request.cs" />
+    <Compile Include="Service.Contract\Product\Response\Get_Products_Response.cs" />
+    <Compile Include="Service.Contract\Product\DTO\Get_Products_DTO_Maper.cs" />
     <Compile Include="ResponseBase.cs" />
     <Compile Include="RequestBase.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -94,8 +98,13 @@
     <Compile Include="Access.DTO\TRANS_REF.cs" />
     <Compile Include="Access.DTO\UNIT.cs" />
     <Compile Include="Access.DTO\UNITCONVERT.cs" />
+    <Compile Include="Service.Contract\Unit\DTO\Get_Unit_DTO_Maper.cs" />
+    <Compile Include="Service.Contract\Unit\Request\Get_Unit_Request.cs" />
+    <Compile Include="Service.Contract\Unit\Response\Get_Unit_Response.cs" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Folder Include="Service.Contract\NewFolder1\" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

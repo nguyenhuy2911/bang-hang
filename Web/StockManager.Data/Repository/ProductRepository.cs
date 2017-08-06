@@ -5,6 +5,7 @@ using System.Linq.Expressions;
 using System.Text;
 using System.Threading.Tasks;
 using StockManager.Entity;
+using StockManager.Data.Infrastructure;
 
 namespace StockManager.Data.Repository
 {

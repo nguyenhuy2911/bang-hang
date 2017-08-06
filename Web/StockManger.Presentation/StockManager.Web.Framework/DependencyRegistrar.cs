@@ -2,6 +2,7 @@
 using Autofac.Integration.Mvc;
 using StockManager.Business;
 using StockManager.Data;
+using StockManager.Data.Infrastructure;
 using StockManager.Data.Repository;
 using System.Linq;
 using System.Reflection;
@@ -20,6 +21,7 @@ namespace StockManager.Web.Framework
         {
             var builder = new ContainerBuilder();
             builder.RegisterControllers(assembly);
+            builder.RegisterType<UnitOfWork>().As<IUnitOfWork>().InstancePerLifetimeScope();
             builder.RegisterType<DataBaseFactory>().As<IDataBaseFactory>().InstancePerLifetimeScope();
             builder.RegisterAssemblyTypes(typeof(ProductRepository).Assembly)
             .Where(t => t.Name.EndsWith("Repository"))

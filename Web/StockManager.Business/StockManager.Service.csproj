@@ -46,8 +46,13 @@
   <ItemGroup>
     <Compile Include="PRODUCT\ProductService.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="UNIT\UnitService.cs" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\Common\Common\Common.csproj">
+      <Project>{9910d0b4-b273-455d-9e77-7b1496553a37}</Project>
+      <Name>Common</Name>
+    </ProjectReference>
     <ProjectReference Include="..\StockManager.Data\StockManager.Data.csproj">
       <Project>{16fc167c-1066-4708-a868-2f451adda52a}</Project>
       <Name>StockManager.Data</Name>

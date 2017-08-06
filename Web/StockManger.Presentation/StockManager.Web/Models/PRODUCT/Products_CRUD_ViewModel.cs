@@ -1,8 +1,10 @@
-﻿using System;
+﻿using StockManager.Entity.Service.Contract;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Web;
+using System.Web.Mvc;
 
 namespace StockManager.Web.Models.PRODUCT
 {
@@ -10,7 +12,7 @@ namespace StockManager.Web.Models.PRODUCT
     {
         public Products_CRUD_ViewModel()
         {
-
+            Units = new List<SelectListItem>();
         }
         [Required(ErrorMessage = "Tên sản phẩm không được để trống")]
         public string Product_Name { get; set; }
@@ -30,5 +32,7 @@ namespace StockManager.Web.Models.PRODUCT
         [Required]
         public string UserID { get; set; }
         public string Description { get; set; }
+
+        public List<SelectListItem> Units { get; set; }
     }
 }
