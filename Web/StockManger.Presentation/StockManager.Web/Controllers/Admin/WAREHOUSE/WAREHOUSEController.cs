@@ -26,9 +26,9 @@ namespace StockManager.Web.Controllers
         public string Vendor_GridHeader()
         {
             var headers = new List<GridColumn>();
-            headers.Add(new GridColumn { name = "Index", title = Utilies.getResourceString("Index"), width = "20", align = JsGridColAlign.center.ToString() });
-            headers.Add(new GridColumn { name = "Name", title = Utilies.getResourceString("Warehouse_Name"), width = "40" });
-            headers.Add(new GridColumn { name = "Address", title = Utilies.getResourceString("Warehouse_Address"), align = JsGridColAlign.center.ToString() });
+            headers.Add(new GridColumn { name = "Index", title = Utility.getResourceString("Index"), width = "20", align = JsGridColAlign.center.ToString() });
+            headers.Add(new GridColumn { name = "Name", title = Utility.getResourceString("Warehouse_Name"), width = "40" });
+            headers.Add(new GridColumn { name = "Address", title = Utility.getResourceString("Warehouse_Address"), align = JsGridColAlign.center.ToString() });
             return JsonConvert.SerializeObject(headers);
         }
         public ActionResult WAREHOUSE_NEW_Form()

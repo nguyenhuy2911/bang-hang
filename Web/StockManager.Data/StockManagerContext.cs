@@ -9,7 +9,7 @@ namespace StockManager.Data
     {
         static StockManagerContext()
         {
-       //     Database.SetInitializer<StockManagerContext>(null);
+            //     Database.SetInitializer<StockManagerContext>(null);
         }
 
         public StockManagerContext() : base("Name=SellManager")
@@ -63,9 +63,10 @@ namespace StockManager.Data
         public DbSet<UNIT> Units { get; set; }
         public DbSet<UNITCONVERT> UnitConverts { get; set; }
 
-        public virtual void Commit()
+        public virtual int Commit()
         {
-            base.SaveChanges();
+            int result = base.SaveChanges();
+            return result;
         }
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {

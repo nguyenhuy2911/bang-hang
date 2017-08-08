@@ -3,6 +3,6 @@ namespace StockManager.Data.Infrastructure
 {
     public interface IUnitOfWork
     {
-        void Commit();
+        int Commit();
     }
 }

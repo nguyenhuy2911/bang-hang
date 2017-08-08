@@ -6,7 +6,7 @@ using StockManager.Entity;
 using StockManager.Entity.Service.Contract;
 using System;
 using System.Collections.Generic;
-
+using Common.Enum;
 namespace StockManager.Business
 {
     public interface IProductService
@@ -30,10 +30,24 @@ namespace StockManager.Business
 
         public CRUD_Product_Response CreateProduct(CRUD_Product_Request request)
         {
-            var requestMap = Mapper.Map<CRUD_Product_Request, PRODUCT>(request);
-            this._IProductRepository.Add(requestMap);
-            this._IUnitOfWork.Commit();
-            return new CRUD_Product_Response();
+            var response = new CRUD_Product_Response();
+            try
+            {
+                var product = Mapper.Map<CRUD_Product_Request, PRODUCT>(request);
+                this._IProductRepository.Add(product);
+                int saveStatus = this._IUnitOfWork.Commit();
+                if (saveStatus > 0)
+                    response.StatusCode = (int)RESULT_STATUS_CODE.SUCCESS;
+                else
+                    response.StatusCode = (int)RESULT_STATUS_CODE.DATABASE_ERROR;
+            }
+            catch (Exception ex)
+            {
+
+                response.StatusCode = (int)RESULT_STATUS_CODE.SYSTEM_ERROR;
+                response.StatusMessage = ex.ToString();
+            }           
+            return response;
         }
 
         public ResponseBase<int> DeleteProduct(int id)
@@ -46,9 +60,9 @@ namespace StockManager.Business
             throw new NotImplementedException();
         }
         public Get_Products_Response GetProducts(GetProducts_Request request)
-        {           
+        {
             var products = _IProductRepository.GetAll(request.Page, x => x.Product_ID, false);
-            var retData = Mapper.Map<ResponseBase<List<PRODUCT>>, Get_Products_Response>(products);           
+            var retData = Mapper.Map<ResponseBase<List<PRODUCT>>, Get_Products_Response>(products);
             return retData;
         }
 

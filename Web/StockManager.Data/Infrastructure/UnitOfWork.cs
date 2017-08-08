@@ -17,9 +17,9 @@ namespace StockManager.Data.Infrastructure
             get { return dataContext ?? (dataContext = databaseFactory.Get()); }
         }
 
-        public void Commit()
+        public int Commit()
         {
-            DataContext.Commit();
+            return DataContext.Commit();
         }
     }
 }

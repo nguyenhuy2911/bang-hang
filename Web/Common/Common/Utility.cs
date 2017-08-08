@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace Common
 {
-  public static class Utilies
+    public static class Utility
     {
         public static string getResourceString(string key)
         {
@@ -24,15 +24,22 @@ namespace Common
                 }
                 catch (Exception ex)
                 {
-                    retVal = "";                  
+                    retVal = "";
                 }
                 return retVal;
             }
             catch (Exception ex)
             {
-               
+
                 return string.Empty;
             }
+        }
+
+        public static T convertNumber<T>(Object value)
+        {
+            CultureInfo ci = new CultureInfo("en-US");
+            var result = (T)Convert.ChangeType(value, typeof(T), ci);
+            return result;
         }
     }
 }

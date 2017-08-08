@@ -48,6 +48,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Enum\RESULT_STATUS_CODE.cs" />
     <Compile Include="PredicateBuilder.cs" />
     <Compile Include="Enum\ACTIVE.cs" />
     <Compile Include="QueryableExtensions.cs" />
@@ -58,7 +59,7 @@
     <Compile Include="RegexUtilities.cs" />
     <Compile Include="StringMenthod.cs" />
     <Compile Include="SystemUrl.cs" />
-    <Compile Include="Utilies.cs" />
+    <Compile Include="Utility.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

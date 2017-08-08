@@ -39,6 +39,7 @@ namespace StockManager.Web
 
             bundles.Add(new ScriptBundle("~/Script/Common").Include(
                         "~/Scripts/jquery-3.1.1.min.js",
+                        "~/Template/Admin/AdminBSBMaterial/plugins/jquery/jquery.min.js",
                         "~/Scripts/modernizr-2.6.2.js",                        
                         "~/Scripts/Common/Helper.js",
                          "~/Scripts/Common/initPlugin.js",
@@ -52,7 +53,7 @@ namespace StockManager.Web
             // --------------------------------  Setup --------------------------------------------- //
 
             bundles.Add(new ScriptBundle("~/Admin/Setup/js").Include(
-                        "~/Template/Admin/AdminBSBMaterial/plugins/jquery/jquery.min.js",
+                        
                         "~/Template/Admin/AdminBSBMaterial/plugins/bootstrap/js/bootstrap.js",
                          "~/Template/Admin/AdminBSBMaterial/plugins/bootstrap-select/js/bootstrap-select.js",
                         "~/Template/Admin/AdminBSBMaterial/plugins/jquery-slimscroll/jquery.slimscroll.js",

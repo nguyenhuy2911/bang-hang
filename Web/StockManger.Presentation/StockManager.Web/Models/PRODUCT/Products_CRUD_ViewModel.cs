@@ -12,27 +12,28 @@ namespace StockManager.Web.Models.PRODUCT
     {
         public Products_CRUD_ViewModel()
         {
-            Units = new List<SelectListItem>();
+            UnitList = new List<SelectListItem>();
         }
+
         [Required(ErrorMessage = "Tên sản phẩm không được để trống")]
         public string Product_Name { get; set; }
 
         [Required(ErrorMessage = "Giá không được để trống")]
-        [Range(0, 1000000, ErrorMessage = "Giá phải là số")]
-        [MaxLength(1000000, ErrorMessage = "Giá phải nhỏ hơn")]
-        public decimal? Sale_Price { get; set; }
+        [Range(0, 99999999, ErrorMessage = "Giá phải là số")]
+        //  [MaxLength(1000000, ErrorMessage = "Giá phải nhỏ hơn 1,000,000")]
+        public string Sale_Price { get; set; }
 
         [Required(ErrorMessage = "Khối lượng không được để trống")]
-        [Range(0, 1000000, ErrorMessage = "Khối lượng phải là số")]
+        [Range(0, 99999999, ErrorMessage = "Khối lượng phải là số")]
         public string Size { get; set; }
 
         [Required(ErrorMessage = "Đơn vị tính không được để trống")]
         public string Unit { get; set; }
 
-        [Required]
         public string UserID { get; set; }
+
         public string Description { get; set; }
 
-        public List<SelectListItem> Units { get; set; }
+        public List<SelectListItem> UnitList { get; set; }
     }
 }

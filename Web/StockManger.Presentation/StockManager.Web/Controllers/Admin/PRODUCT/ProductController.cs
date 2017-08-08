@@ -1,9 +1,11 @@
-﻿using Newtonsoft.Json;
+﻿using Common;
+using Newtonsoft.Json;
 using StockManager.Business;
 using StockManager.Entity;
 using StockManager.Entity.Service.Contract;
 using StockManager.Web.Models;
 using StockManager.Web.Models.PRODUCT;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -19,10 +21,10 @@ namespace StockManager.Web.Controllers
 
         private List<Get_Unit_DTO_Maper> _listUnit { get; set; }
 
-        private  void SetListUnit()
+        private void SetListUnit()
         {
             if (_listUnit == null)
-            {               
+            {
                 _listUnit = GetUnits_For_CRUD();
             }
 
@@ -68,13 +70,13 @@ namespace StockManager.Web.Controllers
         }
 
         [Route("product-create-form")]
-        public ActionResult Product_Create_Form()
+        public ActionResult Product_New_Form()
         {
-            var model = new Products_CRUD_ViewModel();          
-            model.Units.Add(new SelectListItem() { Text = "Chọn", Value = "-1" });
+            var model = new Products_CRUD_ViewModel();
+            model.UnitList.Add(new SelectListItem() { Text = "Chọn", Value = "-1" });
             if (_listUnit != null)
             {
-                model.Units.AddRange(_listUnit.Select(i =>
+                model.UnitList.AddRange(_listUnit.Select(i =>
                                                            new SelectListItem()
                                                            {
                                                                Text = i.Unit_Name,
@@ -88,7 +90,7 @@ namespace StockManager.Web.Controllers
 
         private List<Get_Unit_DTO_Maper> GetUnits_For_CRUD()
         {
-          
+
             var request = new Get_Unit_Request();
             return _IUnitService.GetUnits(request)?.Results;
         }
@@ -97,11 +99,27 @@ namespace StockManager.Web.Controllers
         [Route("product-create")]
         public string Product_New(Products_CRUD_ViewModel model)
         {
-            if (!ModelState.IsValid)
+            try
+            {
+                if (!ModelState.IsValid)
+                    return string.Empty;
+                var request = new CRUD_Product_Request()
+                {
+                    Product_Name = model.Product_Name,
+                    Sale_Price = Utility.convertNumber<decimal>(model.Sale_Price),
+                    Size = model.Size,
+                    Unit = model.Unit,
+                    Description = model.Description
+                };
+                var response = _IProductService.CreateProduct(request);
+                string json = JsonConvert.SerializeObject(response);
+                return json;
+            }
+            catch (Exception ex)
+            {
                 return string.Empty;
-            var response = GetProducts_Data();
-            string json = JsonConvert.SerializeObject(response);
-            return json;
+            }
+
         }
 
         public ActionResult MERCHANDISE_NEWASESEMBLED_Form()

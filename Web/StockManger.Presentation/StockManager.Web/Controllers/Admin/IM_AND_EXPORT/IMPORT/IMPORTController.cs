@@ -29,19 +29,19 @@ namespace StockManager.Web.Controllers.IM_AND_EXPORT.IMPORT
         public string ImPort_IndayForm_GridHeader()
         {
             var headers = new List<GridColumn>();
-            headers.Add(new GridColumn { name = "Index", title = Utilies.getResourceString("Index"), width = "20", align = JsGridColAlign.center.ToString() });
-            headers.Add(new GridColumn { name = "CreateDate", title = Utilies.getResourceString("CreateDate"), align = JsGridColAlign.center.ToString() });
-            headers.Add(new GridColumn { name = "Status", title = Utilies.getResourceString("Status"), align = JsGridColAlign.center.ToString() });
-            headers.Add(new GridColumn { name = "Action", title = Utilies.getResourceString("Action"), align = JsGridColAlign.center.ToString() });
+            headers.Add(new GridColumn { name = "Index", title = Utility.getResourceString("Index"), width = "20", align = JsGridColAlign.center.ToString() });
+            headers.Add(new GridColumn { name = "CreateDate", title = Utility.getResourceString("CreateDate"), align = JsGridColAlign.center.ToString() });
+            headers.Add(new GridColumn { name = "Status", title = Utility.getResourceString("Status"), align = JsGridColAlign.center.ToString() });
+            headers.Add(new GridColumn { name = "Action", title = Utility.getResourceString("Action"), align = JsGridColAlign.center.ToString() });
             return JsonConvert.SerializeObject(headers);
         }
 
         public string ImPort_HistoryForm_GridHeader()
         {
             var headers = new List<GridColumn>();
-            headers.Add(new GridColumn { name = "Index", title = Utilies.getResourceString("Index"), width = "20", align = JsGridColAlign.center.ToString() });
-            headers.Add(new GridColumn { name = "CreateDate", title = Utilies.getResourceString("CreateDate"), align = JsGridColAlign.center.ToString() });
-            headers.Add(new GridColumn { name = "Status", title = Utilies.getResourceString("Status"), align = JsGridColAlign.center.ToString() });
+            headers.Add(new GridColumn { name = "Index", title = Utility.getResourceString("Index"), width = "20", align = JsGridColAlign.center.ToString() });
+            headers.Add(new GridColumn { name = "CreateDate", title = Utility.getResourceString("CreateDate"), align = JsGridColAlign.center.ToString() });
+            headers.Add(new GridColumn { name = "Status", title = Utility.getResourceString("Status"), align = JsGridColAlign.center.ToString() });
             
             return JsonConvert.SerializeObject(headers);
         }
