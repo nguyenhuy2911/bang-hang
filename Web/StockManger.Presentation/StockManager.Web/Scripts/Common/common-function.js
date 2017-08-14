@@ -1,30 +1,28 @@
-$(function () {
-    $('.jsdemo-notification-button button').on('click', function () {
-        var placementFrom = $(this).data('placement-from');
-        var placementAlign = $(this).data('placement-align');
-        var animateEnter = $(this).data('animate-enter');
-        var animateExit = $(this).data('animate-exit');
-        var colorName = $(this).data('color-name');
+﻿
+function showSuccessMessage(message, element) {
+    showNotification("alert-success", message, "top", "right", "animated fadeInRight", "animated fadeOutRight", element)
+}
 
-        showNotification(colorName, null, placementFrom, placementAlign, animateEnter, animateExit);
-    });
-});
+function showErrorMessage(message, element) {
+    showNotification("alert-danger", message, "top", "right", "animated fadeInRight", "animated fadeOutRight", element)
+}
 
-function showNotification(colorName, text, placementFrom, placementAlign, animateEnter, animateExit) {
+function showNotification(colorName, text, placementFrom, placementAlign, animateEnter, animateExit, element) {
     if (colorName === null || colorName === '') { colorName = 'bg-black'; }
     if (text === null || text === '') { text = 'Turning standard Bootstrap alerts'; }
     if (animateEnter === null || animateEnter === '') { animateEnter = 'animated fadeInDown'; }
     if (animateExit === null || animateExit === '') { animateExit = 'animated fadeOutUp'; }
-    var allowDismiss = fal;
+    var allowDismiss = true;
 
     $.notify({
         message: text
     },
         {
+            element: element ? element : 'body',
             type: colorName,
             allow_dismiss: allowDismiss,
             newest_on_top: true,
-            timer: 60000,
+            timer: 1000,
             placement: {
                 from: placementFrom,
                 align: placementAlign

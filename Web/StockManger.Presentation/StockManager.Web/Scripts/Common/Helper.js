@@ -15,9 +15,14 @@
         return o;
     };
 })(jQuery);
-function html2text(html) {
-    var tag = document.createElement('div');
-    tag.innerHTML = html;
-    return tag.innerText;
+
+function htmlEncode(value) {
+    return $('<div/>').text(value).html();
 }
+
+function htmlDecode(value) {
+    return $('<div/>').html(value).text();
+}
+
+
 

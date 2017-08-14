@@ -24,16 +24,15 @@ PRODUCT.prototype.init = function () {
 
 PRODUCT.prototype.regisEvent = function () {
     var $this = this;
-
-
-
     $("#btn-new-product").click(function () {
         $this.loadCreateForm();
     });
 
     $("#btn_product_crud_save").click(function () {
-
         $("#frm-crud-product").submit();
+        $('#div-crud-modal').animate({
+            scrollTop: 0
+        }, 800);
     });
 
 
@@ -79,41 +78,46 @@ PRODUCT.prototype.loadCreateForm = function () {
 }
 
 PRODUCT.prototype.getSaveProduct_RequestValue = function () {
+  
     var obj = new Products_CRUD_ViewModel();
     var formVal = $("#frm-crud-product").serializeFormJSON();
+    var editor_Description = tinymce.get('txt_Description');
     obj.Product_Name = formVal.Product_Name;
     obj.Unit = formVal.Unit;
     obj.Sale_Price = Number(formVal.Sale_Price);
     obj.Size = Number(formVal.Sale_Price);
-    obj.Description = formVal.Description;
+    obj.Description = htmlEncode(editor_Description.getContent());
     return obj;
 }
 
 PRODUCT.prototype.saveProduct = function () {
-    debugger;
-    var isvalidate = $("#frm-crud-product").valid();
-    if (!isvalidate) {
-        return;
-    }
-    var request = this.getSaveProduct_RequestValue();
-  
 
+    var isvalidate = $("#frm-crud-product").valid();
+    if (!isvalidate)
+        return;
+    var request = this.getSaveProduct_RequestValue();
     $.ajax({
         type: 'POST', // define the type of HTTP verb we want to use (POST for our form)
-        url: '/product/product-create', // the url where we want to POST
+        url: '/product/product-save', // the url where we want to POST
         data: request, // our data object
         dataType: 'json', // what type of data do we expect back from the server       
         beforeSend: function () {
+            $("#div-crud-modal").loading();
         },
-        error: function (respone) {
-            console.log(respone);
+        error: function (response) {
+            $("#div-crud-modal").loading("stop");
+            console.log(response);
         },
         success: function (response) {
-            console.log(response);
+            if (response.StatusCode != 0)
+                showErrorMessage(response.StatusMessage, "#div-crud-modal");
+            else
+                showSuccessMessage(response.StatusMessage, "#div-crud-modal");
+
         }
     })
     .done(function (response) {
-        console.log(response);
+        $("#div-crud-modal").loading("stop");
 
     });
 }

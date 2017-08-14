@@ -1,4 +1,5 @@
 ﻿using Common;
+using Common.Enum;
 using Newtonsoft.Json;
 using StockManager.Business;
 using StockManager.Entity;
@@ -96,30 +97,38 @@ namespace StockManager.Web.Controllers
         }
 
         [HttpPost]
-        [Route("product-create")]
-        public string Product_New(Products_CRUD_ViewModel model)
+        [Route("product-save")]
+        public string Product_SaveChange(Products_CRUD_ViewModel model)
         {
             try
             {
-                if (!ModelState.IsValid)
-                    return string.Empty;
-                var request = new CRUD_Product_Request()
-                {
-                    Product_Name = model.Product_Name,
-                    Sale_Price = Utility.convertNumber<decimal>(model.Sale_Price),
-                    Size = model.Size,
-                    Unit = model.Unit,
-                    Description = model.Description
-                };
-                var response = _IProductService.CreateProduct(request);
-                string json = JsonConvert.SerializeObject(response);
-                return json;
+                return Product_Create(model);
             }
             catch (Exception ex)
             {
                 return string.Empty;
             }
 
+        }
+
+        private string Product_Create(Products_CRUD_ViewModel model)
+        {
+            if (!ModelState.IsValid)
+                return string.Empty;
+            var request = new CRUD_Product_Request()
+            {
+                Product_Name = model.Product_Name,
+                Sale_Price = Utility.convertNumber<decimal>(model.Sale_Price),
+                Size = model.Size,
+                Unit = model.Unit,
+                Description = model.Description
+            };
+            var response = _IProductService.CreateProduct(request);
+            if (response?.StatusCode == (int)RESULT_STATUS_CODE.SUCCESS)
+                response.StatusMessage = Utility.getResourceString("CreateSuccess");
+
+            string json = JsonConvert.SerializeObject(response);
+            return json;
         }
 
         public ActionResult MERCHANDISE_NEWASESEMBLED_Form()

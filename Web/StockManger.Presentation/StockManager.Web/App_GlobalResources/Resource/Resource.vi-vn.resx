@@ -240,4 +240,7 @@
   <data name="Url_merchandise_NewAssemble" xml:space="preserve">
     <value>merchandise-new-assemble</value>
   </data>
+  <data name="CreateSuccess" xml:space="preserve">
+    <value>Thêm mới thành công</value>
+  </data>
 </root>

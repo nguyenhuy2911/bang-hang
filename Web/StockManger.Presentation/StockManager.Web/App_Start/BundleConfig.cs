@@ -26,6 +26,7 @@ namespace StockManager.Web
                         "~/Template/Admin/AdminBSBMaterial/plugins/waitme/waitMe.css",
                         "~/Template/Admin/AdminBSBMaterial/plugins/bootstrap-select/css/bootstrap-select.css",
                         "~/Template/Admin/AdminBSBMaterial/plugins/multi-select/css/multi-select.css",
+                        "~/Template/Admin/AdminBSBMaterial/plugins/animate-css/animate.css",
                         "~/Template/Admin/AdminBSBMaterial/css/style.css",
                         "~/Template/Admin/AdminBSBMaterial/css/themes/all-themes.css",
                         "~/Template/Admin/AdminBSBMaterial/font-awesome/css/font-awesome.min.css",                       
@@ -42,7 +43,7 @@ namespace StockManager.Web
                         "~/Template/Admin/AdminBSBMaterial/plugins/jquery/jquery.min.js",
                         "~/Scripts/modernizr-2.6.2.js",                        
                         "~/Scripts/Common/Helper.js",
-                         "~/Scripts/Common/initPlugin.js",
+                         "~/Scripts/Common/common-function.js",
                         "~/Scripts/Function/BaseFunction.js"
 
             ));
@@ -62,7 +63,7 @@ namespace StockManager.Web
                         "~/Template/Admin/AdminBSBMaterial/plugins/momentjs/moment.js",
                         "~/Template/Admin/AdminBSBMaterial/plugins/bootstrap-material-datetimepicker/js/bootstrap-material-datetimepicker.js",
                         "~/Template/Admin/AdminBSBMaterial/plugins/tinymce/tinymce.min.js",
-                        "~/Template/Admin/AdminBSBMaterial/plugins/ckeditor/ckeditor.js",
+                        "~/Template/Admin/AdminBSBMaterial/plugins/bootstrap-notify/bootstrap-notify.js",
                         "~/Scripts/Lip/jquery-loading/jquery.loading.js",
                         "~/Template/Admin/AdminBSBMaterial/js/admin.js"
                         ));

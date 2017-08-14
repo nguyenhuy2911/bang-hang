@@ -4382,6 +4382,7 @@ section.content {
     box-shadow: none;
     border: none;
     color: #fff !important;
+    z-index: 99999;
 }
 
     .alert .alert-link {
@@ -4412,6 +4413,8 @@ section.content {
     border: none;
     text-shadow: none;
 }
+
+
 
 /* Dialogs (SweetAlert) ======================== */
 .sweet-alert {
