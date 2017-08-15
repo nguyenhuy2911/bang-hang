@@ -282,14 +282,21 @@ $.AdminBSB.input = {
         //On label click
         $('body').on('click', '.form-float .form-line .form-label', function () {
             $(this).parent().find('input').focus();
-        });
 
+        });
+        $('.bootstrap-select button').on("click", function () {
+           
+            $(this).parents('.form-line').addClass('focused');
+
+        });
         //Not blank form
         $('.form-control').each(function () {
             if ($(this).val() !== '') {
                 $(this).parents('.form-line').addClass('focused');
             }
         });
+        
+        
     }
 }
 //==========================================================================================================================

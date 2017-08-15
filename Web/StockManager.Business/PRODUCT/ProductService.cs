@@ -12,7 +12,7 @@ namespace StockManager.Business
     public interface IProductService
     {
         Get_Products_Response GetProducts(GetProducts_Request request);
-        ResponseBase<PRODUCT> GetProduct(int id);
+        Get_Product_Groups_Response Get_Product_Groups(Get_Product_Groups_Request request);
         ResponseBase<int> UpdateProduct(PRODUCT ProductToUpdate);
         CRUD_Product_Response CreateProduct(CRUD_Product_Request request);
         ResponseBase<int> DeleteProduct(int id);
@@ -63,6 +63,13 @@ namespace StockManager.Business
         {
             var products = _IProductRepository.GetAll(request.Page, x => x.Product_ID, false);
             var retData = Mapper.Map<ResponseBase<List<PRODUCT>>, Get_Products_Response>(products);
+            return retData;
+        }
+
+        public Get_Product_Groups_Response Get_Product_Groups(Get_Product_Groups_Request request)
+        {
+            var products = _IProductRepository.Get_Product_Groups(request.Page, null, x => x.Product_ID, false);
+            var retData = Mapper.Map<ResponseBase<List<PRODUCT>>, Get_Product_Groups_Response>(products);
             return retData;
         }
 

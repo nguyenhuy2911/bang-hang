@@ -13,6 +13,7 @@ namespace StockManager.Web.Models.PRODUCT
         public Products_CRUD_ViewModel()
         {
             UnitList = new List<SelectListItem>();
+            Product_Groups_List = new SelectList("", "", "");
         }
 
         [Required(ErrorMessage = "Tên sản phẩm không được để trống")]
@@ -35,5 +36,8 @@ namespace StockManager.Web.Models.PRODUCT
         public string Description { get; set; }
 
         public List<SelectListItem> UnitList { get; set; }
+
+        public int ParentId { get; set; }
+        public SelectList Product_Groups_List { get; set; }
     }
 }

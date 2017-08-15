@@ -18,6 +18,7 @@ namespace StockManager.Web.Controllers
     public class ProductController : BaseController
     {
         private readonly IProductService _IProductService;
+
         private readonly IUnitService _IUnitService;
 
         private List<Get_Unit_DTO_Maper> _listUnit { get; set; }
@@ -30,6 +31,64 @@ namespace StockManager.Web.Controllers
             }
 
         }
+
+        private List<Get_Products_DTO_Maper> _list_Product_Groups => this.Get_Product_Groups_List();
+
+
+        /************************************ Get **********************************************/
+
+        private Get_Products_Response GetProducts_Data()
+        {
+            var request = new GetProducts_Request();
+            var response = _IProductService.GetProducts(request);
+            return response;
+        }
+
+        private List<Get_Products_DTO_Maper> Get_Product_Groups_List()
+        {
+            var request = new Get_Product_Groups_Request()
+            {
+                Page = new Page(0, 0)
+            };
+            var response = _IProductService.Get_Product_Groups(request);
+            if (response?.Results != null)
+                return response.Results;
+            else
+                return null;
+        }
+
+        private List<Get_Unit_DTO_Maper> GetUnits_For_CRUD()
+        {
+
+            var request = new Get_Unit_Request();
+            return _IUnitService.GetUnits(request)?.Results;
+        }
+
+        /***************************************************************************************/
+
+        /************************************ Insert, update, delete ***************************/
+
+        private string Product_Create(Products_CRUD_ViewModel model)
+        {
+            if (!ModelState.IsValid)
+                return string.Empty;
+            var request = new CRUD_Product_Request()
+            {
+                Product_Name = model.Product_Name,
+                Sale_Price = Utility.convertNumber<decimal>(model.Sale_Price),
+                Size = model.Size,
+                Unit = model.Unit,
+                Description = model.Description
+            };
+            var response = _IProductService.CreateProduct(request);
+            if (response?.StatusCode == (int)RESULT_STATUS_CODE.SUCCESS)
+                response.StatusMessage = Utility.getResourceString("CreateSuccess");
+
+            string json = JsonConvert.SerializeObject(response);
+            return json;
+        }
+
+        /***************************************************************************************/
 
         public ProductController(IProductService productService, IUnitService unitService)
         {
@@ -58,18 +117,6 @@ namespace StockManager.Web.Controllers
             return json;
         }
 
-        private Get_Products_Response GetProducts_Data()
-        {
-            var request = new GetProducts_Request();
-            var response = _IProductService.GetProducts(request);
-            return response;
-        }
-
-        public ActionResult Details(int id)
-        {
-            return View();
-        }
-
         [Route("product-create-form")]
         public ActionResult Product_New_Form()
         {
@@ -85,15 +132,21 @@ namespace StockManager.Web.Controllers
                                                            }).ToList());
             }
 
+            var list_group_product = new List<SelectListItem>();
+
+            list_group_product.Add(new SelectListItem() { Text = "Gốc", Value = "0", Group = new SelectListGroup() { Name = "" } });
+
+            list_group_product.AddRange(_list_Product_Groups.Select(i =>
+                                                           new SelectListItem()
+                                                           {
+                                                               Text = string.Format("{0} - {1}", i.Product_ID, i.Product_Name),
+                                                               Value = i.Product_Group_ID,
+                                                               Group = new SelectListGroup() { Name = "Chọn cha" }
+                                                           }).ToList());
+
+            model.Product_Groups_List = new SelectList(list_group_product, "Value", "Text", "Group.Name", 0);
 
             return View("~/Views/Admin/PRODUCT/Product_Crud_Form.cshtml", model);
-        }
-
-        private List<Get_Unit_DTO_Maper> GetUnits_For_CRUD()
-        {
-
-            var request = new Get_Unit_Request();
-            return _IUnitService.GetUnits(request)?.Results;
         }
 
         [HttpPost]
@@ -109,26 +162,6 @@ namespace StockManager.Web.Controllers
                 return string.Empty;
             }
 
-        }
-
-        private string Product_Create(Products_CRUD_ViewModel model)
-        {
-            if (!ModelState.IsValid)
-                return string.Empty;
-            var request = new CRUD_Product_Request()
-            {
-                Product_Name = model.Product_Name,
-                Sale_Price = Utility.convertNumber<decimal>(model.Sale_Price),
-                Size = model.Size,
-                Unit = model.Unit,
-                Description = model.Description
-            };
-            var response = _IProductService.CreateProduct(request);
-            if (response?.StatusCode == (int)RESULT_STATUS_CODE.SUCCESS)
-                response.StatusMessage = Utility.getResourceString("CreateSuccess");
-
-            string json = JsonConvert.SerializeObject(response);
-            return json;
         }
 
         public ActionResult MERCHANDISE_NEWASESEMBLED_Form()

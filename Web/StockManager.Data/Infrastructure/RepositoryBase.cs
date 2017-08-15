@@ -136,8 +136,9 @@ namespace StockManager.Data.Infrastructure
                     query.Where(where);
                 if (order != null)
                     query.SortBy(order, ascending);
+                if (pager?.PageSize != 0 && pager?.PageNumber != 0)
+                    query.Take(pager.PageSize).Skip(pager.Skip);
 
-                query.Take(pager.PageSize).Skip(pager.Skip);
                 var result = query.ToList();
                 return  result;
             }

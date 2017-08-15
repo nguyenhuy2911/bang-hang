@@ -62,7 +62,9 @@
     <Compile Include="Access.DTO\PRODUCT_UNIT.cs" />
     <Compile Include="Service.Contract\Product\DTO\CRUD_Product_DTO.cs" />
     <Compile Include="Service.Contract\Product\DTO\Product_DTO.cs" />
+    <Compile Include="Service.Contract\Product\Request\Get_Product_Groups_Request.cs" />
     <Compile Include="Service.Contract\Product\Response\CRUD_Product_Response.cs" />
+    <Compile Include="Service.Contract\Product\Response\Get_Product_Groups_Response.cs" />
     <Compile Include="Service.Contract\Unit\DTO\Unit_DTO.cs" />
     <Compile Include="Service.Contract\Product\Request\CRUD_Product_Request.cs" />
     <Compile Include="Service.Contract\Product\Request\Get_Products_Request.cs" />

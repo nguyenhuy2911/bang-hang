@@ -3853,7 +3853,7 @@ section.content {
     .card .body {
         color: #555;
         padding: 20px;
-        overflow: auto;
+        /*overflow: auto;*/
     }
 
         .card .body .col-xs-1,
@@ -10813,54 +10813,75 @@ html.ie11 .bs-searchbox .form-control {
 
 /*************************************** Loadding **************************************************/
 .spinner {
-  margin: 100px auto 0;
-  width: 70px;
-  text-align: center;
+    margin: 100px auto 0;
+    width: 70px;
+    text-align: center;
 }
 
-.spinner > div {
-  width: 18px;
-  height: 18px;
-  background-color: #333;
+    .spinner > div {
+        width: 18px;
+        height: 18px;
+        background-color: #333;
+        border-radius: 100%;
+        display: inline-block;
+        -webkit-animation: sk-bouncedelay 1.4s infinite ease-in-out both;
+        animation: sk-bouncedelay 1.4s infinite ease-in-out both;
+    }
 
-  border-radius: 100%;
-  display: inline-block;
-  -webkit-animation: sk-bouncedelay 1.4s infinite ease-in-out both;
-  animation: sk-bouncedelay 1.4s infinite ease-in-out both;
-}
+    .spinner .bounce1 {
+        -webkit-animation-delay: -0.32s;
+        animation-delay: -0.32s;
+    }
 
-.spinner .bounce1 {
-  -webkit-animation-delay: -0.32s;
-  animation-delay: -0.32s;
-}
-
-.spinner .bounce2 {
-  -webkit-animation-delay: -0.16s;
-  animation-delay: -0.16s;
-}
+    .spinner .bounce2 {
+        -webkit-animation-delay: -0.16s;
+        animation-delay: -0.16s;
+    }
 
 @-webkit-keyframes sk-bouncedelay {
-  0%, 80%, 100% { -webkit-transform: scale(0) }
-  40% { -webkit-transform: scale(1.0) }
+    0%, 80%, 100% {
+        -webkit-transform: scale(0);
+    }
+
+    40% {
+        -webkit-transform: scale(1.0);
+    }
 }
 
 @keyframes sk-bouncedelay {
-  0%, 80%, 100% { 
-    -webkit-transform: scale(0);
-    transform: scale(0);
-  } 40% { 
-    -webkit-transform: scale(1.0);
-    transform: scale(1.0);
-  }
-}
-.modal-fullscreen {
-    width: 99%;
-    height:auto;    
+    0%, 80%, 100% {
+        -webkit-transform: scale(0);
+        transform: scale(0);
+    }
+
+    40% {
+        -webkit-transform: scale(1.0);
+        transform: scale(1.0);
+    }
 }
 
-.form-group span.error {    
+.modal-fullscreen {
+    width: 99%;
+    height: auto;
+}
+
+.form-group span.error {
     display: block;
     margin-top: 5px;
     font-weight: normal;
     color: #F44336;
+}
+
+div.bootstrap-select {
+    background-color: transparent;
+}
+
+    div.bootstrap-select button {
+        background-color: transparent !important;
+    }
+
+.form-group .form-line.combobox .form-label {
+    top: -15px;
+    left: 0;
+    font-size: 12px;
 }
