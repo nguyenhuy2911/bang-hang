@@ -61,7 +61,9 @@
     <Compile Include="Access.DTO\PRODUCT_TYPE.cs" />
     <Compile Include="Access.DTO\PRODUCT_UNIT.cs" />
     <Compile Include="Service.Contract\Product\DTO\CRUD_Product_DTO.cs" />
-    <Compile Include="Service.Contract\Product\DTO\Product_DTO.cs" />
+    <Compile Include="Service.Contract\Product\DTO\Get_Product_Groups_DTO.cs" />
+    <Compile Include="Service.Contract\Product\DTO\raw\Product_DTO.cs" />
+    <Compile Include="Service.Contract\Product\DTO\raw\Product_Group_DTO.cs" />
     <Compile Include="Service.Contract\Product\Request\Get_Product_Groups_Request.cs" />
     <Compile Include="Service.Contract\Product\Response\CRUD_Product_Response.cs" />
     <Compile Include="Service.Contract\Product\Response\Get_Product_Groups_Response.cs" />
@@ -69,7 +71,7 @@
     <Compile Include="Service.Contract\Product\Request\CRUD_Product_Request.cs" />
     <Compile Include="Service.Contract\Product\Request\Get_Products_Request.cs" />
     <Compile Include="Service.Contract\Product\Response\Get_Products_Response.cs" />
-    <Compile Include="Service.Contract\Product\DTO\Get_Products_DTO_Maper.cs" />
+    <Compile Include="Service.Contract\Product\DTO\Get_Products_DTO_Mapper.cs" />
     <Compile Include="ResponseBase.cs" />
     <Compile Include="RequestBase.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

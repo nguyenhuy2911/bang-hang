@@ -10,7 +10,7 @@ namespace StockManager.Entity.Service.Contract
         public int? Product_Type_ID { get; set; }
         public int? Manufacturer_ID { get; set; }
         public string Model_ID { get; set; }
-        public string Product_Group_ID { get; set; }
+        public Nullable<int> Product_Group_ID { get; set; }
         public string Provider_ID { get; set; }
         public string Origin { get; set; }
         public string Barcode { get; set; }

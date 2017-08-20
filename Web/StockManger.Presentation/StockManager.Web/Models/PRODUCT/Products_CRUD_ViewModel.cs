@@ -29,7 +29,7 @@ namespace StockManager.Web.Models.PRODUCT
         public string Size { get; set; }
 
         [Required(ErrorMessage = "Đơn vị tính không được để trống")]
-        public string Unit { get; set; }
+        public string Unit_ID { get; set; }
 
         public string UserID { get; set; }
 
@@ -37,7 +37,8 @@ namespace StockManager.Web.Models.PRODUCT
 
         public List<SelectListItem> UnitList { get; set; }
 
-        public int ParentId { get; set; }
+        [Required(ErrorMessage = "sản phẩm gốc không được bỏ trống")]
+        public int ProductGroup_ID { get; set; }
         public SelectList Product_Groups_List { get; set; }
     }
 }

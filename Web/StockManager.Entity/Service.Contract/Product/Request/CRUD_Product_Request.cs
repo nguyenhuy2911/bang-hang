@@ -20,7 +20,10 @@ namespace StockManager.Entity.Service.Contract
         public string Size { get; set; }
 
         [Required(ErrorMessage = "Đơn vị tính không được để trống")]
-        public string Unit { get; set; }
+        public string Unit_ID { get; set; }
+
+        [Required(ErrorMessage = "sản phẩm gốc không được bỏ trống")]
+        public int Product_Group_ID { get; set; }
 
         [Required]
         public string UserID { get; set; }

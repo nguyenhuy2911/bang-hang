@@ -23,8 +23,8 @@ namespace StockManager.Data.Models.Mapping
             this.Property(t => t.Model_ID)
                 .HasMaxLength(20);
 
-            this.Property(t => t.Product_Group_ID)
-                .HasMaxLength(20);
+            //this.Property(t => t.Product_Group_ID)
+            //    .HasMaxLength(20);
 
             this.Property(t => t.Provider_ID)
                 .HasMaxLength(20);
@@ -118,9 +118,7 @@ namespace StockManager.Data.Models.Mapping
             this.Property(t => t.Active).HasColumnName("Active");
 
             // Relationships
-            this.HasOptional(t => t.PRODUCT_GROUP)
-                .WithMany(t => t.PRODUCTs)
-                .HasForeignKey(d => d.Product_Group_ID);
+            
             this.HasOptional(t => t.UNIT1)
                 .WithMany(t => t.PRODUCTs)
                 .HasForeignKey(d => d.Unit_ID);

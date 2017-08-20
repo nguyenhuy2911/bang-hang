@@ -2,7 +2,7 @@
 
 namespace StockManager.Entity.Service.Contract
 {
-    public class Get_Product_Groups_Response : ResponseBase<List<Get_Products_DTO_Maper>>
+    public class Get_Product_Groups_Response : ResponseBase<List<Get_Product_Groups_DTO>>
     {
         public Get_Product_Groups_Response() { }
 

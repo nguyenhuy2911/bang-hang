@@ -39,10 +39,10 @@
                                             <div class="form-group">
                                                 <div class="form-line combobox">
                                                     <label class="form-label">Quan hệ với</label>
-                                                    @Html.DropDownListFor(m => m.ParentId, Model.Product_Groups_List, new { @class = "form-control show-tick" })
+                                                    @Html.DropDownListFor(m => m.ProductGroup_ID, Model.Product_Groups_List, new { @class = "form-control show-tick" })
 
                                                 </div>
-                                                @*@Html.ValidationMessageFor(model => model.Unit, null, new { @class = "error" })*@
+                                                @Html.ValidationMessageFor(model => model.ProductGroup_ID, null, new { @class = "error" })
                                             </div>
                                         </div>
                                     </div>
@@ -80,10 +80,10 @@
                                             <div class="form-group form-float">
                                                 <div class="form-line combobox">
                                                     <label class="form-label">Đơn vị tính</label>
-                                                    @Html.DropDownListFor(m => m.Unit, Model.UnitList, new { @class = "form-control show-tick" })
+                                                    @Html.DropDownListFor(m => m.Unit_ID, Model.UnitList, new { @class = "form-control show-tick" })
 
                                                 </div>
-                                                @Html.ValidationMessageFor(model => model.Unit, null, new { @class = "error" })
+                                                @Html.ValidationMessageFor(model => model.Unit_ID, null, new { @class = "error" })
                                             </div>
                                         </div>
                                     </div>
@@ -110,7 +110,7 @@
                                                 <i class="material-icons">format_indent_decrease</i> Mô tả
                                             </a>
                                         </li>
-                                        <li role="presentation">
+                                        <li role="presentation" view-when="update">
                                             <a href="#tab-image" data-toggle="tab">
                                                 <i class="material-icons">insert_photo</i> Hình ảnh
                                             </a>

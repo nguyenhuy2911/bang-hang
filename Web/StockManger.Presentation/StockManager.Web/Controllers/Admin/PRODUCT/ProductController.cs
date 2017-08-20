@@ -32,7 +32,7 @@ namespace StockManager.Web.Controllers
 
         }
 
-        private List<Get_Products_DTO_Maper> _list_Product_Groups => this.Get_Product_Groups_List();
+        private List<Get_Product_Groups_DTO> _list_Product_Groups => this.Get_Product_Groups_List();
 
 
         /************************************ Get **********************************************/
@@ -44,7 +44,7 @@ namespace StockManager.Web.Controllers
             return response;
         }
 
-        private List<Get_Products_DTO_Maper> Get_Product_Groups_List()
+        private List<Get_Product_Groups_DTO> Get_Product_Groups_List()
         {
             var request = new Get_Product_Groups_Request()
             {
@@ -77,8 +77,9 @@ namespace StockManager.Web.Controllers
                 Product_Name = model.Product_Name,
                 Sale_Price = Utility.convertNumber<decimal>(model.Sale_Price),
                 Size = model.Size,
-                Unit = model.Unit,
-                Description = model.Description
+                Unit_ID = model.Unit_ID,
+                Description = model.Description,
+                Product_Group_ID = model.ProductGroup_ID
             };
             var response = _IProductService.CreateProduct(request);
             if (response?.StatusCode == (int)RESULT_STATUS_CODE.SUCCESS)
@@ -121,7 +122,7 @@ namespace StockManager.Web.Controllers
         public ActionResult Product_New_Form()
         {
             var model = new Products_CRUD_ViewModel();
-            model.UnitList.Add(new SelectListItem() { Text = "Chọn", Value = "-1" });
+            model.UnitList.Add(new SelectListItem() { Text = "Chọn", Value = "" });
             if (_listUnit != null)
             {
                 model.UnitList.AddRange(_listUnit.Select(i =>
@@ -139,8 +140,8 @@ namespace StockManager.Web.Controllers
             list_group_product.AddRange(_list_Product_Groups.Select(i =>
                                                            new SelectListItem()
                                                            {
-                                                               Text = string.Format("{0} - {1}", i.Product_ID, i.Product_Name),
-                                                               Value = i.Product_Group_ID,
+                                                               Text = string.Format("{0} - {1}", i.ProductGroup_ID, i.ProductGroup_Name),
+                                                               Value = i.ProductGroup_ID.ToString(),
                                                                Group = new SelectListGroup() { Name = "Chọn cha" }
                                                            }).ToList());
 

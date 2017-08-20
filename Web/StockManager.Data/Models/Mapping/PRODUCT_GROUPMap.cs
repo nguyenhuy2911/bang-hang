@@ -11,10 +11,6 @@ namespace StockManager.Data.Models.Mapping
             this.HasKey(t => t.ProductGroup_ID);
 
             // Properties
-            this.Property(t => t.ProductGroup_ID)
-                .IsRequired()
-                .HasMaxLength(20);
-
             this.Property(t => t.ProductGroup_Name)
                 .HasMaxLength(255);
 

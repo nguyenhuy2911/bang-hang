@@ -22,6 +22,9 @@ namespace StockManager.Web.Mapping
             CreateMap<PRODUCT, Get_Products_DTO_Maper>();
             CreateMap<ResponseBase<List<UNIT>>, Get_Unit_Response>();
             CreateMap<UNIT, Get_Unit_DTO_Maper>();
+            CreateMap<ResponseBase<List<PRODUCT_GROUP>>, Get_Product_Groups_Response>();
+            CreateMap<PRODUCT_GROUP, Get_Product_Groups_DTO>();
+
         }
     }
 }

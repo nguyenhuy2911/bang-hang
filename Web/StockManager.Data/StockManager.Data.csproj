@@ -78,8 +78,10 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Infrastructure\DatabaseExtention.cs" />
     <Compile Include="Infrastructure\DataBaseFactory.cs" />
     <Compile Include="Infrastructure\Disposable.cs" />
+    <Compile Include="Infrastructure\HelperFunctions.cs" />
     <Compile Include="Infrastructure\IRepositoryBase.cs" />
     <Compile Include="Infrastructure\IUnitOfWork.cs" />
     <Compile Include="Infrastructure\RepositoryBase.cs" />
@@ -133,6 +135,7 @@
     <Compile Include="Models\Mapping\UNITCONVERTMap.cs" />
     <Compile Include="Models\Mapping\UNITMap.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="StoreProcedure\STORENAME.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />

@@ -20,7 +20,7 @@ namespace StockManager.Entity
         public Nullable<int> Product_Type_ID { get; set; }
         public Nullable<int> Manufacturer_ID { get; set; }
         public string Model_ID { get; set; }
-        public string Product_Group_ID { get; set; }
+        public Nullable<int> Product_Group_ID { get; set; }
         public string Provider_ID { get; set; }
         public string Origin { get; set; }
         public string Barcode { get; set; }
@@ -65,7 +65,7 @@ namespace StockManager.Entity
         public bool Active { get; set; }
         public virtual  ICollection<ADJUSTMENT_DETAIL> ADJUSTMENT_DETAIL { get; set; }
         public virtual ICollection<INVENTORY_DETAIL> INVENTORY_DETAIL { get; set; }
-        public virtual PRODUCT_GROUP PRODUCT_GROUP { get; set; }
+       
         public virtual UNIT UNIT1 { get; set; }
         public virtual ICollection<STOCK_INWARD_DETAIL> STOCK_INWARD_DETAIL { get; set; }
         public virtual ICollection<STOCK_OUTWARD_DETAIL> STOCK_OUTWARD_DETAIL { get; set; }

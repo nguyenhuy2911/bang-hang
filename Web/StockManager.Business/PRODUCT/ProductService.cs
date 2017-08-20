@@ -13,7 +13,7 @@ namespace StockManager.Business
     {
         Get_Products_Response GetProducts(GetProducts_Request request);
         Get_Product_Groups_Response Get_Product_Groups(Get_Product_Groups_Request request);
-        ResponseBase<int> UpdateProduct(PRODUCT ProductToUpdate);
+        CRUD_Product_Response UpdateProduct(CRUD_Product_Request request);
         CRUD_Product_Response CreateProduct(CRUD_Product_Request request);
         ResponseBase<int> DeleteProduct(int id);
     }
@@ -36,6 +36,13 @@ namespace StockManager.Business
                 var product = Mapper.Map<CRUD_Product_Request, PRODUCT>(request);
                 this._IProductRepository.Add(product);
                 int saveStatus = this._IUnitOfWork.Commit();
+                if (request.Product_Group_ID.Equals(0))
+                {
+                    product.Product_Group_ID = product.Product_ID;
+                    this._IProductRepository.Update(product);
+                    saveStatus = this._IUnitOfWork.Commit();
+                }       
+               
                 if (saveStatus > 0)
                     response.StatusCode = (int)RESULT_STATUS_CODE.SUCCESS;
                 else
@@ -68,14 +75,32 @@ namespace StockManager.Business
 
         public Get_Product_Groups_Response Get_Product_Groups(Get_Product_Groups_Request request)
         {
-            var products = _IProductRepository.Get_Product_Groups(request.Page, null, x => x.Product_ID, false);
-            var retData = Mapper.Map<ResponseBase<List<PRODUCT>>, Get_Product_Groups_Response>(products);
+            var products = _IProductRepository.Get_Product_Groups();
+            var retData = Mapper.Map<ResponseBase<List<PRODUCT_GROUP>>, Get_Product_Groups_Response>(products);
             return retData;
         }
 
-        public ResponseBase<int> UpdateProduct(PRODUCT ProductToUpdate)
+        public CRUD_Product_Response UpdateProduct(CRUD_Product_Request request) 
         {
-            throw new NotImplementedException();
+            var response = new CRUD_Product_Response();
+            try
+            {
+                var product = Mapper.Map<CRUD_Product_Request, PRODUCT>(request);
+                this._IProductRepository.Update(product);               
+                
+                int saveStatus = this._IUnitOfWork.Commit();
+                if (saveStatus > 0)
+                    response.StatusCode = (int)RESULT_STATUS_CODE.SUCCESS;
+                else
+                    response.StatusCode = (int)RESULT_STATUS_CODE.DATABASE_ERROR;
+            }
+            catch (Exception ex)
+            {
+
+                response.StatusCode = (int)RESULT_STATUS_CODE.SYSTEM_ERROR;
+                response.StatusMessage = ex.ToString();
+            }
+            return response;
         }
     }
 }
