@@ -37,9 +37,8 @@ namespace StockManager.Web.Controllers
 
         /************************************ Get **********************************************/
 
-        private Get_Products_Response GetProducts_Data()
+        private Get_Products_Response GetProducts_Data(GetProducts_Request request)
         {
-            var request = new GetProducts_Request();
             var response = _IProductService.GetProducts(request);
             return response;
         }
@@ -109,9 +108,9 @@ namespace StockManager.Web.Controllers
 
         [HttpGet]
         [Route("get-products")]
-        public string GetProducts()
+        public string GetProducts(GetProducts_Request request)
         {
-            var response = GetProducts_Data();
+            var response = GetProducts_Data(request);
             string json = JsonConvert.SerializeObject(response);
             return json;
         }

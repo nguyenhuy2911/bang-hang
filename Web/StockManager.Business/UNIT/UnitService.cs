@@ -39,7 +39,7 @@ namespace StockManager.Business
                     condition = c => c.Active.Equals(true);
 
                 var units = _IUniRepository.GetPage(request.Page, condition);
-                retData = Mapper.Map<ResponseBase<List<UNIT>>, Get_Unit_Response>(units.Result);
+                retData = Mapper.Map<ResponseBase<List<UNIT>>, Get_Unit_Response>(units);
                 return retData;
             }
             catch (Exception ex)

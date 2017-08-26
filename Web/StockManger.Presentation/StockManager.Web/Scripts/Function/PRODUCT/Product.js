@@ -1,6 +1,15 @@
 ﻿var _PRODUCT = null;
+var Page = function (pageNumber, pageSize) {
+    this.PageNumber = pageNumber;
+    this.PageSize = pageSize;
+}
+
+var GetProducts_Request = function () {
+    this.Page = new Page(0, 10);
+}
 
 var Products_CRUD_ViewModel = function () {
+   
     this.Product_Name = "";
     this.Sale_Price = 0;
     this.Size = 0;
@@ -9,7 +18,12 @@ var Products_CRUD_ViewModel = function () {
     this.ProductGroup_ID = 0;
 }
 
-function PRODUCT() { }
+function PRODUCT() {
+    this.variable = {
+        pageIndex: 0,
+        pageSize: 10
+    };
+}
 
 PRODUCT.prototype = new BaseFunction("PRODUCT");
 
@@ -40,14 +54,20 @@ PRODUCT.prototype.regisEvent = function () {
 }
 
 PRODUCT.prototype.getProducts = function () {
+    var $this = this;
+    var request = new GetProducts_Request();
+    request.Page = new Page($this.variable.pageIndex, $this.variable.pageSize);
+    
     var column = JSON.parse(columnGrid);
-    $('#product_list_item').DataTable({
+    var table = $('#product_list_item').DataTable({
         processing: true,
         serverSide: true,
-        columns: column,       
+        searching: false,
+        columns: column,
         ajax: {
             url: '/product/get-products',
             dataType: "json",
+            data: request,
             dataFilter: function (response) {
                 var data = JSON.parse(response);
                 var jsonObj = {};
@@ -56,8 +76,16 @@ PRODUCT.prototype.getProducts = function () {
                 jsonObj.data = data.Results;
                 return JSON.stringify(jsonObj);
             }
-        }
+        },
+
+    })
+    .on('page.dt', function () {
+        var info = table.page.info();
+        $this.variable.pageIndex = info.page;
+        $this.variable.pageSize = info.length;
     });
+
+
 }
 
 

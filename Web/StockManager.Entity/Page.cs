@@ -13,7 +13,7 @@ namespace StockManager.Entity
 
         public Page()
         {
-            PageNumber = 1;
+            PageNumber = 0;
             PageSize = 10;
         }
 
@@ -23,7 +23,7 @@ namespace StockManager.Entity
             PageSize = pageSize;
         }
 
-        public int Skip => (PageNumber - 1) * PageSize;
+        public int Skip => PageNumber * PageSize;
 
     }
     public static class PagingExtensions

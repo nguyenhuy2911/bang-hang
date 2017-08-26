@@ -19,6 +19,6 @@ namespace StockManager.Data.Infrastructure
         // T Get(Expression<Func<T, bool>> where);
         IEnumerable<T> GetAll();
         ResponseBase<List<T>> GetAll(Page pager, Expression<Func<T, object>> order, bool ascending);
-        Task<ResponseBase<List<T>>>  GetPage(Page pager, Expression<Func<T, bool>> where = null, Expression<Func<T, object>> order = null, bool ascending = false);
+        ResponseBase<List<T>>  GetPage(Page pager, Expression<Func<T, bool>> where = null, Expression<Func<T, object>> order = null, bool ascending = false);
     }
 }

@@ -57,37 +57,14 @@ namespace StockManager.Business
             return response;
         }
 
-        public ResponseBase<int> DeleteProduct(int id)
-        {
-            throw new NotImplementedException();
-        }
-
-        public ResponseBase<PRODUCT> GetProduct(int id)
-        {
-            throw new NotImplementedException();
-        }
-        public Get_Products_Response GetProducts(GetProducts_Request request)
-        {
-            var products = _IProductRepository.GetAll(request.Page, x => x.Product_ID, false);
-            var retData = Mapper.Map<ResponseBase<List<PRODUCT>>, Get_Products_Response>(products);
-            return retData;
-        }
-
-        public Get_Product_Groups_Response Get_Product_Groups(Get_Product_Groups_Request request)
-        {
-            var products = _IProductRepository.Get_Product_Groups();
-            var retData = Mapper.Map<ResponseBase<List<PRODUCT_GROUP>>, Get_Product_Groups_Response>(products);
-            return retData;
-        }
-
-        public CRUD_Product_Response UpdateProduct(CRUD_Product_Request request) 
+        public CRUD_Product_Response UpdateProduct(CRUD_Product_Request request)
         {
             var response = new CRUD_Product_Response();
             try
             {
                 var product = Mapper.Map<CRUD_Product_Request, PRODUCT>(request);
-                this._IProductRepository.Update(product);               
-                
+                this._IProductRepository.Update(product);
+
                 int saveStatus = this._IUnitOfWork.Commit();
                 if (saveStatus > 0)
                     response.StatusCode = (int)RESULT_STATUS_CODE.SUCCESS;
@@ -102,5 +79,30 @@ namespace StockManager.Business
             }
             return response;
         }
+
+        public ResponseBase<int> DeleteProduct(int id)
+        {
+            throw new NotImplementedException();
+        }
+
+        public ResponseBase<PRODUCT> GetProduct(int id)
+        {
+            throw new NotImplementedException();
+        }
+        public Get_Products_Response GetProducts(GetProducts_Request request)
+        {
+            var products = _IProductRepository.GetPage(request.Page);
+            var retData = Mapper.Map<ResponseBase<List<PRODUCT>>, Get_Products_Response>(products);
+            return retData;
+        }
+
+        public Get_Product_Groups_Response Get_Product_Groups(Get_Product_Groups_Request request)
+        {
+            var products = _IProductRepository.Get_Product_Groups();
+            var retData = Mapper.Map<ResponseBase<List<PRODUCT_GROUP>>, Get_Product_Groups_Response>(products);
+            return retData;
+        }
+
+        
     }
 }

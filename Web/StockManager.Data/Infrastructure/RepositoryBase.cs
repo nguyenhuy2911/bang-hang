@@ -91,11 +91,11 @@ namespace StockManager.Data.Infrastructure
 
         }
 
-        public virtual async Task< ResponseBase<List<T>>> GetPage(Page pager, Expression<Func<T, bool>> where = null, Expression<Func<T, object>> order = null, bool ascending = false)
+        public virtual  ResponseBase<List<T>> GetPage(Page pager, Expression<Func<T, bool>> where = null, Expression<Func<T, object>> order = null, bool ascending = false)
         {
 
-            var getDataAsync = await this.GetDatas(pager, where, order, ascending);
-            var getTotalRowAsync = await this.GetTotalCount(where);
+            var getDataAsync =  this.GetDatas(pager, where, order, ascending);
+            var getTotalRowAsync =  this.GetTotalCount(where);
            
             return
                 new ResponseBase<List<T>>()
@@ -105,7 +105,7 @@ namespace StockManager.Data.Infrastructure
                 };
         }
 
-        private async Task<int> GetTotalCount(Expression<Func<T, bool>> where = null)
+        private  int GetTotalCount(Expression<Func<T, bool>> where = null)
         {
             try
             {
@@ -126,7 +126,7 @@ namespace StockManager.Data.Infrastructure
             }
         }
 
-        private async Task<List<T>> GetDatas(Page pager, Expression<Func<T, bool>> where = null, Expression<Func<T, object>> order = null, bool ascending = false)
+        private  List<T> GetDatas(Page pager, Expression<Func<T, bool>> where = null, Expression<Func<T, object>> order = null, bool ascending = false)
         {
             try
             {
@@ -137,7 +137,7 @@ namespace StockManager.Data.Infrastructure
                 if (order != null)
                     query.SortBy(order, ascending);
                 if (pager?.PageSize != 0 && pager?.PageNumber != 0)
-                    query.Take(pager.PageSize).Skip(pager.Skip);
+                    query.Take(pager.PageSize).Skip(1);
 
                 var result = query.ToList();
                 return  result;
