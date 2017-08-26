@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace StockManager.Entity
+﻿namespace StockManager.Entity
 {
     public class ResponseBase<T>
     {
@@ -17,5 +11,6 @@ namespace StockManager.Entity
         public string StatusMessage { get; set; }
         public T Results { get; set; }
         public int TotalRow { get; set; }
+        
     }
 }

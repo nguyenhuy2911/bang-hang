@@ -1,9 +1,11 @@
 ﻿using System;
+using System.ComponentModel;
 
 namespace StockManager.Entity.Service.Contract
 {
     public class Product_DTO
     {
+        
         public int Product_ID { get; set; }
         public string Product_Name { get; set; }
         public string Product_NameEN { get; set; }

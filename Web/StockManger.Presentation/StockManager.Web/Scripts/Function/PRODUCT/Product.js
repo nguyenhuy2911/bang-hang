@@ -40,33 +40,26 @@ PRODUCT.prototype.regisEvent = function () {
 }
 
 PRODUCT.prototype.getProducts = function () {
-    var $this = this;
-    $.ajax({
-        type: "GET",
-        url: "/product/get-products",
-        data: { date: new Date() },
-        dataType: "json",
-        success: function (response) {
-            $this.loadToDataTable(response);
+    var column = JSON.parse(columnGrid);
+    $('#product_list_item').DataTable({
+        processing: true,
+        serverSide: true,
+        columns: column,       
+        ajax: {
+            url: '/product/get-products',
+            dataType: "json",
+            dataFilter: function (response) {
+                var data = JSON.parse(response);
+                var jsonObj = {};
+                jsonObj.recordsTotal = data.TotalRow;
+                jsonObj.recordsFiltered = data.TotalRow;
+                jsonObj.data = data.Results;
+                return JSON.stringify(jsonObj);
+            }
         }
     });
 }
 
-PRODUCT.prototype.loadToDataTable = function (response) {
-
-    $('#product_list_item').DataTable({
-        processing: true,
-        data: response.Results,
-        columns: [
-            { data: "Product_ID", title: "Product ID" },
-            { data: "Product_Name", title: "Product Name" },
-            { data: "Unit_ID", title: "Unit" },
-            { data: "Quantity", title: "Quantity" }
-        ],
-        select: true
-    });
-
-};
 
 PRODUCT.prototype.loadCreateForm = function () {
     $("#div-crud-modal").loading();
@@ -116,7 +109,7 @@ PRODUCT.prototype.saveProduct = function () {
                 showSuccessMessage(response.StatusMessage, "#div-crud-modal");
                 $("[view-when='update']").fadeIn();
             }
-               
+
 
         }
     })

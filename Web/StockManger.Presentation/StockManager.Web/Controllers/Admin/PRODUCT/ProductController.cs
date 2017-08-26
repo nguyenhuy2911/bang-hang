@@ -43,6 +43,7 @@ namespace StockManager.Web.Controllers
             var response = _IProductService.GetProducts(request);
             return response;
         }
+       
 
         private List<Get_Product_Groups_DTO> Get_Product_Groups_List()
         {
@@ -101,10 +102,7 @@ namespace StockManager.Web.Controllers
         [Route]
         public ActionResult Product_FormList()
         {
-            if (!CheckLogin())
-            {
-                return Login();
-            }
+            
             var model = new Products_ViewModel();
             return View("~/Views/Admin/PRODUCT/PRODUCT_FormList.cshtml", model);
         }
