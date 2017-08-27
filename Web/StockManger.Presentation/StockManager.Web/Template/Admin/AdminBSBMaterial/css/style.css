@@ -3218,6 +3218,20 @@ section.content {
         /*background-color: #ddd;*/
     }
 
+    .btn-link.btn-link-primary {
+        color:#1f91f3 !important;
+    }
+
+    .btn-link.btn-link-success {
+        color:#2b982b !important;
+    }
+    .btn-link.btn-link-warning {
+        color:#ff9600 !important;
+    }
+    .btn-link.btn-link-danger {
+        color:#fb483a !important;
+    }
+
 .btn-circle-lg {
     border: none;
     outline: none !important;
@@ -7986,10 +8000,6 @@ fieldset[disabled] .form-control {
     color: #bbb;
 }
 
-.pagination li.active a {
-    background-color: #2196F3;
-}
-
 .pagination li {
     -webkit-border-radius: 0;
     -moz-border-radius: 0;
@@ -8022,7 +8032,7 @@ fieldset[disabled] .form-control {
     .pagination > li:first-child > a .material-icons,
     .pagination > li:last-child > a .material-icons {
         position: relative;
-        bottom: 2px;
+        bottom: -3px;
     }
 
 .pagination-sm > li:first-child > a,

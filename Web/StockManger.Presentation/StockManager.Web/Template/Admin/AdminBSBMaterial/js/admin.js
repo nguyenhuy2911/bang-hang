@@ -1,3 +1,4 @@
+
 if (typeof jQuery === "undefined") {
     throw new Error("jQuery plugins need to be before this file");
 }
@@ -264,7 +265,7 @@ $.AdminBSB.navbar = {
 $.AdminBSB.input = {
     activate: function () {
         //On focus event
-        $('.form-control').focus(function () {          
+        $('.form-control').focus(function () {
             $(this).parent().addClass('focused');
         });
 
@@ -285,7 +286,7 @@ $.AdminBSB.input = {
 
         });
         $('.bootstrap-select button').on("click", function () {
-           
+
             $(this).parents('.form-line').addClass('focused');
 
         });
@@ -295,8 +296,8 @@ $.AdminBSB.input = {
                 $(this).parents('.form-line').addClass('focused');
             }
         });
-        
-        
+
+
     }
 }
 //==========================================================================================================================
@@ -558,7 +559,7 @@ $(function () {
         setSettingListHeightAndScroll();
     });
 
-    
+
 });
 $(".search-form .close-search").on("click", function () {
     $(this.closest(".collapse")).collapse('hide');

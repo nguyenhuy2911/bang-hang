@@ -27,6 +27,7 @@ namespace StockManager.Web
                         "~/Template/Admin/AdminBSBMaterial/plugins/bootstrap-select/css/bootstrap-select.css",
                         "~/Template/Admin/AdminBSBMaterial/plugins/multi-select/css/multi-select.css",
                         "~/Template/Admin/AdminBSBMaterial/plugins/animate-css/animate.css",
+                        "~/Template/Admin/AdminBSBMaterial/plugins/jquery-datatable/skin/bootstrap/css/dataTables.bootstrap.css",
                         "~/Template/Admin/AdminBSBMaterial/css/style.css",
                         "~/Template/Admin/AdminBSBMaterial/css/themes/all-themes.css",
                         "~/Template/Admin/AdminBSBMaterial/font-awesome/css/font-awesome.min.css",                       
@@ -78,7 +79,7 @@ namespace StockManager.Web
             // ------------------------- PRODUCT ----------------------------------------------//
 
             var productStyles = new List<string>();
-            productStyles.AddRange(DataTableStyle);          
+            
             productStyles.AddRange(UploadFileStyle);
             bundles.Add(new StyleBundle("~/Styles/Function/Product").Include(
                           productStyles.ToArray()
@@ -96,16 +97,7 @@ namespace StockManager.Web
         }
 
         // ------------------------------------  Plugin Style ----------------------------------------//
-        private static string[] DataTableStyle
-        {
-            get
-            {
-                return new string[]
-                {
-                    "~/Template/Admin/AdminBSBMaterial/plugins/jquery-datatable/skin/bootstrap/css/dataTables.bootstrap.min.css"
-                };
-            }
-        }      
+            
         private static string[] DataTableScript
         {
             get

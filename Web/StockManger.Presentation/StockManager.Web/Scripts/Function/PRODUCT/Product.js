@@ -9,7 +9,7 @@ var GetProducts_Request = function () {
 }
 
 var Products_CRUD_ViewModel = function () {
-   
+
     this.Product_Name = "";
     this.Sale_Price = 0;
     this.Size = 0;
@@ -18,7 +18,7 @@ var Products_CRUD_ViewModel = function () {
     this.ProductGroup_ID = 0;
 }
 
-function PRODUCT() {
+var PRODUCT = function () {
     this.variable = {
         pageIndex: 0,
         pageSize: 10
@@ -55,10 +55,23 @@ PRODUCT.prototype.regisEvent = function () {
 
 PRODUCT.prototype.getProducts = function () {
     var $this = this;
-    var request = new GetProducts_Request();
-    request.Page = new Page($this.variable.pageIndex, $this.variable.pageSize);
-    
     var column = JSON.parse(columnGrid);
+    var columnRender = [];
+    $.each(column, function (index, objColumn) {
+        if (objColumn.data == "Action") {
+            objColumn.render = function (data, type, row, meta) {
+
+                var $btnEdit = $("<a data-toggle='modal' data-target='#div-crud-modal'>")
+                                       .addClass("btn btn-link btn-link-primary")
+                                       .append('<i class="material-icons">mode_edit</i>')
+                                       .attr("onclick", '_PRODUCT.loadEditForm(\'' + JSON.stringify(row) + '\')');
+                var $btnDelete = $("<a>").addClass("btn btn-link btn-link-danger").append('<i class="material-icons">delete</i>');
+                var $div = $("<div>").append($btnEdit).append($btnDelete);
+                return $div.html();
+            }
+        }
+        columnRender.push(objColumn);
+    })
     var table = $('#product_list_item').DataTable({
         processing: true,
         serverSide: true,
@@ -67,7 +80,12 @@ PRODUCT.prototype.getProducts = function () {
         ajax: {
             url: '/product/get-products',
             dataType: "json",
-            data: request,
+            type: 'POST',
+            data: function () {
+                var request = new GetProducts_Request();
+                request.Page = new Page($this.variable.pageIndex, $this.variable.pageSize);
+                return request;
+            },
             dataFilter: function (response) {
                 var data = JSON.parse(response);
                 var jsonObj = {};
@@ -84,12 +102,21 @@ PRODUCT.prototype.getProducts = function () {
         $this.variable.pageIndex = info.page;
         $this.variable.pageSize = info.length;
     });
+}
 
-
+PRODUCT.prototype.loadCreateForm = function () {
+    $("#div-crud-modal").loading();
+    $("#div-crud-modal .modal-body").html("");
+    $("#div-crud-modal .modal-body").load("/product/product-create-form", function () {
+        $("#div-crud-modal").loading("stop");
+        $("[view-when='update']").fadeOut();
+    });
 }
 
 
-PRODUCT.prototype.loadCreateForm = function () {
+
+PRODUCT.prototype.loadEditForm = function (strJsondata) {    
+    var data = JSON.parse(strJsondata);
     $("#div-crud-modal").loading();
     $("#div-crud-modal .modal-body").html("");
     $("#div-crud-modal .modal-body").load("/product/product-create-form", function () {

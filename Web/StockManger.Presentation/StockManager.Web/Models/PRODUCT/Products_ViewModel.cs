@@ -34,6 +34,9 @@ namespace StockManager.Web.Models.PRODUCT
 
         [TableHeader(title = "Đơn vị tính")]
         public string Unit_ID { get; set; }
+
+        [TableHeader(title = "Sửa / Xóa")]
+        public string Action { get; set; }
     }
 
 }

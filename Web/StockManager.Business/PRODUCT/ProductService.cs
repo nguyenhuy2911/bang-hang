@@ -41,8 +41,8 @@ namespace StockManager.Business
                     product.Product_Group_ID = product.Product_ID;
                     this._IProductRepository.Update(product);
                     saveStatus = this._IUnitOfWork.Commit();
-                }       
-               
+                }
+
                 if (saveStatus > 0)
                     response.StatusCode = (int)RESULT_STATUS_CODE.SUCCESS;
                 else
@@ -53,7 +53,7 @@ namespace StockManager.Business
 
                 response.StatusCode = (int)RESULT_STATUS_CODE.SYSTEM_ERROR;
                 response.StatusMessage = ex.ToString();
-            }           
+            }
             return response;
         }
 
@@ -91,7 +91,7 @@ namespace StockManager.Business
         }
         public Get_Products_Response GetProducts(GetProducts_Request request)
         {
-            var products = _IProductRepository.GetPage(request.Page);
+            var products = _IProductRepository.GetPage(request.Page, w => true, x => x.Product_ID);
             var retData = Mapper.Map<ResponseBase<List<PRODUCT>>, Get_Products_Response>(products);
             return retData;
         }
@@ -103,6 +103,6 @@ namespace StockManager.Business
             return retData;
         }
 
-        
+
     }
 }

@@ -21,20 +21,6 @@ namespace StockManager.Web.Controllers
 
         private readonly IUnitService _IUnitService;
 
-        private List<Get_Unit_DTO_Maper> _listUnit { get; set; }
-
-        private void SetListUnit()
-        {
-            if (_listUnit == null)
-            {
-                _listUnit = GetUnits_For_CRUD();
-            }
-
-        }
-
-        private List<Get_Product_Groups_DTO> _list_Product_Groups => this.Get_Product_Groups_List();
-
-
         /************************************ Get **********************************************/
 
         private Get_Products_Response GetProducts_Data(GetProducts_Request request)
@@ -42,7 +28,7 @@ namespace StockManager.Web.Controllers
             var response = _IProductService.GetProducts(request);
             return response;
         }
-       
+
 
         private List<Get_Product_Groups_DTO> Get_Product_Groups_List()
         {
@@ -62,7 +48,10 @@ namespace StockManager.Web.Controllers
 
             var request = new Get_Unit_Request();
             return _IUnitService.GetUnits(request)?.Results;
+
         }
+
+
 
         /***************************************************************************************/
 
@@ -95,18 +84,18 @@ namespace StockManager.Web.Controllers
         {
             this._IProductService = productService;
             this._IUnitService = unitService;
-            this.SetListUnit();
+
         }
 
         [Route]
         public ActionResult Product_FormList()
         {
-            
+
             var model = new Products_ViewModel();
             return View("~/Views/Admin/PRODUCT/PRODUCT_FormList.cshtml", model);
         }
 
-        [HttpGet]
+        [HttpPost]
         [Route("get-products")]
         public string GetProducts(GetProducts_Request request)
         {
@@ -120,21 +109,19 @@ namespace StockManager.Web.Controllers
         {
             var model = new Products_CRUD_ViewModel();
             model.UnitList.Add(new SelectListItem() { Text = "Chọn", Value = "" });
-            if (_listUnit != null)
-            {
-                model.UnitList.AddRange(_listUnit.Select(i =>
-                                                           new SelectListItem()
-                                                           {
-                                                               Text = i.Unit_Name,
-                                                               Value = i.Unit_ID
-                                                           }).ToList());
-            }
+            model.UnitList.AddRange(this.GetUnits_For_CRUD()?.Select(i =>
+                                                       new SelectListItem()
+                                                       {
+                                                           Text = i.Unit_Name,
+                                                           Value = i.Unit_ID
+                                                       }).ToList());
+
 
             var list_group_product = new List<SelectListItem>();
 
             list_group_product.Add(new SelectListItem() { Text = "Gốc", Value = "0", Group = new SelectListGroup() { Name = "" } });
 
-            list_group_product.AddRange(_list_Product_Groups.Select(i =>
+            list_group_product.AddRange(this.Get_Product_Groups_List()?.Select(i =>
                                                            new SelectListItem()
                                                            {
                                                                Text = string.Format("{0} - {1}", i.ProductGroup_ID, i.ProductGroup_Name),

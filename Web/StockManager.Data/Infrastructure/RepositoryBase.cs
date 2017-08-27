@@ -91,12 +91,12 @@ namespace StockManager.Data.Infrastructure
 
         }
 
-        public virtual  ResponseBase<List<T>> GetPage(Page pager, Expression<Func<T, bool>> where = null, Expression<Func<T, object>> order = null, bool ascending = false)
+        public virtual ResponseBase<List<T>> GetPage(Page pager, Expression<Func<T, bool>> where = null, Expression<Func<T, object>> order = null, bool ascending = false)
         {
 
-            var getDataAsync =  this.GetDatas(pager, where, order, ascending);
-            var getTotalRowAsync =  this.GetTotalCount(where);
-           
+            var getDataAsync = this.GetDatas(pager, where, order, ascending);
+            var getTotalRowAsync = this.GetTotalCount(where);
+
             return
                 new ResponseBase<List<T>>()
                 {
@@ -105,7 +105,7 @@ namespace StockManager.Data.Infrastructure
                 };
         }
 
-        private  int GetTotalCount(Expression<Func<T, bool>> where = null)
+        private int GetTotalCount(Expression<Func<T, bool>> where = null)
         {
             try
             {
@@ -114,10 +114,10 @@ namespace StockManager.Data.Infrastructure
                 if (where != null)
                 {
                     var total = query.Count(where);
-                    return  total;
+                    return total;
                 }
                 else
-                    return  dbset.Count();
+                    return dbset.Count();
             }
             catch (Exception ex)
             {
@@ -126,21 +126,14 @@ namespace StockManager.Data.Infrastructure
             }
         }
 
-        private  List<T> GetDatas(Page pager, Expression<Func<T, bool>> where = null, Expression<Func<T, object>> order = null, bool ascending = false)
+        private List<T> GetDatas(Page pager, Expression<Func<T, bool>> where = null, Expression<Func<T, object>> order = null, bool ascending = false)
         {
             try
             {
-
-                var query = dbset;
-                if (where != null)
-                    query.Where(where);
-                if (order != null)
-                    query.SortBy(order, ascending);
-                if (pager?.PageSize != 0 && pager?.PageNumber != 0)
-                    query.Take(pager.PageSize).Skip(1);
+                var query = dbset.Where(where).SortBy(order, ascending).Skip(pager.Skip).Take(pager.PageSize);
 
                 var result = query.ToList();
-                return  result;
+                return result;
             }
             catch (Exception ex)
             {
