@@ -70,6 +70,7 @@
     <Compile Include="Service.Contract\Product\DTO\raw\Product_Group_DTO.cs" />
     <Compile Include="Service.Contract\Product\Request\Get_Product_Groups_Request.cs" />
     <Compile Include="Service.Contract\Product\Response\CRUD_Product_Response.cs" />
+    <Compile Include="Service.Contract\Product\Response\Get_Product_By_Id_Response.cs" />
     <Compile Include="Service.Contract\Product\Response\Get_Product_Groups_Response.cs" />
     <Compile Include="Service.Contract\Unit\DTO\Unit_DTO.cs" />
     <Compile Include="Service.Contract\Product\Request\CRUD_Product_Request.cs" />

@@ -14,10 +14,8 @@ namespace StockManager.Data.Infrastructure
         void Update(T entity);
         void Delete(T entity);
         //  void Delete(Expression<Func<T, bool>> where);
-        T GetById(long id);
-        T GetById(string id);
-        // T Get(Expression<Func<T, bool>> where);
-        IEnumerable<T> GetAll();
+        ResponseBase<T> GetById(long id);
+        ResponseBase<T> GetById(string id);
         ResponseBase<List<T>> GetAll(Page pager, Expression<Func<T, object>> order, bool ascending);
         ResponseBase<List<T>>  GetPage(Page pager, Expression<Func<T, bool>> where = null, Expression<Func<T, object>> order = null, bool ascending = false);
     }

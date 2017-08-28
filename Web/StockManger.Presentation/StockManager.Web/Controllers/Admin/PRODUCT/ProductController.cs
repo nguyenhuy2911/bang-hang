@@ -107,13 +107,39 @@ namespace StockManager.Web.Controllers
         [Route("product-create-form")]
         public ActionResult Product_New_Form()
         {
+            var model = Get_Products_CRUD_ViewModel(0);
+            return View("~/Views/Admin/PRODUCT/Product_Crud_Form.cshtml", model);
+        }
+
+        [Route("product-edit-form")]
+        public ActionResult Product_Edit_Form(int Id)
+        {
+            var model = Get_Products_CRUD_ViewModel(Id);
+            return View("~/Views/Admin/PRODUCT/Product_Crud_Form.cshtml", model);
+        }
+
+        private Products_CRUD_ViewModel Get_Products_CRUD_ViewModel(int Id)
+        {
             var model = new Products_CRUD_ViewModel();
+
+            var product = Id != 0 ? _IProductService.Get_Product_ById(Id)?.Results : null;
+            var product_UnitId = product?.Unit_ID;
+            var product_GroupId = product?.Product_Group_ID;
+
+            model.Product_Name = product?.Product_Name;
+            model.ProductGroup_ID = product?.Product_Group_ID ?? 0;
+            model.Sale_Price = product?.Sale_Price.ToString();
+            model.Size = product?.Size;
+            model.Unit_ID = model?.Unit_ID;
+            model.Description = product?.Description;
+
             model.UnitList.Add(new SelectListItem() { Text = "Chọn", Value = "" });
             model.UnitList.AddRange(this.GetUnits_For_CRUD()?.Select(i =>
                                                        new SelectListItem()
                                                        {
                                                            Text = i.Unit_Name,
-                                                           Value = i.Unit_ID
+                                                           Value = i.Unit_ID,
+                                                           Selected = product_UnitId.Equals(i.Unit_ID) ? true : false
                                                        }).ToList());
 
 
@@ -126,12 +152,12 @@ namespace StockManager.Web.Controllers
                                                            {
                                                                Text = string.Format("{0} - {1}", i.ProductGroup_ID, i.ProductGroup_Name),
                                                                Value = i.ProductGroup_ID.ToString(),
+                                                               Selected = product_GroupId.Equals(i.ProductGroup_ID) ? true : false,
                                                                Group = new SelectListGroup() { Name = "Chọn cha" }
                                                            }).ToList());
 
             model.Product_Groups_List = new SelectList(list_group_product, "Value", "Text", "Group.Name", 0);
-
-            return View("~/Views/Admin/PRODUCT/Product_Crud_Form.cshtml", model);
+            return model;
         }
 
         [HttpPost]
@@ -140,7 +166,10 @@ namespace StockManager.Web.Controllers
         {
             try
             {
-                return Product_Create(model);
+                if (model.Id.Equals(0))
+                    return Product_Create(model);
+                else
+                    return string.Empty;
             }
             catch (Exception ex)
             {

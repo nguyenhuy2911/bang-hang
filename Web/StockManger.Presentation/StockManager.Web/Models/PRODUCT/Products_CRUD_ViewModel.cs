@@ -16,6 +16,9 @@ namespace StockManager.Web.Models.PRODUCT
             Product_Groups_List = new SelectList("", "", "");
         }
 
+      
+        public int Id { get; set; }
+
         [Required(ErrorMessage = "Tên sản phẩm không được để trống")]
         public string Product_Name { get; set; }
 

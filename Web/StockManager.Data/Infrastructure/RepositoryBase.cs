@@ -47,15 +47,28 @@ namespace StockManager.Data.Infrastructure
         public virtual void Delete(string id)
         {
             var entity = GetById(id);
-            dbset.Remove(entity);
+            dbset.Remove(entity.Results);
         }
-        public virtual T GetById(long id)
+        public virtual ResponseBase<T> GetById(long id)
         {
-            return dbset.Find(id);
+            var result = dbset.Find(id);
+            return
+               new ResponseBase<T>()
+               {
+                   Results = result,
+                   TotalRow = 0
+               };
+
         }
-        public virtual T GetById(string id)
+        public virtual ResponseBase<T> GetById(string id)
         {
-            return dbset.Find(id);
+            var result = dbset.Find(id);
+            return
+               new ResponseBase<T>()
+               {
+                   Results = result,
+                   TotalRow = 0
+               };
         }
         public virtual IEnumerable<T> GetAll()
         {
