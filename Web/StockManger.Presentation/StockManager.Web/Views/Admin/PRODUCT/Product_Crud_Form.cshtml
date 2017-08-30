@@ -24,6 +24,7 @@
             </div>
             <div class="body">
                 <form id="frm-crud-product" action="">
+                    @Html.HiddenFor(m => m.Product_ID)
                     <div class="row clearfix">
                         <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
                             <div class="card">
@@ -121,7 +122,8 @@
                                     <!-- Tab panes -->
                                     <div class="tab-content">
                                         <div role="tabpanel" class="tab-pane fade in active" id="tab-description">
-                                            @Html.TextAreaFor(m => m.Description, new { @id = "txt_Description", @class = "txt-description" })
+                                            <textarea id="txt_Description" name="Description" class="txt-description">@Html.Raw(Model.Description)</textarea>
+                                            @*@Html.TextAreaFor(m => m.Description, new { @id = "txt_Description", @class = "txt-description" })*@
                                         </div>
                                         <div role="tabpanel" class="tab-pane fade" id="tab-image">
                                             <div id="divFileUpload" class="dropzone" method="post">

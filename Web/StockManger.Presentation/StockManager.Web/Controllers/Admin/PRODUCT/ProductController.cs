@@ -9,6 +9,7 @@ using StockManager.Web.Models.PRODUCT;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net;
 using System.Threading.Tasks;
 using System.Web.Mvc;
 
@@ -67,12 +68,34 @@ namespace StockManager.Web.Controllers
                 Sale_Price = Utility.convertNumber<decimal>(model.Sale_Price),
                 Size = model.Size,
                 Unit_ID = model.Unit_ID,
-                Description = model.Description,
+                Description = WebUtility.HtmlEncode(model.Description),
                 Product_Group_ID = model.ProductGroup_ID
             };
             var response = _IProductService.CreateProduct(request);
             if (response?.StatusCode == (int)RESULT_STATUS_CODE.SUCCESS)
                 response.StatusMessage = Utility.getResourceString("CreateSuccess");
+
+            string json = JsonConvert.SerializeObject(response);
+            return json;
+        }
+
+        private string Product_Update(Products_CRUD_ViewModel model)
+        {
+            if (!ModelState.IsValid)
+                return string.Empty;
+            var request = new CRUD_Product_Request()
+            {
+                Product_ID = model.Product_ID,
+                Product_Name = model.Product_Name,
+                Sale_Price = Utility.convertNumber<decimal>(model.Sale_Price),
+                Size = model.Size,
+                Unit_ID = model.Unit_ID,
+                Description = WebUtility.HtmlEncode(model.Description),
+                Product_Group_ID = model.ProductGroup_ID
+            };
+            var response = _IProductService.UpdateProduct(request);
+            if (response?.StatusCode == (int)RESULT_STATUS_CODE.SUCCESS)
+                response.StatusMessage = Utility.getResourceString("UpdateSuccess");
 
             string json = JsonConvert.SerializeObject(response);
             return json;
@@ -126,12 +149,13 @@ namespace StockManager.Web.Controllers
             var product_UnitId = product?.Unit_ID;
             var product_GroupId = product?.Product_Group_ID;
 
+            model.Product_ID = Id;
             model.Product_Name = product?.Product_Name;
             model.ProductGroup_ID = product?.Product_Group_ID ?? 0;
             model.Sale_Price = product?.Sale_Price.ToString();
             model.Size = product?.Size;
             model.Unit_ID = model?.Unit_ID;
-            model.Description = product?.Description;
+            model.Description = WebUtility.HtmlDecode(product?.Description);
 
             model.UnitList.Add(new SelectListItem() { Text = "Chọn", Value = "" });
             model.UnitList.AddRange(this.GetUnits_For_CRUD()?.Select(i =>
@@ -166,10 +190,10 @@ namespace StockManager.Web.Controllers
         {
             try
             {
-                if (model.Id.Equals(0))
+                if (model.Product_ID.Equals(0))
                     return Product_Create(model);
                 else
-                    return string.Empty;
+                    return Product_Update(model);
             }
             catch (Exception ex)
             {

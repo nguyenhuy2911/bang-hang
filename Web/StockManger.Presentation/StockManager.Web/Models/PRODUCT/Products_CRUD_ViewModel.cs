@@ -17,7 +17,7 @@ namespace StockManager.Web.Models.PRODUCT
         }
 
       
-        public int Id { get; set; }
+        public int Product_ID { get; set; }
 
         [Required(ErrorMessage = "Tên sản phẩm không được để trống")]
         public string Product_Name { get; set; }

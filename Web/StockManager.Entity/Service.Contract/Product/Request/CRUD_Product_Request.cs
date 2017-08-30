@@ -7,6 +7,8 @@ namespace StockManager.Entity.Service.Contract
         {
            
         }
+        public int Product_ID { get; set; }
+
         [Required(ErrorMessage = "Tên sản phẩm không được để trống")]
         public string Product_Name { get; set; }
 
