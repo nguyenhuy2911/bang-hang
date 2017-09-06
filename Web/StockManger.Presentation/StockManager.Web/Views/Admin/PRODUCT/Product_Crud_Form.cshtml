@@ -70,10 +70,10 @@
                                         <div class="col-sm-3">
                                             <div class="form-group form-float">
                                                 <div class="form-line">
-                                                    @Html.TextBoxFor(m => m.Size, new { @class = "form-control" })
+                                                    @Html.TextBoxFor(m => m.Quantity, new { @class = "form-control" })
                                                     <label class="form-label">Khối lượng</label>
                                                 </div>
-                                                @Html.ValidationMessageFor(model => model.Size, null, new { @class = "error" })
+                                                @Html.ValidationMessageFor(model => model.Quantity, null, new { @class = "error" })
                                             </div>
                                         </div>
 
@@ -94,7 +94,7 @@
 
                     </div>
 
-                    <div class="row clearfix">
+                    <div class="row clearfix" view-when="update">
                         <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
                             <div class="card">
                                 <div class="header">
@@ -111,7 +111,7 @@
                                                 <i class="material-icons">format_indent_decrease</i> Mô tả
                                             </a>
                                         </li>
-                                        <li role="presentation" view-when="update">
+                                        <li role="presentation">
                                             <a href="#tab-image" data-toggle="tab">
                                                 <i class="material-icons">insert_photo</i> Hình ảnh
                                             </a>
@@ -123,7 +123,6 @@
                                     <div class="tab-content">
                                         <div role="tabpanel" class="tab-pane fade in active" id="tab-description">
                                             <textarea id="txt_Description" name="Description" class="txt-description">@Html.Raw(Model.Description)</textarea>
-                                            @*@Html.TextAreaFor(m => m.Description, new { @id = "txt_Description", @class = "txt-description" })*@
                                         </div>
                                         <div role="tabpanel" class="tab-pane fade" id="tab-image">
                                             <div id="divFileUpload" class="dropzone" method="post">
@@ -135,8 +134,9 @@
                                                     <em>(This is just a demo dropzone. Selected files are <strong>not</strong> actually uploaded.)</em>
                                                 </div>
                                                 <div class="fallback">
-                                                    <input name="file" type="file" multiple />
+                                                    <input id="file_product_img_upload" name="file" type="file" multiple />
                                                 </div>
+                                                <a href="javascript:;" id="btnSubmit" class="btn btn-primary btn-lg">Upload</a>
                                             </div>
                                         </div>
                                     </div>
@@ -159,8 +159,22 @@
         $.AdminBSB.dropdownMenu.activate();
         $.AdminBSB.select.activate();
         $.AdminBSB.Tinymce.setup("textarea.txt-description");
-        $("div#divFileUpload").dropzone({
-            url: "/",
+        var myDropzone = new Dropzone("div#divFileUpload", {
+            //  $("div#divFileUpload").dropzone({
+            autoProcessQueue: false,
+          //  autoQueue: false,
+            params: _PRODUCT.getProduct_Image_RequestValue(),
+            url: "/image/product-upload",
+            // maxFilesize: 1,
+            acceptedFiles: "image/jpeg, image/jpg, image/png",
+            //  parallelUploads: 1,
+            init: function () {
+                $('#btnSubmit').on('click', function (event) {
+                    event.preventDefault();
+                    myDropzone.processQueue();
+                });
+            },
+
             removedfile: function (file) {
                 alert("testremove");
                 var _ref;
@@ -177,7 +191,7 @@
             e.preventDefault(); //STOP default action
             _PRODUCT.saveProduct();
         });
-
+        
     })
 </script>
 @Scripts.Render("~/bundles/jqueryval")

@@ -35,6 +35,7 @@ namespace StockManager.Data.Infrastructure
         {
             dbset.Add(entity);
         }
+        
         public virtual void Update(T entity)
         {
             dbset.Attach(entity);

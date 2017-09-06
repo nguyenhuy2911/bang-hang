@@ -152,12 +152,14 @@
     <Compile Include="Controllers\Admin\PRODUCT\ProductController.cs" />
     <Compile Include="Controllers\Admin\VENDOR\VENDORController.cs" />
     <Compile Include="Controllers\Admin\WAREHOUSETRANSFER\WAREHOUSETRANSFERController.cs" />
+    <Compile Include="Controllers\ImageController.cs" />
     <Compile Include="Mapping\AutoMapperConfiguration.cs" />
     <Compile Include="Mapping\ServiceToDomainMappingProfile.cs" />
     <Compile Include="Mapping\DomainToServiceMappingProfile.cs" />
     <Compile Include="Models\INVENTORY\INVENTORY_Form_Model.cs" />
     <Compile Include="Models\INVENTORY\INVENTORY_New_UpDate_Form_Model.cs" />
     <Compile Include="Models\PRODUCT\Products_CRUD_ViewModel.cs" />
+    <Compile Include="Models\IMAGES\ProductImg_Upload_Modal.cs" />
     <Compile Include="Models\WAREHOUSETRANSFER\WAREHOUSETRANSFER_Form_Model.cs" />
     <Compile Include="Models\WAREHOUSETRANSFER\WAREHOUSETRANSFER_New_UpDate_Form_Model.cs" />
     <Compile Include="Models\IMPORT\IMPORT_New_UpDate_Form_Model.cs" />
@@ -4047,7 +4049,10 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="uploads\img\product\" />
     <Folder Include="Views\Shared\Admin\" />
+    <Folder Include="Views\Uploads\" />
+    <Folder Include="Views\Upload\" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Project_Readme.html" />

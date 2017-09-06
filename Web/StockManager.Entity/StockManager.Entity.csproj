@@ -57,6 +57,7 @@
     <Compile Include="Access.DTO\FORM.cs" />
     <Compile Include="Access.DTO\INVENTORY.cs" />
     <Compile Include="Access.DTO\INVENTORY_DETAIL.cs" />
+    <Compile Include="Access.DTO\Images.cs" />
     <Compile Include="Page.cs" />
     <Compile Include="Access.DTO\PRODUCT.cs" />
     <Compile Include="Access.DTO\PRODUCT_BUILD.cs" />
@@ -64,6 +65,9 @@
     <Compile Include="Access.DTO\PRODUCT_PRICE.cs" />
     <Compile Include="Access.DTO\PRODUCT_TYPE.cs" />
     <Compile Include="Access.DTO\PRODUCT_UNIT.cs" />
+    <Compile Include="Service.Contract\Image\DTO\CRUD_Image_DTO.cs" />
+    <Compile Include="Service.Contract\Image\Request\CRUD_Image_Request.cs" />
+    <Compile Include="Service.Contract\Image\Response\CRUD_Image_Response.cs" />
     <Compile Include="Service.Contract\Product\DTO\CRUD_Product_DTO.cs" />
     <Compile Include="Service.Contract\Product\DTO\Get_Product_Groups_DTO.cs" />
     <Compile Include="Service.Contract\Product\DTO\raw\Product_DTO.cs" />
@@ -111,9 +115,7 @@
     <Compile Include="Service.Contract\Unit\Request\Get_Unit_Request.cs" />
     <Compile Include="Service.Contract\Unit\Response\Get_Unit_Response.cs" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Service.Contract\NewFolder1\" />
-  </ItemGroup>
+  <ItemGroup />
   <ItemGroup>
     <ProjectReference Include="..\Common\Common\Common.csproj">
       <Project>{9910D0B4-B273-455D-9E77-7B1496553A37}</Project>

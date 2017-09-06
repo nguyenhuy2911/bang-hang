@@ -44,9 +44,10 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="PRODUCT\ProductService.cs" />
+    <Compile Include="Images\ImagesService.cs" />
+    <Compile Include="Product\ProductService.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="UNIT\UnitService.cs" />
+    <Compile Include="Unit\UnitService.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Common\Common\Common.csproj">

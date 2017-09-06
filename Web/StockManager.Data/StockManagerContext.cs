@@ -62,6 +62,7 @@ namespace StockManager.Data
         public DbSet<TRANS_REF> Trans_Refs { get; set; }
         public DbSet<UNIT> Units { get; set; }
         public DbSet<UNITCONVERT> UnitConverts { get; set; }
+        public DbSet<Images> Images { get; set; }
 
         public virtual int Commit()
         {
@@ -115,6 +116,7 @@ namespace StockManager.Data
             modelBuilder.Configurations.Add(new TRANS_REFMap());
             modelBuilder.Configurations.Add(new UNITMap());
             modelBuilder.Configurations.Add(new UNITCONVERTMap());
+            modelBuilder.Configurations.Add(new ImagesMap());
         }
     }
 }

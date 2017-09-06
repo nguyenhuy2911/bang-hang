@@ -18,7 +18,8 @@ namespace StockManager.Web.Mapping
         public ServiceToDomainMappingProfile()
         {
             CreateMap<CRUD_Product_Request, PRODUCT>();
-            
+            CreateMap<CRUD_Image_Request, Images>();
+
         }
     }
 }

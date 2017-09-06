@@ -19,7 +19,7 @@ namespace StockManager.Entity.Service.Contract
 
         [Required(ErrorMessage = "Khối lượng không được để trống")]
         [Range(0, 1000000, ErrorMessage = "Khối lượng phải là số")]        
-        public string Size { get; set; }
+        public decimal? Quantity { get; set; }
 
         [Required(ErrorMessage = "Đơn vị tính không được để trống")]
         public string Unit_ID { get; set; }

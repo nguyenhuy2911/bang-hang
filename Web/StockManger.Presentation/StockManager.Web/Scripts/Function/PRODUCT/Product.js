@@ -12,7 +12,7 @@ var Products_CRUD_ViewModel = function () {
     this.Product_ID = 0;
     this.Product_Name = "";
     this.Sale_Price = 0;
-    this.Size = 0;
+    this.Quantity = 0;
     this.Unit_ID = "";
     this.Description = 0;
     this.ProductGroup_ID = 0;
@@ -135,9 +135,16 @@ PRODUCT.prototype.getSaveProduct_RequestValue = function () {
     obj.Product_Name = formVal.Product_Name;
     obj.Unit_ID = formVal.Unit_ID;
     obj.Sale_Price = Number(formVal.Sale_Price);
-    obj.Size = Number(formVal.Sale_Price);
+    obj.Quantity = Number(formVal.Quantity);
     obj.Description = htmlEncode(editor_Description.getContent());
     obj.ProductGroup_ID = formVal.ProductGroup_ID
+    return obj;
+}
+
+PRODUCT.prototype.getProduct_Image_RequestValue = function () {
+    var obj = {};
+    obj.Product_Id = $("#ProductGroup_ID").val();
+    obj.Product_Name = $("#Product_Name").val();  
     return obj;
 }
 

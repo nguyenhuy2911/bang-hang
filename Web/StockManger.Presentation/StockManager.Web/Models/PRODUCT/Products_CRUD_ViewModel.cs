@@ -29,7 +29,7 @@ namespace StockManager.Web.Models.PRODUCT
 
         [Required(ErrorMessage = "Khối lượng không được để trống")]
         [Range(0, 99999999, ErrorMessage = "Khối lượng phải là số")]
-        public string Size { get; set; }
+        public string Quantity { get; set; }
 
         [Required(ErrorMessage = "Đơn vị tính không được để trống")]
         public string Unit_ID { get; set; }

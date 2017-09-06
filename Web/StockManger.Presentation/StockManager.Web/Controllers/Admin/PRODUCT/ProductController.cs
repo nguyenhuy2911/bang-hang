@@ -8,9 +8,11 @@ using StockManager.Web.Models;
 using StockManager.Web.Models.PRODUCT;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Net;
 using System.Threading.Tasks;
+using System.Web;
 using System.Web.Mvc;
 
 namespace StockManager.Web.Controllers
@@ -52,8 +54,6 @@ namespace StockManager.Web.Controllers
 
         }
 
-
-
         /***************************************************************************************/
 
         /************************************ Insert, update, delete ***************************/
@@ -66,7 +66,7 @@ namespace StockManager.Web.Controllers
             {
                 Product_Name = model.Product_Name,
                 Sale_Price = Utility.convertNumber<decimal>(model.Sale_Price),
-                Size = model.Size,
+                Quantity = Utility.convertNumber<decimal>(model.Quantity),
                 Unit_ID = model.Unit_ID,
                 Description = WebUtility.HtmlEncode(model.Description),
                 Product_Group_ID = model.ProductGroup_ID
@@ -88,7 +88,7 @@ namespace StockManager.Web.Controllers
                 Product_ID = model.Product_ID,
                 Product_Name = model.Product_Name,
                 Sale_Price = Utility.convertNumber<decimal>(model.Sale_Price),
-                Size = model.Size,
+                Quantity = Utility.convertNumber<decimal>(model.Quantity),
                 Unit_ID = model.Unit_ID,
                 Description = WebUtility.HtmlEncode(model.Description),
                 Product_Group_ID = model.ProductGroup_ID
@@ -146,14 +146,14 @@ namespace StockManager.Web.Controllers
             var model = new Products_CRUD_ViewModel();
 
             var product = Id != 0 ? _IProductService.Get_Product_ById(Id)?.Results : null;
-            var product_UnitId = product?.Unit_ID;
-            var product_GroupId = product?.Product_Group_ID;
+            string product_UnitId = product?.Unit_ID ?? string.Empty;
+            int product_GroupId = product?.Product_Group_ID ?? 0;
 
             model.Product_ID = Id;
             model.Product_Name = product?.Product_Name;
             model.ProductGroup_ID = product?.Product_Group_ID ?? 0;
             model.Sale_Price = product?.Sale_Price.ToString();
-            model.Size = product?.Size;
+            model.Quantity = product?.Quantity.ToString();
             model.Unit_ID = model?.Unit_ID;
             model.Description = WebUtility.HtmlDecode(product?.Description);
 
@@ -201,6 +201,7 @@ namespace StockManager.Web.Controllers
             }
 
         }
+               
 
         public ActionResult MERCHANDISE_NEWASESEMBLED_Form()
         {
