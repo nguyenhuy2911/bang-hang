@@ -33,15 +33,15 @@ namespace StockManager.Web.Models.PRODUCT
 
         [Required(ErrorMessage = "Đơn vị tính không được để trống")]
         public string Unit_ID { get; set; }
+        [Required(ErrorMessage = "sản phẩm gốc không được bỏ trống")]
+        public int ProductGroup_ID { get; set; }
 
         public string UserID { get; set; }
 
         public string Description { get; set; }
 
-        public List<SelectListItem> UnitList { get; set; }
-
-        [Required(ErrorMessage = "sản phẩm gốc không được bỏ trống")]
-        public int ProductGroup_ID { get; set; }
+        public List<SelectListItem> UnitList { get; set; }       
         public SelectList Product_Groups_List { get; set; }
+        public string ListImgJson { get; set; }
     }
 }

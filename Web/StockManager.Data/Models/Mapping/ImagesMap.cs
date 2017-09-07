@@ -18,8 +18,7 @@ namespace StockManager.Data.Models.Mapping
                 .HasMaxLength(50);
             this.Property(t => t.Path)
                .HasMaxLength(250);
-            this.Property(t => t.Type)
-                .HasColumnType("nchar")
+            this.Property(t => t.Type)               
                .HasMaxLength(10);
             this.Property(t => t.RelateId)
                .HasMaxLength(50);

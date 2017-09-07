@@ -114,8 +114,6 @@ PRODUCT.prototype.loadCreateForm = function () {
     });
 }
 
-
-
 PRODUCT.prototype.loadEditForm = function (strJsondata) {
     var data = JSON.parse(strJsondata);
     $("#div-crud-modal").loading();

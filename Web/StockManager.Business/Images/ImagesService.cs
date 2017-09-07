@@ -2,6 +2,7 @@
 using Common.Enum;
 using StockManager.Data.Infrastructure;
 using StockManager.Data.Repository;
+using StockManager.Entity;
 using StockManager.Entity.Service.Contract;
 using System;
 using System.Collections.Generic;
@@ -9,11 +10,12 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace StockManager.Business.Images
+namespace StockManager.Business
 {
     public interface IImagesService
     {
         CRUD_Image_Response CreateImage(CRUD_Image_Request request);
+        Get_Images_By_RelateId_Response Get_Images_By_RelateId(Get_Images_By_RelateId_Request request);
     }
     public class ImagesService : IImagesService
     {
@@ -37,7 +39,7 @@ namespace StockManager.Business.Images
                     response.StatusCode = (int)RESULT_STATUS_CODE.SUCCESS;
                 else
                     response.StatusCode = (int)RESULT_STATUS_CODE.DATABASE_ERROR;
-                
+
             }
             catch (Exception ex)
             {
@@ -46,6 +48,13 @@ namespace StockManager.Business.Images
                 response.StatusMessage = ex.ToString();
             }
             return response;
+        }
+
+        public Get_Images_By_RelateId_Response Get_Images_By_RelateId(Get_Images_By_RelateId_Request request)
+        {
+            var response = _IImagesRepository.GetPage(new Entity.Page(), p => p.RelateId.Equals(request.RelateId), p=>p.Id);
+            var retData = Mapper.Map<ResponseBase<List<Entity.Images>>, Get_Images_By_RelateId_Response>(response);
+            return retData;
         }
     }
 }

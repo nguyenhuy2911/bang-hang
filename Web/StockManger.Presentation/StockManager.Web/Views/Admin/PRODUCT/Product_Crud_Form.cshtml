@@ -6,6 +6,7 @@
 
 @Html.AntiForgeryToken()
 @Html.ValidationSummary(true)
+
 <div class="row clearfix">
     <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
         <div class="card">
@@ -136,8 +137,8 @@
                                                 <div class="fallback">
                                                     <input id="file_product_img_upload" name="file" type="file" multiple />
                                                 </div>
-                                                <a href="javascript:;" id="btnSubmit" class="btn btn-primary btn-lg">Upload</a>
                                             </div>
+                                            <input type="button" id="btnSubmit" class="btn btn-primary btn-lg" value="Upload">
                                         </div>
                                     </div>
                                 </div>
@@ -154,29 +155,50 @@
 
 
 <script type="text/javascript">
+    var listImage = JSON.parse(htmlDecode('@Model.ListImgJson'));
     $(function () {
         $.AdminBSB.input.activate();
         $.AdminBSB.dropdownMenu.activate();
         $.AdminBSB.select.activate();
         $.AdminBSB.Tinymce.setup("textarea.txt-description");
         var myDropzone = new Dropzone("div#divFileUpload", {
-            //  $("div#divFileUpload").dropzone({
             autoProcessQueue: false,
-          //  autoQueue: false,
             params: _PRODUCT.getProduct_Image_RequestValue(),
             url: "/image/product-upload",
-            // maxFilesize: 1,
             acceptedFiles: "image/jpeg, image/jpg, image/png",
-            //  parallelUploads: 1,
+            parallelUploads: 20,
+            maxFiles: 20,
+            addRemoveLinks: true,
+            //thumbnailWidth: 314, //I want to change width to 100% instead
+            //thumbnailHeight: 314,
             init: function () {
+                var thisDropzone = this;
                 $('#btnSubmit').on('click', function (event) {
                     event.preventDefault();
-                    myDropzone.processQueue();
+                    thisDropzone.processQueue();
+                });
+
+                $.each(listImage, function (index, item) {
+
+                    var mockFile = {
+                        name: item.Name,
+                      //  size: 9000000,
+                        accepted: true,
+                        kind: 'image'
+                    };
+                    // Call the default addedfile event handler
+                    thisDropzone.options.addedfile.call(thisDropzone, mockFile);
+
+                    // And optionally show the thumbnail of the file:ss               
+                    thisDropzone.files.push(mockFile);
+                    thisDropzone.createThumbnailFromUrl(mockFile, item.Path, function () {
+                       // thisDropzone.emit("complete", mockFile);
+                    }, "anonymous");                    
+                    thisDropzone.uploadFiles([mockFile])
+
                 });
             },
-
             removedfile: function (file) {
-                alert("testremove");
                 var _ref;
                 if (file.previewElement) {
                     if ((_ref = file.previewElement) != null) {
@@ -191,7 +213,7 @@
             e.preventDefault(); //STOP default action
             _PRODUCT.saveProduct();
         });
-        
+
     })
 </script>
 @Scripts.Render("~/bundles/jqueryval")

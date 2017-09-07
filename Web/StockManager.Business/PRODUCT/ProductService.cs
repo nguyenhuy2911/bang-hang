@@ -88,7 +88,7 @@ namespace StockManager.Business
 
         public Get_Product_By_Id_Response Get_Product_ById(int id)
         {
-            var product = _IProductRepository.GetById(id);            
+            var product = _IProductRepository.GetById(id);     
             var retData = Mapper.Map<ResponseBase<PRODUCT>, Get_Product_By_Id_Response>(product);
             return retData;
         }

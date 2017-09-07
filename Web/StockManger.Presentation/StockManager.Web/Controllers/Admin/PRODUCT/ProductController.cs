@@ -4,15 +4,11 @@ using Newtonsoft.Json;
 using StockManager.Business;
 using StockManager.Entity;
 using StockManager.Entity.Service.Contract;
-using StockManager.Web.Models;
 using StockManager.Web.Models.PRODUCT;
 using System;
 using System.Collections.Generic;
-using System.IO;
 using System.Linq;
 using System.Net;
-using System.Threading.Tasks;
-using System.Web;
 using System.Web.Mvc;
 
 namespace StockManager.Web.Controllers
@@ -20,9 +16,18 @@ namespace StockManager.Web.Controllers
     [RoutePrefix("product")]
     public class ProductController : BaseController
     {
+        public ProductController(IProductService productService, IUnitService unitService, IImagesService imagesService)
+        {
+            this._IProductService = productService;
+            this._IUnitService = unitService;
+            this._IImagesService = imagesService;
+        }
+
         private readonly IProductService _IProductService;
 
         private readonly IUnitService _IUnitService;
+
+        private readonly IImagesService _IImagesService;
 
         /************************************ Get **********************************************/
 
@@ -52,6 +57,15 @@ namespace StockManager.Web.Controllers
             var request = new Get_Unit_Request();
             return _IUnitService.GetUnits(request)?.Results;
 
+        }
+
+        private List<Images_DTO> Get_ListImage_By_Product_GroupId(string product_GroupId)
+        {
+            var request = new Get_Images_By_RelateId_Request()
+            {
+                RelateId = product_GroupId
+            };
+            return this._IImagesService.Get_Images_By_RelateId(request)?.Results;
         }
 
         /***************************************************************************************/
@@ -103,12 +117,7 @@ namespace StockManager.Web.Controllers
 
         /***************************************************************************************/
 
-        public ProductController(IProductService productService, IUnitService unitService)
-        {
-            this._IProductService = productService;
-            this._IUnitService = unitService;
 
-        }
 
         [Route]
         public ActionResult Product_FormList()
@@ -181,6 +190,9 @@ namespace StockManager.Web.Controllers
                                                            }).ToList());
 
             model.Product_Groups_List = new SelectList(list_group_product, "Value", "Text", "Group.Name", 0);
+            var listImages = this.Get_ListImage_By_Product_GroupId(product_GroupId.ToString());
+            model.ListImgJson = JsonConvert.SerializeObject(listImages);
+
             return model;
         }
 
@@ -201,7 +213,7 @@ namespace StockManager.Web.Controllers
             }
 
         }
-               
+
 
         public ActionResult MERCHANDISE_NEWASESEMBLED_Form()
         {

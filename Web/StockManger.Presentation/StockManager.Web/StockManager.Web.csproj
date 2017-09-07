@@ -149,7 +149,7 @@
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\Admin\IM_AND_EXPORT\IMPORT\IMPORTController.cs" />
     <Compile Include="Controllers\Admin\INVENTORY\INVENTORYController.cs" />
-    <Compile Include="Controllers\Admin\PRODUCT\ProductController.cs" />
+    <Compile Include="Controllers\Admin\Product\ProductController.cs" />
     <Compile Include="Controllers\Admin\VENDOR\VENDORController.cs" />
     <Compile Include="Controllers\Admin\WAREHOUSETRANSFER\WAREHOUSETRANSFERController.cs" />
     <Compile Include="Controllers\ImageController.cs" />

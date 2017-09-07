@@ -1,12 +1,10 @@
 ﻿using Common;
 using Common.Enum;
-using StockManager.Business.Images;
+using StockManager.Business;
 using StockManager.Entity.Service.Contract;
 using StockManager.Web.Models;
 using System;
-using System.Collections.Generic;
 using System.IO;
-using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 
@@ -33,7 +31,7 @@ namespace StockManager.Web.Controllers
                     HttpPostedFileBase file = Request.Files[_fileName];
                     string ext = Path.GetExtension(file.FileName);
                     string fileName = string.Format("{0}_{1}", StringMenthod.friendly_urlSEO(modal.Product_Name), Guid.NewGuid());
-                    string path = string.Format(@"~\uploads\img\product\{0}", modal.Product_Id);
+                    string path = string.Format(@"~\uploads\img\product\{0}", modal.Product_Id);                   
                     if (file != null && file.ContentLength > 0)
                     {
                         if (!Directory.Exists(Server.MapPath(path)))
@@ -47,7 +45,7 @@ namespace StockManager.Web.Controllers
                         {
                             RelateId = modal.Product_Id.ToString(),
                             Name = modal.Product_Name,
-                            Path = path,
+                            Path =  path.Replace(@"~\","").Replace(@"\","/"),
                             Type = IMAGE_TYPE.PRODUCT.ToString()
                         };
                         var insertPicResult = this._IImagesService.CreateImage(request);
