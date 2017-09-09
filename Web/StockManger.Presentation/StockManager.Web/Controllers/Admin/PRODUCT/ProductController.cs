@@ -4,7 +4,7 @@ using Newtonsoft.Json;
 using StockManager.Business;
 using StockManager.Entity;
 using StockManager.Entity.Service.Contract;
-using StockManager.Web.Models.PRODUCT;
+using StockManager.Web.Models.Admin;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -59,15 +59,7 @@ namespace StockManager.Web.Controllers
 
         }
 
-        private List<Images_DTO> Get_ListImage_By_Product_GroupId(string product_GroupId)
-        {
-            var request = new Get_Images_By_RelateId_Request()
-            {
-                RelateId = product_GroupId
-            };
-            return this._IImagesService.Get_Images_By_RelateId(request)?.Results;
-        }
-
+       
         /***************************************************************************************/
 
         /************************************ Insert, update, delete ***************************/
@@ -82,7 +74,6 @@ namespace StockManager.Web.Controllers
                 Sale_Price = Utility.convertNumber<decimal>(model.Sale_Price),
                 Quantity = Utility.convertNumber<decimal>(model.Quantity),
                 Unit_ID = model.Unit_ID,
-                Description = WebUtility.HtmlEncode(model.Description),
                 Product_Group_ID = model.ProductGroup_ID
             };
             var response = _IProductService.CreateProduct(request);
@@ -104,7 +95,6 @@ namespace StockManager.Web.Controllers
                 Sale_Price = Utility.convertNumber<decimal>(model.Sale_Price),
                 Quantity = Utility.convertNumber<decimal>(model.Quantity),
                 Unit_ID = model.Unit_ID,
-                Description = WebUtility.HtmlEncode(model.Description),
                 Product_Group_ID = model.ProductGroup_ID
             };
             var response = _IProductService.UpdateProduct(request);
@@ -116,15 +106,12 @@ namespace StockManager.Web.Controllers
         }
 
         /***************************************************************************************/
-
-
-
+        
         [Route]
-        public ActionResult Product_FormList()
+        public ActionResult Index()
         {
-
             var model = new Products_ViewModel();
-            return View("~/Views/Admin/PRODUCT/PRODUCT_FormList.cshtml", model);
+            return View("~/Views/Admin/Product/Index.cshtml", model);
         }
 
         [HttpPost]
@@ -140,7 +127,7 @@ namespace StockManager.Web.Controllers
         public ActionResult Product_New_Form()
         {
             var model = Get_Products_CRUD_ViewModel(0);
-            return View("~/Views/Admin/PRODUCT/Product_Crud_Form.cshtml", model);
+            return View("~/Views/Admin/Product/Product_Crud_Form.cshtml", model);
         }
 
         [Route("product-edit-form")]
@@ -163,8 +150,7 @@ namespace StockManager.Web.Controllers
             model.ProductGroup_ID = product?.Product_Group_ID ?? 0;
             model.Sale_Price = product?.Sale_Price.ToString();
             model.Quantity = product?.Quantity.ToString();
-            model.Unit_ID = model?.Unit_ID;
-            model.Description = WebUtility.HtmlDecode(product?.Description);
+            model.Unit_ID = model?.Unit_ID;          
 
             model.UnitList.Add(new SelectListItem() { Text = "Chọn", Value = "" });
             model.UnitList.AddRange(this.GetUnits_For_CRUD()?.Select(i =>
@@ -190,9 +176,6 @@ namespace StockManager.Web.Controllers
                                                            }).ToList());
 
             model.Product_Groups_List = new SelectList(list_group_product, "Value", "Text", "Group.Name", 0);
-            var listImages = this.Get_ListImage_By_Product_GroupId(product_GroupId.ToString());
-            model.ListImgJson = JsonConvert.SerializeObject(listImages);
-
             return model;
         }
 

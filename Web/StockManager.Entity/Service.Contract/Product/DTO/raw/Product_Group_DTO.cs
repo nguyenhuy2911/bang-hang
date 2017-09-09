@@ -14,7 +14,8 @@ namespace StockManager.Entity.Service.Contract
         }
         public int ProductGroup_ID { get; set; }
         public string ProductGroup_Name { get; set; }
-        public string Description { get; set; }       
+        public string Description { get; set; }
+        public string ImagePath { get; set; }
         public bool Active { get; set; }
     }
 }

@@ -4,21 +4,20 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 
-namespace StockManager.Web.Models.PRODUCT
+namespace StockManager.Web.Models.Admin
 {
     public class Products_ViewModel : BaseModel
     {
         public Products_ViewModel()
         {
             FunctionName = "Products";
-            GridHeader = DataTableGridHelper.GetHeaderJson<ProductList_Col>();
+            GridHeader = DataTableGridHelper.GetHeaderJson<Product_Grid_Column>();
         }
         public string GridHeader { get; set; }
 
-        public ProductList_Col TableColumn { get; set; }
 
     }
-    public class ProductList_Col
+    public class Product_Grid_Column
     {
         [TableHeader(title ="Id")]
         public string Product_ID { get; set; }

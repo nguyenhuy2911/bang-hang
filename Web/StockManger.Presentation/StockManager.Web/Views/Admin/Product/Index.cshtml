@@ -1,0 +1,95 @@
+﻿@model StockManager.Web.Models.Admin.Products_ViewModel
+@{
+    ViewBag.Title = "Product";
+    Layout = "~/Views/Shared/Admin/_Layout.cshtml";
+}
+<script>
+
+    var columnGrid = htmlDecode('@Model.GridHeader');
+</script>
+<div class="search-form clearfix">
+    <div id="searh-bar" class="collapse col-lg-12 col-md-12 col-sm-12 col-xs-12">
+        <div class="info-box hover-zoom-effect">
+            <div class="icon bg-blue">
+                <i class="fa fa-5x fa-search"></i>
+            </div>
+            <div class="content">
+                <div class="col-sm-4">
+                    <div class="form-group form-float">
+                        <div class="form-line">
+                            <input type="text" class="form-control" placeholder="">
+                            <label class="form-label">Mã sản phẩm</label>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-sm-4">
+                    <div class="form-group form-float">
+                        <div class="form-line">
+                            <input type="text" class="form-control" placeholder="">
+                            <label class="form-label">Tên sản phẩm</label>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-sm-4">
+                    <a class="btn btn-link">
+                        <i class="fa font-20 fa-search" aria-hidden="true"></i>
+                        @Common.Utility.getResourceString("Search")
+                    </a>
+                </div>
+            </div>
+        </div>
+        <div class="close-search">
+            <i class="material-icons">close</i>
+        </div>
+    </div>
+
+</div>
+<div class="container-fluid">
+
+    <div class="row clearfix">
+        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+            <div class="card">
+                <div class="header">
+                    <h2>
+                        Danh sách
+                    </h2>
+                    <ul class="header-dropdown m-r--5">
+                        <li>
+                            <a class="filter-bar" data-toggle="collapse" data-target="#searh-bar"><i class="fa fa-2x fa-filter"></i> Tìm kiếm</a>
+                        </li>
+                    </ul>
+                </div>
+                <div class="body">
+                    <table id="product_list_item" class="table table-bordered table-striped table-hover js-basic-example dataTable"></table>
+
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+</div>
+<div class="fixed-action-btn">
+    <a id="btn-new-product" class="btn-floating btn-large waves-effect waves-light bg-pink" data-toggle="modal" data-target="#div-crud-modal">
+        <i class="material-icons">add</i>
+    </a>
+</div>
+<div class="modal fade" id="div-crud-modal" tabindex="-1" role="dialog">
+    <div class="modal-dialog modal-fullscreen" role="document">
+        <div class="modal-content">
+            <div class="modal-body">
+            </div>
+            <div class="modal-footer">
+                <button type="button" id="btn_product_crud_save" class="btn btn-link waves-effect">SAVE CHANGES</button>
+                <button type="button" class="btn btn-link waves-effect" data-dismiss="modal">CLOSE</button>
+
+            </div>
+        </div>
+    </div>
+</div>
+@section Scripts {
+
+    @Scripts.Render("~/Script/Function/Product")
+}
+
+

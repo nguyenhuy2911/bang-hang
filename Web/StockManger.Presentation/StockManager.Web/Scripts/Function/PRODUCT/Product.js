@@ -30,10 +30,6 @@ PRODUCT.prototype = new BaseFunction("PRODUCT");
 PRODUCT.prototype.init = function () {
     this.regisEvent();
     this.getProducts();
-    Dropzone.options.frmFileUpload = {
-        paramName: "file",
-        maxFilesize: 2
-    };
 }
 
 PRODUCT.prototype.regisEvent = function () {
@@ -110,7 +106,7 @@ PRODUCT.prototype.loadCreateForm = function () {
     $("#div-crud-modal .modal-body").html("");
     $("#div-crud-modal .modal-body").load("/product/product-create-form", function () {
         $("#div-crud-modal").loading("stop");
-        $("[view-when='update']").fadeOut();
+      //  $("[view-when='update']").fadeOut();
     });
 }
 
@@ -120,7 +116,7 @@ PRODUCT.prototype.loadEditForm = function (strJsondata) {
     $("#div-crud-modal .modal-body").html("");
     $("#div-crud-modal .modal-body").load("/product/product-edit-form?Id=" + data.Product_ID, function () {
         $("#div-crud-modal").loading("stop");
-        $("[view-when='update']").fadeIn();
+      //  $("[view-when='update']").fadeIn();
     });
 }
 
@@ -136,13 +132,6 @@ PRODUCT.prototype.getSaveProduct_RequestValue = function () {
     obj.Quantity = Number(formVal.Quantity);
     obj.Description = htmlEncode(editor_Description.getContent());
     obj.ProductGroup_ID = formVal.ProductGroup_ID
-    return obj;
-}
-
-PRODUCT.prototype.getProduct_Image_RequestValue = function () {
-    var obj = {};
-    obj.Product_Id = $("#ProductGroup_ID").val();
-    obj.Product_Name = $("#Product_Name").val();  
     return obj;
 }
 

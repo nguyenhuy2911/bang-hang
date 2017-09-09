@@ -6,7 +6,7 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 
-namespace StockManager.Web.Models.PRODUCT
+namespace StockManager.Web.Models.Admin
 {
     public class Products_CRUD_ViewModel
     {
@@ -38,10 +38,8 @@ namespace StockManager.Web.Models.PRODUCT
 
         public string UserID { get; set; }
 
-        public string Description { get; set; }
-
         public List<SelectListItem> UnitList { get; set; }       
         public SelectList Product_Groups_List { get; set; }
-        public string ListImgJson { get; set; }
+
     }
 }

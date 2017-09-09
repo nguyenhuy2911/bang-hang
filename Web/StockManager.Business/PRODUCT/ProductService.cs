@@ -102,7 +102,7 @@ namespace StockManager.Business
 
         public Get_Product_Groups_Response Get_Product_Groups(Get_Product_Groups_Request request)
         {
-            var products = _IProductRepository.Get_Product_Groups();
+            var products = _IProductRepository.Get_Product_Groups(request.Page);           
             var retData = Mapper.Map<ResponseBase<List<PRODUCT_GROUP>>, Get_Product_Groups_Response>(products);
             return retData;
         }

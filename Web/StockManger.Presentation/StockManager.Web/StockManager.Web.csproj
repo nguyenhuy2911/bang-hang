@@ -145,6 +145,7 @@
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Controllers\Admin\DashBoardController.cs" />
+    <Compile Include="Controllers\Admin\OnlineItem\OnlineItemController.cs" />
     <Compile Include="Controllers\BaseController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\Admin\IM_AND_EXPORT\IMPORT\IMPORTController.cs" />
@@ -156,9 +157,11 @@
     <Compile Include="Mapping\AutoMapperConfiguration.cs" />
     <Compile Include="Mapping\ServiceToDomainMappingProfile.cs" />
     <Compile Include="Mapping\DomainToServiceMappingProfile.cs" />
+    <Compile Include="Models\Admin\online-items\Online_Items_ViewModel.cs" />
+    <Compile Include="Models\Admin\online-items\Online_Item_Detail_ViewModel.cs" />
     <Compile Include="Models\INVENTORY\INVENTORY_Form_Model.cs" />
     <Compile Include="Models\INVENTORY\INVENTORY_New_UpDate_Form_Model.cs" />
-    <Compile Include="Models\PRODUCT\Products_CRUD_ViewModel.cs" />
+    <Compile Include="Models\Admin\product\Products_CRUD_ViewModel.cs" />
     <Compile Include="Models\IMAGES\ProductImg_Upload_Modal.cs" />
     <Compile Include="Models\WAREHOUSETRANSFER\WAREHOUSETRANSFER_Form_Model.cs" />
     <Compile Include="Models\WAREHOUSETRANSFER\WAREHOUSETRANSFER_New_UpDate_Form_Model.cs" />
@@ -170,7 +173,7 @@
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Models\BaseModel.cs" />
-    <Compile Include="Models\PRODUCT\Products_ViewModel.cs" />
+    <Compile Include="Models\Admin\product\Products_ViewModel.cs" />
     <Compile Include="Models\WAREHOUSE\WAREHOUSE_FormList_Model.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="App_GlobalResources\Resource\Resource.Designer.cs">
@@ -472,7 +475,8 @@
     <Content Include="Scripts\Common\common-function.js" />
     <Content Include="Scripts\Function\BaseFunction.js" />
     <Content Include="Scripts\Function\IMPORT\IMPORT_New.js" />
-    <Content Include="Scripts\Function\PRODUCT\Product.js" />
+    <Content Include="Scripts\Function\online-items\online-items.js" />
+    <Content Include="Scripts\Function\product\Product.js" />
     <Content Include="Scripts\Function\VENDOR\VENDOR.js" />
     <Content Include="Scripts\Function\IMPORT\IMPORT.js" />
     <Content Include="Scripts\Function\INVENTORY\INVENTORY.js" />
@@ -3795,19 +3799,18 @@
       <DependentUpon>Web.config</DependentUpon>
     </Content>
     <Content Include="Views\Web.config" />
-    <Content Include="Views\_ViewStart.cshtml" />
     <Content Include="Views\Shared\Error.cshtml" />
     <Content Include="Views\Shared\_Layout1.cshtml" />
     <Content Include="Views\Home\About.cshtml" />
     <Content Include="Views\Home\Contact.cshtml" />
     <Content Include="Views\Home\Index.cshtml" />
-    <Content Include="Views\Admin\PRODUCT\PRODUCT_FormList.cshtml" />
-    <Content Include="Views\Admin\PRODUCT\Product_Crud_Form.cshtml" />
+    <Content Include="Views\Admin\Product\Index.cshtml" />
+    <Content Include="Views\Admin\Product\Product_Crud_Form.cshtml" />
     <Content Include="Views\Admin\VENDOR\VENDOR_FormList.cshtml" />
-    <Content Include="Views\Admin\PRODUCT\partial\_Product_Crud_Form_Tab_Stock.cshtml" />
-    <Content Include="Views\Admin\PRODUCT\partial\_Product_Crud_Form_Tab_Barcode.cshtml" />
-    <Content Include="Views\Admin\PRODUCT\partial\_Product_Crud_Form_Tab_VendorAndPrice.cshtml" />
-    <Content Include="Views\Admin\PRODUCT\partial\_Product_Crud_Form_Tab_Assemble.cshtml" />
+    <Content Include="Views\Admin\Product\partial\_Product_Crud_Form_Tab_Stock.cshtml" />
+    <Content Include="Views\Admin\Product\partial\_Product_Crud_Form_Tab_Barcode.cshtml" />
+    <Content Include="Views\Admin\Product\partial\_Product_Crud_Form_Tab_VendorAndPrice.cshtml" />
+    <Content Include="Views\Admin\Product\partial\_Product_Crud_Form_Tab_Assemble.cshtml" />
     <Content Include="Views\Admin\WAREHOUSE\WAREHOUSE_FormList.cshtml" />
     <Content Include="Views\Admin\IMPORT\IMPORT_FormList.cshtml" />
     <Content Include="Views\Admin\IMPORT\IMPORT_NEW_UPDATE_Form.cshtml" />
@@ -3815,7 +3818,7 @@
     <Content Include="Views\Admin\WAREHOUSETRANSFER\WAREHOUSETRANSFER_NEW_AND_UPDATE_Form.cshtml" />
     <Content Include="Views\Admin\INVENTORY\INVENTORY_Form.cshtml" />
     <Content Include="Views\Admin\INVENTORY\INVENTORY_NEW_AND_UPDATE_Form.cshtml" />
-    <Content Include="Views\Admin\PRODUCT\PRODUCT_Form.cshtml" />
+    <Content Include="Views\Admin\Product\PRODUCT_Form.cshtml" />
     <Content Include="Template\Admin\AdminBSBMaterial\plugins\bootstrap-colorpicker\css\bootstrap-colorpicker.css.map" />
     <Content Include="Template\Admin\AdminBSBMaterial\plugins\bootstrap-colorpicker\css\bootstrap-colorpicker.min.css.map" />
     <Content Include="Template\Admin\AdminBSBMaterial\plugins\bootstrap-material-datetimepicker\font\Material-Design-Icons.eot" />
@@ -4008,9 +4011,9 @@
     <Content Include="Template\Admin\AdminBSBMaterial\scss\_tooltippopovers.scss" />
     <Content Include="Template\Admin\AdminBSBMaterial\scss\_variables.scss" />
     <Content Include="Template\Admin\AdminBSBMaterial\scss\_waveseffect.scss" />
-    <Content Include="Views\Shared\_Layout.cshtml" />
-    <Content Include="Views\Shared\_Rightsidebar.cshtml" />
-    <Content Include="Views\Shared\_TopBar.cshtml" />
+    <Content Include="Views\Shared\Admin\_Layout.cshtml" />
+    <Content Include="Views\Shared\Admin\_Rightsidebar.cshtml" />
+    <Content Include="Views\Shared\Admin\_TopBar.cshtml" />
     <Content Include="Views\Admin\DASHBOARD\DashBoard.cshtml" />
     <Content Include="Template\Admin\AdminBSBMaterial\font-awesome\css\font-awesome.css.map" />
     <Content Include="Template\Admin\AdminBSBMaterial\font-awesome\fonts\fontawesome-webfont.eot" />
@@ -4046,18 +4049,17 @@
     <Content Include="Template\Admin\AdminBSBMaterial\font-awesome\scss\_stacked.scss" />
     <Content Include="Template\Admin\AdminBSBMaterial\font-awesome\scss\_variables.scss" />
     <Content Include="Template\Admin\AdminBSBMaterial\font-awesome\scss\font-awesome.scss" />
+    <Content Include="Views\Admin\Online-Items\Index.cshtml" />
+    <Content Include="Views\Admin\Online-Items\Online_Item_Crud_Form.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="uploads\img\product\" />
-    <Folder Include="Views\Shared\Admin\" />
-    <Folder Include="Views\Uploads\" />
-    <Folder Include="Views\Upload\" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Project_Readme.html" />
-    <Content Include="Views\Shared\_Leftsidebar.cshtml" />
-    <Content Include="Views\Shared\_TopMenu.cshtml" />
+    <Content Include="Views\Shared\Admin\_Leftsidebar.cshtml" />
+    <Content Include="Views\Shared\Admin\_TopMenu.cshtml" />
     <Content Include="Scripts\jquery-3.1.1.slim.min.map" />
     <Content Include="Scripts\jquery-3.1.1.min.map" />
   </ItemGroup>

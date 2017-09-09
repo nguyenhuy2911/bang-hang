@@ -1,11 +1,9 @@
-﻿@model StockManager.Web.Models.PRODUCT.Products_ViewModel
+﻿@model StockManager.Web.Models.Admin.Online_Items_ViewModel
 @{
-    ViewBag.Title = "Product";
-    Layout = "~/Views/Shared/_Layout.cshtml";
+    ViewBag.Title = "Online Items";
+    Layout = "~/Views/Shared/Admin/_Layout.cshtml";
 }
-@Styles.Render("~/Styles/Function/Product")
 <script>
-
     var columnGrid = htmlDecode('@Model.GridHeader');
 </script>
 <div class="search-form clearfix">
@@ -70,11 +68,6 @@
     </div>
 
 </div>
-<div class="fixed-action-btn">
-    <a id="btn-new-product" class="btn-floating btn-large waves-effect waves-light bg-pink" data-toggle="modal" data-target="#div-crud-modal">
-        <i class="material-icons">add</i>
-    </a>
-</div>
 <div class="modal fade" id="div-crud-modal" tabindex="-1" role="dialog">
     <div class="modal-dialog modal-fullscreen" role="document">
         <div class="modal-content">
@@ -90,7 +83,7 @@
 </div>
 @section Scripts {
 
-    @Scripts.Render("~/Script/Function/Product")
+    @Scripts.Render("~/Script/Function/online-items")
 }
 
 

@@ -28,6 +28,7 @@ namespace StockManager.Web
                         "~/Template/Admin/AdminBSBMaterial/plugins/multi-select/css/multi-select.css",
                         "~/Template/Admin/AdminBSBMaterial/plugins/animate-css/animate.css",
                         "~/Template/Admin/AdminBSBMaterial/plugins/jquery-datatable/skin/bootstrap/css/dataTables.bootstrap.css",
+                        "~/Template/Admin/AdminBSBMaterial/plugins/dropzone/dropzone.css",
                         "~/Template/Admin/AdminBSBMaterial/css/style.css",
                         "~/Template/Admin/AdminBSBMaterial/css/themes/all-themes.css",
                         "~/Template/Admin/AdminBSBMaterial/font-awesome/css/font-awesome.min.css",                       
@@ -44,7 +45,8 @@ namespace StockManager.Web
                         "~/Template/Admin/AdminBSBMaterial/plugins/jquery/jquery.min.js",
                         "~/Scripts/modernizr-2.6.2.js",                        
                         "~/Scripts/Common/Helper.js",
-                         "~/Scripts/Common/common-function.js",
+                        "~/Scripts/Common/common-function.js",
+                       // "~/Scripts/Common/dataTableExtention.js",
                         "~/Scripts/Function/BaseFunction.js"
 
             ));
@@ -57,7 +59,7 @@ namespace StockManager.Web
             bundles.Add(new ScriptBundle("~/Admin/Setup/js").Include(
                         
                         "~/Template/Admin/AdminBSBMaterial/plugins/bootstrap/js/bootstrap.js",
-                         "~/Template/Admin/AdminBSBMaterial/plugins/bootstrap-select/js/bootstrap-select.js",
+                        "~/Template/Admin/AdminBSBMaterial/plugins/bootstrap-select/js/bootstrap-select.js",
                         "~/Template/Admin/AdminBSBMaterial/plugins/jquery-slimscroll/jquery.slimscroll.js",
                         "~/Template/Admin/AdminBSBMaterial/plugins/node-waves/waves.js",
                         "~/Template/Admin/AdminBSBMaterial/plugins/autosize/autosize.js",
@@ -65,6 +67,9 @@ namespace StockManager.Web
                         "~/Template/Admin/AdminBSBMaterial/plugins/bootstrap-material-datetimepicker/js/bootstrap-material-datetimepicker.js",
                         "~/Template/Admin/AdminBSBMaterial/plugins/tinymce/tinymce.min.js",
                         "~/Template/Admin/AdminBSBMaterial/plugins/bootstrap-notify/bootstrap-notify.js",
+                        "~/Template/Admin/AdminBSBMaterial/plugins/jquery-datatable/jquery.dataTables.js",
+                        "~/Template/Admin/AdminBSBMaterial/plugins/jquery-datatable/skin/bootstrap/js/dataTables.bootstrap.js",
+                        "~/Template/Admin/AdminBSBMaterial/plugins/dropzone/dropzone.js",
                         "~/Scripts/Lip/jquery-loading/jquery.loading.js",
                         "~/Template/Admin/AdminBSBMaterial/js/admin.js"
                         ));
@@ -78,59 +83,21 @@ namespace StockManager.Web
 
             // ------------------------- PRODUCT ----------------------------------------------//
 
-            var productStyles = new List<string>();
-            
-            productStyles.AddRange(UploadFileStyle);
-            bundles.Add(new StyleBundle("~/Styles/Function/Product").Include(
-                          productStyles.ToArray()
-           ));
-
-            var productScript = new List<string>();
-            productScript.AddRange(DataTableScript);
-            productScript.AddRange(UploadFileScript);
-            //   productScript.AddRange(CkeditorScript);
-            productScript.Add("~/Scripts/Function/PRODUCT/Product.js");
           
             bundles.Add(new ScriptBundle("~/Script/Function/Product").Include(
-                          productScript.ToArray()
+                                         "~/Scripts/Function/Product/Product.js"
+            ));
+
+            // ------------------------- Online Item ----------------------------------------------//
+            bundles.Add(new ScriptBundle("~/Script/Function/online-items").Include(
+                                         "~/Scripts/Function/online-items/online-items.js"
             ));
         }
 
-        // ------------------------------------  Plugin Style ----------------------------------------//
-            
-        private static string[] DataTableScript
-        {
-            get
-            {
-                return new string[]
-                {
-                    "~/Template/Admin/AdminBSBMaterial/plugins/jquery-datatable/jquery.dataTables.js",
-                    "~/Template/Admin/AdminBSBMaterial/plugins/jquery-datatable/skin/bootstrap/js/dataTables.bootstrap.js",
-                    "~/Scripts/Common/dataTableExtention.js"
-                };
-            }
-        }
+       
+              
 
-        private static string[] UploadFileStyle
-        {
-            get
-            {
-                return new string[]
-                {
-                    "~/Template/Admin/AdminBSBMaterial/plugins/dropzone/dropzone.css"
-                };
-            }
-        }
-        private static string[] UploadFileScript
-        {
-            get
-            {
-                return new string[]
-                {
-                    "~/Template/Admin/AdminBSBMaterial/plugins/dropzone/dropzone.js"
-                };
-            }
-        }
+       
 
         // ------------------------------------ End ----------------------------------------------//
     }

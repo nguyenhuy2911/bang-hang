@@ -52,7 +52,7 @@ namespace StockManager.Business
 
         public Get_Images_By_RelateId_Response Get_Images_By_RelateId(Get_Images_By_RelateId_Request request)
         {
-            var response = _IImagesRepository.GetPage(new Entity.Page(), p => p.RelateId.Equals(request.RelateId), p=>p.Id);
+            var response = _IImagesRepository.GetPage(request.Page, p => p.RelateId.Equals(request.RelateId), p=>p.Id);
             var retData = Mapper.Map<ResponseBase<List<Entity.Images>>, Get_Images_By_RelateId_Response>(response);
             return retData;
         }
