@@ -50,6 +50,15 @@ namespace StockManager.Web.Controllers.Admin.OnlineItem
             return json;
         }
 
+        [HttpPost]
+        [Route("get-items-by-group")]
+        public string Get_Items_by_group(Get_Products_By_GroupId_Request request)
+        {
+            var response = _IProductService.Get_Product_ByGroupId(request);
+            string json = JsonConvert.SerializeObject(response);
+            return json;
+        }
+
         [Route("online-item-detail")]
         public ActionResult Item_Detail_Form(int groupId)
         {

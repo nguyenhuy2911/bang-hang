@@ -6,9 +6,9 @@ using System.Web;
 
 namespace StockManager.Entity.Service.Contract
 {
-    public class Get_Products_DTO_Maper : Product_DTO
+    public class Get_Products_DTO : Product_DTO
     {
-        public Get_Products_DTO_Maper()
+        public Get_Products_DTO()
         {
         }
         

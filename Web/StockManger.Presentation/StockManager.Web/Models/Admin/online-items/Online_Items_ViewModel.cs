@@ -25,4 +25,5 @@ namespace StockManager.Web.Models.Admin
         [TableHeader(title = "Sửa")]
         public string Action { get; set; }
     }
+    
 }

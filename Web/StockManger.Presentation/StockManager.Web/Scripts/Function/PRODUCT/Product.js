@@ -73,6 +73,7 @@ PRODUCT.prototype.getProducts = function () {
         processing: true,
         serverSide: true,
         searching: false,
+        autoWidth: false,
         columns: column,
         ajax: {
             url: '/product/get-products',

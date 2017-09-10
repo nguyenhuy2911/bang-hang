@@ -8,6 +8,12 @@ var Get_Product_Groups_Request = function () {
     this.Page = new Page(0, 10);
 }
 
+var Get_Products_By_GroupId_Request = function () {
+    this.Page = new Page(0, 10);
+    this.Product_Group_ID = $("#ProductGroup_ID").val();
+}
+
+
 var Products_CRUD_ViewModel = function () {
     this.Product_ID = 0;
     this.Product_Name = "";
@@ -79,6 +85,7 @@ ONLINE_ITEMS.prototype.get_Online_Items = function () {
         processing: true,
         serverSide: true,
         searching: false,
+        autoWidth: false,
         columns: column,
         ajax: {
             url: '/online-items/get-online-items',
@@ -116,6 +123,60 @@ ONLINE_ITEMS.prototype.loadEditForm = function (strJsondata) {
         $("[view-when='update']").fadeIn();
     });
 }
+
+ONLINE_ITEMS.prototype.get_Items_By_Group = function () {
+  
+    var $this = this;
+    var column = item_By_Group_GridHeader;
+    var columnRender = [];
+    $.each(column, function (index, objColumn) {       
+        if (objColumn.data == "Action") {
+            objColumn.render = function (data, type, row, meta) {
+
+                var $btnEdit = $("<a data-toggle='modal' data-target='#div-crud-modal'>")
+                                       .addClass("btn btn-link btn-link-primary")
+                                       .append('<i class="material-icons">mode_edit</i>')
+                                       .attr("onclick", '_ONLINE_ITEMS.loadEditForm(\'' + JSON.stringify(row) + '\')');
+                var $div = $("<div>").append($btnEdit);
+                return $div.html();
+            }
+        }
+        columnRender.push(objColumn);
+    })
+    var table = $('table#list_item_by_group').DataTable({
+        responsive: true,
+        processing: true,
+        serverSide: true,
+        searching: false,
+        autoWidth: false,
+        columns: column,
+        ajax: {
+            url: '/online-items/get-items-by-group',
+            dataType: "JSON",
+            type: 'POST',
+            data: function () {
+                var request = new Get_Products_By_GroupId_Request();
+                request.Page = new Page($this.variable.pageIndex, $this.variable.pageSize);
+                return request;
+            },
+            dataFilter: function (response) {
+                var data = JSON.parse(response);
+                var jsonObj = {};
+                jsonObj.recordsTotal = data.TotalRow;
+                jsonObj.recordsFiltered = data.TotalRow;
+                jsonObj.data = data.Results;
+                return JSON.stringify(jsonObj);
+            }
+        },
+
+    })
+    .on('page.dt', function () {
+        var info = table.page.info();
+        $this.variable.pageIndex = info.page;
+        $this.variable.pageSize = info.length;
+    });
+}
+
 
 ONLINE_ITEMS.prototype.getSaveProduct_RequestValue = function () {
 

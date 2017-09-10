@@ -1,10 +1,5 @@
-﻿using StockManager.Entity.Service.Contract;
-using System;
-using System.Collections.Generic;
+﻿using Common;
 using System.ComponentModel.DataAnnotations;
-using System.Linq;
-using System.Web;
-using System.Web.Mvc;
 
 namespace StockManager.Web.Models.Admin
 {
@@ -12,10 +7,8 @@ namespace StockManager.Web.Models.Admin
     {
         public Online_Item_Detail_ViewModel()
         {
-            
-        }
-
-      
+            Item_By_Group_GridHeader = DataTableGridHelper.GetHeaderJson<Items_B_yGroup_Grid_Column>();
+        }      
         public int Product_ID { get; set; }
 
         [Required(ErrorMessage = "Tên sản phẩm không được để trống")]
@@ -38,5 +31,27 @@ namespace StockManager.Web.Models.Admin
         public string Description { get; set; }
         
         public string ListImgJson { get; set; }
+        public string Item_By_Group_GridHeader { get; set; }
+    }
+
+    public class Items_B_yGroup_Grid_Column
+    {
+        [TableHeader(title = "Id")]
+        public string Product_ID { get; set; }
+
+        [TableHeader(title = "Tên sản phẩm")]
+        public string Product_Name { get; set; }
+
+        [TableHeader(title = "Giá")]
+        public string Sale_Price { set; get; }
+
+        [TableHeader(title = "Khối lượng")]
+        public string Quantity { get; set; }
+
+        [TableHeader(title = "Đơn vị tính")]
+        public string Unit_ID { get; set; }
+
+        [TableHeader(title = "")]
+        public string Action { get; set; }
     }
 }
