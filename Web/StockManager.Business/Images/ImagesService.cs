@@ -32,7 +32,7 @@ namespace StockManager.Business
             var response = new CRUD_Image_Response();
             try
             {
-                var image = Mapper.Map<CRUD_Image_Request, StockManager.Entity.Images>(request);
+                var image = Mapper.Map<CRUD_Image_Request, StockManager.Entity.DataAccess.Images>(request);
                 this._IImagesRepository.Add(image);
                 int saveStatus = this._IUnitOfWork.Commit();
                 if (saveStatus > 0)
@@ -53,7 +53,7 @@ namespace StockManager.Business
         public Get_Images_By_RelateId_Response Get_Images_By_RelateId(Get_Images_By_RelateId_Request request)
         {
             var response = _IImagesRepository.GetPage(request.Page, p => p.RelateId.Equals(request.RelateId), p=>p.Id);
-            var retData = Mapper.Map<ResponseBase<List<Entity.Images>>, Get_Images_By_RelateId_Response>(response);
+            var retData = Mapper.Map<ResponseBase<List< StockManager.Entity.DataAccess.Images>>, Get_Images_By_RelateId_Response>(response);
             return retData;
         }
     }

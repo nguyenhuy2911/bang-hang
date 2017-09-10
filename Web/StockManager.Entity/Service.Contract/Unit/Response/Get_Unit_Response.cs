@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace StockManager.Entity.Service.Contract
 {
-    public class Get_Unit_Response: ResponseBase<List<Get_Unit_DTO_Maper>>
+    public class Get_Unit_Response: ResponseBase<List<Get_Unit_DTO>>
     {
     }
 }

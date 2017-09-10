@@ -38,6 +38,10 @@
       <HintPath>..\..\..\packages\Autofac.Mvc5.4.0.1\lib\net45\Autofac.Integration.Mvc.dll</HintPath>
       <Private>True</Private>
     </Reference>
+    <Reference Include="AutoMapper, Version=6.1.1.0, Culture=neutral, PublicKeyToken=be96cd2c38ef1005, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\AutoMapper.6.1.1\lib\net45\AutoMapper.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="Microsoft.Web.Infrastructure, Version=1.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <HintPath>..\..\..\packages\Microsoft.Web.Infrastructure.1.0.0.0\lib\net40\Microsoft.Web.Infrastructure.dll</HintPath>
       <Private>True</Private>
@@ -77,6 +81,9 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="DependencyRegistrar.cs" />
+    <Compile Include="Mapping\AutoMapperConfiguration.cs" />
+    <Compile Include="Mapping\DomainToServiceMappingProfile.cs" />
+    <Compile Include="Mapping\ServiceToDomainMappingProfile.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -91,6 +98,10 @@
     <ProjectReference Include="..\..\StockManager.Data\StockManager.Data.csproj">
       <Project>{16fc167c-1066-4708-a868-2f451adda52a}</Project>
       <Name>StockManager.Data</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\StockManager.Entity\StockManager.Entity.csproj">
+      <Project>{3b6e80e2-c6d2-49a5-9962-d6f02aed37b9}</Project>
+      <Name>StockManager.Entity</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

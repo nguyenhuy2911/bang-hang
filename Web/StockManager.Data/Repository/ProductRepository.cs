@@ -1,17 +1,12 @@
-﻿using System;
+﻿using StockManager.Data.Infrastructure;
+using StockManager.Data.StoreProcedure;
+using StockManager.Entity;
+using StockManager.Entity.DataAccess;
+using System;
 using System.Collections.Generic;
+using System.Data.Entity;
 using System.Linq;
 using System.Linq.Expressions;
-using System.Text;
-using System.Threading.Tasks;
-using StockManager.Entity;
-using StockManager.Data.Infrastructure;
-using System.Data.Entity;
-using Common;
-using StockManager.Data.StoreProcedure;
-using System.Data.SqlClient;
-using System.Data;
-
 
 namespace StockManager.Data.Repository
 {

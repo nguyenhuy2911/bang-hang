@@ -1,7 +1,6 @@
-using System.Data.Entity;
-using System.Data.Entity.Infrastructure;
 using StockManager.Data.Models.Mapping;
-using StockManager.Entity;
+using StockManager.Entity.DataAccess;
+using System.Data.Entity;
 
 namespace StockManager.Data
 {

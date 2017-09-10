@@ -7,6 +7,8 @@ using StockManager.Entity.Service.Contract;
 using System;
 using System.Collections.Generic;
 using Common.Enum;
+using StockManager.Entity.DataAccess;
+
 namespace StockManager.Business
 {
     public interface IProductService

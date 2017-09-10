@@ -51,7 +51,7 @@ namespace StockManager.Web.Controllers
                 return null;
         }
 
-        private List<Get_Unit_DTO_Maper> GetUnits_For_CRUD()
+        private List<Get_Unit_DTO> GetUnits_For_CRUD()
         {
 
             var request = new Get_Unit_Request();

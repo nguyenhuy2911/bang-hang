@@ -1,12 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using StockManager.Entity;
-using System.Linq.Expressions;
-using StockManager.Data.Infrastructure;
-
+﻿using StockManager.Data.Infrastructure;
+using StockManager.Entity.DataAccess;
 namespace StockManager.Data.Repository
 {
     public interface IUniRepository : IRepositoryBase<UNIT>

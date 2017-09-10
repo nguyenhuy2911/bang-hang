@@ -1,5 +1,5 @@
 ﻿using StockManager.Web.Framework;
-using StockManager.Web.Mapping;
+using StockManager.Web.Framework.Mapping;
 using System.Reflection;
 namespace StockManager.Web
 {
