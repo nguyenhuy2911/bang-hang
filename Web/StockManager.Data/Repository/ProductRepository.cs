@@ -31,9 +31,6 @@ namespace StockManager.Data.Repository
                 TotalRow = 0
             };
         }
-
-        
-
     }
 }
 

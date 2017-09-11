@@ -55,5 +55,6 @@ namespace StockManager.Entity.Service.Contract
         public string UserID { get; set; }
         public Nullable<bool> Serial { get; set; }
         public bool Active { get; set; }
+        public bool Publish { get; set; }
     }
 }

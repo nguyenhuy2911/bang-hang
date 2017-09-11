@@ -143,19 +143,20 @@
     <Compile Include="Controllers\Admin\DashBoardController.cs" />
     <Compile Include="Controllers\Admin\OnlineItem\OnlineItemController.cs" />
     <Compile Include="Controllers\BaseController.cs" />
-    <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\FrontEnd\HomeController.cs" />
     <Compile Include="Controllers\Admin\IM_AND_EXPORT\IMPORT\IMPORTController.cs" />
     <Compile Include="Controllers\Admin\INVENTORY\INVENTORYController.cs" />
     <Compile Include="Controllers\Admin\Product\ProductController.cs" />
     <Compile Include="Controllers\Admin\VENDOR\VENDORController.cs" />
     <Compile Include="Controllers\Admin\WAREHOUSETRANSFER\WAREHOUSETRANSFERController.cs" />
-    <Compile Include="Controllers\ImageController.cs" />
+    <Compile Include="Controllers\Admin\Images\ImageController.cs" />
+    <Compile Include="Controllers\ImageHandleController.cs" />
     <Compile Include="Models\Admin\online-items\Online_Items_ViewModel.cs" />
     <Compile Include="Models\Admin\online-items\Online_Item_Detail_ViewModel.cs" />
     <Compile Include="Models\INVENTORY\INVENTORY_Form_Model.cs" />
     <Compile Include="Models\INVENTORY\INVENTORY_New_UpDate_Form_Model.cs" />
     <Compile Include="Models\Admin\product\Products_CRUD_ViewModel.cs" />
-    <Compile Include="Models\IMAGES\ProductImg_Upload_Modal.cs" />
+    <Compile Include="Models\Admin\images\ProductImg_Upload_Modal.cs" />
     <Compile Include="Models\WAREHOUSETRANSFER\WAREHOUSETRANSFER_Form_Model.cs" />
     <Compile Include="Models\WAREHOUSETRANSFER\WAREHOUSETRANSFER_New_UpDate_Form_Model.cs" />
     <Compile Include="Models\IMPORT\IMPORT_New_UpDate_Form_Model.cs" />
@@ -185,6 +186,8 @@
     <Content Include="Content\bootstrap.min.css" />
     <Content Include="Content\build.css" />
     <Content Include="Content\highlight.css" />
+    <Content Include="Content\images\no-image.jpg" />
+    <Content Include="Content\images\no-image.png" />
     <Content Include="Content\jquery-ui.css" />
     <Content Include="Content\jquery-ui.min.css" />
     <Content Include="Content\jquery-ui.theme.css" />
@@ -4048,6 +4051,7 @@
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="uploads\img\product\" />
+    <Folder Include="Views\ImageHandle\" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Project_Readme.html" />

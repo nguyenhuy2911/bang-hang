@@ -39,10 +39,9 @@
                                         <div class="col-lg-3 col-md-3 col-sm-3 col-xs-12">
                                             <div class="form-group form-float">
                                                 <div class="form-line">
-                                                    @Html.TextBoxFor(m => m.Product_Name, new { @class = "form-control" })
+                                                    @Html.TextBoxFor(m => m.Product_Name, new { @class = "form-control", @readonly = "readonly" })
                                                     <label class="form-label">Tên sản phẩm</label>
                                                 </div>
-                                                @Html.ValidationMessageFor(x => x.Product_Name, null, new { @class = "error" })
                                             </div>
                                         </div>
                                     </div>
@@ -109,6 +108,7 @@
         $.AdminBSB.dropdownMenu.activate();
         $.AdminBSB.select.activate();
         $.AdminBSB.Tinymce.setup("textarea.txt-description");
+
         var myDropzone = new Dropzone("div#divFileUpload", {
             autoProcessQueue: false,
             params: _ONLINE_ITEMS.getItem_Image_RequestValue(),
@@ -130,6 +130,8 @@
 
                     var mockFile = {
                         name: item.Name,
+                        id: item.Id,
+                        path: item.Path,
                         //  size: 9000000,
                         accepted: true,
                         kind: 'image'
@@ -139,7 +141,7 @@
 
                     // And optionally show the thumbnail of the file:ss
                     thisDropzone.files.push(mockFile);
-                    thisDropzone.createThumbnailFromUrl(mockFile, item.Path, function () {
+                    thisDropzone.createThumbnailFromUrl(mockFile, "images-handle/get-image?path=" + item.Path + "&w=240&h=240", function () {
                         // thisDropzone.emit("complete", mockFile);
                     }, "anonymous");
                     thisDropzone.emit("success", mockFile);
@@ -148,22 +150,37 @@
 
                 });
             },
-            removedfile: function (file) {
-                var _ref;
-                if (file.previewElement) {
-                    if ((_ref = file.previewElement) != null) {
-                        _ref.parentNode.removeChild(file.previewElement);
+            removedfile: function (file, _) {
+                $.ajax({
+                    type: "POST",
+                    url: "/images/delete-image",
+                    data: { id: file.id },
+                    dataType: "json",
+                    success: function (response) {
+                        if (response.StatusCode != 0)
+                            showErrorMessage(response.StatusMessage, "#div-crud-modal");
+                        else {
+                            showSuccessMessage(response.StatusMessage, "#div-crud-modal");
+                            var _ref;
+                            if (file.previewElement) {
+                                if ((_ref = file.previewElement) != null) {
+                                    _ref.parentNode.removeChild(file.previewElement);
+                                }
+                            }
+                        }
                     }
-                }
+                });
                 return this._updateMaxFilesReachedClass();
             },
 
         });
+
         $("#frm-crud-product").submit(function (e) {
-            e.preventDefault(); //STOP default action
-            _PRODUCT.saveProduct();
+            e.preventDefault();
+            _ONLINE_ITEMS.saveItem();
         });
-        _ONLINE_ITEMS.get_Items_By_Group();
+
+        _ONLINE_ITEMS.get_Product_ByItem();
     })
 </script>
 @Scripts.Render("~/bundles/jqueryval")

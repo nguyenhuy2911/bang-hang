@@ -11,21 +11,8 @@ namespace StockManager.Web.Models.Admin
         }      
         public int Product_ID { get; set; }
 
-        [Required(ErrorMessage = "Tên sản phẩm không được để trống")]
-        public string Product_Name { get; set; }
-
-        [Required(ErrorMessage = "Giá không được để trống")]
-        [Range(0, 99999999, ErrorMessage = "Giá phải là số")]
-        //  [MaxLength(1000000, ErrorMessage = "Giá phải nhỏ hơn 1,000,000")]
-        public string Sale_Price { get; set; }
-
-        [Required(ErrorMessage = "Khối lượng không được để trống")]
-        [Range(0, 99999999, ErrorMessage = "Khối lượng phải là số")]
-        public string Quantity { get; set; }
-
-        [Required(ErrorMessage = "Đơn vị tính không được để trống")]
-        public string Unit_ID { get; set; }
-        [Required(ErrorMessage = "sản phẩm gốc không được bỏ trống")]
+        public string Product_Name { get; set; }      
+       
         public int ProductGroup_ID { get; set; }
 
         public string Description { get; set; }
@@ -51,7 +38,7 @@ namespace StockManager.Web.Models.Admin
         [TableHeader(title = "Đơn vị tính")]
         public string Unit_ID { get; set; }
 
-        [TableHeader(title = "")]
-        public string Action { get; set; }
+        [TableHeader(title = "Online")]
+        public string Publish { get; set; }
     }
 }

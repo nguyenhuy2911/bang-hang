@@ -67,8 +67,7 @@ namespace StockManager.Business
             try
             {
                 var product = Mapper.Map<CRUD_Product_Request, PRODUCT>(request);
-                this._IProductRepository.Update(product);
-
+                this._IProductRepository.Update(product, request.Product_ID);
                 int saveStatus = this._IUnitOfWork.Commit();
                 if (saveStatus > 0)
                     response.StatusCode = (int)RESULT_STATUS_CODE.SUCCESS;

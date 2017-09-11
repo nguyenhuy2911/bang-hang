@@ -1,12 +1,8 @@
 ﻿
 using System;
-using System.Collections.Generic;
 using System.Drawing;
 using System.Drawing.Drawing2D;
 using System.IO;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Web;
 namespace Common.ImagesExtention
 {
@@ -15,23 +11,24 @@ namespace Common.ImagesExtention
     {
         public static System.Drawing.Image GetImageFromPath(this string path, int maxWidth, int maxHeight, bool isScale = true)
         {
-            Image current = new Bitmap(100, 100);
+            Bitmap current = new Bitmap(maxWidth, maxHeight);
             try
             {
+                string noImagePath = HttpContext.Current.Server.MapPath(@"~/Content/images/no-image.png");
                 string imagePath = HttpContext.Current.Server.MapPath(path);
                 if (System.IO.File.Exists(imagePath))
-                {
-                    current = System.Drawing.Image.FromFile(imagePath);
-                }
+                    current = new Bitmap(imagePath);
+                else
+                    current = new Bitmap(noImagePath);
+               
             }
             catch (Exception)
             {
                 return current;
             }
-            //return current;
             return current.Resize(maxWidth, maxHeight, isScale);
         }
-        public static Image Resize(this Image current, int newWidth, int newHeight, bool isScale)
+        public static Image Resize(this Bitmap current, int newWidth, int newHeight, bool isScale)
         {
             int width, height;
 
@@ -53,22 +50,23 @@ namespace Common.ImagesExtention
                 width = newWidth;
                 height = newHeight;
             }
-            Image canvas = new Bitmap(width, height);
-
+            Bitmap canvas = new Bitmap(width, height);
+           
             using (var graphics = Graphics.FromImage(canvas))
             {
                 graphics.CompositingQuality = CompositingQuality.HighSpeed;
                 graphics.InterpolationMode = InterpolationMode.HighQualityBicubic;
-                graphics.CompositingMode = CompositingMode.SourceCopy;                
+                graphics.CompositingMode = CompositingMode.SourceCopy;             
                 graphics.DrawImage(current, 0, 0, width, height);
             }
+           
             return canvas;
         }
         public static byte[] ToByteArray(this Image current)
         {
             using (var stream = new MemoryStream())
             {
-                current.Save(stream, System.Drawing.Imaging.ImageFormat.Jpeg);
+                current.Save(stream, System.Drawing.Imaging.ImageFormat.Png);
                 return stream.ToArray();
             }
         }

@@ -16,6 +16,9 @@ namespace StockManager.Web.Models.Admin
     }
     public class Items_Grid_Column
     {
+        [TableHeader(title = "Id")]
+        public string ProductGroup_ID { get; set; }
+
         [TableHeader(title = "Hình ảnh")]
         public string ImagePath { get; set; }
 

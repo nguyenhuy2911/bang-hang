@@ -124,14 +124,13 @@ PRODUCT.prototype.loadEditForm = function (strJsondata) {
 PRODUCT.prototype.getSaveProduct_RequestValue = function () {
 
     var obj = new Products_CRUD_ViewModel();
-    var formVal = $("#frm-crud-product").serializeFormJSON();
-    var editor_Description = tinymce.get('txt_Description');
+    var formVal = $("#frm-crud-product").serializeFormJSON();  
     obj.Product_ID = formVal.Product_ID;
     obj.Product_Name = formVal.Product_Name;
     obj.Unit_ID = formVal.Unit_ID;
     obj.Sale_Price = Number(formVal.Sale_Price);
     obj.Quantity = Number(formVal.Quantity);
-    obj.Description = htmlEncode(editor_Description.getContent());
+    
     obj.ProductGroup_ID = formVal.ProductGroup_ID
     return obj;
 }

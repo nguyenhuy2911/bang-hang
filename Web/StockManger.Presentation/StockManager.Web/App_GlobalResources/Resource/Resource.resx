@@ -228,4 +228,7 @@
   <data name="Warehouse_Name" xml:space="preserve">
     <value>Tên kho hàng</value>
   </data>
+  <data name="DeleteSuccess" xml:space="preserve">
+    <value>Xóa thành công</value>
+  </data>
 </root>

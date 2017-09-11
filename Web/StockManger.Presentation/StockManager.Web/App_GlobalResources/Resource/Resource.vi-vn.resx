@@ -246,4 +246,7 @@
   <data name="UpdateSuccess" xml:space="preserve">
     <value>Cập nhật thành công</value>
   </data>
+  <data name="DeleteSuccess" xml:space="preserve">
+    <value>Xóa thành công</value>
+  </data>
 </root>

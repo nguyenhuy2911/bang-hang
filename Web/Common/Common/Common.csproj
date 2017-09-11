@@ -59,6 +59,7 @@
     <Compile Include="Imager.cs" />
     <Compile Include="PredicateBuilder.cs" />
     <Compile Include="Enum\ACTIVE.cs" />
+    <Compile Include="PropertiesExtention.cs" />
     <Compile Include="QueryableExtensions.cs" />
     <Compile Include="DALExcell.cs" />
     <Compile Include="DataTableJs.cs" />

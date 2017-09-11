@@ -1,11 +1,10 @@
 ﻿using Common;
 using Common.Enum;
-using Common.ImagesExtention;
+using Newtonsoft.Json;
 using StockManager.Business;
 using StockManager.Entity.Service.Contract;
 using StockManager.Web.Models;
 using System;
-using System.Collections.Generic;
 using System.IO;
 using System.Web;
 using System.Web.Mvc;
@@ -65,14 +64,21 @@ namespace StockManager.Web.Controllers
             return Json(new { res = result });
         }
 
-        [HttpGet]
-        [Route("get-images")]
-        public FileStreamResult GetImages(string path, int w, int h)
-        {
-            System.Drawing.Image image = (@"~/" + path).GetImageFromPath(w, h, true);
-            Stream ms = new MemoryStream(image.ToByteArray());
-            return new FileStreamResult(ms, "image/jpg");
-        }
+        [HttpPost]
+        [Route("delete-image")]
+        public string DeleteImage(long id, string path)            
+        {           
+            var response = _IImagesService.DeleteImage(id);
+            if (response?.StatusCode == (int)RESULT_STATUS_CODE.SUCCESS)
+                response.StatusMessage = Utility.getResourceString("DeleteSuccess");
+            string imPpath = string.Format(@"~\" + path);
+            if (!Directory.Exists(Server.MapPath(imPpath)))
+            {
+                Directory.Delete(Server.MapPath(path));
+            }
+            string json = JsonConvert.SerializeObject(response);
+            return json;
 
+        }
     }
 }

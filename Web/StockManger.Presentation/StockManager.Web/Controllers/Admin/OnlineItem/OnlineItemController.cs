@@ -9,6 +9,8 @@ using StockManager.Entity.Service.Contract;
 using StockManager.Entity;
 using Newtonsoft.Json;
 using System.Net;
+using Common.Enum;
+using Common;
 
 namespace StockManager.Web.Controllers.Admin.OnlineItem
 {
@@ -51,8 +53,8 @@ namespace StockManager.Web.Controllers.Admin.OnlineItem
         }
 
         [HttpPost]
-        [Route("get-items-by-group")]
-        public string Get_Items_by_group(Get_Products_By_GroupId_Request request)
+        [Route("get-product-by-item")]
+        public string Get_Product_By_Item(Get_Products_By_GroupId_Request request)
         {
             var response = _IProductService.Get_Product_ByGroupId(request);
             string json = JsonConvert.SerializeObject(response);
@@ -71,13 +73,44 @@ namespace StockManager.Web.Controllers.Admin.OnlineItem
             model.Product_ID = groupId;
             model.Product_Name = product?.Product_Name;
             model.ProductGroup_ID = groupId;
-            model.Sale_Price = product?.Sale_Price.ToString();
-            model.Quantity = product?.Quantity.ToString();
-            model.Unit_ID = model?.Unit_ID;
             model.Description = WebUtility.HtmlDecode(product?.Description);
             var listImages = this.Get_ListImage_By_Product_GroupId(groupId.ToString());
             model.ListImgJson = JsonConvert.SerializeObject(listImages);
             return View("~/Views/Admin/Online-Items/Online_Item_Crud_Form.cshtml", model);
+        }
+
+        [HttpPost]
+        [Route("online-item-update")]
+        public string Item_Update(Online_Item_Detail_ViewModel model)
+        {
+            var request = new CRUD_Product_Request()
+            {
+                Product_ID = model.ProductGroup_ID,
+                Description = WebUtility.HtmlEncode(model.Description),
+            };
+            var response = _IProductService.UpdateProduct(request);
+            if (response?.StatusCode == (int)RESULT_STATUS_CODE.SUCCESS)
+                response.StatusMessage = Utility.getResourceString("UpdateSuccess");
+            string json = JsonConvert.SerializeObject(response);
+            return json;
+
+        }
+
+        [HttpPost]
+        [Route("online-item-update-publishstatus")]
+        public string Item_Update_PublishStatus(int productId, int publishStatus)
+        {
+            var request = new CRUD_Product_Request()
+            {
+                Product_ID = productId,
+                Publish = publishStatus,
+            };
+            var response = _IProductService.UpdateProduct(request);
+            if (response?.StatusCode == (int)RESULT_STATUS_CODE.SUCCESS)
+                response.StatusMessage = Utility.getResourceString("UpdateSuccess");
+            string json = JsonConvert.SerializeObject(response);
+            return json;
+
         }
     }
 }

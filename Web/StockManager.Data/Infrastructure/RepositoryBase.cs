@@ -9,6 +9,7 @@ using System.Text;
 using System.Threading.Tasks;
 using Common;
 using System.Data.Entity.Infrastructure;
+using System.Reflection;
 
 namespace StockManager.Data.Infrastructure
 {
@@ -35,20 +36,36 @@ namespace StockManager.Data.Infrastructure
         {
             dbset.Add(entity);
         }
-        
+
         public virtual void Update(T entity)
         {
             dbset.Attach(entity);
             dataContext.Entry(entity).State = EntityState.Modified;
         }
+        public virtual void Update(T entity, object updateId)
+        {
+
+            var exitEntity = dbset.Find(updateId);
+            foreach (PropertyInfo property in exitEntity.GetType().GetProperties())
+            {
+                var current = entity.GetPropValue(property.Name);
+                var original = exitEntity.GetPropValue(property.Name);
+                if (current != null && current != original)
+                {                    
+                    exitEntity.GetType().GetProperty(property.Name).SetValue(exitEntity, current);
+                }
+            }
+            dataContext.Entry(exitEntity).State = EntityState.Modified;
+        }
+        
         public virtual void Delete(T entity)
         {
             dbset.Remove(entity);
         }
-        public virtual void Delete(string id)
+        public virtual void Delete(object id)
         {
-            var entity = GetById(id);
-            dbset.Remove(entity.Results);
+            var result = dbset.Find(id);
+            dbset.Remove(result);
         }
         public virtual ResponseBase<T> GetById(long id)
         {

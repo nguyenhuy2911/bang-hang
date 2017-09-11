@@ -12,8 +12,9 @@ namespace StockManager.Data.Infrastructure
     {
         void Add(T entity);
         void Update(T entity);
+        void Update(T entity, object entityId);
         void Delete(T entity);
-        //  void Delete(Expression<Func<T, bool>> where);
+        void Delete(object id);
         ResponseBase<T> GetById(long id);
         ResponseBase<T> GetById(string id);
         ResponseBase<List<T>> GetAll(Page pager, Expression<Func<T, object>> order, bool ascending);

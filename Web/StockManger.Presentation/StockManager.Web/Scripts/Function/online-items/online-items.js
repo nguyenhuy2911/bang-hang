@@ -1,4 +1,9 @@
-﻿var _ONLINE_ITEMS = null;
+﻿var PUBLISH_STATUS = {
+    ACTIVE: 1,
+    NONE: 0
+}
+var _ONLINE_ITEMS = null;
+var table_OnlineItemList;
 var Page = function (pageNumber, pageSize) {
     this.PageNumber = pageNumber;
     this.PageSize = pageSize;
@@ -12,7 +17,6 @@ var Get_Products_By_GroupId_Request = function () {
     this.Page = new Page(0, 10);
     this.Product_Group_ID = $("#ProductGroup_ID").val();
 }
-
 
 var Products_CRUD_ViewModel = function () {
     this.Product_ID = 0;
@@ -40,6 +44,7 @@ ONLINE_ITEMS.prototype.init = function () {
 
 ONLINE_ITEMS.prototype.regisEvent = function () {
     var $this = this;
+    var $modal = $('#div-crud-modal');
     $("#btn_product_crud_save").click(function () {
         $("#frm-crud-product").submit();
         $('#div-crud-modal').animate({
@@ -47,8 +52,9 @@ ONLINE_ITEMS.prototype.regisEvent = function () {
         }, 800);
     });
 
-
-
+    $modal.on('hidden.bs.modal', function (e) {
+        table_OnlineItemList.draw();
+    });
 }
 
 ONLINE_ITEMS.prototype.get_Online_Items = function () {
@@ -59,7 +65,7 @@ ONLINE_ITEMS.prototype.get_Online_Items = function () {
         if (objColumn.data == "ImagePath") {
             objColumn.render = function (data, type, row, meta) {
                 if (data != null && data != '') {
-                    var $thumnail = $("<a class='background-transparent'>").append($("<img class='img-responsive'>").attr("src", "images/get-images?path=" + data + "&w=100&h=100"))
+                    var $thumnail = $("<a class='background-transparent'>").append($("<img class='img-responsive'>").attr("src", "images-handle/get-image?path=" + data + "&w=100&h=100"))
                     var $div = $("<div>").append($thumnail);
                     return $div.html();
                 }
@@ -80,7 +86,7 @@ ONLINE_ITEMS.prototype.get_Online_Items = function () {
         }
         columnRender.push(objColumn);
     })
-    var table = $('#product_list_item').DataTable({
+    table_OnlineItemList = $('#product_list_item').DataTable({
         responsive: true,
         processing: true,
         serverSide: true,
@@ -108,7 +114,7 @@ ONLINE_ITEMS.prototype.get_Online_Items = function () {
 
     })
     .on('page.dt', function () {
-        var info = table.page.info();
+        var info = table_OnlineItemList.page.info();
         $this.variable.pageIndex = info.page;
         $this.variable.pageSize = info.length;
     });
@@ -124,20 +130,20 @@ ONLINE_ITEMS.prototype.loadEditForm = function (strJsondata) {
     });
 }
 
-ONLINE_ITEMS.prototype.get_Items_By_Group = function () {
-  
+ONLINE_ITEMS.prototype.get_Product_ByItem = function () {
+
     var $this = this;
     var column = item_By_Group_GridHeader;
     var columnRender = [];
-    $.each(column, function (index, objColumn) {       
-        if (objColumn.data == "Action") {
+    $.each(column, function (index, objColumn) {
+        if (objColumn.data == "Publish") {
             objColumn.render = function (data, type, row, meta) {
-
-                var $btnEdit = $("<a data-toggle='modal' data-target='#div-crud-modal'>")
-                                       .addClass("btn btn-link btn-link-primary")
-                                       .append('<i class="material-icons">mode_edit</i>')
-                                       .attr("onclick", '_ONLINE_ITEMS.loadEditForm(\'' + JSON.stringify(row) + '\')');
-                var $div = $("<div>").append($btnEdit);
+                var $lablel = $("<label for=\'chk_" + row.Product_ID + "\'>");
+                var $checkbox = $("<input id=\'chk_" + row.Product_ID + "\' type='checkbox'>")
+                                   .addClass("filled-in chk-col-deep-purple")
+                                   .attr("checked", row.Publish)
+                                   .attr("onClick", "_ONLINE_ITEMS.updatePublish_Status(this, \'" + row.Product_ID + "\')");
+                var $div = $("<div>").append($checkbox).append($lablel);
                 return $div.html();
             }
         }
@@ -151,7 +157,7 @@ ONLINE_ITEMS.prototype.get_Items_By_Group = function () {
         autoWidth: false,
         columns: column,
         ajax: {
-            url: '/online-items/get-items-by-group',
+            url: '/online-items/get-product-by-item',
             dataType: "JSON",
             type: 'POST',
             data: function () {
@@ -177,17 +183,11 @@ ONLINE_ITEMS.prototype.get_Items_By_Group = function () {
     });
 }
 
-
-ONLINE_ITEMS.prototype.getSaveProduct_RequestValue = function () {
-
+ONLINE_ITEMS.prototype.getSaveItem_RequestValue = function () {
     var obj = new Products_CRUD_ViewModel();
     var formVal = $("#frm-crud-product").serializeFormJSON();
     var editor_Description = tinymce.get('txt_Description');
     obj.Product_ID = formVal.Product_ID;
-    obj.Product_Name = formVal.Product_Name;
-    obj.Unit_ID = formVal.Unit_ID;
-    obj.Sale_Price = Number(formVal.Sale_Price);
-    obj.Quantity = Number(formVal.Quantity);
     obj.Description = htmlEncode(editor_Description.getContent());
     obj.ProductGroup_ID = formVal.ProductGroup_ID
     return obj;
@@ -200,15 +200,15 @@ ONLINE_ITEMS.prototype.getItem_Image_RequestValue = function () {
     return obj;
 }
 
-ONLINE_ITEMS.prototype.saveProduct = function () {
+ONLINE_ITEMS.prototype.saveItem = function () {
 
     var isvalidate = $("#frm-crud-product").valid();
     if (!isvalidate)
         return;
-    var request = this.getSaveProduct_RequestValue();
+    var request = this.getSaveItem_RequestValue();
     $.ajax({
         type: 'POST', // define the type of HTTP verb we want to use (POST for our form)
-        url: '/product/product-save', // the url where we want to POST
+        url: '/online-items/online-item-update', // the url where we want to POST
         data: request, // our data object
         dataType: 'json', // what type of data do we expect back from the server       
         beforeSend: function () {
@@ -225,12 +225,42 @@ ONLINE_ITEMS.prototype.saveProduct = function () {
                 showSuccessMessage(response.StatusMessage, "#div-crud-modal");
                 $("[view-when='update']").fadeIn();
             }
+        }
+    })
+    .done(function (response) {
+        $("#div-crud-modal").loading("stop");
+
+    });
+}
+
+ONLINE_ITEMS.prototype.updatePublish_Status = function (element, productId) {
+    var _publishStatus = $(element).prop("checked") == true ? PUBLISH_STATUS.ACTIVE : PUBLISH_STATUS.NONE;
+    var request = {
+        productId: productId,
+        publishStatus: _publishStatus
+    }
+    $.ajax({
+        type: 'POST', // define the type of HTTP verb we want to use (POST for our form)
+        url: '/online-items/online-item-update-publishstatus', // the url where we want to POST
+        data: request, // our data object
+        dataType: 'json', // what type of data do we expect back from the server       
+        beforeSend: function () {
+        },
+        error: function (response) {
+            console.log(response);
+        },
+        success: function (response) {
+            if (response.StatusCode != 0)
+                showErrorMessage(response.StatusMessage, "#div-crud-modal");
+            else {
+                showSuccessMessage(response.StatusMessage, "#div-crud-modal");
+                $("[view-when='update']").fadeIn();
+            }
 
 
         }
     })
     .done(function (response) {
-        $("#div-crud-modal").loading("stop");
 
     });
 }

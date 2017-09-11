@@ -14,13 +14,14 @@ namespace StockManager.Web
             routes.IgnoreRoute("{resource}.axd/{*pathInfo}");
 
             /** --------------------------------------- DASHBOARD -------------------------------*/
+
             routes.MapRoute(
                 name: "dash-board",
                 url: "dash-board",
                 defaults: new { controller = "DashBoard", action = "Index" }
             );
-            
-          
+
+
             /** --------------------------------------- VENDOR -------------------------------*/
             routes.MapRoute(
                 name: "vendor-list",
@@ -80,11 +81,16 @@ namespace StockManager.Web
             );
             routes.MapMvcAttributeRoutes();
             routes.MapRoute(
+                name: "admin",
+                url: "admin",
+                defaults: new { controller = "DashBoard", action = "Index", id = UrlParameter.Optional }
+            );
+            routes.MapRoute(
                 name: "Default",
                 url: "{controller}/{action}/{id}",
                 defaults: new { controller = "DashBoard", action = "Index", id = UrlParameter.Optional }
             );
-          
+
         }
     }
 }
