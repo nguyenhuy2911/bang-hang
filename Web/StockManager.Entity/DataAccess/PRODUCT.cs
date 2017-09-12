@@ -71,5 +71,6 @@ namespace StockManager.Entity.DataAccess
         public virtual ICollection<STOCK_INWARD_DETAIL> STOCK_INWARD_DETAIL { get; set; }
         public virtual ICollection<STOCK_OUTWARD_DETAIL> STOCK_OUTWARD_DETAIL { get; set; }
         public virtual ICollection<STOCK_TRANSFER_DETAIL> STOCK_TRANSFER_DETAIL { get; set; }
+        public virtual ICollection<OrderItem> OrderItems { get; set; }
     }
 }

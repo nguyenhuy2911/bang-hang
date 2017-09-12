@@ -12,7 +12,9 @@ namespace StockManager.Business
     public interface IImagesService
     {
         CRUD_Image_Response CreateImage(CRUD_Image_Request request);
+        CRUD_Image_Response DeleteImage(long Id);
         Get_Images_By_RelateId_Response Get_Images_By_RelateId(Get_Images_By_RelateId_Request request);
+        
     }
     public class ImagesService : IImagesService
     {
@@ -52,6 +54,28 @@ namespace StockManager.Business
             var response = _IImagesRepository.GetPage(request.Page, p => p.RelateId.Equals(request.RelateId), p=>p.Id);
             var retData = Mapper.Map<ResponseBase<List< StockManager.Entity.DataAccess.Images>>, Get_Images_By_RelateId_Response>(response);
             return retData;
+        }
+
+        public CRUD_Image_Response DeleteImage(long Id)
+        {
+            var response = new CRUD_Image_Response();
+            try
+            {               
+                this._IImagesRepository.Delete(Id);
+                int saveStatus = this._IUnitOfWork.Commit();
+                if (saveStatus > 0)
+                    response.StatusCode = (int)RESULT_STATUS_CODE.SUCCESS;
+                else
+                    response.StatusCode = (int)RESULT_STATUS_CODE.DATABASE_ERROR;
+
+            }
+            catch (Exception ex)
+            {
+
+                response.StatusCode = (int)RESULT_STATUS_CODE.SYSTEM_ERROR;
+                response.StatusMessage = ex.ToString();
+            }
+            return response;
         }
     }
 }

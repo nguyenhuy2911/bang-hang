@@ -142,6 +142,7 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Controllers\Admin\DashBoardController.cs" />
     <Compile Include="Controllers\Admin\OnlineItem\OnlineItemController.cs" />
+    <Compile Include="Controllers\Admin\Order\OrderController.cs" />
     <Compile Include="Controllers\BaseController.cs" />
     <Compile Include="Controllers\FrontEnd\HomeController.cs" />
     <Compile Include="Controllers\Admin\IM_AND_EXPORT\IMPORT\IMPORTController.cs" />
@@ -153,6 +154,7 @@
     <Compile Include="Controllers\ImageHandleController.cs" />
     <Compile Include="Models\Admin\online-items\Online_Items_ViewModel.cs" />
     <Compile Include="Models\Admin\online-items\Online_Item_Detail_ViewModel.cs" />
+    <Compile Include="Models\Admin\order\Order_ViewModel.cs" />
     <Compile Include="Models\INVENTORY\INVENTORY_Form_Model.cs" />
     <Compile Include="Models\INVENTORY\INVENTORY_New_UpDate_Form_Model.cs" />
     <Compile Include="Models\Admin\product\Products_CRUD_ViewModel.cs" />
@@ -4047,6 +4049,7 @@
     <Content Include="Template\Admin\AdminBSBMaterial\font-awesome\scss\font-awesome.scss" />
     <Content Include="Views\Admin\Online-Items\Index.cshtml" />
     <Content Include="Views\Admin\Online-Items\Online_Item_Crud_Form.cshtml" />
+    <Content Include="Views\Admin\Order\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

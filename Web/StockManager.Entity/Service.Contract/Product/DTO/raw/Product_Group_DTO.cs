@@ -10,7 +10,6 @@ namespace StockManager.Entity.Service.Contract
     {
         public Product_Group_DTO()
         {
-
         }
         public int ProductGroup_ID { get; set; }
         public string ProductGroup_Name { get; set; }

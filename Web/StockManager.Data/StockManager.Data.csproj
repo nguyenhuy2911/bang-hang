@@ -86,8 +86,12 @@
     <Compile Include="Infrastructure\IUnitOfWork.cs" />
     <Compile Include="Infrastructure\RepositoryBase.cs" />
     <Compile Include="Infrastructure\UnitOfWork.cs" />
+    <Compile Include="Mapping\OrderItemMap.cs" />
+    <Compile Include="Mapping\OrderMap.cs" />
     <Compile Include="Mapping\ImagesMap.cs" />
     <Compile Include="Repository\ImageRepository.cs" />
+    <Compile Include="Repository\OrderItemRepository.cs" />
+    <Compile Include="Repository\OrderRepository.cs" />
     <Compile Include="Repository\ProductRepository.cs" />
     <Compile Include="Repository\UnitRepository.cs" />
     <Compile Include="StockManagerContext.cs" />

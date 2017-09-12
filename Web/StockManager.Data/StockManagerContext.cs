@@ -62,7 +62,8 @@ namespace StockManager.Data
         public DbSet<UNIT> Units { get; set; }
         public DbSet<UNITCONVERT> UnitConverts { get; set; }
         public DbSet<Images> Images { get; set; }
-
+        public virtual DbSet<Order> Order { get; set; }
+        public virtual DbSet<OrderItem> OrderItem { get; set; }
         public virtual int Commit()
         {
             int result = base.SaveChanges();
@@ -116,6 +117,8 @@ namespace StockManager.Data
             modelBuilder.Configurations.Add(new UNITMap());
             modelBuilder.Configurations.Add(new UNITCONVERTMap());
             modelBuilder.Configurations.Add(new ImagesMap());
+            modelBuilder.Configurations.Add(new OrderMap());
+            modelBuilder.Configurations.Add(new OrderItemMap());
         }
     }
 }

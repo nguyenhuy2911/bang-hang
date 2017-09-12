@@ -31,7 +31,9 @@ var Products_CRUD_ViewModel = function () {
 var ONLINE_ITEMS = function () {
     this.variable = {
         pageIndex: 0,
-        pageSize: 10
+        pageSize: 10,
+        getProductByItemPageIndex: 0,
+        getProductByItemPageSize: 0,
     };
 }
 
@@ -162,7 +164,7 @@ ONLINE_ITEMS.prototype.get_Product_ByItem = function () {
             type: 'POST',
             data: function () {
                 var request = new Get_Products_By_GroupId_Request();
-                request.Page = new Page($this.variable.pageIndex, $this.variable.pageSize);
+                request.Page = new Page($this.variable.getProductByItemPageIndex, $this.variable.getProductByItemPageSize);
                 return request;
             },
             dataFilter: function (response) {
@@ -178,8 +180,8 @@ ONLINE_ITEMS.prototype.get_Product_ByItem = function () {
     })
     .on('page.dt', function () {
         var info = table.page.info();
-        $this.variable.pageIndex = info.page;
-        $this.variable.pageSize = info.length;
+        $this.variable.getProductByItemPageIndex = info.page;
+        $this.variable.getProductByItemPageSize = info.length;
     });
 }
 

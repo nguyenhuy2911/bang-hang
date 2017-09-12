@@ -88,6 +88,15 @@ namespace StockManager.Web.App_GlobalResources.Resource {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Xóa thành công.
+        /// </summary>
+        public static string DeleteSuccess {
+            get {
+                return ResourceManager.GetString("DeleteSuccess", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Từ kho.
         /// </summary>
         public static string FromWareHouse {

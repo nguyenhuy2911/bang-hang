@@ -59,6 +59,8 @@
     <Compile Include="DataAccess\INVENTORY.cs" />
     <Compile Include="DataAccess\INVENTORY_DETAIL.cs" />
     <Compile Include="DataAccess\Images.cs" />
+    <Compile Include="DataAccess\Order.cs" />
+    <Compile Include="DataAccess\OrderItem.cs" />
     <Compile Include="Page.cs" />
     <Compile Include="DataAccess\PRODUCT.cs" />
     <Compile Include="DataAccess\PRODUCT_BUILD.cs" />
