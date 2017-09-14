@@ -92,6 +92,11 @@ namespace StockManager.Web
             bundles.Add(new ScriptBundle("~/Script/Function/online-items").Include(
                                          "~/Scripts/Function/online-items/online-items.js"
             ));
+
+            // ------------------------- Order ----------------------------------------------//
+            bundles.Add(new ScriptBundle("~/Script/Function/orders").Include(
+                                         "~/Scripts/Function/orders/orders.js"
+            ));
         }
 
        

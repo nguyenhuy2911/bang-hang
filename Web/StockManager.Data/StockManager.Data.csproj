@@ -87,11 +87,14 @@
     <Compile Include="Infrastructure\RepositoryBase.cs" />
     <Compile Include="Infrastructure\UnitOfWork.cs" />
     <Compile Include="Mapping\OrderItemMap.cs" />
+    <Compile Include="Mapping\Product_ProductAttribute_Mapping_Map.cs" />
+    <Compile Include="Mapping\ProductAttributeMap.cs" />
     <Compile Include="Mapping\OrderMap.cs" />
     <Compile Include="Mapping\ImagesMap.cs" />
     <Compile Include="Repository\ImageRepository.cs" />
     <Compile Include="Repository\OrderItemRepository.cs" />
     <Compile Include="Repository\OrderRepository.cs" />
+    <Compile Include="Repository\ProductAtributeRepository.cs" />
     <Compile Include="Repository\ProductRepository.cs" />
     <Compile Include="Repository\UnitRepository.cs" />
     <Compile Include="StockManagerContext.cs" />
@@ -157,9 +160,7 @@
       <Name>StockManager.Entity</Name>
     </ProjectReference>
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Models\" />
-  </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

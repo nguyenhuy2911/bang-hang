@@ -41,6 +41,7 @@ namespace Common
 
         public static T convertNumber<T>(Object value)
         {
+            
             CultureInfo ci = new CultureInfo("en-US");
             var result = (T)Convert.ChangeType(value, typeof(T), ci);
             return result;

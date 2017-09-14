@@ -20,10 +20,6 @@ namespace StockManager.Data.Models.Mapping
                .HasMaxLength(20);
 
             this.Property(t => t.ShippingWarId)
-                .IsRequired()
-                .HasMaxLength(250);
-
-            this.Property(t => t.ShippingWarId)
                .HasMaxLength(250);
 
             this.Property(t => t.ShippingStreet)
@@ -31,12 +27,6 @@ namespace StockManager.Data.Models.Mapping
 
             this.Property(t => t.ShippingHomeAddress)
                .HasMaxLength(500);
-
-            this.Property(t => t.ShippingWarId)
-               .HasMaxLength(250);
-
-            this.Property(t => t.ShippingWarId)
-               .HasMaxLength(250);
 
             // Table & Column Mappings
             this.ToTable("Order");

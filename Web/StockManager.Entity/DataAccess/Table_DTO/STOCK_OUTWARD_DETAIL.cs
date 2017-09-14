@@ -9,7 +9,7 @@ namespace StockManager.Entity.DataAccess
         public string Outward_ID { get; set; }
         public string Stock_ID { get; set; }
         public Nullable<int> RefType { get; set; }
-        public Nullable< int> Product_ID { get; set; }
+        public Nullable<int> Product_ID { get; set; }
         public string ProductName { get; set; }
         public Nullable<int> Vat { get; set; }
         public Nullable<decimal> Lev1 { get; set; }

@@ -64,6 +64,8 @@ namespace StockManager.Data
         public DbSet<Images> Images { get; set; }
         public virtual DbSet<Order> Order { get; set; }
         public virtual DbSet<OrderItem> OrderItem { get; set; }
+        public virtual DbSet<ProductAttribute> ProductAttribute { get; set; }
+        public virtual DbSet<Product_ProductAttribute_Mapping> Product_ProductAttribute_Mapping { get; set; }
         public virtual int Commit()
         {
             int result = base.SaveChanges();
@@ -119,6 +121,8 @@ namespace StockManager.Data
             modelBuilder.Configurations.Add(new ImagesMap());
             modelBuilder.Configurations.Add(new OrderMap());
             modelBuilder.Configurations.Add(new OrderItemMap());
+            modelBuilder.Configurations.Add(new ProductAttributeMap());
+            modelBuilder.Configurations.Add(new ProductAttributeMap());
         }
     }
 }

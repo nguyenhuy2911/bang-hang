@@ -12,6 +12,7 @@ namespace StockManager.Entity.DataAccess
             this.STOCK_INWARD_DETAIL = new List<STOCK_INWARD_DETAIL>();
             this.STOCK_OUTWARD_DETAIL = new List<STOCK_OUTWARD_DETAIL>();
             this.STOCK_TRANSFER_DETAIL = new List<STOCK_TRANSFER_DETAIL>();
+            this.OrderItems = new List<OrderItem>();
         }
 
         public int Product_ID { get; set; }
@@ -72,5 +73,6 @@ namespace StockManager.Entity.DataAccess
         public virtual ICollection<STOCK_OUTWARD_DETAIL> STOCK_OUTWARD_DETAIL { get; set; }
         public virtual ICollection<STOCK_TRANSFER_DETAIL> STOCK_TRANSFER_DETAIL { get; set; }
         public virtual ICollection<OrderItem> OrderItems { get; set; }
+        public virtual ICollection<Product_ProductAttribute_Mapping> Product_ProductAttribute_Mapping { get; set; }
     }
 }

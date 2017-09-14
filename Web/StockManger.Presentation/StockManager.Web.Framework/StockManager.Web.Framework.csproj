@@ -7,8 +7,8 @@
     <ProjectGuid>{238A35D3-BCB2-4AE7-89F6-0E97C40955A4}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>Coffe.Web.Framework</RootNamespace>
-    <AssemblyName>Coffe.Web.Framework</AssemblyName>
+    <RootNamespace>StockManager.Web.Framework</RootNamespace>
+    <AssemblyName>StockManager.Web.Framework</AssemblyName>
     <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
   </PropertyGroup>
@@ -48,10 +48,7 @@
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
-    <Reference Include="System.Web.Helpers, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
-      <HintPath>..\..\..\packages\Microsoft.AspNet.WebPages.3.2.3\lib\net45\System.Web.Helpers.dll</HintPath>
-      <Private>True</Private>
-    </Reference>
+    <Reference Include="System.Web" />
     <Reference Include="System.Web.Mvc, Version=5.2.3.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <HintPath>..\..\..\packages\Microsoft.AspNet.Mvc.5.2.3\lib\net45\System.Web.Mvc.dll</HintPath>
       <Private>True</Private>
@@ -76,13 +73,17 @@
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="System.Data" />
-    <Reference Include="System.Net.Http" />
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="DependencyRegistrar.cs" />
     <Compile Include="Mapping\AutoMapperConfiguration.cs" />
     <Compile Include="Mapping\DomainToServiceMappingProfile.cs" />
+    <Compile Include="Mapping\Profiles\DomainToService\ProductAttribute_Domain_To_Service.cs" />
+    <Compile Include="Mapping\Profiles\DomainToService\Orders_Domain_To_Service.cs" />
+    <Compile Include="Mapping\Profiles\DomainToService\Images_Domain_To_Service.cs" />
+    <Compile Include="Mapping\Profiles\DomainToService\Unit_Domain_To_Service.cs" />
+    <Compile Include="Mapping\Profiles\DomainToService\Product_Domain_To_Service.cs" />
     <Compile Include="Mapping\ServiceToDomainMappingProfile.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -103,6 +104,14 @@
       <Project>{3b6e80e2-c6d2-49a5-9962-d6f02aed37b9}</Project>
       <Name>StockManager.Entity</Name>
     </ProjectReference>
+    <ProjectReference Include="..\..\StockManger.Core\StockManger.Core\StockManger.Core.csproj">
+      <Project>{fdc701f4-4429-44f1-aee1-72d9dc5d2e33}</Project>
+      <Name>StockManger.Core</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Infrastructure\" />
+    <Folder Include="Mapping\Profiles\ServiceToDomain\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

@@ -40,12 +40,13 @@ namespace StockManager.Data.Models.Mapping
             this.Property(t => t.ProroteID).HasColumnName("ProroteID");
 
             // Relationships
-            this.HasOptional(t => t.Order)
-                .WithMany(t => t.OrderItem)
-                .HasForeignKey(d => d.OrderId);
-            this.HasOptional(t => t.PRODUCT)
+            this.HasRequired(t => t.PRODUCT)
                 .WithMany(t => t.OrderItems)
                 .HasForeignKey(d => d.ProductId);
+            this.HasRequired(t => t.Order)
+                .WithMany(t => t.OrderItem)
+                .HasForeignKey(d => d.OrderId);
+            
 
         }
     }

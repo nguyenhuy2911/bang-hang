@@ -154,7 +154,7 @@
     <Compile Include="Controllers\ImageHandleController.cs" />
     <Compile Include="Models\Admin\online-items\Online_Items_ViewModel.cs" />
     <Compile Include="Models\Admin\online-items\Online_Item_Detail_ViewModel.cs" />
-    <Compile Include="Models\Admin\order\Order_ViewModel.cs" />
+    <Compile Include="Models\Admin\order\Orders_ViewModel.cs" />
     <Compile Include="Models\INVENTORY\INVENTORY_Form_Model.cs" />
     <Compile Include="Models\INVENTORY\INVENTORY_New_UpDate_Form_Model.cs" />
     <Compile Include="Models\Admin\product\Products_CRUD_ViewModel.cs" />
@@ -474,6 +474,7 @@
     <Content Include="Scripts\Function\BaseFunction.js" />
     <Content Include="Scripts\Function\IMPORT\IMPORT_New.js" />
     <Content Include="Scripts\Function\online-items\online-items.js" />
+    <Content Include="Scripts\Function\orders\orders.js" />
     <Content Include="Scripts\Function\product\Product.js" />
     <Content Include="Scripts\Function\VENDOR\VENDOR.js" />
     <Content Include="Scripts\Function\IMPORT\IMPORT.js" />

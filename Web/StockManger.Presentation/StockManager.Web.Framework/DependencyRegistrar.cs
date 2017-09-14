@@ -4,6 +4,8 @@ using StockManager.Business;
 using StockManager.Data;
 using StockManager.Data.Infrastructure;
 using StockManager.Data.Repository;
+using StockManager.Web.Framework.Mapping;
+using StockManger.Core.Infrastructure;
 using System.Linq;
 using System.Reflection;
 using System.Web.Mvc;
@@ -23,6 +25,7 @@ namespace StockManager.Web.Framework
             builder.RegisterControllers(assembly);
             builder.RegisterType<UnitOfWork>().As<IUnitOfWork>().InstancePerLifetimeScope();
             builder.RegisterType<DataBaseFactory>().As<IDataBaseFactory>().InstancePerLifetimeScope();
+            builder.RegisterType<AppDomainTypeFinder>().As<ITypeFinder>().InstancePerLifetimeScope();
             builder.RegisterAssemblyTypes(typeof(ProductRepository).Assembly)
             .Where(t => t.Name.EndsWith("Repository"))
             .AsImplementedInterfaces().InstancePerRequest();
@@ -33,6 +36,7 @@ namespace StockManager.Web.Framework
             builder.RegisterFilterProvider();
             IContainer container = builder.Build();
             DependencyResolver.SetResolver(new AutofacDependencyResolver(container));
+        
         }
     }
 }

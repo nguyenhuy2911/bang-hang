@@ -1,11 +1,12 @@
-using System;
+﻿using System;
 using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
-using System.ComponentModel.DataAnnotations.Schema;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
 
-namespace StockManager.Entity.DataAccess
+namespace StockManager.Entity.Service.Contract
 {
-    public partial class Order
+    public class Order_DTO
     {
         public int Id { get; set; }
 
@@ -115,7 +116,6 @@ namespace StockManager.Entity.DataAccess
         public string ShippingRateComputationMethodSystemName { get; set; }
 
         public string CustomValuesXml { get; set; }
-       
-        public virtual ICollection<OrderItem> OrderItem { get; set; }
+
     }
 }
