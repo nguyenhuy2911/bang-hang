@@ -11,12 +11,15 @@ namespace StockManager.Data.Models.Mapping
             // Primary Key
             this.HasKey(t => t.Id);
 
-            // Properties
+          //  Properties
             this.Property(t => t.ProductId)
                 .IsRequired();
 
             this.Property(t => t.ProductAttributeId)
                 .IsRequired();
+
+            this.Property(t => t.Type)
+                .HasMaxLength(50);
             // Table & Column Mappings
             this.ToTable("Product_ProductAttribute_Mapping");
             this.Property(t => t.Id).HasColumnName("Id");
@@ -31,7 +34,6 @@ namespace StockManager.Data.Models.Mapping
             this.Property(t => t.ValidationFileAllowedExtensions).HasColumnName("ValidationFileAllowedExtensions");
             this.Property(t => t.ValidationFileMaximumSize).HasColumnName("ValidationFileMaximumSize");
             this.Property(t => t.DefaultValue).HasColumnName("DefaultValue");
-            // Relationships
 
             // Relationships
             this.HasRequired(t => t.PRODUCT)

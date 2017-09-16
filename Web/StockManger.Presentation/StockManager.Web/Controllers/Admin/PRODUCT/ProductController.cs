@@ -16,11 +16,12 @@ namespace StockManager.Web.Controllers
     [RoutePrefix("product")]
     public class ProductController : BaseController
     {
-        public ProductController(IProductService productService, IUnitService unitService, IImagesService imagesService)
+        public ProductController(IProductService productService, IUnitService unitService, IImagesService imagesService, IProductAttributeService productAttributeService)
         {
             this._IProductService = productService;
             this._IUnitService = unitService;
             this._IImagesService = imagesService;
+            this._IProductAttributeService = productAttributeService;
         }
 
         private readonly IProductService _IProductService;
@@ -28,6 +29,8 @@ namespace StockManager.Web.Controllers
         private readonly IUnitService _IUnitService;
 
         private readonly IImagesService _IImagesService;
+
+        private readonly IProductAttributeService _IProductAttributeService;
 
         /************************************ Get **********************************************/
 
@@ -59,7 +62,16 @@ namespace StockManager.Web.Controllers
 
         }
 
-       
+        private List<Get_ProductAttributes_DTO> Get_List_Attribute()
+        {
+            var request = new Get_ProductAttributes_Resquest
+            {
+                Page = new Page()
+            };
+            var response = this._IProductAttributeService.Get_ProductAttributes(request);
+            return response?.Results;
+        }
+
         /***************************************************************************************/
 
         /************************************ Insert, update, delete ***************************/
@@ -72,6 +84,7 @@ namespace StockManager.Web.Controllers
             {
                 Product_Name = model.Product_Name,
                 Sale_Price = Utility.convertNumber<decimal>(model.Sale_Price),
+                Org_Price = Utility.convertNumber<decimal>(model.Org_Price),
                 Quantity = Utility.convertNumber<decimal>(model.Quantity),
                 Unit_ID = model.Unit_ID,
                 Product_Group_ID = model.ProductGroup_ID
@@ -93,6 +106,7 @@ namespace StockManager.Web.Controllers
                 Product_ID = model.Product_ID,
                 Product_Name = model.Product_Name,
                 Sale_Price = Utility.convertNumber<decimal>(model.Sale_Price),
+                Org_Price = Utility.convertNumber<decimal>(model.Org_Price),
                 Quantity = Utility.convertNumber<decimal>(model.Quantity),
                 Unit_ID = model.Unit_ID,
                 Product_Group_ID = model.ProductGroup_ID
@@ -106,7 +120,7 @@ namespace StockManager.Web.Controllers
         }
 
         /***************************************************************************************/
-        
+
         [Route]
         public ActionResult Index()
         {
@@ -149,8 +163,9 @@ namespace StockManager.Web.Controllers
             model.Product_Name = product?.Product_Name;
             model.ProductGroup_ID = product?.Product_Group_ID ?? 0;
             model.Sale_Price = product?.Sale_Price.ToString();
+            model.Org_Price = product?.Org_Price.ToString();
             model.Quantity = product?.Quantity.ToString();
-            model.Unit_ID = model?.Unit_ID;          
+            model.Unit_ID = model?.Unit_ID;
 
             model.UnitList.Add(new SelectListItem() { Text = "Chọn", Value = "" });
             model.UnitList.AddRange(this.GetUnits_For_CRUD()?.Select(i =>
@@ -174,8 +189,20 @@ namespace StockManager.Web.Controllers
                                                                Selected = product_GroupId.Equals(i.ProductGroup_ID) ? true : false,
                                                                Group = new SelectListGroup() { Name = "Chọn cha" }
                                                            }).ToList());
-
             model.Product_Groups_List = new SelectList(list_group_product, "Value", "Text", "Group.Name", 0);
+            var listAtribute = this.Get_List_Attribute();
+            if (listAtribute != null)
+            {
+                var listAtribute_Type = listAtribute.GroupBy(x => new { x.Type, x.TypeName })
+                                        .Select(o => new Get_ProductAttribute_Types_DTO
+                                                {
+                                                    Type = o.Key.Type,
+                                                    TypeName = o.Key.TypeName,
+                                                    ProductAttributes = listAtribute.Where(p=>p.Type.Equals(o.Key.Type)).ToList()
+                                        })
+                                        .ToList();
+                model.AtributeType_List = listAtribute_Type;
+            }
             return model;
         }
 

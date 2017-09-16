@@ -107,7 +107,7 @@ PRODUCT.prototype.loadCreateForm = function () {
     $("#div-crud-modal .modal-body").html("");
     $("#div-crud-modal .modal-body").load("/product/product-create-form", function () {
         $("#div-crud-modal").loading("stop");
-      //  $("[view-when='update']").fadeOut();
+        $("[view-when='update']").fadeOut();
     });
 }
 
@@ -117,7 +117,7 @@ PRODUCT.prototype.loadEditForm = function (strJsondata) {
     $("#div-crud-modal .modal-body").html("");
     $("#div-crud-modal .modal-body").load("/product/product-edit-form?Id=" + data.Product_ID, function () {
         $("#div-crud-modal").loading("stop");
-      //  $("[view-when='update']").fadeIn();
+        $("[view-when='update']").fadeIn();
     });
 }
 

@@ -9,8 +9,8 @@
 
 <div class="row clearfix">
     <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
-        <div class="card">
-            <div class="header">
+        <div class="card main-content-body">
+            <div class="header bg-blue-grey">
                 <h2>
                     Cập nhật
                     <small>nhập thông tin sản phẩm</small>
@@ -58,7 +58,15 @@
                                                 @Html.ValidationMessageFor(x => x.Product_Name, null, new { @class = "error" })
                                             </div>
                                         </div>
-
+                                        <div class="col-sm-3">
+                                            <div class="form-group form-float">
+                                                <div class="form-line">
+                                                    @Html.TextBoxFor(m => m.Org_Price, new { @class = "form-control" })
+                                                    <label class="form-label">Giá gốc</label>
+                                                </div>
+                                                @Html.ValidationMessageFor(model => model.Org_Price, null, new { @class = "error" })
+                                            </div>
+                                        </div>
                                         <div class="col-sm-3">
                                             <div class="form-group form-float">
                                                 <div class="form-line">
@@ -92,16 +100,45 @@
                                 </div>
                             </div>
                         </div>
-
                     </div>
-
-                    
                 </form>
-
+                @{
+                    if (Model.AtributeType_List != null && Model.AtributeType_List.Count > 0)
+                    {
+                        <div class="row clearfix" view-when='update'>
+                            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                                <div class="card">
+                                    <div class="header">
+                                        <h2>
+                                            Thuộc tính
+                                            <small>Chọn thuộc tính sản phẩm</small>
+                                        </h2>
+                                    </div>
+                                    <div class="body">
+                                        <div class="row clearfix">
+                                            @foreach (var atributeType in Model.AtributeType_List)
+                                            {
+                                                <div class="col-lg-4 col-md-4 col-sm-6 col-xs-12">
+                                                    <h2 class="card-inside-title">@atributeType.TypeName</h2>
+                                                    <div class="demo-radio-button">
+                                                        @foreach (var atribute in atributeType.ProductAttributes)
+                                                        {
+                                                            <input name="@atribute.Type" type="radio" id="radio_@(atribute.Type)_@(atribute.Id)" />
+                                                            <label for="radio_@(atribute.Type)_@(atribute.Id)">@atribute.Name</label>
+                                                        }
+                                                    </div>
+                                                </div>
+                                            }
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    }
+                }
             </div>
         </div>
     </div>
-
 </div>
 
 

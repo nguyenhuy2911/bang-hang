@@ -13,6 +13,7 @@ namespace StockManager.Entity.DataAccess
             this.STOCK_OUTWARD_DETAIL = new List<STOCK_OUTWARD_DETAIL>();
             this.STOCK_TRANSFER_DETAIL = new List<STOCK_TRANSFER_DETAIL>();
             this.OrderItems = new List<OrderItem>();
+            this.Product_ProductAttribute_Mapping = new List<Product_ProductAttribute_Mapping>();
         }
 
         public int Product_ID { get; set; }

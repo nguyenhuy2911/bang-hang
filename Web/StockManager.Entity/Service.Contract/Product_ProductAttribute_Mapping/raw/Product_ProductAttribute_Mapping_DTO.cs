@@ -1,8 +1,6 @@
-namespace StockManager.Entity.DataAccess
-{
-
-
-    public partial class Product_ProductAttribute_Mapping
+namespace StockManager.Entity.Service.Contract
+{ 
+    public partial class Product_ProductAttribute_Mapping_DTO
     {
         public int Id { get; set; }
 
@@ -28,8 +26,5 @@ namespace StockManager.Entity.DataAccess
 
         public string DefaultValue { get; set; }
         public string Type { get; set; }
-        public virtual PRODUCT PRODUCT { get; set; }
-
-        public virtual ProductAttribute ProductAttribute { get; set; }
     }
 }

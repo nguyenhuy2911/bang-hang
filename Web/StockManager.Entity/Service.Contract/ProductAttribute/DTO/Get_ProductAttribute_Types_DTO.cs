@@ -6,12 +6,14 @@ using System.Web;
 
 namespace StockManager.Entity.Service.Contract
 {
-    public class Get_ProductAttribute_Types_DTO 
+    public class Get_ProductAttribute_Types_DTO
     {
         public Get_ProductAttribute_Types_DTO()
         {
         }
         public string Type { get; set; }
         public string TypeName { get; set; }
+        public List<Get_ProductAttributes_DTO> ProductAttributes { get; set; }
+
     }
 }

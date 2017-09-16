@@ -13,7 +13,8 @@ namespace StockManager.Business
 {
     public interface IProductAttributeService
     {
-        Get_ProductAttribute_Types_Response Get_ProductAttribute_Types(Get_Orders_Request request);        
+        Get_ProductAttribute_Types_Response Get_ProductAttribute_Types(Get_ProductAttribute_Types_Request request);
+        Get_ProductAttributes_Response Get_ProductAttributes(Get_ProductAttributes_Resquest request);
     }
     public class ProductAttributeService : IProductAttributeService
     {
@@ -26,10 +27,17 @@ namespace StockManager.Business
             this._IProductAtributeRepository = productAtributeRepository;
         }
 
-        public Get_ProductAttribute_Types_Response Get_ProductAttribute_Types(Get_Orders_Request request)
+        public Get_ProductAttribute_Types_Response Get_ProductAttribute_Types(Get_ProductAttribute_Types_Request request)
         {
             var data = _IProductAtributeRepository.Get_ProductAttribute_Types();
             var retData = Mapper.Map<ResponseBase<List<ProductAttribute_Type>>, Get_ProductAttribute_Types_Response>(data);
+            return retData;
+        }
+
+        public Get_ProductAttributes_Response Get_ProductAttributes(Get_ProductAttributes_Resquest request)
+        {
+            var data = _IProductAtributeRepository.GetAll(request.Page, p=>p.Id, false);
+            var retData = Mapper.Map<ResponseBase<List<ProductAttribute>>, Get_ProductAttributes_Response>(data);
             return retData;
         }
     }

@@ -77,8 +77,13 @@
     <Compile Include="Service.Contract\Image\Request\CRUD_Image_Request.cs" />
     <Compile Include="Service.Contract\Image\Response\Get_Images_By_RelateId_Response.cs" />
     <Compile Include="Service.Contract\Image\Response\CRUD_Image_Response.cs" />
+    <Compile Include="Service.Contract\ProductAttribute\DTO\Get_ProductAttributes_DTO.cs" />
     <Compile Include="Service.Contract\ProductAttribute\DTO\Get_ProductAttribute_Types_DTO.cs" />
+    <Compile Include="Service.Contract\ProductAttribute\DTO\raw\ProductAttribute_DTO.cs" />
+    <Compile Include="Service.Contract\Product_ProductAttribute_Mapping\raw\Product_ProductAttribute_Mapping_DTO.cs" />
+    <Compile Include="Service.Contract\ProductAttribute\Request\Get_ProductAttributes_Resquest.cs" />
     <Compile Include="Service.Contract\ProductAttribute\Request\Get_ProductAttribute_Types_Request.cs" />
+    <Compile Include="Service.Contract\ProductAttribute\Response\Get_ProductAttributes_Response.cs" />
     <Compile Include="Service.Contract\ProductAttribute\Response\Get_ProductAttribute_Types_Response.cs" />
     <Compile Include="Service.Contract\Order\DTO\Get_Orders_DTO.cs" />
     <Compile Include="Service.Contract\Order\DTO\raw\Order_DTO.cs" />
@@ -133,9 +138,7 @@
     <Compile Include="Service.Contract\Unit\Request\Get_Unit_Request.cs" />
     <Compile Include="Service.Contract\Unit\Response\Get_Unit_Response.cs" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Service.Contract\ProductAttribute\DTO\raw\" />
-  </ItemGroup>
+  <ItemGroup />
   <ItemGroup>
     <ProjectReference Include="..\Common\Common\Common.csproj">
       <Project>{9910D0B4-B273-455D-9E77-7B1496553A37}</Project>

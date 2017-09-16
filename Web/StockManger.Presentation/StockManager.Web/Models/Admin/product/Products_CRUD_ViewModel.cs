@@ -16,7 +16,7 @@ namespace StockManager.Web.Models.Admin
             Product_Groups_List = new SelectList("", "", "");
         }
 
-      
+
         public int Product_ID { get; set; }
 
         [Required(ErrorMessage = "Tên sản phẩm không được để trống")]
@@ -26,6 +26,11 @@ namespace StockManager.Web.Models.Admin
         [Range(0, 99999999, ErrorMessage = "Giá phải là số")]
         //  [MaxLength(1000000, ErrorMessage = "Giá phải nhỏ hơn 1,000,000")]
         public string Sale_Price { get; set; }
+
+        [Required(ErrorMessage = "Giá không được để trống")]
+        [Range(0, 99999999, ErrorMessage = "Giá phải là số")]
+        //  [MaxLength(1000000, ErrorMessage = "Giá phải nhỏ hơn 1,000,000")]
+        public string Org_Price { get; set; }
 
         [Required(ErrorMessage = "Khối lượng không được để trống")]
         [Range(0, 99999999, ErrorMessage = "Khối lượng phải là số")]
@@ -38,8 +43,10 @@ namespace StockManager.Web.Models.Admin
 
         public string UserID { get; set; }
 
-        public List<SelectListItem> UnitList { get; set; }       
+        public List<SelectListItem> UnitList { get; set; }
         public SelectList Product_Groups_List { get; set; }
+
+        public List<Get_ProductAttribute_Types_DTO> AtributeType_List { get; set; }
 
     }
 }

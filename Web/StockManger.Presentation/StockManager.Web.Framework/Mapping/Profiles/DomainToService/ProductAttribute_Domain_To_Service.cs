@@ -16,6 +16,8 @@ namespace StockManager.Web.Framework.Mapping.Profiles.DomainToService
         {           
             CreateMap<ResponseBase<List<ProductAttribute>>, Get_ProductAttribute_Types_Response>();
             CreateMap<ProductAttribute_Type, Get_ProductAttribute_Types_DTO>();
+            CreateMap<ResponseBase<List<ProductAttribute>>, Get_ProductAttributes_Response>();
+            CreateMap<ProductAttribute, Get_ProductAttributes_DTO>();
         }
     }
 }

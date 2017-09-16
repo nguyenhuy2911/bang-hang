@@ -17,6 +17,11 @@ namespace StockManager.Entity.Service.Contract
         [MaxLength(1000000, ErrorMessage = "Giá phải nhỏ hơn")]
         public decimal? Sale_Price { get; set; }
 
+        [Required(ErrorMessage = "Giá không được để trống")]
+        [Range(0, 1000000, ErrorMessage = "Giá phải là số")]
+        [MaxLength(1000000, ErrorMessage = "Giá phải nhỏ hơn")]
+        public decimal? Org_Price { get; set; }
+
         [Required(ErrorMessage = "Khối lượng không được để trống")]
         [Range(0, 1000000, ErrorMessage = "Khối lượng phải là số")]
         public decimal? Quantity { get; set; }

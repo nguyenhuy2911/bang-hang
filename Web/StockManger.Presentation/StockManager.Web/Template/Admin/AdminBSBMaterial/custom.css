@@ -27,17 +27,18 @@
             }
 
 a.filter-bar {
-    color: #03a9f4 !important;
+    color: #f9f6f6 !important;
     cursor: pointer;
 }
 
     a.filter-bar:hover {
-        color: #1ABB9C !important;
+        color: #f9f6f6 !important;
     }
 
     a.filter-bar > i {
         -webkit-transition: -webkit-transform .8s ease-in-out;
         transition: transform .8s ease-in-out;
+        color: #f9f6f6 !important;
     }
 
     a.filter-bar:hover > i {
@@ -78,6 +79,16 @@ a.filter-bar {
     color: #FFFFFF;
     box-shadow: 0 4px 5px 0 rgba(156, 39, 176, 0.14), 0 1px 10px 0 rgba(156, 39, 176, 0.12), 0 2px 4px -1px rgba(156, 39, 176, 0.2);
 }
+
 .dropzone .dz-preview.dz-image-preview {
-    background-color:transparent;
+    background-color: transparent;
+}
+
+.modal-body .main-content-body {
+    box-shadow: none;
+    margin-bottom: 0px;
+}
+
+.modal-body .card {
+    margin-bottom: 0px;
 }
