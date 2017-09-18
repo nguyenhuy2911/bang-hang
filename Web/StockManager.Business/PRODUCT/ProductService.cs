@@ -25,11 +25,13 @@ namespace StockManager.Business
     {
         private readonly IUnitOfWork _IUnitOfWork;
         private readonly IProductRepository _IProductRepository;
+        private readonly IProduct_ProductAttribute_MappingRepository _IProduct_ProductAttribute_MappingRepository;
 
-        public ProductService(IProductRepository productRepository, IUnitOfWork unitOfWork)
+        public ProductService(IProductRepository productRepository, IProduct_ProductAttribute_MappingRepository product_ProductAttribute_MappingRepository, IUnitOfWork unitOfWork)
         {
             this._IProductRepository = productRepository;
             this._IUnitOfWork = unitOfWork;
+            this._IProduct_ProductAttribute_MappingRepository = product_ProductAttribute_MappingRepository;
         }
 
         public CRUD_Product_Response CreateProduct(CRUD_Product_Request request)
@@ -92,12 +94,14 @@ namespace StockManager.Business
         {
             var product = _IProductRepository.GetById(id);
             var retData = Mapper.Map<ResponseBase<PRODUCT>, Get_Product_By_Id_Response>(product);
+            
             return retData;
         }
 
         public Get_Products_Response GetProducts(GetProducts_Request request)
         {
             var products = _IProductRepository.GetPage(request.Page, w => true, x => x.Product_ID);
+            
             var retData = Mapper.Map<ResponseBase<List<PRODUCT>>, Get_Products_Response>(products);
             return retData;
         }

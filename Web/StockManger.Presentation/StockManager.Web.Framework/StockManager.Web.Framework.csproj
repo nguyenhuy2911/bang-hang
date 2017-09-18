@@ -79,6 +79,7 @@
     <Compile Include="DependencyRegistrar.cs" />
     <Compile Include="Mapping\AutoMapperConfiguration.cs" />
     <Compile Include="Mapping\DomainToServiceMappingProfile.cs" />
+    <Compile Include="Mapping\Profiles\DomainToService\Product_ProductAttribute_Mapping_Domain_To_Service.cs" />
     <Compile Include="Mapping\Profiles\DomainToService\ProductAttribute_Domain_To_Service.cs" />
     <Compile Include="Mapping\Profiles\DomainToService\Orders_Domain_To_Service.cs" />
     <Compile Include="Mapping\Profiles\DomainToService\Images_Domain_To_Service.cs" />

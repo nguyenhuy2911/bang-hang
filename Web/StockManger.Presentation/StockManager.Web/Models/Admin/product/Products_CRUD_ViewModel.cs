@@ -38,6 +38,7 @@ namespace StockManager.Web.Models.Admin
 
         [Required(ErrorMessage = "Đơn vị tính không được để trống")]
         public string Unit_ID { get; set; }
+
         [Required(ErrorMessage = "sản phẩm gốc không được bỏ trống")]
         public int ProductGroup_ID { get; set; }
 

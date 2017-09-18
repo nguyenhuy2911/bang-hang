@@ -94,6 +94,7 @@
     <Compile Include="Repository\ImageRepository.cs" />
     <Compile Include="Repository\OrderItemRepository.cs" />
     <Compile Include="Repository\OrderRepository.cs" />
+    <Compile Include="Repository\Product_ProductAttribute_MappingRepository.cs" />
     <Compile Include="Repository\ProductAtributeRepository.cs" />
     <Compile Include="Repository\ProductRepository.cs" />
     <Compile Include="Repository\UnitRepository.cs" />

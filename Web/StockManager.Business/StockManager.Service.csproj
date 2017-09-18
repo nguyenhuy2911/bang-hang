@@ -45,6 +45,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Images\ImagesService.cs" />
+    <Compile Include="Product_ProductAttribute_Mapping\Product_ProductAttribute_MappingService.cs" />
     <Compile Include="ProductAttribute\ProductAttributeService.cs" />
     <Compile Include="Order\OrderService.cs" />
     <Compile Include="Product\ProductService.cs" />

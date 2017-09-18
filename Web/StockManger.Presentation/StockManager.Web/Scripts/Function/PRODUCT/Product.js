@@ -12,10 +12,19 @@ var Products_CRUD_ViewModel = function () {
     this.Product_ID = 0;
     this.Product_Name = "";
     this.Sale_Price = 0;
+    this.Org_Price = 0;
     this.Quantity = 0;
     this.Unit_ID = "";
     this.Description = 0;
     this.ProductGroup_ID = 0;
+}
+
+var Product_ProductAttribute_Mapping_Model = function () {
+    this.Id = 0;
+    this.ProductId = 0;
+    this.ProductAttributeId = 0;
+    this.Type = "";
+
 }
 
 var PRODUCT = function () {
@@ -45,8 +54,9 @@ PRODUCT.prototype.regisEvent = function () {
         }, 800);
     });
 
-
-
+    $(".rad-product-attribute").click(function () {
+        _PRODUCT.addProductAtribute(this);
+    });
 }
 
 PRODUCT.prototype.getProducts = function () {
@@ -124,13 +134,13 @@ PRODUCT.prototype.loadEditForm = function (strJsondata) {
 PRODUCT.prototype.getSaveProduct_RequestValue = function () {
 
     var obj = new Products_CRUD_ViewModel();
-    var formVal = $("#frm-crud-product").serializeFormJSON();  
+    var formVal = $("#frm-crud-product").serializeFormJSON();
     obj.Product_ID = formVal.Product_ID;
     obj.Product_Name = formVal.Product_Name;
     obj.Unit_ID = formVal.Unit_ID;
     obj.Sale_Price = Number(formVal.Sale_Price);
+    obj.Org_Price = Number(formVal.Org_Price);
     obj.Quantity = Number(formVal.Quantity);
-    
     obj.ProductGroup_ID = formVal.ProductGroup_ID
     return obj;
 }
@@ -169,6 +179,44 @@ PRODUCT.prototype.saveProduct = function () {
 
     });
 }
+
+PRODUCT.prototype.getProduct_ProductAttribute_Mapping_RequestValue = function (selector) {
+    debugger;
+    var obj = new Product_ProductAttribute_Mapping_Model();
+    obj.ProductAttributeId = $(selector).val();
+    obj.ProductId = $(selector).attr("data-productid");
+    obj.Type = $(selector).attr("data-type");
+    return obj;
+}
+
+PRODUCT.prototype.addProductAtribute = function (selector) {
+   
+    var request = this.getProduct_ProductAttribute_Mapping_RequestValue(selector);
+    $.ajax({
+        type: 'POST', // define the type of HTTP verb we want to use (POST for our form)
+        url: '/product/add-product-atribute', // the url where we want to POST
+        data: request, // our data object
+        dataType: 'json', // what type of data do we expect back from the server       
+        beforeSend: function () {
+
+        },
+        error: function (response) {
+
+            console.log(response);
+        },
+        success: function (response) {
+            if (response.StatusCode != 0)
+                showErrorMessage(response.StatusMessage, "#div-crud-modal");
+            else {
+                showSuccessMessage(response.StatusMessage, "#div-crud-modal");
+            }
+
+
+        }
+    });
+
+}
+
 
 $(function () {
     _PRODUCT = new PRODUCT();

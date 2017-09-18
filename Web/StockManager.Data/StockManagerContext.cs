@@ -122,6 +122,7 @@ namespace StockManager.Data
             modelBuilder.Configurations.Add(new OrderMap());
             modelBuilder.Configurations.Add(new OrderItemMap());
             modelBuilder.Configurations.Add(new ProductAttributeMap());
+            modelBuilder.Configurations.Add(new Product_ProductAttribute_Mapping_Map());
         }
     }
 }

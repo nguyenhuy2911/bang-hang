@@ -80,6 +80,7 @@
     <Compile Include="Service.Contract\ProductAttribute\DTO\Get_ProductAttributes_DTO.cs" />
     <Compile Include="Service.Contract\ProductAttribute\DTO\Get_ProductAttribute_Types_DTO.cs" />
     <Compile Include="Service.Contract\ProductAttribute\DTO\raw\ProductAttribute_DTO.cs" />
+    <Compile Include="Service.Contract\Product\DTO\Get_Products_By_Id_DTO.cs" />
     <Compile Include="Service.Contract\Product_ProductAttribute_Mapping\raw\Product_ProductAttribute_Mapping_DTO.cs" />
     <Compile Include="Service.Contract\ProductAttribute\Request\Get_ProductAttributes_Resquest.cs" />
     <Compile Include="Service.Contract\ProductAttribute\Request\Get_ProductAttribute_Types_Request.cs" />
@@ -99,6 +100,8 @@
     <Compile Include="Service.Contract\Product\Response\Get_Products_By_GroupId_Response.cs" />
     <Compile Include="Service.Contract\Product\Response\Get_Product_By_Id_Response.cs" />
     <Compile Include="Service.Contract\Product\Response\Get_Products_Groups_Response.cs" />
+    <Compile Include="Service.Contract\Product_ProductAttribute_Mapping\Request\CRUD_Product_ProductAttribute_Mapping_Request.cs" />
+    <Compile Include="Service.Contract\Product_ProductAttribute_Mapping\Response\CRUD_Product_ProductAttribute_Mapping_Response.cs" />
     <Compile Include="Service.Contract\Unit\DTO\raw\Unit_DTO.cs" />
     <Compile Include="Service.Contract\Product\Request\CRUD_Product_Request.cs" />
     <Compile Include="Service.Contract\Product\Request\Get_Products_Request.cs" />

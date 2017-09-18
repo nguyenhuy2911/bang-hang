@@ -121,10 +121,10 @@
                                                 <div class="col-lg-4 col-md-4 col-sm-6 col-xs-12">
                                                     <h2 class="card-inside-title">@atributeType.TypeName</h2>
                                                     <div class="demo-radio-button">
-                                                        @foreach (var atribute in atributeType.ProductAttributes)
+                                                        @foreach (var attribute in atributeType.ProductAttributes)
                                                         {
-                                                            <input name="@atribute.Type" type="radio" id="radio_@(atribute.Type)_@(atribute.Id)" />
-                                                            <label for="radio_@(atribute.Type)_@(atribute.Id)">@atribute.Name</label>
+                                                            <input name="@attribute.Type" class="rad-product-attribute" type="radio" id="radio_@(attribute.Type)_@(attribute.Id)" value="@(attribute.Id)" data-productid="@Model.Product_ID" data-type="@attribute.Type" onchange="_PRODUCT.addProductAtribute(this);" checked="@attribute.IsSelected"/>
+                                                            <label for="radio_@(attribute.Type)_@(attribute.Id)">@attribute.Name</label>
                                                         }
                                                     </div>
                                                 </div>
@@ -151,7 +151,7 @@
             e.preventDefault(); //STOP default action
             _PRODUCT.saveProduct();
         });
-
+       
     })
 </script>
 @Scripts.Render("~/bundles/jqueryval")

@@ -18,6 +18,7 @@ namespace StockManager.Web.Framework.Mapping.Profiles.DomainToService
             CreateMap<ProductAttribute_Type, Get_ProductAttribute_Types_DTO>();
             CreateMap<ResponseBase<List<ProductAttribute>>, Get_ProductAttributes_Response>();
             CreateMap<ProductAttribute, Get_ProductAttributes_DTO>();
+            CreateMap<Product_ProductAttribute_Mapping, Product_ProductAttribute_Mapping_DTO>();
         }
     }
 }

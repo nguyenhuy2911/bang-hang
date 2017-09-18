@@ -18,6 +18,7 @@ namespace StockManager.Web.Framework.Mapping
         {
             CreateMap<CRUD_Product_Request, PRODUCT>();
             CreateMap<CRUD_Image_Request, Images>();
+            CreateMap<CRUD_Product_ProductAttribute_Mapping_Request, Product_ProductAttribute_Mapping>();
 
         }
     }

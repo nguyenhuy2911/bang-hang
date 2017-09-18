@@ -16,12 +16,13 @@ namespace StockManager.Web.Controllers
     [RoutePrefix("product")]
     public class ProductController : BaseController
     {
-        public ProductController(IProductService productService, IUnitService unitService, IImagesService imagesService, IProductAttributeService productAttributeService)
+        public ProductController(IProductService productService, IUnitService unitService, IImagesService imagesService, IProductAttributeService productAttributeService, IProduct_ProductAttribute_MappingService product_ProductAttribute_MappingService)
         {
             this._IProductService = productService;
             this._IUnitService = unitService;
             this._IImagesService = imagesService;
             this._IProductAttributeService = productAttributeService;
+            this._IProduct_ProductAttribute_MappingService = product_ProductAttribute_MappingService;
         }
 
         private readonly IProductService _IProductService;
@@ -31,6 +32,7 @@ namespace StockManager.Web.Controllers
         private readonly IImagesService _IImagesService;
 
         private readonly IProductAttributeService _IProductAttributeService;
+        private readonly IProduct_ProductAttribute_MappingService _IProduct_ProductAttribute_MappingService;
 
         /************************************ Get **********************************************/
 
@@ -193,12 +195,24 @@ namespace StockManager.Web.Controllers
             var listAtribute = this.Get_List_Attribute();
             if (listAtribute != null)
             {
+                var listOfType = listAtribute.Select(o => new Get_ProductAttributes_DTO
+                                                            {
+                                                              Id = o.Id,
+                                                              Name = o.Name,
+                                                              Type = o.Type,
+                                                              Description = o.Description,
+                                                              Image = o.Image,
+                                                              IsActive = o.IsActive,
+                                                              TypeName = o.TypeName,
+                                                              Value = o.Value,
+                                                              IsSelected = product.Product_ProductAttribute_Mapping != null ? product.Product_ProductAttribute_Mapping.Any(p=>p.Id.Equals(o.Id)): false
+                                                            });
                 var listAtribute_Type = listAtribute.GroupBy(x => new { x.Type, x.TypeName })
                                         .Select(o => new Get_ProductAttribute_Types_DTO
-                                                {
-                                                    Type = o.Key.Type,
-                                                    TypeName = o.Key.TypeName,
-                                                    ProductAttributes = listAtribute.Where(p=>p.Type.Equals(o.Key.Type)).ToList()
+                                        {
+                                            Type = o.Key.Type,
+                                            TypeName = o.Key.TypeName,
+                                            ProductAttributes = listOfType.Where(p => p.Type.Equals(o.Key.Type)).ToList()
                                         })
                                         .ToList();
                 model.AtributeType_List = listAtribute_Type;
@@ -216,6 +230,25 @@ namespace StockManager.Web.Controllers
                     return Product_Create(model);
                 else
                     return Product_Update(model);
+            }
+            catch (Exception ex)
+            {
+                return string.Empty;
+            }
+
+        }
+
+        [HttpPost]
+        [Route("add-product-atribute")]
+        public string CreateProductAtribute(CRUD_Product_ProductAttribute_Mapping_Request model)
+        {
+            try
+            {
+                var response = this._IProduct_ProductAttribute_MappingService.CreateProduct_ProductAttribute_Mapping(model);
+                if (response?.StatusCode == (int)RESULT_STATUS_CODE.SUCCESS)
+                    response.StatusMessage = Utility.getResourceString("UpdateSuccess");
+                string json = JsonConvert.SerializeObject(response);
+                return json;
             }
             catch (Exception ex)
             {
