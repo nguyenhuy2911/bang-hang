@@ -32,7 +32,7 @@ namespace StockManager.Business
             var response = new CRUD_Product_ProductAttribute_Mapping_Response();
             try
             {
-                var deleteDatas = _IProduct_ProductAttribute_MappingRepository.GetPage(new Page(), o => o.ProductId.Equals(request.ProductId) && request.Type.Equals(request.Type), o=>o.Id)?.Results;
+                var deleteDatas = _IProduct_ProductAttribute_MappingRepository.GetPage(new Page(), o => o.ProductId.Equals(request.ProductId) && o.Type.Equals(request.Type), o=>o.Id)?.Results;
                 if (deleteDatas != null)
                 {
                     deleteDatas.ForEach(x =>

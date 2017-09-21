@@ -33,7 +33,7 @@ var ONLINE_ITEMS = function () {
         pageIndex: 0,
         pageSize: 10,
         getProductByItemPageIndex: 0,
-        getProductByItemPageSize: 0,
+        getProductByItemPageSize: 10,
     };
 }
 

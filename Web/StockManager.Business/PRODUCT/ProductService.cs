@@ -68,9 +68,9 @@ namespace StockManager.Business
             var response = new CRUD_Product_Response();
             try
             {
-                var product = Mapper.Map<CRUD_Product_Request, PRODUCT>(request);
-                this._IProductRepository.Update(product, request.Product_ID);
-                int saveStatus = this._IUnitOfWork.Commit();
+                var productParam = Mapper.Map<CRUD_Product_Request, Product_Update_Parameter>(request);
+                //this._IProductRepository.Update(productParam, request.Product_ID);
+                var saveStatus = this._IProductRepository.Update_Product(productParam);
                 if (saveStatus > 0)
                     response.StatusCode = (int)RESULT_STATUS_CODE.SUCCESS;
                 else
@@ -94,28 +94,31 @@ namespace StockManager.Business
         {
             var product = _IProductRepository.GetById(id);
             var retData = Mapper.Map<ResponseBase<PRODUCT>, Get_Product_By_Id_Response>(product);
-            
+
             return retData;
         }
 
         public Get_Products_Response GetProducts(GetProducts_Request request)
         {
             var products = _IProductRepository.GetPage(request.Page, w => true, x => x.Product_ID);
-            
+
             var retData = Mapper.Map<ResponseBase<List<PRODUCT>>, Get_Products_Response>(products);
             return retData;
         }
 
         public Get_Products_Groups_Response Get_Product_Groups(Get_Product_Groups_Request request)
         {
-            var products = _IProductRepository.Get_Product_Groups(request.Page);
+            var productParam = Mapper.Map<Get_Product_Groups_Request, Product_Group_GetList_Parameter>(request);
+            productParam.Offset = request.Page.Skip;
+            productParam.Next = request.Page.PageSize;
+            var products = _IProductRepository.Get_Product_Groups(productParam);
             var retData = Mapper.Map<ResponseBase<List<PRODUCT_GROUP>>, Get_Products_Groups_Response>(products);
             return retData;
         }
 
         public Get_Products_By_GroupId_Response Get_Product_ByGroupId(Get_Products_By_GroupId_Request request)
         {
-            var data = _IProductRepository.GetPage(request.Page, o => o.Product_Group_ID ==request.Product_Group_ID, o => o.Product_ID);
+            var data = _IProductRepository.GetPage(request.Page, o => o.Product_Group_ID == request.Product_Group_ID, o => o.Product_ID);
             var retData = Mapper.Map<ResponseBase<List<PRODUCT>>, Get_Products_By_GroupId_Response>(data);
             return retData;
         }

@@ -193,9 +193,9 @@ namespace StockManager.Web.Controllers
                                                            }).ToList());
             model.Product_Groups_List = new SelectList(list_group_product, "Value", "Text", "Group.Name", 0);
             var listAtribute = this.Get_List_Attribute();
-            if (listAtribute != null)
+            if (listAtribute != null && listAtribute.Count > 0)
             {
-                var listOfType = listAtribute.Select(o => new Get_ProductAttributes_DTO
+                var listOfType = listAtribute?.Select(o => new Get_ProductAttributes_DTO
                                                             {
                                                               Id = o.Id,
                                                               Name = o.Name,
@@ -205,16 +205,15 @@ namespace StockManager.Web.Controllers
                                                               IsActive = o.IsActive,
                                                               TypeName = o.TypeName,
                                                               Value = o.Value,
-                                                              IsSelected = product.Product_ProductAttribute_Mapping != null ? product.Product_ProductAttribute_Mapping.Any(p=>p.Id.Equals(o.Id)): false
+                                                              IsSelected = product.Product_ProductAttribute_Mapping != null ? product.Product_ProductAttribute_Mapping.Any(p=>p.ProductAttributeId.Equals(o.Id)): false
                                                             });
-                var listAtribute_Type = listAtribute.GroupBy(x => new { x.Type, x.TypeName })
+                var listAtribute_Type = listAtribute?.GroupBy(x => new { x.Type, x.TypeName })
                                         .Select(o => new Get_ProductAttribute_Types_DTO
                                         {
                                             Type = o.Key.Type,
                                             TypeName = o.Key.TypeName,
-                                            ProductAttributes = listOfType.Where(p => p.Type.Equals(o.Key.Type)).ToList()
-                                        })
-                                        .ToList();
+                                            ProductAttributes = listOfType?.Where(p => p.Type.Equals(o.Key.Type)).ToList()
+                                        }).ToList();
                 model.AtributeType_List = listAtribute_Type;
             }
             return model;

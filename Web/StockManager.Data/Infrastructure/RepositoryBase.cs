@@ -57,7 +57,11 @@ namespace StockManager.Data.Infrastructure
             }
             dataContext.Entry(exitEntity).State = EntityState.Modified;
         }
-        
+        protected int Update_ByStore<TParameter>(TParameter parameter, string storeName)
+        {
+            var data = DataContext.UpdateData_By_Stored(storeName, parameter);
+            return data;
+        }
         public virtual void Delete(T entity)
         {
             dbset.Remove(entity);

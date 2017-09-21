@@ -53,6 +53,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Attribute\SqlParameterAttribute.cs" />
     <Compile Include="Enum\IMAGE_TYPE.cs" />
     <Compile Include="Enum\RESULT_STATUS_CODE.cs" />
     <Compile Include="ImagesExtention.cs" />

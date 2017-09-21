@@ -12,7 +12,7 @@ namespace StockManager.Data.Infrastructure
     {
         void Add(T entity);
         void Update(T entity);
-        void Update(T entity, object entityId);
+        void Update(T entity, object entityId);      
         void Delete(T entity);
         void Delete(object id);
         ResponseBase<T> GetById(long id);

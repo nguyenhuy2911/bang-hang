@@ -12,11 +12,11 @@ namespace StockManager.Data.Models.Mapping
             this.HasKey(t => t.Id);
 
           //  Properties
-            this.Property(t => t.ProductId)
-                .IsRequired();
+            //this.Property(t => t.ProductId)
+            //    .IsRequired();
 
-            this.Property(t => t.ProductAttributeId)
-                .IsRequired();
+            //this.Property(t => t.ProductAttributeId)
+            //    .IsRequired();
 
             this.Property(t => t.Type)
                 .HasMaxLength(50);
@@ -36,10 +36,10 @@ namespace StockManager.Data.Models.Mapping
             this.Property(t => t.DefaultValue).HasColumnName("DefaultValue");
 
             // Relationships
-            this.HasRequired(t => t.PRODUCT)
+            this.HasOptional(t => t.PRODUCT)
                 .WithMany(t => t.Product_ProductAttribute_Mapping)
                 .HasForeignKey(d => d.ProductId);
-            this.HasRequired(t => t.ProductAttribute)
+            this.HasOptional(t => t.ProductAttribute)
                 .WithMany(t => t.Product_ProductAttribute_Mapping)
                 .HasForeignKey(d => d.ProductAttributeId);
         }

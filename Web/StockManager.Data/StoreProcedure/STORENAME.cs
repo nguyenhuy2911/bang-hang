@@ -9,7 +9,8 @@ namespace StockManager.Data.StoreProcedure
     public static class STORENAME
     {
         public static string PRODUCT_GROUP_GetList = "PRODUCT_GROUP_GetList";
-
+        public static string PRODUCT_Update = "PRODUCT_Update";
+        
 
     }
 }

@@ -46,7 +46,9 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="DataAccess\Other_DTO\ProductAttribute_Type.cs" />
+    <Compile Include="DataAccess\Complex_DTO\ProductAttribute_Type.cs" />
+    <Compile Include="DataAccess\Complex_DTO\Product\QueryPrameters\Product_Group_GetList_Parameter.cs" />
+    <Compile Include="DataAccess\Complex_DTO\Product\QueryPrameters\Product_Update_Parameter.cs" />
     <Compile Include="DataAccess\Table_DTO\ADJUSTMENT.cs" />
     <Compile Include="DataAccess\Table_DTO\ADJUSTMENT_DETAIL.cs" />
     <Compile Include="DataAccess\Table_DTO\BOOK.cs" />
@@ -67,7 +69,7 @@
     <Compile Include="Page.cs" />
     <Compile Include="DataAccess\Table_DTO\PRODUCT.cs" />
     <Compile Include="DataAccess\Table_DTO\PRODUCT_BUILD.cs" />
-    <Compile Include="DataAccess\Other_DTO\PRODUCT_GROUP.cs" />
+    <Compile Include="DataAccess\Complex_DTO\Product\DTO\PRODUCT_GROUP.cs" />
     <Compile Include="DataAccess\Table_DTO\PRODUCT_PRICE.cs" />
     <Compile Include="DataAccess\Table_DTO\PRODUCT_TYPE.cs" />
     <Compile Include="DataAccess\Table_DTO\PRODUCT_UNIT.cs" />
@@ -141,7 +143,9 @@
     <Compile Include="Service.Contract\Unit\Request\Get_Unit_Request.cs" />
     <Compile Include="Service.Contract\Unit\Response\Get_Unit_Response.cs" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Folder Include="DataAccess\Complex_DTO\Product\QueryResults\" />
+  </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Common\Common\Common.csproj">
       <Project>{9910D0B4-B273-455D-9E77-7B1496553A37}</Project>
