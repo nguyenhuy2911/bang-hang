@@ -85,10 +85,13 @@ namespace StockManager.Web
                 url: "admin",
                 defaults: new { controller = "DashBoard", action = "Index", id = UrlParameter.Optional }
             );
+           
             routes.MapRoute(
                 name: "Default",
                 url: "{controller}/{action}/{id}",
-                defaults: new { controller = "DashBoard", action = "Index", id = UrlParameter.Optional }
+                defaults: new { controller = "Home", action = "Index", id = UrlParameter.Optional }
+            // defaults: new { controller = "Home", action = "Index", id = UrlParameter.Optional }
+            // namespaces: new[] { "StockManager.Web.Online.Controllers" }
             );
 
         }

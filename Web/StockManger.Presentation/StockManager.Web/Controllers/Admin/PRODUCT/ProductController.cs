@@ -47,7 +47,7 @@ namespace StockManager.Web.Controllers
         {
             var request = new Get_Product_Groups_Request()
             {
-                Page = new Page(0, 0)
+                Page = new Page(0, int.MaxValue)
             };
             var response = _IProductService.Get_Product_Groups(request);
             if (response?.Results != null)
@@ -156,65 +156,86 @@ namespace StockManager.Web.Controllers
         private Products_CRUD_ViewModel Get_Products_CRUD_ViewModel(int Id)
         {
             var model = new Products_CRUD_ViewModel();
-
-            var product = Id != 0 ? _IProductService.Get_Product_ById(Id)?.Results : null;
-            string product_UnitId = product?.Unit_ID ?? string.Empty;
-            int product_GroupId = product?.Product_Group_ID ?? 0;
-
-            model.Product_ID = Id;
-            model.Product_Name = product?.Product_Name;
-            model.ProductGroup_ID = product?.Product_Group_ID ?? 0;
-            model.Sale_Price = product?.Sale_Price.ToString();
-            model.Org_Price = product?.Org_Price.ToString();
-            model.Quantity = product?.Quantity.ToString();
-            model.Unit_ID = model?.Unit_ID;
-
             model.UnitList.Add(new SelectListItem() { Text = "Chọn", Value = "" });
             model.UnitList.AddRange(this.GetUnits_For_CRUD()?.Select(i =>
                                                        new SelectListItem()
                                                        {
                                                            Text = i.Unit_Name,
-                                                           Value = i.Unit_ID,
-                                                           Selected = product_UnitId.Equals(i.Unit_ID) ? true : false
+                                                           Value = i.Unit_ID
                                                        }).ToList());
 
-
-            var list_group_product = new List<SelectListItem>();
-
-            list_group_product.Add(new SelectListItem() { Text = "Gốc", Value = "0", Group = new SelectListGroup() { Name = "" } });
-
-            list_group_product.AddRange(this.Get_Product_Groups_List()?.Select(i =>
+            var _list_group_product = new List<SelectListItem>();
+            _list_group_product.Add(new SelectListItem() { Text = "Gốc", Value = "0", Group = new SelectListGroup() { Name = "" } });
+            _list_group_product.AddRange(this.Get_Product_Groups_List()?.Select(i =>
                                                            new SelectListItem()
                                                            {
                                                                Text = string.Format("{0} - {1}", i.ProductGroup_ID, i.ProductGroup_Name),
                                                                Value = i.ProductGroup_ID.ToString(),
-                                                               Selected = product_GroupId.Equals(i.ProductGroup_ID) ? true : false,
                                                                Group = new SelectListGroup() { Name = "Chọn cha" }
                                                            }).ToList());
-            model.Product_Groups_List = new SelectList(list_group_product, "Value", "Text", "Group.Name", 0);
-            var listAtribute = this.Get_List_Attribute();
-            if (listAtribute != null && listAtribute.Count > 0)
+            model.Product_Groups_List = new SelectList(_list_group_product, "Value", "Text", "Group.Name", 0);
+
+            var _listAtribute = this.Get_List_Attribute();
+            if (_listAtribute != null && _listAtribute.Count > 0)
             {
-                var listOfType = listAtribute?.Select(o => new Get_ProductAttributes_DTO
-                                                            {
-                                                              Id = o.Id,
-                                                              Name = o.Name,
-                                                              Type = o.Type,
-                                                              Description = o.Description,
-                                                              Image = o.Image,
-                                                              IsActive = o.IsActive,
-                                                              TypeName = o.TypeName,
-                                                              Value = o.Value,
-                                                              IsSelected = product.Product_ProductAttribute_Mapping != null ? product.Product_ProductAttribute_Mapping.Any(p=>p.ProductAttributeId.Equals(o.Id)): false
-                                                            });
-                var listAtribute_Type = listAtribute?.GroupBy(x => new { x.Type, x.TypeName })
-                                        .Select(o => new Get_ProductAttribute_Types_DTO
-                                        {
-                                            Type = o.Key.Type,
-                                            TypeName = o.Key.TypeName,
-                                            ProductAttributes = listOfType?.Where(p => p.Type.Equals(o.Key.Type)).ToList()
-                                        }).ToList();
-                model.AtributeType_List = listAtribute_Type;
+                var listOfType = _listAtribute?.Select(o => new Get_ProductAttributes_DTO
+                {
+                    Id = o.Id,
+                    Name = o.Name,
+                    Type = o.Type,
+                    Description = o.Description,
+                    Image = o.Image,
+                    IsActive = o.IsActive,
+                    TypeName = o.TypeName,
+                    Value = o.Value,                   
+                });
+                var _listAtribute_Group = _listAtribute?.GroupBy(x => new { x.Type, x.TypeName })
+                                            .Select(o => new Get_ProductAttribute_Types_DTO
+                                            {
+                                                Type = o.Key.Type,
+                                                TypeName = o.Key.TypeName,
+                                                ProductAttributes = listOfType?.Where(p => p.Type.Equals(o.Key.Type)).ToList()
+                                            }).ToList();
+                model.AtributeType_List = _listAtribute_Group;
+            }
+
+            if (!string.IsNullOrEmpty(Id.ToString()) && Id > 0)
+            {
+                var product = Id != 0 ? _IProductService.Get_Product_ById(Id)?.Results : null;
+                string product_UnitId = product?.Unit_ID ?? string.Empty;
+                int product_GroupId = product?.Product_Group_ID ?? 0;
+
+                model.Product_ID = Id;
+                model.Product_Name = product?.Product_Name;
+                model.ProductGroup_ID = product?.Product_Group_ID ?? 0;
+                model.Sale_Price = product?.Sale_Price.ToString();
+                model.Org_Price = product?.Org_Price.ToString();
+                model.Quantity = product?.Quantity.ToString();
+                model.Unit_ID = product?.Unit_ID;
+
+                model.UnitList.ForEach(p =>
+                {
+                    if (p.Value.Equals(model.Unit_ID))
+                        p.Selected = true;
+
+                });
+                _list_group_product.ForEach(p =>
+                {
+                    if (p.Value.Equals(model.ProductGroup_ID))
+                        p.Selected = true;
+                });
+                model.Product_Groups_List.ToList().Clear();
+                model.Product_Groups_List = new SelectList(_list_group_product, "Value", "Text", "Group.Name", 0);
+                if (model.AtributeType_List != null)
+                {
+                    foreach (var AtributeType in model.AtributeType_List)
+                    {
+                        AtributeType.ProductAttributes.ForEach(x =>
+                        {
+                            x.IsSelected = product.Product_ProductAttribute_Mapping != null ? product.Product_ProductAttribute_Mapping.Any(p => p.ProductAttributeId.Equals(x.Id)) : false;
+                        });
+                    }
+                }
             }
             return model;
         }
