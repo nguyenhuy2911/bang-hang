@@ -4112,6 +4112,8 @@
     <Content Include="Views\Admin\Order\Index.cshtml" />
     <Content Include="Views\Shared\Online\_Header.cshtml" />
     <Content Include="Views\Shared\Online\_Footer.cshtml" />
+    <Content Include="Views\Online\Home\QuickView.cshtml" />
+    <Content Include="Views\Online\Home\Detail.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

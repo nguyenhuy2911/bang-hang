@@ -29,17 +29,18 @@ HOME.prototype.Get_Newest_Items = function () {
             $(".div-newest-items").html("")
         },
         success: function (response) {
+            var item = "";
             if (response != null && response.Results != null) {
                 $.each(response.Results, function (index, Obj) {
                     var image = "images-handle/get-image?path=" + Obj.ImagePath + "&w=275&h=356";
-                    var item = '<div class="col-lg-2 col-md-4 col-sm-6 col-xs-12">' +
+                    item += '<div class="col-lg-2 col-md-4 col-sm-6 col-xs-12">' +
 										'<div class="item-pro-color">' +
 											'<div class="product-thumb">' +
-												'<a href="detail.html" class="product-thumb-link">' +
+												'<a href="/detail" class="product-thumb-link">' +
 													'<img data-color="black" class="active" src="' + image + '" alt="">' +
 
 												'</a>' +
-                                                '<a href="quick-view.html" class="quickview-link plus fancybox.iframe"><span>quick view</span></a>' +
+                                                '<a href="/home/quick-view" class="quickview-link plus fancybox.iframe"><span>Xem nhanh</span></a>' +
                                             '</div>' +
                                                 '<div class="product-info">' +
                                                     '<div class="list-color">' +
@@ -48,7 +49,7 @@ HOME.prototype.Get_Newest_Items = function () {
                                                         '<a href="#" data-color="blue" style="background:#868fff"></a>' +
                                                         '<a href="#" data-color="cyan" style="background:#80e6ff"></a>' +
                                                     '</div>' +
-                                                    '<h3 class="product-title"><a href="detail.html">' + Obj.ProductGroup_Name + '</a></h3>' +
+                                                    '<h3 class="product-title"><a href="/detail">' + Obj.ProductGroup_Name + '</a></h3>' +
                                                     '<div class="product-price">' +
                                                         '<ins><span>$360.00</span></ins>' +
                                                         '<del><span>$400.00</span></del>' +
@@ -60,17 +61,19 @@ HOME.prototype.Get_Newest_Items = function () {
                                                     '</div>' +
                                                 '</div>' +
                                             '</div>' +
-                                        '</div>';
-                    $(".div-newest-items").append(item);
+                                        '</div>';                   
                 });
-                var itemLoadMore = '<div class="col-lg-2 col-md-4 col-sm-6 col-xs-12">' +										
+                if (item.length>0) {
+                    item += '<div class="col-lg-2 col-md-4 col-sm-6 col-xs-12">' +
 											'<div class="product-thumb">' +
-												'<a href="detail.html" class="product-thumb-link see-more">' +
+												'<a href="/product" class="product-thumb-link see-more">' +
                                                     '<i class="material-icons">add</i>' +
                                                 '</a>' +
                                             '</div>' +
                                      '</div>';
-                $(".div-newest-items").append(itemLoadMore);
+                }
+                
+                $(".div-newest-items").append(item);
             }
         }
     });

@@ -27,6 +27,18 @@ namespace StockManager.Web.Online.Controllers
             return View("~/Views/Online/Home/Index.cshtml");
         }
 
+        [Route("home/quick-view")]
+        public ActionResult QuickView()
+        {
+            return View("~/Views/Online/Home/QuickView.cshtml");
+        }
+
+        [Route("detail")]
+        public ActionResult Detail()
+        {
+            return View("~/Views/Online/Home/Detail.cshtml");
+        }
+
         [HttpPost]
         [Route("get-newest-items")]
         public string Get_Newest_Items()

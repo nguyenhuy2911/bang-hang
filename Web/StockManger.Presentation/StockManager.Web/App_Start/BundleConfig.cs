@@ -142,6 +142,38 @@ namespace StockManager.Web
 
             ));
 
+            // ----------------------------- Quick view Style ----------------------------------------------- //
+            bundles.Add(new StyleBundle("~/quickview/css").Include(
+                        "~/Content/site/online/css/libs/font-awesome.min.css",
+                        "~/Content/site/online/css/libs/bootstrap.min.css",
+                        "~/Content/site/online/css/libs/bootstrap-theme.css",
+                        "~/Content/site/online/css/libs/jquery.fancybox.css",
+                        "~/Content/site/online/css/libs/jquery-ui.min.css",
+                        "~/Content/site/online/css/libs/owl.carousel.css",
+                        "~/Content/site/online/css/libs/owl.transitions.css",
+                        "~/Content/site/online/css/libs/owl.theme.css",
+                        "~/Content/site/online/css/libs/jquery.mCustomScrollbar.css",
+                        "~/Content/site/online/css/libs/animate.css",
+                        "~/Content/site/online/css/libs/hover.css",
+                        "~/Content/site/online/css/theme.css",
+                        "~/Content/site/online/css/color-orange.css",
+                        "~/Content/site/online/css/responsive.css",
+                        "~/Content/site/online/css/browser.css"
+            ));
+
+            bundles.Add(new ScriptBundle("~/quickview/js").Include(
+                        "~/Content/site/online/js/libs/bootstrap.min.js",
+                        "~/Content/site/online/js/libs/jquery.fancybox.js",
+                        "~/Content/site/online/js/libs/jquery-ui.min.js",
+                        "~/Content/site/online/js/libs/owl.carousel.js",
+                        "~/Content/site/online/js/libs/jquery.jcarousellite.js",
+                        "~/Content/site/online/js/libs/jquery.elevatezoom.js",
+                        "~/Content/site/online/js/libs/TimeCircles.js",
+                        "~/Content/site/online/js/libs/jquery.mCustomScrollbar.js",
+                        "~/Content/site/online/js/libs/wow.js",
+                        "~/Content/site/online/js/theme.js"
+            ));
+
             // ------------------------- Home ----------------------------------------------//
 
 
