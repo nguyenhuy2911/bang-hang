@@ -55,9 +55,9 @@ HOME.prototype.Get_Newest_Items = function () {
                                                         '<del><span>$400.00</span></del>' +
                                                     '</div>' +
                                                     '<div class="product-extra-link">' +
-                                                        '<a href="#" class="addcart-link"><i class="fa fa-shopping-basket" aria-hidden="true"></i><span>Add to Cart</span></a>' +
-                                                        '<a href="#" class="wishlist-link"><i class="fa fa-heart" aria-hidden="true"></i><span>Wishlist</span></a>' +
-                                                        '<a href="#" class="compare-link"><i class="fa fa-refresh" aria-hidden="true"></i><span>Compare</span></a>' +
+                                                        '<a href="#" class="addcart-link_"><i class="fa fa-shopping-basket" aria-hidden="true"></i>Mua ngay<span>Mua ngay</span></a>' +
+                                                       // '<a href="#" class="wishlist-link"><i class="fa fa-heart" aria-hidden="true"></i><span>Wishlist</span></a>' +
+                                                       // '<a href="#" class="compare-link"><i class="fa fa-refresh" aria-hidden="true"></i><span>Compare</span></a>' +
                                                     '</div>' +
                                                 '</div>' +
                                             '</div>' +

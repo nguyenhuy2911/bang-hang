@@ -157,6 +157,7 @@ namespace StockManager.Web
                         "~/Content/site/online/css/libs/hover.css",
                         "~/Content/site/online/css/theme.css",
                         "~/Content/site/online/css/color-orange.css",
+                        "~/Content/site/online/css/camera.css",
                         "~/Content/site/online/css/responsive.css",
                         "~/Content/site/online/css/browser.css"
             ));
@@ -171,6 +172,7 @@ namespace StockManager.Web
                         "~/Content/site/online/js/libs/TimeCircles.js",
                         "~/Content/site/online/js/libs/jquery.mCustomScrollbar.js",
                         "~/Content/site/online/js/libs/wow.js",
+                        "~/Content/site/online/js/libs/camera.js",
                         "~/Content/site/online/js/theme.js"
             ));
 
