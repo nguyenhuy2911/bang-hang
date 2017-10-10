@@ -2,6 +2,7 @@
 using StockManager.Business;
 using StockManager.Entity.Service.Contract;
 using StockManager.Web.Controllers;
+using StockManager.Web.Models.Online;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -28,13 +29,32 @@ namespace StockManager.Web.Online.Controllers
         }
 
         [Route("home/quick-view")]
-        public ActionResult QuickView()
+        public ActionResult QuickView(int product_Group_Id)
         {
-            return View("~/Views/Online/Home/QuickView.cshtml");
+            var model = new QuickViewModel();
+            var getProductByGroupRequest = new Get_Products_By_GroupId_Request
+            {
+                Product_Group_ID = product_Group_Id,
+                Page = new Entity.Page(0, int.MaxValue)
+            };
+            var products = this._IProductService.Get_Products_By_GroupId(getProductByGroupRequest);
+            if (products != null && products.Results != null && products.Results.Count > 0)
+            {
+                model.ListProduct = products.Results;
+                var getImgRequest = new Get_Images_By_RelateId_Request
+                {
+                    Page = new Entity.Page(0, int.MaxValue),
+                    RelateId = products.Results[0].Product_Group_ID.ToString()
+                };
+                var listImg = this._IImagesService.Get_Images_By_RelateId(getImgRequest);
+                if (listImg != null && listImg.Results != null && listImg.Results.Count > 0)
+                    model.ListImage = listImg.Results;
+            }
+            return View("~/Views/Online/Home/QuickView.cshtml", model);
         }
 
         [Route("detail")]
-        public ActionResult Detail()
+        public ActionResult Detail(int produc_Group_tId)
         {
             return View("~/Views/Online/Home/Detail.cshtml");
         }

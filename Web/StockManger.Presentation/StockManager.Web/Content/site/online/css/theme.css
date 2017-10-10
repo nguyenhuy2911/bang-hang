@@ -1927,8 +1927,8 @@ li.menu-item-has-children:hover > .sub-menu {
     transition: all 0.5s ease-out 0s;
     -webkit-transition: all 0.5s ease-out 0s;
     border-radius: 4px;
-    background-color:#f31349;
-    color:#fff;
+    background-color: #f31349;
+    color: #fff;
 }
 
 .product-thumb .product-extra-link a {
@@ -4332,6 +4332,7 @@ li.menu-item-has-children:hover > .sub-menu {
     position: relative;
     text-align: center;
     width: 260px;
+    padding-top: 5px;
 }
 
     .gallery-control .prev {
@@ -4529,6 +4530,21 @@ li.menu-item-has-children:hover > .sub-menu {
         top: -6px;
         width: 0;
     }
+
+.detail-gallery .owl-carousel .owl-item {
+    padding: 2px;
+}
+
+.detail-gallery .nav-arrow-right, .detail-gallery .nav-arrow-left {
+    z-index: 999;
+    top:50px;
+}
+.detail-gallery .nav-arrow-left {
+    left: -12px;
+}
+.detail-gallery .nav-arrow-right {
+    right: -12px;
+}
 
 .title-detail {
     font-size: 24px;
@@ -19673,17 +19689,17 @@ td.product-info-total .product-info .desc {
             border-radius: 50%;
             text-align: center;
             color: rgba(243, 19, 74, 0.6);
-            transition: all .3s ease-in-out; 
+            transition: all .3s ease-in-out;
             /*-webkit-transition: all 0.5s ease-out 0s;*/
         }
 
             .section_service_first .wrap_srv .content_wrap .thumb:hover {
                 background-color: #b018a9;
-                color:#FFF;
+                color: #FFF;
                 -webkit-transition: all 200ms ease-in;
                 -webkit-transform: scale(1.2);
                 -ms-transition: all 200ms ease-in;
-                -ms-transform: scale(1.2);   
+                -ms-transform: scale(1.2);
                 -moz-transition: all 200ms ease-in;
                 -moz-transform: scale(1.2);
                 /*transition: all 200ms ease-in;*/

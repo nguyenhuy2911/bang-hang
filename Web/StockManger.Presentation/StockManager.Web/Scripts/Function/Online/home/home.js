@@ -40,19 +40,13 @@ HOME.prototype.Get_Newest_Items = function () {
 													'<img data-color="black" class="active" src="' + image + '" alt="">' +
 
 												'</a>' +
-                                                '<a href="/home/quick-view" class="quickview-link plus fancybox.iframe"><span>Xem nhanh</span></a>' +
+                                                '<a href="/home/quick-view?product_Group_Id=' + Obj.ProductGroup_ID + '" class="quickview-link plus fancybox.iframe"><span>Xem nhanh</span></a>' +
                                             '</div>' +
                                                 '<div class="product-info">' +
-                                                    '<div class="list-color">' +
-                                                        '<a href="#" data-color="black" style="background:#404040"></a>' +
-                                                        '<a href="#" data-color="purple" style="background:#ff8ff8"></a>' +
-                                                        '<a href="#" data-color="blue" style="background:#868fff"></a>' +
-                                                        '<a href="#" data-color="cyan" style="background:#80e6ff"></a>' +
-                                                    '</div>' +
                                                     '<h3 class="product-title"><a href="/detail">' + Obj.ProductGroup_Name + '</a></h3>' +
                                                     '<div class="product-price">' +
-                                                        '<ins><span>$360.00</span></ins>' +
-                                                        '<del><span>$400.00</span></del>' +
+                                                        '<ins><span>' + Obj.Sale_Price + '</span></ins>' +
+                                                        //'<del><span>$400.00</span></del>' +
                                                     '</div>' +
                                                     '<div class="product-extra-link">' +
                                                         '<a href="#" class="addcart-link_"><i class="fa fa-shopping-basket" aria-hidden="true"></i>Mua ngay<span>Mua ngay</span></a>' +
@@ -61,9 +55,9 @@ HOME.prototype.Get_Newest_Items = function () {
                                                     '</div>' +
                                                 '</div>' +
                                             '</div>' +
-                                        '</div>';                   
+                                        '</div>';
                 });
-                if (item.length>0) {
+                if (item.length > 0) {
                     item += '<div class="col-lg-2 col-md-4 col-sm-6 col-xs-12">' +
 											'<div class="product-thumb">' +
 												'<a href="/product" class="product-thumb-link see-more">' +
@@ -72,7 +66,7 @@ HOME.prototype.Get_Newest_Items = function () {
                                             '</div>' +
                                      '</div>';
                 }
-                
+
                 $(".div-newest-items").append(item);
             }
         }

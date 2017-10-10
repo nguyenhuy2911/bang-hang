@@ -16,7 +16,10 @@ namespace StockManager.Business
         Get_Products_Response GetProducts(GetProducts_Request request);
         Get_Products_Groups_Response Get_Product_Groups(Get_Product_Groups_Request request);
         Get_Product_By_Id_Response Get_Product_ById(int id);
-        Get_Products_By_GroupId_Response Get_Product_ByGroupId(Get_Products_By_GroupId_Request request);
+        Get_Products_By_GroupId_Response Get_Products_By_GroupId(Get_Products_By_GroupId_Request request);
+        Product_GetList_By_Level1_Response GetProducts_By_Level1(Product_GetList_By_Level1_Request request);
+        Product_GetList_By_Level2_Response GetProducts_By_Level2(Product_GetList_By_Level2_Request request);
+        Product_GetList_Level2_By_Level1_Response GetProducts_Level2_By_Level1(Product_GetList_Level2_By_Level1_Request request);
         CRUD_Product_Response UpdateProduct(CRUD_Product_Request request);
         CRUD_Product_Response CreateProduct(CRUD_Product_Request request);
         ResponseBase<int> DeleteProduct(int id);
@@ -39,16 +42,25 @@ namespace StockManager.Business
             var response = new CRUD_Product_Response();
             try
             {
+                bool _checkupdate = false;
                 var product = Mapper.Map<CRUD_Product_Request, PRODUCT>(request);
                 this._IProductRepository.Add(product);
                 int saveStatus = this._IUnitOfWork.Commit();
-                if (request.Product_Group_ID.Equals(0))
+                if (request.Product_Level1.Equals(0))
                 {
-                    product.Product_Group_ID = product.Product_ID;
+                    product.Product_Level1 = product.Product_ID;
+                    _checkupdate = true;
+                }
+                if (request.Product_Level2.Equals(0))
+                {
+                    product.Product_Level2 = product.Product_Level1;
+                    _checkupdate = true;
+                }
+                if (_checkupdate)
+                {
                     this._IProductRepository.Update(product);
                     saveStatus = this._IUnitOfWork.Commit();
                 }
-
                 if (saveStatus > 0)
                     response.StatusCode = (int)RESULT_STATUS_CODE.SUCCESS;
                 else
@@ -103,6 +115,48 @@ namespace StockManager.Business
             var products = _IProductRepository.GetPage(request.Page, w => true, x => x.Product_ID);
 
             var retData = Mapper.Map<ResponseBase<List<PRODUCT>>, Get_Products_Response>(products);
+            if (retData != null && retData.Results != null)
+                retData.StatusCode = (int)RESULT_STATUS_CODE.SUCCESS;
+            else
+                retData.StatusCode = (int)RESULT_STATUS_CODE.NODATA;
+            return retData;
+        }
+
+        public Product_GetList_Level2_By_Level1_Response GetProducts_Level2_By_Level1(Product_GetList_Level2_By_Level1_Request request)
+        {
+            var param = Mapper.Map<Product_GetList_Level2_By_Level1_Request, Product_GetList_Level2_By_Level1_Parameter>(request);
+            param.Offset = request.Page.Skip;
+            param.Next = request.Page.PageSize;
+            var datas = _IProductRepository.Product_GetList_Level2_By_Level1(param);
+            var retData = Mapper.Map<ResponseBase<List<Product_GetList_Level2_By_Level1>>, Product_GetList_Level2_By_Level1_Response>(datas);
+            if (retData != null && retData.Results != null)
+                retData.StatusCode = (int)RESULT_STATUS_CODE.SUCCESS;
+            else
+                retData.StatusCode = (int)RESULT_STATUS_CODE.NODATA;
+            return retData;
+        }
+
+        public Product_GetList_By_Level2_Response GetProducts_By_Level2(Product_GetList_By_Level2_Request request)
+        {
+            var param = Mapper.Map<Product_GetList_By_Level2_Request, Product_GetList_By_Level2_Parameter>(request);
+            param.Offset = request.Page.Skip;
+            param.Next = request.Page.PageSize;
+            var datas = _IProductRepository.Product_GetList_By_Level2(param);
+            var retData = Mapper.Map<ResponseBase<List<Product_GetList_By_Level2>>, Product_GetList_By_Level2_Response>(datas);
+            if(retData != null && retData.Results != null)
+                retData.StatusCode = (int)RESULT_STATUS_CODE.SUCCESS;
+            else
+                retData.StatusCode = (int)RESULT_STATUS_CODE.NODATA;
+            return retData;
+        }
+
+        public Product_GetList_By_Level1_Response GetProducts_By_Level1(Product_GetList_By_Level1_Request request)
+        {
+            var param = Mapper.Map<Product_GetList_By_Level1_Request, Product_GetList_By_Level1_Parameter>(request);
+            param.Offset = request.Page.Skip;
+            param.Next = request.Page.PageSize;
+            var datas = _IProductRepository.Product_GetList_By_Level1(param);
+            var retData = Mapper.Map<ResponseBase<List<Product_GetList_By_Level1>>, Product_GetList_By_Level1_Response>(datas);
             return retData;
         }
 
@@ -113,13 +167,25 @@ namespace StockManager.Business
             productParam.Next = request.Page.PageSize;
             var products = _IProductRepository.Get_Product_Groups(productParam);
             var retData = Mapper.Map<ResponseBase<List<PRODUCT_GROUP>>, Get_Products_Groups_Response>(products);
+            if (retData != null && retData.Results != null)
+                retData.StatusCode = (int)RESULT_STATUS_CODE.SUCCESS;
+            else
+                retData.StatusCode = (int)RESULT_STATUS_CODE.NODATA;
             return retData;
         }
 
-        public Get_Products_By_GroupId_Response Get_Product_ByGroupId(Get_Products_By_GroupId_Request request)
+        public Get_Products_By_GroupId_Response Get_Products_By_GroupId(Get_Products_By_GroupId_Request request)
         {
-            var data = _IProductRepository.GetPage(request.Page, o => o.Product_Group_ID == request.Product_Group_ID, o => o.Product_ID);
+            var _params = new Product_Get_By_Product_Group_ID_Parameter
+            {
+                Product_Group_ID = request.Product_Group_ID
+            };
+            var data = _IProductRepository.Get_Products_By_GroupId(_params);
             var retData = Mapper.Map<ResponseBase<List<PRODUCT>>, Get_Products_By_GroupId_Response>(data);
+            if(retData != null && retData.Results != null)
+                retData.StatusCode = (int)RESULT_STATUS_CODE.SUCCESS;
+            else
+                retData.StatusCode = (int)RESULT_STATUS_CODE.NODATA;
             return retData;
         }
 

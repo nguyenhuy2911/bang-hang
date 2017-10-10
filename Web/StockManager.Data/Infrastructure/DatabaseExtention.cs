@@ -98,10 +98,10 @@ namespace StockManager.Data.Infrastructure
             return Rows;
         }
 
-        public static List<T> GetListData_By_Stored<T, TParameter>(this DbContext context, string storedName, TParameter parameterObj, ref int rowCount)
+        public static List<TSource> GetListData_By_Stored<TSource, TParameter>(this DbContext context, string storedName, TParameter parameterObj, ref int rowCount)
         {
 
-            List<T> Rows = new List<T>();
+            List<TSource> Rows = new List<TSource>();
             var _parameters = new List<SqlParameter>();
             var parametersObjProp = parameterObj.GetType().GetProperties();
             foreach (var paramProp in parametersObjProp)
@@ -128,14 +128,14 @@ namespace StockManager.Data.Infrastructure
                     {
                         if (dr.HasRows)
                         {
-                            var dictionary = typeof(T).GetProperties()
+                            var dictionary = typeof(TSource).GetProperties()
                                                       .ToDictionary(
                                                             field => CamelCaseToUnderscore(field.Name),
                                                             field => field.Name
                                                        );
                             while (dr.Read())
                             {
-                                T tempObj = (T)Activator.CreateInstance(typeof(T));
+                                TSource tempObj = (TSource)Activator.CreateInstance(typeof(TSource));
                                 foreach (var key in dictionary.Keys)
                                 {
                                     var fieldName = dictionary[key];

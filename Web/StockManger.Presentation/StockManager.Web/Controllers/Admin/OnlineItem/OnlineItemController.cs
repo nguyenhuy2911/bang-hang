@@ -56,7 +56,7 @@ namespace StockManager.Web.Controllers.Admin.OnlineItem
         [Route("get-product-by-item")]
         public string Get_Product_By_Item(Get_Products_By_GroupId_Request request)
         {
-            var response = _IProductService.Get_Product_ByGroupId(request);
+            var response = _IProductService.Get_Products_By_GroupId(request);
             string json = JsonConvert.SerializeObject(response);
             return json;
         }

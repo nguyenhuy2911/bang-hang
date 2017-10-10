@@ -66,6 +66,12 @@ namespace StockManager.Entity.DataAccess
         public Nullable<bool> Serial { get; set; }
         public bool Active { get; set; }
         public Nullable<bool> Publish { get; set; }
+        public int? Product_Level1 { get; set; }
+        public int? Product_Level2 { get; set; }
+        public int? Product_Level3 { get; set; }
+        public int? Product_Level4 { get; set; }
+        public int? Product_Level5 { get; set; }
+
         public virtual ICollection<ADJUSTMENT_DETAIL> ADJUSTMENT_DETAIL { get; set; }
         public virtual ICollection<INVENTORY_DETAIL> INVENTORY_DETAIL { get; set; }
 

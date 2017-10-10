@@ -152,6 +152,7 @@
     <Compile Include="Controllers\Admin\WAREHOUSETRANSFER\WAREHOUSETRANSFERController.cs" />
     <Compile Include="Controllers\Admin\Images\ImageController.cs" />
     <Compile Include="Controllers\ImageHandleController.cs" />
+    <Compile Include="HtmlHelper\CustomHtmlHelper.cs" />
     <Compile Include="Models\Admin\Online-items\Online_Items_ViewModel.cs" />
     <Compile Include="Models\Admin\Online-items\Online_Item_Detail_ViewModel.cs" />
     <Compile Include="Models\Admin\Order\Orders_ViewModel.cs" />
@@ -159,6 +160,8 @@
     <Compile Include="Models\INVENTORY\INVENTORY_New_UpDate_Form_Model.cs" />
     <Compile Include="Models\Admin\Product\Products_CRUD_ViewModel.cs" />
     <Compile Include="Models\Admin\Images\ProductImg_Upload_Modal.cs" />
+    <Compile Include="Models\Online\Home\QuickViewModel.cs" />
+    <Compile Include="Models\SelectList_Group.cs" />
     <Compile Include="Models\WAREHOUSETRANSFER\WAREHOUSETRANSFER_Form_Model.cs" />
     <Compile Include="Models\WAREHOUSETRANSFER\WAREHOUSETRANSFER_New_UpDate_Form_Model.cs" />
     <Compile Include="Models\IMPORT\IMPORT_New_UpDate_Form_Model.cs" />
@@ -232,6 +235,8 @@
     <Content Include="Content\site\online\css\libs\owl.carousel.css" />
     <Content Include="Content\site\online\css\libs\owl.theme.css" />
     <Content Include="Content\site\online\css\libs\owl.transitions.css" />
+    <Content Include="Content\site\online\css\libs\xzoom.css" />
+    <Content Include="Content\site\online\js\libs\xzoom.js" />
     <Content Include="Content\site\online\css\responsive.css" />
     <Content Include="Content\site\online\css\theme.css" />
     <Content Include="Content\site\online\js\libs\bootstrap.min.js" />
@@ -4127,7 +4132,6 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Models\Online\Home\" />
     <Folder Include="uploads\img\product\" />
   </ItemGroup>
   <ItemGroup>

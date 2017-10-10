@@ -4,6 +4,7 @@ using Newtonsoft.Json;
 using StockManager.Business;
 using StockManager.Entity;
 using StockManager.Entity.Service.Contract;
+using StockManager.Web.Models;
 using StockManager.Web.Models.Admin;
 using System;
 using System.Collections.Generic;
@@ -32,6 +33,7 @@ namespace StockManager.Web.Controllers
         private readonly IImagesService _IImagesService;
 
         private readonly IProductAttributeService _IProductAttributeService;
+
         private readonly IProduct_ProductAttribute_MappingService _IProduct_ProductAttribute_MappingService;
 
         /************************************ Get **********************************************/
@@ -56,12 +58,23 @@ namespace StockManager.Web.Controllers
                 return null;
         }
 
-        private List<Get_Unit_DTO> GetUnits_For_CRUD()
+        private List<SelectListItem> Units_SelectList()
         {
-
+            var selectList = new List<SelectListItem>();
             var request = new Get_Unit_Request();
-            return _IUnitService.GetUnits(request)?.Results;
+            var datas = _IUnitService.GetUnits(request)?.Results;
 
+            selectList.Add(new SelectListItem() { Text = "Chọn", Value = "" });
+            if (datas != null)
+            {
+                selectList.AddRange(datas.Select(i =>
+                                                      new SelectListItem()
+                                                      {
+                                                          Text = i.Unit_Name,
+                                                          Value = i.Unit_ID
+                                                      }).ToList());
+            }
+            return selectList;
         }
 
         private List<Get_ProductAttributes_DTO> Get_List_Attribute()
@@ -72,6 +85,30 @@ namespace StockManager.Web.Controllers
             };
             var response = this._IProductAttributeService.Get_ProductAttributes(request);
             return response?.Results;
+        }
+
+        private SelectList Products_By_Level1_SelectList()
+        {
+            var selectList = new SelectList(new List<SelectListItem>());
+            var _product_Level1_List = new List<SelectListItem>();
+            var request = new Product_GetList_By_Level1_Request()
+            {
+                Page = new Page(0, int.MaxValue)
+            };
+            var response = _IProductService.GetProducts_By_Level1(request);
+            _product_Level1_List.Add(new SelectListItem() { Text = "Gốc", Value = "0", Group = new SelectListGroup() { Name = "" } });
+            if (response?.Results != null)
+            {
+                _product_Level1_List.AddRange(response.Results.Select(i =>
+                                                               new SelectListItem()
+                                                               {
+                                                                   Text = string.Format("{0} - {1}", i.Product_Level1, i.Product_Name),
+                                                                   Value = i.Product_Level1.ToString(),
+                                                                   Group = new SelectListGroup() { Name = "Chọn" }
+                                                               }).ToList());
+            }
+            selectList = new SelectList(_product_Level1_List, "Value", "Text", "Group.Name", 0);
+            return selectList;
         }
 
         /***************************************************************************************/
@@ -89,7 +126,10 @@ namespace StockManager.Web.Controllers
                 Org_Price = Utility.convertNumber<decimal>(model.Org_Price),
                 Quantity = Utility.convertNumber<decimal>(model.Quantity),
                 Unit_ID = model.Unit_ID,
-                Product_Group_ID = model.ProductGroup_ID
+                Product_Type_ID = model.Product_Type_ID,
+                Product_Level1 = model.Product_Level1,
+                Product_Level2 = model.Product_Level2
+
             };
             var response = _IProductService.CreateProduct(request);
             if (response?.StatusCode == (int)RESULT_STATUS_CODE.SUCCESS)
@@ -111,7 +151,7 @@ namespace StockManager.Web.Controllers
                 Org_Price = Utility.convertNumber<decimal>(model.Org_Price),
                 Quantity = Utility.convertNumber<decimal>(model.Quantity),
                 Unit_ID = model.Unit_ID,
-                Product_Group_ID = model.ProductGroup_ID
+                //  Product_Group_ID = model.ProductGroup_ID
             };
             var response = _IProductService.UpdateProduct(request);
             if (response?.StatusCode == (int)RESULT_STATUS_CODE.SUCCESS)
@@ -156,25 +196,10 @@ namespace StockManager.Web.Controllers
         private Products_CRUD_ViewModel Get_Products_CRUD_ViewModel(int Id)
         {
             var model = new Products_CRUD_ViewModel();
-            model.UnitList.Add(new SelectListItem() { Text = "Chọn", Value = "" });
-            model.UnitList.AddRange(this.GetUnits_For_CRUD()?.Select(i =>
-                                                       new SelectListItem()
-                                                       {
-                                                           Text = i.Unit_Name,
-                                                           Value = i.Unit_ID
-                                                       }).ToList());
-
-            var _list_group_product = new List<SelectListItem>();
-            _list_group_product.Add(new SelectListItem() { Text = "Gốc", Value = "0", Group = new SelectListGroup() { Name = "" } });
-            _list_group_product.AddRange(this.Get_Product_Groups_List()?.Select(i =>
-                                                           new SelectListItem()
-                                                           {
-                                                               Text = string.Format("{0} - {1}", i.ProductGroup_ID, i.ProductGroup_Name),
-                                                               Value = i.ProductGroup_ID.ToString(),
-                                                               Group = new SelectListGroup() { Name = "Chọn cha" }
-                                                           }).ToList());
-            model.Product_Groups_List = new SelectList(_list_group_product, "Value", "Text", "Group.Name", 0);
-
+            model.UnitList = Units_SelectList();
+            model.Product_Level1_List = Products_By_Level1_SelectList();
+            model.Product_Level2_List = Get_Products_Level2_SelectList(0);
+            model.Product_Type_List = new List<SelectListItem>() { new SelectListItem { Value = "", Text = "Chọn" } };
             var _listAtribute = this.Get_List_Attribute();
             if (_listAtribute != null && _listAtribute.Count > 0)
             {
@@ -187,7 +212,7 @@ namespace StockManager.Web.Controllers
                     Image = o.Image,
                     IsActive = o.IsActive,
                     TypeName = o.TypeName,
-                    Value = o.Value,                   
+                    Value = o.Value,
                 });
                 var _listAtribute_Group = _listAtribute?.GroupBy(x => new { x.Type, x.TypeName })
                                             .Select(o => new Get_ProductAttribute_Types_DTO
@@ -207,7 +232,6 @@ namespace StockManager.Web.Controllers
 
                 model.Product_ID = Id;
                 model.Product_Name = product?.Product_Name;
-                model.ProductGroup_ID = product?.Product_Group_ID ?? 0;
                 model.Sale_Price = product?.Sale_Price.ToString();
                 model.Org_Price = product?.Org_Price.ToString();
                 model.Quantity = product?.Quantity.ToString();
@@ -219,25 +243,56 @@ namespace StockManager.Web.Controllers
                         p.Selected = true;
 
                 });
-                _list_group_product.ForEach(p =>
-                {
-                    if (p.Value.Equals(model.ProductGroup_ID))
-                        p.Selected = true;
-                });
-                model.Product_Groups_List.ToList().Clear();
-                model.Product_Groups_List = new SelectList(_list_group_product, "Value", "Text", "Group.Name", 0);
-                if (model.AtributeType_List != null)
-                {
-                    foreach (var AtributeType in model.AtributeType_List)
-                    {
-                        AtributeType.ProductAttributes.ForEach(x =>
-                        {
-                            x.IsSelected = product.Product_ProductAttribute_Mapping != null ? product.Product_ProductAttribute_Mapping.Any(p => p.ProductAttributeId.Equals(x.Id)) : false;
-                        });
-                    }
-                }
             }
             return model;
+        }
+
+        [HttpPost]
+        [Route("get-products-level2-by-product-level1-id-selectlist")]
+        public string Get_Products_Level2_By_Level1_Selectlist(int product_Level1_Id)
+        {
+            List<SelectList_Group> selectList = Get_Products_Level2_SelectList(product_Level1_Id);
+
+            string json = JsonConvert.SerializeObject(selectList);
+            return json;
+        }
+
+        private List<SelectList_Group> Get_Products_Level2_SelectList(int product_Level1_Id)
+        {
+            var selectList = new List<SelectList_Group>();
+            selectList.Add(new SelectList_Group
+            {
+                Name = "Gốc",
+                Items = new List<SelectListItem>
+                {
+                        new SelectListItem() { Text = "Gốc", Value = "0" }
+                }
+            });
+
+            if (product_Level1_Id > 0)
+            {
+                var _product_Level2_List = new SelectList_Group();
+                _product_Level2_List.Name = "Chọn";
+                var request = new Product_GetList_Level2_By_Level1_Request
+                {
+                    Product_Level1_Id = product_Level1_Id,
+                    Page = new Page(0, int.MaxValue)
+                };
+                var response = this._IProductService.GetProducts_Level2_By_Level1(request);
+                if (response?.Results != null)
+                {
+
+                    _product_Level2_List.Items.AddRange(response.Results.Select(i =>
+                                                                   new SelectListItem()
+                                                                   {
+                                                                       Text = string.Format("{0} - {1}", i.Product_Level1, i.Product_Name),
+                                                                       Value = i.Product_Level1.ToString()
+                                                                   }).ToList());
+                }
+                selectList.Add(_product_Level2_List);
+            }
+
+            return selectList;
         }
 
         [HttpPost]

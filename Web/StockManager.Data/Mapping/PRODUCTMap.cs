@@ -117,9 +117,15 @@ namespace StockManager.Data.Models.Mapping
             this.Property(t => t.UserID).HasColumnName("UserID");
             this.Property(t => t.Serial).HasColumnName("Serial");
             this.Property(t => t.Active).HasColumnName("Active");
+            this.Property(t => t.Product_Level1).HasColumnName("Product_Level1");
+            this.Property(t => t.Product_Level2).HasColumnName("Product_Level2");
+            this.Property(t => t.Product_Level3).HasColumnName("Product_Level3");
+            this.Property(t => t.Product_Level4).HasColumnName("Product_Level4");
+            this.Property(t => t.Product_Level5).HasColumnName("Product_Level5");
+
 
             // Relationships
-            
+
             this.HasOptional(t => t.UNIT1)
                 .WithMany(t => t.PRODUCTs)
                 .HasForeignKey(d => d.Unit_ID);

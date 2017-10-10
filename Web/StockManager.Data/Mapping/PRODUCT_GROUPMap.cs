@@ -15,15 +15,11 @@ namespace StockManager.Data.Models.Mapping
             this.Property(t => t.ProductGroup_Name)
                 .HasMaxLength(255);
 
-            this.Property(t => t.Description)
-                .HasMaxLength(255);
-
             // Table & Column Mappings
             this.ToTable("PRODUCT_GROUP");
             this.Property(t => t.ProductGroup_ID).HasColumnName("ProductGroup_ID");
             this.Property(t => t.ProductGroup_Name).HasColumnName("ProductGroup_Name");
-            this.Property(t => t.Description).HasColumnName("Description");
-            this.Property(t => t.IsMain).HasColumnName("IsMain");
+            this.Property(t => t.Sale_Price).HasColumnName("Sale_Price");
             this.Property(t => t.Active).HasColumnName("Active");
         }
     }

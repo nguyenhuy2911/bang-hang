@@ -47,6 +47,13 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="DataAccess\Complex_DTO\ProductAttribute_Type.cs" />
+    <Compile Include="DataAccess\Complex_DTO\Product\DTO\Product_GetList_Level2_By_Level1.cs" />
+    <Compile Include="DataAccess\Complex_DTO\Product\DTO\Product_GetList_By_Level1.cs" />
+    <Compile Include="DataAccess\Complex_DTO\Product\DTO\Product_GetList_By_Level2.cs" />
+    <Compile Include="DataAccess\Complex_DTO\Product\QueryPrameters\Product_GetList_Level2_By_Level1_Parameter.cs" />
+    <Compile Include="DataAccess\Complex_DTO\Product\QueryPrameters\Product_GetList_By_Level1_Parameter.cs" />
+    <Compile Include="DataAccess\Complex_DTO\Product\QueryPrameters\Product_Get_By_Product_Group_ID_Parameter.cs" />
+    <Compile Include="DataAccess\Complex_DTO\Product\QueryPrameters\Product_GetList_By_Level2_Parameter.cs" />
     <Compile Include="DataAccess\Complex_DTO\Product\QueryPrameters\Product_Group_GetList_Parameter.cs" />
     <Compile Include="DataAccess\Complex_DTO\Product\QueryPrameters\Product_Update_Parameter.cs" />
     <Compile Include="DataAccess\Table_DTO\ADJUSTMENT.cs" />
@@ -83,6 +90,15 @@
     <Compile Include="Service.Contract\ProductAttribute\DTO\Get_ProductAttribute_Types_DTO.cs" />
     <Compile Include="Service.Contract\ProductAttribute\DTO\raw\ProductAttribute_DTO.cs" />
     <Compile Include="Service.Contract\Product\DTO\Get_Products_By_Id_DTO.cs" />
+    <Compile Include="Service.Contract\Product\DTO\Product_GetList_By_Level1_DTO.cs" />
+    <Compile Include="Service.Contract\Product\DTO\Product_GetList_By_Level2_DTO.cs" />
+    <Compile Include="Service.Contract\Product\DTO\Product_GetList_Level2_By_Level1_DTO.cs" />
+    <Compile Include="Service.Contract\Product\Request\Product_GetList_Level2_By_Level1_Request.cs" />
+    <Compile Include="Service.Contract\Product\Request\Product_GetList_By_Level1_Request.cs" />
+    <Compile Include="Service.Contract\Product\Request\Product_GetList_By_Level2_Request.cs" />
+    <Compile Include="Service.Contract\Product\Response\Product_GetList_Level2_By_Level1_Response.cs" />
+    <Compile Include="Service.Contract\Product\Response\Product_GetList_By_Level1_Response.cs" />
+    <Compile Include="Service.Contract\Product\Response\Product_GetList_By_Level2_Response.cs" />
     <Compile Include="Service.Contract\Product_ProductAttribute_Mapping\raw\Product_ProductAttribute_Mapping_DTO.cs" />
     <Compile Include="Service.Contract\ProductAttribute\Request\Get_ProductAttributes_Resquest.cs" />
     <Compile Include="Service.Contract\ProductAttribute\Request\Get_ProductAttribute_Types_Request.cs" />

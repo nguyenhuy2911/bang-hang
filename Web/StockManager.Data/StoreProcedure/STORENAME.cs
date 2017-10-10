@@ -10,7 +10,10 @@ namespace StockManager.Data.StoreProcedure
     {
         public static string PRODUCT_GROUP_GetList = "PRODUCT_GROUP_GetList";
         public static string PRODUCT_Update = "PRODUCT_Update";
-        
+        public static string PRODUCT_Get_By_Product_Group_ID = "PRODUCT_Get_By_Product_Group_ID";
+        public static string PRODUCT_GetList_By_Level2 = "PRODUCT_GetList_By_Level2";
+        public static string PRODUCT_GetList_By_Level1 = "PRODUCT_GetList_By_Level1";
+        public static string PRODUCT_GetList_Level2_By_Level1 = "PRODUCT_GetList_Level2_By_Level1";
 
     }
 }

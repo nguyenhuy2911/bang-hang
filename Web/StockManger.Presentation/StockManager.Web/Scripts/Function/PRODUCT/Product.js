@@ -57,6 +57,7 @@ PRODUCT.prototype.regisEvent = function () {
     $(".rad-product-attribute").click(function () {
         _PRODUCT.addProductAtribute(this);
     });
+
 }
 
 PRODUCT.prototype.getProducts = function () {
@@ -181,7 +182,7 @@ PRODUCT.prototype.saveProduct = function () {
 }
 
 PRODUCT.prototype.getProduct_ProductAttribute_Mapping_RequestValue = function (selector) {
-    debugger;
+
     var obj = new Product_ProductAttribute_Mapping_Model();
     obj.ProductAttributeId = $(selector).val();
     obj.ProductId = $(selector).attr("data-productid");
@@ -190,7 +191,7 @@ PRODUCT.prototype.getProduct_ProductAttribute_Mapping_RequestValue = function (s
 }
 
 PRODUCT.prototype.addProductAtribute = function (selector) {
-   
+
     var request = this.getProduct_ProductAttribute_Mapping_RequestValue(selector);
     $.ajax({
         type: 'POST', // define the type of HTTP verb we want to use (POST for our form)
@@ -217,6 +218,43 @@ PRODUCT.prototype.addProductAtribute = function (selector) {
 
 }
 
+PRODUCT.prototype.getProductsLevel2_By_Level1_Id = function () {
+    debugger;
+    var product_Level1_Id = $("#Product_Level1").val();
+
+    $.ajax({
+        type: 'POST', // define the type of HTTP verb we want to use (POST for our form)
+        url: '/product/get-products-level2-by-product-level1-id-selectlist', // the url where we want to POST
+        data: { product_Level1_Id: product_Level1_Id }, // our data object
+        dataType: 'json', // what type of data do we expect back from the server       
+        beforeSend: function () {
+
+        },
+        error: function (response) {
+
+            console.log(response);
+        },
+        success: function (response) {
+
+            $("#Product_Level2").empty();
+            var $select = $('#Product_Level2');
+            $.each(response, function (index, group) {
+                var $group = $('<optgroup label="' + group.Name + '" />');
+                $.each(group.Items, function (_, item) {
+                    var option = new Option(item.Text, item.Value);
+                    $group.append(option);
+                });
+                $group.appendTo($select);
+            });
+
+        }
+    })
+    .done(function (response) {
+        $('#Product_Level2').selectpicker("refresh");
+    });
+
+
+}
 
 $(function () {
     _PRODUCT = new PRODUCT();
