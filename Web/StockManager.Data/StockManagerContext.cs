@@ -32,7 +32,7 @@ namespace StockManager.Data
         public DbSet<PRODUCT_BUILD> Product_Builds { get; set; }
         public DbSet<PRODUCT_GROUP> Product_Groups { get; set; }
         public DbSet<PRODUCT_PRICE> Product_Prices { get; set; }
-        public DbSet<PRODUCT_TYPE> Product_Types { get; set; }
+        public DbSet<Product_Type> Product_Types { get; set; }
         public DbSet<PRODUCT_UNIT> Product_Units { get; set; }
         public DbSet<PROVIDER> Providers { get; set; }
         public DbSet<REFTYPE> RefTypes { get; set; }
@@ -62,10 +62,11 @@ namespace StockManager.Data
         public DbSet<UNIT> Units { get; set; }
         public DbSet<UNITCONVERT> UnitConverts { get; set; }
         public DbSet<Images> Images { get; set; }
-        public virtual DbSet<Order> Order { get; set; }
-        public virtual DbSet<OrderItem> OrderItem { get; set; }
-        public virtual DbSet<ProductAttribute> ProductAttribute { get; set; }
-        public virtual DbSet<Product_ProductAttribute_Mapping> Product_ProductAttribute_Mapping { get; set; }
+        public DbSet<Order> Order { get; set; }
+        public DbSet<OrderItem> OrderItem { get; set; }
+        public DbSet<ProductAttribute> ProductAttribute { get; set; }
+        public DbSet<Product_ProductAttribute_Mapping> Product_ProductAttribute_Mapping { get; set; }
+        public DbSet<ProductType_Attribute> ProductType_Attribute { get; set; }
         public virtual int Commit()
         {
             int result = base.SaveChanges();
@@ -89,7 +90,7 @@ namespace StockManager.Data
             modelBuilder.Configurations.Add(new PRODUCT_BUILDMap());
             modelBuilder.Configurations.Add(new PRODUCT_GROUPMap());
             modelBuilder.Configurations.Add(new PRODUCT_PRICEMap());
-            modelBuilder.Configurations.Add(new PRODUCT_TYPEMap());
+            modelBuilder.Configurations.Add(new Product_TypeMap());
             modelBuilder.Configurations.Add(new PRODUCT_UNITMap());
             modelBuilder.Configurations.Add(new PROVIDERMap());
             modelBuilder.Configurations.Add(new REFTYPEMap());
@@ -123,6 +124,7 @@ namespace StockManager.Data
             modelBuilder.Configurations.Add(new OrderItemMap());
             modelBuilder.Configurations.Add(new ProductAttributeMap());
             modelBuilder.Configurations.Add(new Product_ProductAttribute_Mapping_Map());
+            modelBuilder.Configurations.Add(new Product_Type_AttributeMap());
         }
     }
 }

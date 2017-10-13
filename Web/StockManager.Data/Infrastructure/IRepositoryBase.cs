@@ -17,7 +17,7 @@ namespace StockManager.Data.Infrastructure
         void Delete(object id);
         ResponseBase<T> GetById(long id);
         ResponseBase<T> GetById(string id);
-        ResponseBase<List<T>> GetAll(Page pager, Expression<Func<T, object>> order, bool ascending);
+        ResponseBase<List<T>> GetAll();
         ResponseBase<List<T>>  GetPage(Page pager, Expression<Func<T, bool>> where = null, Expression<Func<T, object>> order = null, bool ascending = false);
     }
 }

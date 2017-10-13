@@ -92,12 +92,12 @@ namespace StockManager.Data.Infrastructure
                    TotalRow = 0
                };
         }
-        public virtual IEnumerable<T> GetAll()
-        {
-            return dbset.ToList();
-        }
+        //public virtual IEnumerable<T> GetAll()
+        //{
+        //    return dbset.ToList();
+        //}
 
-        public virtual ResponseBase<List<T>> GetAll(Page pager, Expression<Func<T, object>> order, bool ascending)
+        public virtual ResponseBase<List<T>> GetAll()
         {
             var response = new ResponseBase<List<T>>()
             {
@@ -105,8 +105,8 @@ namespace StockManager.Data.Infrastructure
             };
             try
             {
-                var query = dbset.SortBy(order, ascending).Skip(pager.Skip).Take(pager.PageSize);
-                var result = query.ToList();
+               
+                var result = dbset.ToList();
                 var totalRow = dbset.Count();
                 return
                     new ResponseBase<List<T>>()

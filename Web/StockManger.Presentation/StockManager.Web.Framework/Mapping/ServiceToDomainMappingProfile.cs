@@ -24,6 +24,7 @@ namespace StockManager.Web.Framework.Mapping
             CreateMap<Product_GetList_By_Level2_Request, Product_GetList_By_Level2_Parameter>();
             CreateMap<Product_GetList_By_Level1_Request, Product_GetList_By_Level1_Parameter>();
             CreateMap<Product_GetList_Level2_By_Level1_Request, Product_GetList_Level2_By_Level1_Parameter>();
+            CreateMap<ProductType_Attribute_Get_By_ProductType_Id_Request, ProductType_Attribute_Get_By_ProductType_Id_Parameter>();
         }
     }
 }

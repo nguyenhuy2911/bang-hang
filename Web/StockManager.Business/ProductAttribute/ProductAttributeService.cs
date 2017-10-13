@@ -36,7 +36,7 @@ namespace StockManager.Business
 
         public Get_ProductAttributes_Response Get_ProductAttributes(Get_ProductAttributes_Resquest request)
         {
-            var data = _IProductAtributeRepository.GetAll(request.Page, p=>p.Id, false);
+            var data = _IProductAtributeRepository.GetAll();
             var retData = Mapper.Map<ResponseBase<List<ProductAttribute>>, Get_ProductAttributes_Response>(data);
             return retData;
         }

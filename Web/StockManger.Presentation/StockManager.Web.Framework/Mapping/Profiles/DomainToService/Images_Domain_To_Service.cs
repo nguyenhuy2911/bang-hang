@@ -1,12 +1,6 @@
 ﻿using StockManager.Entity;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using AutoMapper;
 using StockManager.Entity.Service.Contract;
-using StockManager.Entity.DataAccess;
+using System.Collections.Generic;
 
 namespace StockManager.Web.Framework.Mapping.Profiles.DomainToService
 {

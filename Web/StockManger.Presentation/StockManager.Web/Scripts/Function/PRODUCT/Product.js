@@ -1,4 +1,5 @@
 ﻿var _PRODUCT = null;
+
 var Page = function (pageNumber, pageSize) {
     this.PageNumber = pageNumber;
     this.PageSize = pageSize;
@@ -17,6 +18,8 @@ var Products_CRUD_ViewModel = function () {
     this.Unit_ID = "";
     this.Description = 0;
     this.ProductGroup_ID = 0;
+    this.Product_Level1 = 0;
+    this.Product_Level2 = 0;
 }
 
 var Product_ProductAttribute_Mapping_Model = function () {
@@ -32,6 +35,7 @@ var PRODUCT = function () {
         pageIndex: 0,
         pageSize: 10
     };
+    this.Product_DataTables = null;
 }
 
 PRODUCT.prototype = new BaseFunction("PRODUCT");
@@ -79,7 +83,7 @@ PRODUCT.prototype.getProducts = function () {
         }
         columnRender.push(objColumn);
     })
-    var table = $('#product_list_item').DataTable({
+    $this.Product_DataTables = $('#product_list_item').DataTable({
         responsive: true,
         processing: true,
         serverSide: true,
@@ -107,7 +111,7 @@ PRODUCT.prototype.getProducts = function () {
 
     })
     .on('page.dt', function () {
-        var info = table.page.info();
+        var info = $this.Product_DataTables.page.info();
         $this.variable.pageIndex = info.page;
         $this.variable.pageSize = info.length;
     });
@@ -124,12 +128,25 @@ PRODUCT.prototype.loadCreateForm = function () {
 
 PRODUCT.prototype.loadEditForm = function (strJsondata) {
     var data = JSON.parse(strJsondata);
-    $("#div-crud-modal").loading();
-    $("#div-crud-modal .modal-body").html("");
-    $("#div-crud-modal .modal-body").load("/product/product-edit-form?Id=" + data.Product_ID, function () {
-        $("#div-crud-modal").loading("stop");
-        $("[view-when='update']").fadeIn();
+    $.ajax({
+        type: 'GET',
+        url: '/product/product-edit-form',
+        data: data,
+        beforeSend: function () {
+            $("#div-crud-modal").loading();
+            $("#div-crud-modal .modal-body").html("");
+        },
+        error: function (response) {
+            console.log(response);
+        },
+        success: function (html) {
+
+            $("#div-crud-modal .modal-body").html(html);
+            $("#div-crud-modal").loading("stop");
+            $("[view-when='update']").fadeIn();
+        }
     });
+    
 }
 
 PRODUCT.prototype.getSaveProduct_RequestValue = function () {
@@ -142,21 +159,23 @@ PRODUCT.prototype.getSaveProduct_RequestValue = function () {
     obj.Sale_Price = Number(formVal.Sale_Price);
     obj.Org_Price = Number(formVal.Org_Price);
     obj.Quantity = Number(formVal.Quantity);
-    obj.ProductGroup_ID = formVal.ProductGroup_ID
+    obj.Product_Level1 = formVal.Product_Level1;
+    obj.Product_Level2 = formVal.Product_Level2;
+    obj.Product_Type_ID = formVal.Product_Type_ID;
     return obj;
 }
 
 PRODUCT.prototype.saveProduct = function () {
-
+    var $this = this;
     var isvalidate = $("#frm-crud-product").valid();
     if (!isvalidate)
         return;
     var request = this.getSaveProduct_RequestValue();
     $.ajax({
         type: 'POST', // define the type of HTTP verb we want to use (POST for our form)
-        url: '/product/product-save', // the url where we want to POST
-        data: request, // our data object
-        dataType: 'json', // what type of data do we expect back from the server       
+        url: '/product/product-save',
+        data: request,
+        dataType: 'json',
         beforeSend: function () {
             $("#div-crud-modal").loading();
         },
@@ -169,6 +188,7 @@ PRODUCT.prototype.saveProduct = function () {
                 showErrorMessage(response.StatusMessage, "#div-crud-modal");
             else {
                 showSuccessMessage(response.StatusMessage, "#div-crud-modal");
+                $this.Product_DataTables.draw();
                 $("[view-when='update']").fadeIn();
             }
 
@@ -185,7 +205,7 @@ PRODUCT.prototype.getProduct_ProductAttribute_Mapping_RequestValue = function (s
 
     var obj = new Product_ProductAttribute_Mapping_Model();
     obj.ProductAttributeId = $(selector).val();
-    obj.ProductId = $(selector).attr("data-productid");
+    obj.ProductId = $("#Product_ID").val();
     obj.Type = $(selector).attr("data-type");
     return obj;
 }
@@ -194,10 +214,10 @@ PRODUCT.prototype.addProductAtribute = function (selector) {
 
     var request = this.getProduct_ProductAttribute_Mapping_RequestValue(selector);
     $.ajax({
-        type: 'POST', // define the type of HTTP verb we want to use (POST for our form)
-        url: '/product/add-product-atribute', // the url where we want to POST
-        data: request, // our data object
-        dataType: 'json', // what type of data do we expect back from the server       
+        type: 'POST',
+        url: '/product/add-product-atribute',
+        data: request,
+        dataType: 'json',
         beforeSend: function () {
 
         },
@@ -219,19 +239,15 @@ PRODUCT.prototype.addProductAtribute = function (selector) {
 }
 
 PRODUCT.prototype.getProductsLevel2_By_Level1_Id = function () {
-    debugger;
     var product_Level1_Id = $("#Product_Level1").val();
-
     $.ajax({
         type: 'POST', // define the type of HTTP verb we want to use (POST for our form)
-        url: '/product/get-products-level2-by-product-level1-id-selectlist', // the url where we want to POST
-        data: { product_Level1_Id: product_Level1_Id }, // our data object
-        dataType: 'json', // what type of data do we expect back from the server       
+        url: '/product/get-products-level2-by-product-level1-id-selectlist',
+        data: { product_Level1_Id: product_Level1_Id },
+        dataType: 'json',
         beforeSend: function () {
-
         },
         error: function (response) {
-
             console.log(response);
         },
         success: function (response) {
@@ -246,14 +262,52 @@ PRODUCT.prototype.getProductsLevel2_By_Level1_Id = function () {
                 });
                 $group.appendTo($select);
             });
-
         }
     })
     .done(function (response) {
         $('#Product_Level2').selectpicker("refresh");
     });
+}
 
+PRODUCT.prototype.Get_Attributes_By_ProductType = function () {
+    var product_Type_Id = $("#Product_Type_ID").val();
 
+    $.ajax({
+        type: 'GET',
+        url: '/product/get-attributes-by-product-type',
+        data: { product_Type_Id: product_Type_Id },
+        dataType: 'json',
+        beforeSend: function () {
+        },
+        error: function (response) {
+            console.log(response);
+        },
+        success: function (datas) {
+
+            if (datas == null) {
+                return;
+            }
+            $("#div_attribute").empty();
+            var html = "";
+            $.each(datas, function (index, obj) {
+                var attributeHtml = "";
+                $.each(obj.ProductAttributes, function (_, attribute) {
+                    attributeHtml +=
+                       '<input name=\'' + attribute.Type + '\' class="with-gap radio-col-pink rad-product-attribute" type="radio" id="radio_' + attribute.Type + '_' + attribute.Id + '" value="' + attribute.Id + '" data-productid="0" data-type="' + attribute.Type + '" onchange="_PRODUCT.addProductAtribute(this);" checked="' + attribute.IsSelected + '" />' +
+                       '<label for="radio_' + attribute.Type + '_' + attribute.Id + '">' + attribute.Name + '</label>';
+                });
+                html =
+                   '<div class="col-lg-4 col-md-4 col-sm-6 col-xs-12">' +
+                       '<h2 class="card-inside-title">' + obj.TypeName + '</h2>' +
+                           '<div class="demo-radio-button">' +
+                                   attributeHtml +
+                           '</div>' +
+                   '</div>';
+                $("#div_attribute").append(html);
+            });
+
+        }
+    });
 }
 
 $(function () {

@@ -44,7 +44,7 @@ namespace StockManager.Data.Models.Mapping
                 .WithMany(t => t.OrderItems)
                 .HasForeignKey(d => d.ProductId);
             this.HasRequired(t => t.Order)
-                .WithMany(t => t.OrderItem)
+                .WithMany(t => t.OrderItems)
                 .HasForeignKey(d => d.OrderId);
             
 

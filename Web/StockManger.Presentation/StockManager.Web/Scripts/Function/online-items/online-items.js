@@ -35,6 +35,7 @@ var ONLINE_ITEMS = function () {
         getProductByItemPageIndex: 0,
         getProductByItemPageSize: 10,
     };
+    this.Online_Items_Datatables = null;
 }
 
 ONLINE_ITEMS.prototype = new BaseFunction("ONLINE_ITEMS");
@@ -55,7 +56,7 @@ ONLINE_ITEMS.prototype.regisEvent = function () {
     });
 
     $modal.on('hidden.bs.modal', function (e) {
-        table_OnlineItemList.draw();
+        $this.Online_Items_Datatables.draw();
     });
 }
 
@@ -88,7 +89,7 @@ ONLINE_ITEMS.prototype.get_Online_Items = function () {
         }
         columnRender.push(objColumn);
     })
-    table_OnlineItemList = $('#product_list_item').DataTable({
+    $this.Online_Items_Datatables = $('#product_list_item').DataTable({
         responsive: true,
         processing: true,
         serverSide: true,
@@ -116,7 +117,7 @@ ONLINE_ITEMS.prototype.get_Online_Items = function () {
 
     })
     .on('page.dt', function () {
-        var info = table_OnlineItemList.page.info();
+        var info = $this.Online_Items_Datatables.page.info();
         $this.variable.pageIndex = info.page;
         $this.variable.pageSize = info.length;
     });

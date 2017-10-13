@@ -42,25 +42,25 @@ namespace StockManager.Business
             var response = new CRUD_Product_Response();
             try
             {
-                bool _checkupdate = false;
                 var product = Mapper.Map<CRUD_Product_Request, PRODUCT>(request);
                 this._IProductRepository.Add(product);
                 int saveStatus = this._IUnitOfWork.Commit();
                 if (request.Product_Level1.Equals(0))
                 {
                     product.Product_Level1 = product.Product_ID;
-                    _checkupdate = true;
                 }
                 if (request.Product_Level2.Equals(0))
                 {
-                    product.Product_Level2 = product.Product_Level1;
-                    _checkupdate = true;
+                    product.Product_Level2 = product.Product_ID;
                 }
-                if (_checkupdate)
+                if (request.Product_Level3.Equals(0))
                 {
-                    this._IProductRepository.Update(product);
-                    saveStatus = this._IUnitOfWork.Commit();
+                    product.Product_Level3 = product.Product_ID;
                 }
+
+                this._IProductRepository.Update(product);
+                saveStatus = this._IUnitOfWork.Commit();
+
                 if (saveStatus > 0)
                     response.StatusCode = (int)RESULT_STATUS_CODE.SUCCESS;
                 else
@@ -143,7 +143,7 @@ namespace StockManager.Business
             param.Next = request.Page.PageSize;
             var datas = _IProductRepository.Product_GetList_By_Level2(param);
             var retData = Mapper.Map<ResponseBase<List<Product_GetList_By_Level2>>, Product_GetList_By_Level2_Response>(datas);
-            if(retData != null && retData.Results != null)
+            if (retData != null && retData.Results != null)
                 retData.StatusCode = (int)RESULT_STATUS_CODE.SUCCESS;
             else
                 retData.StatusCode = (int)RESULT_STATUS_CODE.NODATA;
@@ -182,7 +182,7 @@ namespace StockManager.Business
             };
             var data = _IProductRepository.Get_Products_By_GroupId(_params);
             var retData = Mapper.Map<ResponseBase<List<PRODUCT>>, Get_Products_By_GroupId_Response>(data);
-            if(retData != null && retData.Results != null)
+            if (retData != null && retData.Results != null)
                 retData.StatusCode = (int)RESULT_STATUS_CODE.SUCCESS;
             else
                 retData.StatusCode = (int)RESULT_STATUS_CODE.NODATA;

@@ -17,13 +17,14 @@ namespace StockManager.Web.Controllers
     [RoutePrefix("product")]
     public class ProductController : BaseController
     {
-        public ProductController(IProductService productService, IUnitService unitService, IImagesService imagesService, IProductAttributeService productAttributeService, IProduct_ProductAttribute_MappingService product_ProductAttribute_MappingService)
+        public ProductController(IProductService productService, IUnitService unitService, IImagesService imagesService, IProductAttributeService productAttributeService, IProduct_ProductAttribute_MappingService product_ProductAttribute_MappingService, IProductType_Service productType_Service)
         {
             this._IProductService = productService;
             this._IUnitService = unitService;
             this._IImagesService = imagesService;
             this._IProductAttributeService = productAttributeService;
             this._IProduct_ProductAttribute_MappingService = product_ProductAttribute_MappingService;
+            this._IProductType_Service = productType_Service;
         }
 
         private readonly IProductService _IProductService;
@@ -36,7 +37,9 @@ namespace StockManager.Web.Controllers
 
         private readonly IProduct_ProductAttribute_MappingService _IProduct_ProductAttribute_MappingService;
 
-        /************************************ Get **********************************************/
+        private readonly IProductType_Service _IProductType_Service;
+
+        /* ========================================================== Get ==================================================================================*/
 
         private Get_Products_Response GetProducts_Data(GetProducts_Request request)
         {
@@ -58,7 +61,7 @@ namespace StockManager.Web.Controllers
                 return null;
         }
 
-        private List<SelectListItem> Units_SelectList()
+        private List<SelectListItem> Get_Units_SelectList(string unitId)
         {
             var selectList = new List<SelectListItem>();
             var request = new Get_Unit_Request();
@@ -71,7 +74,8 @@ namespace StockManager.Web.Controllers
                                                       new SelectListItem()
                                                       {
                                                           Text = i.Unit_Name,
-                                                          Value = i.Unit_ID
+                                                          Value = i.Unit_ID,
+                                                          Selected = i.Unit_ID.Equals(unitId)
                                                       }).ToList());
             }
             return selectList;
@@ -87,7 +91,7 @@ namespace StockManager.Web.Controllers
             return response?.Results;
         }
 
-        private SelectList Products_By_Level1_SelectList()
+        private SelectList Get_Products_Level1_SelectList(int? Product_Level1)
         {
             var selectList = new SelectList(new List<SelectListItem>());
             var _product_Level1_List = new List<SelectListItem>();
@@ -104,16 +108,75 @@ namespace StockManager.Web.Controllers
                                                                {
                                                                    Text = string.Format("{0} - {1}", i.Product_Level1, i.Product_Name),
                                                                    Value = i.Product_Level1.ToString(),
-                                                                   Group = new SelectListGroup() { Name = "Chọn" }
+                                                                   Group = new SelectListGroup() { Name = "Chọn" },
+                                                                   Selected = i.Product_Level1.Equals(Product_Level1)
                                                                }).ToList());
             }
             selectList = new SelectList(_product_Level1_List, "Value", "Text", "Group.Name", 0);
             return selectList;
         }
 
-        /***************************************************************************************/
+        private List<SelectList_Group> Get_Products_Level2_SelectList(int? product_Level1_Id, int? product_Level2_Id)
+        {
+            var selectList = new List<SelectList_Group>();
+            selectList.Add(new SelectList_Group
+            {
+                Name = "Gốc",
+                Items = new List<SelectListItem>
+                {
+                        new SelectListItem() { Text = "Gốc", Value = "0" }
+                }
+            });
 
-        /************************************ Insert, update, delete ***************************/
+            if (!string.IsNullOrEmpty(product_Level1_Id.ToString()) && product_Level1_Id > 0)
+            {
+                var _product_Level2_List = new SelectList_Group();
+                _product_Level2_List.Name = "Chọn";
+                var request = new Product_GetList_Level2_By_Level1_Request
+                {
+                    Product_Level1_Id = product_Level1_Id ?? 0,
+                    Page = new Page(0, int.MaxValue)
+                };
+                var response = this._IProductService.GetProducts_Level2_By_Level1(request);
+                if (response?.Results != null)
+                {
+
+                    _product_Level2_List.Items.AddRange(response.Results.Select(i =>
+                                                                   new SelectListItem()
+                                                                   {
+                                                                       Text = string.Format("{0} - {1}", i.Product_Level2, i.Product_Name),
+                                                                       Value = i.Product_Level2.ToString(),
+                                                                       Selected = i.Product_Level2.Equals(product_Level2_Id)
+                                                                   }).ToList());
+                }
+                selectList.Add(_product_Level2_List);
+            }
+
+            return selectList;
+        }
+
+        private List<SelectListItem> Get_Product_Types_SelectList(int? product_Type_Id)
+        {
+            var selectList = new List<SelectListItem>();
+            var datas = _IProductType_Service.GetAllProductType()?.Results;
+
+            selectList.Add(new SelectListItem() { Text = "Chọn", Value = "" });
+            if (datas != null)
+            {
+                selectList.AddRange(datas.Select(i =>
+                                                      new SelectListItem()
+                                                      {
+                                                          Text = i.Name,
+                                                          Value = i.Product_Type_ID.ToString(),
+                                                          Selected = i.Product_Type_ID.Equals(product_Type_Id)
+                                                      }).ToList());
+            }
+            return selectList;
+        }
+
+        // ===============================================================================================================================================/
+
+        /* =================================================================== Insert, update, delete ================================================== */
 
         private string Product_Create(Products_CRUD_ViewModel model)
         {
@@ -151,7 +214,9 @@ namespace StockManager.Web.Controllers
                 Org_Price = Utility.convertNumber<decimal>(model.Org_Price),
                 Quantity = Utility.convertNumber<decimal>(model.Quantity),
                 Unit_ID = model.Unit_ID,
-                //  Product_Group_ID = model.ProductGroup_ID
+                Product_Type_ID = model.Product_Type_ID,
+                Product_Level1 = model.Product_Level1,
+                Product_Level2 = model.Product_Level2
             };
             var response = _IProductService.UpdateProduct(request);
             if (response?.StatusCode == (int)RESULT_STATUS_CODE.SUCCESS)
@@ -161,7 +226,7 @@ namespace StockManager.Web.Controllers
             return json;
         }
 
-        /***************************************************************************************/
+        /* ============================================================================================================================================= */
 
         [Route]
         public ActionResult Index()
@@ -182,67 +247,38 @@ namespace StockManager.Web.Controllers
         [Route("product-create-form")]
         public ActionResult Product_New_Form()
         {
-            var model = Get_Products_CRUD_ViewModel(0);
+            var model = Get_Products_CRUD_ViewModel(null);
             return View("~/Views/Admin/Product/Product_Crud_Form.cshtml", model);
         }
 
+        [HttpGet]
         [Route("product-edit-form")]
-        public ActionResult Product_Edit_Form(int Id)
+        public ActionResult Product_Edit_Form(Get_Products_DTO product)
         {
-            var model = Get_Products_CRUD_ViewModel(Id);
+            var model = Get_Products_CRUD_ViewModel(product);
             return View("~/Views/Admin/PRODUCT/Product_Crud_Form.cshtml", model);
         }
 
-        private Products_CRUD_ViewModel Get_Products_CRUD_ViewModel(int Id)
+        private Products_CRUD_ViewModel Get_Products_CRUD_ViewModel(Get_Products_DTO product)
         {
             var model = new Products_CRUD_ViewModel();
-            model.UnitList = Units_SelectList();
-            model.Product_Level1_List = Products_By_Level1_SelectList();
-            model.Product_Level2_List = Get_Products_Level2_SelectList(0);
+            model.UnitList = Get_Units_SelectList(product?.Unit_ID);
+            model.Product_Level1_List = Get_Products_Level1_SelectList(product?.Product_Level1);
+            model.Product_Level2_List = Get_Products_Level2_SelectList(0, product?.Product_Level2);
             model.Product_Type_List = new List<SelectListItem>() { new SelectListItem { Value = "", Text = "Chọn" } };
-            var _listAtribute = this.Get_List_Attribute();
-            if (_listAtribute != null && _listAtribute.Count > 0)
-            {
-                var listOfType = _listAtribute?.Select(o => new Get_ProductAttributes_DTO
-                {
-                    Id = o.Id,
-                    Name = o.Name,
-                    Type = o.Type,
-                    Description = o.Description,
-                    Image = o.Image,
-                    IsActive = o.IsActive,
-                    TypeName = o.TypeName,
-                    Value = o.Value,
-                });
-                var _listAtribute_Group = _listAtribute?.GroupBy(x => new { x.Type, x.TypeName })
-                                            .Select(o => new Get_ProductAttribute_Types_DTO
-                                            {
-                                                Type = o.Key.Type,
-                                                TypeName = o.Key.TypeName,
-                                                ProductAttributes = listOfType?.Where(p => p.Type.Equals(o.Key.Type)).ToList()
-                                            }).ToList();
-                model.AtributeType_List = _listAtribute_Group;
-            }
+            model.Product_Type_List = Get_Product_Types_SelectList(product?.Product_Type_ID);
 
-            if (!string.IsNullOrEmpty(Id.ToString()) && Id > 0)
+            if (product != null && product.Product_ID > 0)
             {
-                var product = Id != 0 ? _IProductService.Get_Product_ById(Id)?.Results : null;
                 string product_UnitId = product?.Unit_ID ?? string.Empty;
                 int product_GroupId = product?.Product_Group_ID ?? 0;
-
-                model.Product_ID = Id;
+                model.Product_ID = product.Product_ID;
                 model.Product_Name = product?.Product_Name;
                 model.Sale_Price = product?.Sale_Price.ToString();
                 model.Org_Price = product?.Org_Price.ToString();
                 model.Quantity = product?.Quantity.ToString();
                 model.Unit_ID = product?.Unit_ID;
-
-                model.UnitList.ForEach(p =>
-                {
-                    if (p.Value.Equals(model.Unit_ID))
-                        p.Selected = true;
-
-                });
+                model.Product_Level2_List = Get_Products_Level2_SelectList(product?.Product_Level1, product?.Product_Level2);
             }
             return model;
         }
@@ -251,49 +287,12 @@ namespace StockManager.Web.Controllers
         [Route("get-products-level2-by-product-level1-id-selectlist")]
         public string Get_Products_Level2_By_Level1_Selectlist(int product_Level1_Id)
         {
-            List<SelectList_Group> selectList = Get_Products_Level2_SelectList(product_Level1_Id);
+            List<SelectList_Group> selectList = Get_Products_Level2_SelectList(product_Level1_Id, 0);
 
             string json = JsonConvert.SerializeObject(selectList);
             return json;
         }
 
-        private List<SelectList_Group> Get_Products_Level2_SelectList(int product_Level1_Id)
-        {
-            var selectList = new List<SelectList_Group>();
-            selectList.Add(new SelectList_Group
-            {
-                Name = "Gốc",
-                Items = new List<SelectListItem>
-                {
-                        new SelectListItem() { Text = "Gốc", Value = "0" }
-                }
-            });
-
-            if (product_Level1_Id > 0)
-            {
-                var _product_Level2_List = new SelectList_Group();
-                _product_Level2_List.Name = "Chọn";
-                var request = new Product_GetList_Level2_By_Level1_Request
-                {
-                    Product_Level1_Id = product_Level1_Id,
-                    Page = new Page(0, int.MaxValue)
-                };
-                var response = this._IProductService.GetProducts_Level2_By_Level1(request);
-                if (response?.Results != null)
-                {
-
-                    _product_Level2_List.Items.AddRange(response.Results.Select(i =>
-                                                                   new SelectListItem()
-                                                                   {
-                                                                       Text = string.Format("{0} - {1}", i.Product_Level1, i.Product_Name),
-                                                                       Value = i.Product_Level1.ToString()
-                                                                   }).ToList());
-                }
-                selectList.Add(_product_Level2_List);
-            }
-
-            return selectList;
-        }
 
         [HttpPost]
         [Route("product-save")]
@@ -332,6 +331,36 @@ namespace StockManager.Web.Controllers
 
         }
 
+        [HttpGet]
+        [Route("get-attributes-by-product-type")]
+        public string Get_Attributes_By_ProductType(int product_Type_Id)
+        {
+            var request = new ProductType_Attribute_Get_By_ProductType_Id_Request
+            {
+                ProductType_Id = product_Type_Id
+            };
+            var response = this._IProductType_Service.Get_ProductType_Attribute_By_ProductType_Id(request);
+
+            var _listAtribute_Type = response.Results?.GroupBy(x => new { x.Attrtibute_Type, x.Attrtibute_TypeName })
+                                           .Select(o => new Get_ProductAttribute_Types_DTO
+                                           {
+                                               Type = o.Key.Attrtibute_Type,
+                                               TypeName = o.Key.Attrtibute_TypeName,
+                                               ProductAttributes = response.Results?.Where(p => p.Attrtibute_Type.Equals(o.Key.Attrtibute_Type)).Select(p => new Get_ProductAttributes_DTO
+                                               {
+                                                   Id = p.Id,
+                                                   Name = p.Attrtibute_Name,
+                                                   Type = p.Attrtibute_Type,
+                                                   TypeName = p.Attrtibute_TypeName,
+                                                   Value = p.Attrtibute_Value,
+                                                   IsSelected = false
+                                               }).ToList()
+                                           }).ToList();
+
+            string json = JsonConvert.SerializeObject(_listAtribute_Type);
+
+            return json;
+        }
 
         public ActionResult MERCHANDISE_NEWASESEMBLED_Form()
         {

@@ -14,6 +14,7 @@ namespace StockManager.Data.StoreProcedure
         public static string PRODUCT_GetList_By_Level2 = "PRODUCT_GetList_By_Level2";
         public static string PRODUCT_GetList_By_Level1 = "PRODUCT_GetList_By_Level1";
         public static string PRODUCT_GetList_Level2_By_Level1 = "PRODUCT_GetList_Level2_By_Level1";
+        public static string ProductType_Attribute_Get_By_ProductType_Id = "ProductType_Attribute_Get_By_ProductType_Id";
 
     }
 }

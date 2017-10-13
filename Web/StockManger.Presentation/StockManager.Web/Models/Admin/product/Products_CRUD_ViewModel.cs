@@ -44,7 +44,7 @@ namespace StockManager.Web.Models.Admin
         [Required(ErrorMessage = "Chọn sản phẩm cấp 2")]
         public int Product_Level2 { get; set; }
 
-       // [Required(ErrorMessage = "Chọn loại sản phẩm")]
+        [Required(ErrorMessage = "Chọn loại sản phẩm")]
         public int Product_Type_ID { get; set; }
 
         public List<SelectListItem> UnitList { get; set; }

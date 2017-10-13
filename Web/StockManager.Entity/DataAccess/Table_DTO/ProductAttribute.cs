@@ -9,6 +9,7 @@ namespace StockManager.Entity.DataAccess
         public ProductAttribute()
         {
             Product_ProductAttribute_Mapping = new List<Product_ProductAttribute_Mapping>();
+            ProductType_Attributes = new List<ProductType_Attribute>();
         }
 
         public int Id { get; set; }
@@ -21,5 +22,6 @@ namespace StockManager.Entity.DataAccess
         public bool? IsActive { get; set; }
 
         public virtual ICollection<Product_ProductAttribute_Mapping> Product_ProductAttribute_Mapping { get; set; }
+        public virtual ICollection<ProductType_Attribute> ProductType_Attributes { get; set; }
     }
 }

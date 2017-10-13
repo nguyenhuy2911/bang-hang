@@ -24,9 +24,6 @@ namespace StockManager.Data.Models.Mapping
             this.Property(t => t.Model_ID)
                 .HasMaxLength(20);
 
-            //this.Property(t => t.Product_Group_ID)
-            //    .HasMaxLength(20);
-
             this.Property(t => t.Provider_ID)
                 .HasMaxLength(20);
 

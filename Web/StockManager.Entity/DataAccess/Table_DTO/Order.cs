@@ -9,7 +9,7 @@ namespace StockManager.Entity.DataAccess
     {
         public Order()
         {
-            this.OrderItem = new List<OrderItem>();
+            this.OrderItems = new List<OrderItem>();
         }
         public int Id { get; set; }
 
@@ -121,6 +121,6 @@ namespace StockManager.Entity.DataAccess
 
         public string CustomValuesXml { get; set; }
        
-        public virtual ICollection<OrderItem> OrderItem { get; set; }
+        public virtual ICollection<OrderItem> OrderItems { get; set; }
     }
 }
