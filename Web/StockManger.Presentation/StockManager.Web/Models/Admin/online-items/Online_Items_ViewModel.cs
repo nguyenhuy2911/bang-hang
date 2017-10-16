@@ -17,16 +17,17 @@ namespace StockManager.Web.Models.Admin
     public class Items_Grid_Column
     {
         [TableHeader(title = "Id")]
-        public string ProductGroup_ID { get; set; }
+        public string Product_Level2 { get; set; }
 
         [TableHeader(title = "Hình ảnh")]
         public string ImagePath { get; set; }
 
         [TableHeader(title = "Tên sản phẩm")]
-        public string ProductGroup_Name { get; set; }
+        public string Product_Name { get; set; }
 
         [TableHeader(title = "Sửa")]
         public string Action { get; set; }
+
     }
     
 }

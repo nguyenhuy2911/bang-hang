@@ -1,4 +1,12 @@
-﻿(function ($) {
+﻿var loaddingHtml = '<div class="loader">' +
+                            '<div class="spinner">' +
+                                '<div class="bounce1 bg-pink"></div>' +
+                                '<div class="bounce2 bg-pink"></div>' +
+                                '<div class="bounce3 bg-pink"></div>' +
+                            '</div>' +
+                        '</div>';
+
+(function ($) {
     $.fn.serializeFormJSON = function () {
         var o = {};
         var a = this.serializeArray();

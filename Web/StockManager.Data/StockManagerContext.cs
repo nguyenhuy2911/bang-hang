@@ -1,5 +1,5 @@
 using StockManager.Data.Models.Mapping;
-using StockManager.Entity.DataAccess;
+using StockManager.Data.Model.Data;
 using System.Data.Entity;
 
 namespace StockManager.Data

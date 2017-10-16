@@ -6,7 +6,7 @@ using System.Text;
 using System.Threading.Tasks;
 using AutoMapper;
 using StockManager.Entity.Service.Contract;
-using StockManager.Entity.DataAccess;
+using StockManager.Data.Model.Data;
 
 namespace StockManager.Web.Framework.Mapping.Profiles.DomainToService
 {

@@ -1,7 +1,7 @@
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Data.Entity.ModelConfiguration;
 using StockManager.Entity;
-using StockManager.Entity.DataAccess;
+using StockManager.Data.Model.Data;
 namespace StockManager.Data.Models.Mapping
 {
     public class STOCK_TRANSFER_DETAILMap : EntityTypeConfiguration<STOCK_TRANSFER_DETAIL>

@@ -46,43 +46,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="DataAccess\Complex_DTO\ProductAttribute_Type.cs" />
-    <Compile Include="DataAccess\Complex_DTO\ProductType_Atribute\DTO\ProductType_Attribute_Get_By_ProductType_Id.cs" />
-    <Compile Include="DataAccess\Complex_DTO\ProductType_Atribute\QueryParameters\ProductType_Attribute_Get_By_ProductType_Id.cs" />
-    <Compile Include="DataAccess\Complex_DTO\Product\DTO\Product_GetList_Level2_By_Level1.cs" />
-    <Compile Include="DataAccess\Complex_DTO\Product\DTO\Product_GetList_By_Level1.cs" />
-    <Compile Include="DataAccess\Complex_DTO\Product\DTO\Product_GetList_By_Level2.cs" />
-    <Compile Include="DataAccess\Complex_DTO\Product\QueryPrameters\Product_GetList_Level2_By_Level1_Parameter.cs" />
-    <Compile Include="DataAccess\Complex_DTO\Product\QueryPrameters\Product_GetList_By_Level1_Parameter.cs" />
-    <Compile Include="DataAccess\Complex_DTO\Product\QueryPrameters\Product_Get_By_Product_Group_ID_Parameter.cs" />
-    <Compile Include="DataAccess\Complex_DTO\Product\QueryPrameters\Product_GetList_By_Level2_Parameter.cs" />
-    <Compile Include="DataAccess\Complex_DTO\Product\QueryPrameters\Product_Group_GetList_Parameter.cs" />
-    <Compile Include="DataAccess\Complex_DTO\Product\QueryPrameters\Product_Update_Parameter.cs" />
-    <Compile Include="DataAccess\Table_DTO\ADJUSTMENT.cs" />
-    <Compile Include="DataAccess\Table_DTO\ADJUSTMENT_DETAIL.cs" />
-    <Compile Include="DataAccess\Table_DTO\BOOK.cs" />
-    <Compile Include="DataAccess\Table_DTO\CURRENCY.cs" />
-    <Compile Include="DataAccess\Table_DTO\CUSTOMER.cs" />
-    <Compile Include="DataAccess\Table_DTO\CUSTOMER_GROUP.cs" />
-    <Compile Include="DataAccess\Table_DTO\CUSTOMER_TYPE.cs" />
-    <Compile Include="DataAccess\Table_DTO\DEPARTMENT.cs" />
-    <Compile Include="DataAccess\Table_DTO\EMPLOYEE.cs" />
-    <Compile Include="DataAccess\Table_DTO\FORM.cs" />
-    <Compile Include="DataAccess\Table_DTO\INVENTORY.cs" />
-    <Compile Include="DataAccess\Table_DTO\INVENTORY_DETAIL.cs" />
-    <Compile Include="DataAccess\Table_DTO\Images.cs" />
-    <Compile Include="DataAccess\Table_DTO\Order.cs" />
-    <Compile Include="DataAccess\Table_DTO\OrderItem.cs" />
-    <Compile Include="DataAccess\Table_DTO\ProductAttribute.cs" />
-    <Compile Include="DataAccess\Table_DTO\ProductType_Atribute.cs" />
-    <Compile Include="DataAccess\Table_DTO\Product_ProductAttribute_Mapping.cs" />
-    <Compile Include="Page.cs" />
-    <Compile Include="DataAccess\Table_DTO\PRODUCT.cs" />
-    <Compile Include="DataAccess\Table_DTO\PRODUCT_BUILD.cs" />
-    <Compile Include="DataAccess\Complex_DTO\Product\DTO\PRODUCT_GROUP.cs" />
-    <Compile Include="DataAccess\Table_DTO\PRODUCT_PRICE.cs" />
-    <Compile Include="DataAccess\Table_DTO\Product_Type.cs" />
-    <Compile Include="DataAccess\Table_DTO\PRODUCT_UNIT.cs" />
+    <Compile Include="Infrastructure\Page.cs" />
     <Compile Include="Service.Contract\Image\Dto\CRUD_Image_DTO.cs" />
     <Compile Include="Service.Contract\Image\Dto\Images_DTO.cs" />
     <Compile Include="Service.Contract\Image\Request\Get_Images_By_RelateId_Request.cs" />
@@ -92,6 +56,7 @@
     <Compile Include="Service.Contract\ProductAttribute\Dto\Get_ProductAttributes_DTO.cs" />
     <Compile Include="Service.Contract\ProductAttribute\Dto\Get_ProductAttribute_Types_DTO.cs" />
     <Compile Include="Service.Contract\ProductAttribute\Dto\raw\ProductAttribute_DTO.cs" />
+    <Compile Include="Service.Contract\Product_ProductAttribute_Mapping\Response\Get_ProductAttributes_By_ProductId_Response.cs" />
     <Compile Include="Service.Contract\ProductType\Dto\GetProductTypes_DTO.cs" />
     <Compile Include="Service.Contract\ProductType\Dto\GetProductType_By_Id_DTO.cs" />
     <Compile Include="Service.Contract\ProductType\Dto\raw\ProductType_Atribute_DTO.cs" />
@@ -101,16 +66,17 @@
     <Compile Include="Service.Contract\ProductType\Response\GetProductTypes_Response.cs" />
     <Compile Include="Service.Contract\ProductType\Response\GetProductType_By_Id_Response.cs" />
     <Compile Include="Service.Contract\ProductType\Response\ProductType_Attribute_Get_By_ProductType_Id_Response.cs" />
+    <Compile Include="Service.Contract\Product\Dto\Get_Products_By_GroupId_DTO.cs" />
     <Compile Include="Service.Contract\Product\Dto\Get_Products_By_Id_DTO.cs" />
     <Compile Include="Service.Contract\Product\Dto\Product_GetList_By_Level1_DTO.cs" />
-    <Compile Include="Service.Contract\Product\Dto\Product_GetList_By_Level2_DTO.cs" />
-    <Compile Include="Service.Contract\Product\Dto\Product_GetList_Level2_By_Level1_DTO.cs" />
-    <Compile Include="Service.Contract\Product\Request\Product_GetList_Level2_By_Level1_Request.cs" />
+    <Compile Include="Service.Contract\Product\Dto\Get_Products_Level2_DTO.cs" />
+    <Compile Include="Service.Contract\Product\Dto\Get_Products_Level2_By_Level1_DTO.cs" />
+    <Compile Include="Service.Contract\Product\Request\Get_Products_Level2_By_Level1_Request.cs" />
     <Compile Include="Service.Contract\Product\Request\Product_GetList_By_Level1_Request.cs" />
-    <Compile Include="Service.Contract\Product\Request\Product_GetList_By_Level2_Request.cs" />
-    <Compile Include="Service.Contract\Product\Response\Product_GetList_Level2_By_Level1_Response.cs" />
+    <Compile Include="Service.Contract\Product\Request\Get_Products_Level2_Request.cs" />
+    <Compile Include="Service.Contract\Product\Response\Get_Products_Level2_By_Level1_Response.cs" />
     <Compile Include="Service.Contract\Product\Response\Product_GetList_By_Level1_Response.cs" />
-    <Compile Include="Service.Contract\Product\Response\Product_GetList_By_Level2_Response.cs" />
+    <Compile Include="Service.Contract\Product\Response\Get_Products_Level2_Response.cs" />
     <Compile Include="Service.Contract\Product_ProductAttribute_Mapping\raw\Product_ProductAttribute_Mapping_DTO.cs" />
     <Compile Include="Service.Contract\ProductAttribute\Request\Get_ProductAttributes_Resquest.cs" />
     <Compile Include="Service.Contract\ProductAttribute\Request\Get_ProductAttribute_Types_Request.cs" />
@@ -129,7 +95,7 @@
     <Compile Include="Service.Contract\Product\Response\CRUD_Product_Response.cs" />
     <Compile Include="Service.Contract\Product\Response\Get_Products_By_GroupId_Response.cs" />
     <Compile Include="Service.Contract\Product\Response\Get_Product_By_Id_Response.cs" />
-    <Compile Include="Service.Contract\Product\Response\Get_Products_Groups_Response.cs" />
+    <Compile Include="Service.Contract\Product\Response\Get_Product_Groups_Response.cs" />
     <Compile Include="Service.Contract\Product_ProductAttribute_Mapping\Request\CRUD_Product_ProductAttribute_Mapping_Request.cs" />
     <Compile Include="Service.Contract\Product_ProductAttribute_Mapping\Response\CRUD_Product_ProductAttribute_Mapping_Response.cs" />
     <Compile Include="Service.Contract\Unit\Dto\raw\Unit_DTO.cs" />
@@ -140,40 +106,11 @@
     <Compile Include="Infrastructure\ResponseBase.cs" />
     <Compile Include="Infrastructure\RequestBase.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="DataAccess\Table_DTO\PROVIDER.cs" />
-    <Compile Include="DataAccess\Table_DTO\REFTYPE.cs" />
-    <Compile Include="DataAccess\Table_DTO\REPORT.cs" />
-    <Compile Include="DataAccess\Table_DTO\REPORT_GROUP.cs" />
-    <Compile Include="DataAccess\Table_DTO\STOCK.cs" />
-    <Compile Include="DataAccess\Table_DTO\STOCK_BUILD.cs" />
-    <Compile Include="DataAccess\Table_DTO\STOCK_BUILD_DETAIL.cs" />
-    <Compile Include="DataAccess\Table_DTO\STOCK_INWARD.cs" />
-    <Compile Include="DataAccess\Table_DTO\STOCK_INWARD_DETAIL.cs" />
-    <Compile Include="DataAccess\Table_DTO\STOCK_OUTWARD.cs" />
-    <Compile Include="DataAccess\Table_DTO\STOCK_OUTWARD_DETAIL.cs" />
-    <Compile Include="DataAccess\Table_DTO\STOCK_TRANSFER.cs" />
-    <Compile Include="DataAccess\Table_DTO\STOCK_TRANSFER_DETAIL.cs" />
-    <Compile Include="DataAccess\Table_DTO\sysdiagram.cs" />
-    <Compile Include="DataAccess\Table_DTO\SYS_COMPANY.cs" />
-    <Compile Include="DataAccess\Table_DTO\SYS_GROUP.cs" />
-    <Compile Include="DataAccess\Table_DTO\SYS_GROUP_OBJECT.cs" />
-    <Compile Include="DataAccess\Table_DTO\SYS_INFO.cs" />
-    <Compile Include="DataAccess\Table_DTO\SYS_LOG.cs" />
-    <Compile Include="DataAccess\Table_DTO\SYS_OBJECT.cs" />
-    <Compile Include="DataAccess\Table_DTO\SYS_OPTION.cs" />
-    <Compile Include="DataAccess\Table_DTO\SYS_RULE.cs" />
-    <Compile Include="DataAccess\Table_DTO\SYS_USER.cs" />
-    <Compile Include="DataAccess\Table_DTO\SYS_USER_RULE.cs" />
-    <Compile Include="DataAccess\Table_DTO\TRANS_REF.cs" />
-    <Compile Include="DataAccess\Table_DTO\UNIT.cs" />
-    <Compile Include="DataAccess\Table_DTO\UNITCONVERT.cs" />
     <Compile Include="Service.Contract\Unit\Dto\Get_Unit_DTO.cs" />
     <Compile Include="Service.Contract\Unit\Request\Get_Unit_Request.cs" />
     <Compile Include="Service.Contract\Unit\Response\Get_Unit_Response.cs" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="DataAccess\Complex_DTO\Product\QueryResults\" />
-  </ItemGroup>
+  <ItemGroup />
   <ItemGroup>
     <ProjectReference Include="..\Common\Common\Common.csproj">
       <Project>{9910D0B4-B273-455D-9E77-7B1496553A37}</Project>

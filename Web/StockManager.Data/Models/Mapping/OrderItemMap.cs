@@ -1,7 +1,7 @@
 using StockManager.Entity;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Data.Entity.ModelConfiguration;
-using StockManager.Entity.DataAccess;
+using StockManager.Data.Model.Data;
 namespace StockManager.Data.Models.Mapping
 {
     public class OrderItemMap : EntityTypeConfiguration<OrderItem>

@@ -37,6 +37,7 @@ namespace StockManager.Web.Controllers.Admin.OnlineItem
         }
 
         [Route]
+        [OutputCache(CacheProfile = "SystemCache", Location = System.Web.UI.OutputCacheLocation.Server)]
         public ActionResult Index()
         {
             var model = new Online_Items_ViewModel();
@@ -45,36 +46,42 @@ namespace StockManager.Web.Controllers.Admin.OnlineItem
 
         [HttpPost]
         [Route("get-online-items")]
-        public string Get_Online_Items(Get_Product_Groups_Request request)
+        public string Get_Online_Items(Get_Products_Level2_Request request)
         {
-            var response = _IProductService.Get_Product_Groups(request);
+            var response = _IProductService.Get_Products_Level2(request);
             string json = JsonConvert.SerializeObject(response);
             return json;
         }
 
         [HttpPost]
-        [Route("get-product-by-item")]
-        public string Get_Product_By_Item(Get_Products_By_GroupId_Request request)
-        {
+        [Route("get-products-by-item")]
+        public string Get_Products_By_Item(Get_Products_By_GroupId_Request model)
+         {
+            var request = new Get_Products_By_GroupId_Request
+            {
+                Page = model.Page,
+                Product_Group_ID = model.Product_Group_ID,
+                Publish = (int)ACTIVE.ALL
+            };
             var response = _IProductService.Get_Products_By_GroupId(request);
             string json = JsonConvert.SerializeObject(response);
             return json;
         }
 
         [Route("online-item-detail")]
-        public ActionResult Item_Detail_Form(int groupId)
+        [OutputCache(CacheProfile = "SystemCache", Location = System.Web.UI.OutputCacheLocation.Server)]
+        public ActionResult Item_Detail_Form(int productId)
         {
             var model = new Online_Item_Detail_ViewModel();
 
-            var product = groupId != 0 ? _IProductService.Get_Product_ById(groupId)?.Results : null;
+            var product = productId != 0 ? _IProductService.Get_Product_ById(productId)?.Results : null;
             string product_UnitId = product?.Unit_ID ?? string.Empty;
             int product_GroupId = product?.Product_Group_ID ?? 0;
 
-            model.Product_ID = groupId;
+            model.ProductId = productId;
             model.Product_Name = product?.Product_Name;
-            model.ProductGroup_ID = groupId;
             model.Description = WebUtility.HtmlDecode(product?.Description);
-            var listImages = this.Get_ListImage_By_Product_GroupId(groupId.ToString());
+            var listImages = this.Get_ListImage_By_Product_GroupId(productId.ToString());
             model.ListImgJson = JsonConvert.SerializeObject(listImages);
             return View("~/Views/Admin/Online-Items/Online_Item_Crud_Form.cshtml", model);
         }
@@ -85,7 +92,7 @@ namespace StockManager.Web.Controllers.Admin.OnlineItem
         {
             var request = new CRUD_Product_Request()
             {
-                Product_ID = model.ProductGroup_ID,
+                Product_ID = model.ProductId,
                 Description = WebUtility.HtmlEncode(model.Description),
             };
             var response = _IProductService.UpdateProduct(request);

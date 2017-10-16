@@ -103,7 +103,7 @@ namespace StockManager.Data.Infrastructure
                 return string.Empty;
             if (value == null)
                 return string.Empty;
-            return value;
+            return value.ToString();
         }
         public static object ReturnFalseIfNull(this object value)
         {
@@ -116,9 +116,9 @@ namespace StockManager.Data.Infrastructure
         public static object ReturnNullIfDbNull(this object value)
         {
             if (value == DBNull.Value)
-                return '\0';
+                return null;
             if (value == null)
-                return '\0';
+                return null;
             return value;
         }
     

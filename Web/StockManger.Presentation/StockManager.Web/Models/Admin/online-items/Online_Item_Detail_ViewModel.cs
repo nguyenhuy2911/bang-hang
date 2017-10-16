@@ -9,12 +9,10 @@ namespace StockManager.Web.Models.Admin
         {
             Item_By_Group_GridHeader = DataTableGridHelper.GetHeaderJson<Items_B_yGroup_Grid_Column>();
         }      
-        public int Product_ID { get; set; }
+        public int ProductId { get; set; }
 
         public string Product_Name { get; set; }      
        
-        public int ProductGroup_ID { get; set; }
-
         public string Description { get; set; }
         
         public string ListImgJson { get; set; }
@@ -36,7 +34,7 @@ namespace StockManager.Web.Models.Admin
         public string Quantity { get; set; }
 
         [TableHeader(title = "Đơn vị tính")]
-        public string Unit_ID { get; set; }
+        public string Unit_Name { get; set; }
 
         [TableHeader(title = "Online")]
         public string Publish { get; set; }

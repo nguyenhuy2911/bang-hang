@@ -5,7 +5,7 @@ using System.Data.Entity.ModelConfiguration;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using StockManager.Entity.DataAccess;
+using StockManager.Data.Model.Data;
 namespace StockManager.Data.Models.Mapping
 {
     public class ImagesMap: EntityTypeConfiguration<Images>

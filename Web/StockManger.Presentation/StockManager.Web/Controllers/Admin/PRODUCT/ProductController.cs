@@ -46,20 +46,7 @@ namespace StockManager.Web.Controllers
             var response = _IProductService.GetProducts(request);
             return response;
         }
-
-
-        private List<Get_Product_Groups_DTO> Get_Product_Groups_List()
-        {
-            var request = new Get_Product_Groups_Request()
-            {
-                Page = new Page(0, int.MaxValue)
-            };
-            var response = _IProductService.Get_Product_Groups(request);
-            if (response?.Results != null)
-                return response.Results;
-            else
-                return null;
-        }
+      
 
         private List<SelectListItem> Get_Units_SelectList(string unitId)
         {
@@ -80,17 +67,7 @@ namespace StockManager.Web.Controllers
             }
             return selectList;
         }
-
-        private List<Get_ProductAttributes_DTO> Get_List_Attribute()
-        {
-            var request = new Get_ProductAttributes_Resquest
-            {
-                Page = new Page()
-            };
-            var response = this._IProductAttributeService.Get_ProductAttributes(request);
-            return response?.Results;
-        }
-
+      
         private SelectList Get_Products_Level1_SelectList(int? Product_Level1)
         {
             var selectList = new SelectList(new List<SelectListItem>());
@@ -132,12 +109,12 @@ namespace StockManager.Web.Controllers
             {
                 var _product_Level2_List = new SelectList_Group();
                 _product_Level2_List.Name = "Chọn";
-                var request = new Product_GetList_Level2_By_Level1_Request
+                var request = new Get_Products_Level2_By_Level1_Request
                 {
                     Product_Level1_Id = product_Level1_Id ?? 0,
                     Page = new Page(0, int.MaxValue)
                 };
-                var response = this._IProductService.GetProducts_Level2_By_Level1(request);
+                var response = this._IProductService.Get_Products_Level2_By_Level1(request);
                 if (response?.Results != null)
                 {
 

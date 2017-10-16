@@ -8,5 +8,6 @@
         }
         public Page Page { get; set; }
         public int Product_Group_ID { get; set; }
+        public int Publish { get; set; }
     }
 }

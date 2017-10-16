@@ -7,5 +7,7 @@
             Page = new Page();
         }
         public Page Page { get; set; }
+
+        public int Product_Level2 { get; set; }
     }
 }

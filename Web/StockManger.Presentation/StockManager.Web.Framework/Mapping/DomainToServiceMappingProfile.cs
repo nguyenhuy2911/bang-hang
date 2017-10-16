@@ -1,8 +1,4 @@
 ﻿using AutoMapper;
-using StockManager.Entity;
-using StockManager.Entity.DataAccess;
-using StockManager.Entity.Service.Contract;
-using System.Collections.Generic;
 
 namespace StockManager.Web.Framework.Mapping
 {

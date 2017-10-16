@@ -1,5 +1,5 @@
-﻿using StockManager.Entity;
-using StockManager.Entity.DataAccess;
+﻿using StockManager.Data.Model.Data;
+using StockManager.Entity;
 using StockManager.Entity.Service.Contract;
 using System.Collections.Generic;
 

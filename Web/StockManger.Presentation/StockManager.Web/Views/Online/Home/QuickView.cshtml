@@ -1,5 +1,14 @@
 ﻿@model StockManager.Web.Models.Online.QuickViewModel
+@using StockManager.Entity.Service.Contract
+@using Common.Enum
 
+@{
+    var _firstProduct = new Get_Products_By_GroupId_DTO();
+    if (Model.ListProduct != null && Model.ListProduct.Count > 0)
+    {
+        _firstProduct = Model.ListProduct[0];
+    }
+}
 <html lang="en-US" class="">
 <head>
     <meta charset="UTF-8">
@@ -32,7 +41,7 @@
                                         }
                                         <img src="~/images-handle/get-image?path=@(bigImgSlider)&w=330&h=360" data-zoom-image="../images-handle/get-image?path=@(bigImgSlider)&w=430&h=460" alt="">
                                     </div>
-                                    <div class="gallery-control">                                        
+                                    <div class="gallery-control">
                                         <div id="detail-item-slider" class="owl-carousel">
                                             <!-- Carousel items -->
                                             @{
@@ -51,13 +60,12 @@
                                                                 <a href="#" class="thumbnail" data-image="../images-handle/get-image?path=@(image.Path)&w=330&h=360" data-zoom-image="../images-handle/get-image?path=@(image.Path)&w=530&h=560">
                                                                     <img src="~/images-handle/get-image?path=@(image.Path)&w=330&h=360" alt="" style="max-width:100%;">
                                                                 </a>
-
                                                             </div>
                                                         </div>
                                                         count++;
                                                     }
                                                 }
-                                            }                                           
+                                            }
                                         </div>
                                     </div>
 
@@ -67,24 +75,36 @@
                             </div>
                             <div class="col-md-7 col-sm-6 col-xs-12">
                                 <div class="detail-info">
-                                    <h2 class="title-detail">@Model.ListProduct[0].Product_Name.ToUpper()</h2>                                   
+                                    <h2 class="title-detail">@_firstProduct.Product_Name.ToUpper()</h2>
                                     <div class="product-price">
-                                        <ins><span>@Model.ListProduct[0].Sale_Price</span></ins>
-                                    </div>                                  
-                                    <div class="attr-detail attr-color">
-                                        <div class="attr-title">
-                                            <strong><sup>*</sup>Màu:</strong><span class="current-color">White</span>
-                                        </div>
-                                        <ul class="list-filter color-filter">
-                                            <li><a href="#" data-color="Red"><span style="background:#ff596d"></span></a></li>
-                                            <li><a href="#" data-color="Yellow"><span style="background:#ffdb33"></span></a></li>
-                                            <li class="active"><a href="#" data-color="White"><span style="background:#ffffff"></span></a></li>
-                                            <li><a href="#" data-color="Orange"><span style="background:#ffbb51"></span></a></li>
-                                            <li><a href="#" data-color="Cyan"><span style="background:#80e6ff"></span></a></li>
-                                            <li><a href="#" data-color="Green"><span style="background:#38cf46"></span></a></li>
-                                            <li><a href="#" data-color="Purple"><span style="background:#ff8ff8"></span></a></li>
-                                        </ul>
+                                        <ins><span>@_firstProduct.Sale_Price</span></ins>
                                     </div>
+                                    @if (Model.List_Similar_Products.Count > 0)
+                                    {
+                                        if (Model.List_Similar_Products.All(p => p.ProductAttributes != null && p.ProductAttributes.Count > 0))
+                                        {
+                                            bool exitAttribute = Model.List_Similar_Products.Any(p => p.ProductAttributes.Any(o => o.Attrtibute_Type.Equals(ATTRIBUTE_TYPE.COLOR)));
+                                            if (exitAttribute)
+                                            {
+                                                <div class="attr-detail attr-color">
+                                                    <div class="attr-title">
+                                                        <strong><sup>*</sup>Màu:</strong><span class="current-color">White</span>
+                                                    </div>
+                                                    <ul class="list-filter color-filter">
+                                                        @foreach (var similar in Model.List_Similar_Products)
+                                                        {
+                                                            foreach (var attribute in similar.ProductAttributes.Where(o => o.Attrtibute_TypeName.Equals(ATTRIBUTE_TYPE.COLOR)))
+                                                            {
+                                                                <li><a href="#" data-color="Red"><span style="background:#ff596d"></span></a></li>
+                                                            }
+                                                        }
+                                                    </ul>
+                                                </div>
+                                            }
+                                        }
+
+                                    }
+
                                     <div class="attr-detail attr-size">
                                         <div class="attr-title">
                                             <strong><sup>*</sup>Size:</strong><span class="current-size">M</span>
@@ -104,7 +124,7 @@
                                             <a href="#" class="qty-up"><i class="fa fa-caret-up" aria-hidden="true"></i></a>
                                         </div>
                                         <div class="product-extra-link2">
-                                            <a class="addcart-link" href="#">Add to Cart</a>                                           
+                                            <a class="addcart-link" href="#">Add to Cart</a>
                                         </div>
                                     </div>
                                 </div>

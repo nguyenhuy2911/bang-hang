@@ -9,23 +9,23 @@ var Page = function (pageNumber, pageSize) {
     this.PageSize = pageSize;
 }
 
-var Get_Product_Groups_Request = function () {
+var Get_Online_Items_Model = function () {
     this.Page = new Page(0, 10);
 }
 
-var Get_Products_By_GroupId_Request = function () {
+var Get_Products_By_Item_Model = function () {
     this.Page = new Page(0, 10);
-    this.Product_Group_ID = $("#ProductGroup_ID").val();
+    this.Product_Group_ID = $("#ProductId").val();
 }
 
 var Products_CRUD_ViewModel = function () {
-    this.Product_ID = 0;
+    this.ProductId = 0;
     this.Product_Name = "";
     this.Sale_Price = 0;
     this.Quantity = 0;
     this.Unit_ID = "";
     this.Description = 0;
-    this.ProductGroup_ID = 0;
+
 }
 
 var ONLINE_ITEMS = function () {
@@ -101,7 +101,7 @@ ONLINE_ITEMS.prototype.get_Online_Items = function () {
             dataType: "JSON",
             type: 'POST',
             data: function () {
-                var request = new Get_Product_Groups_Request();
+                var request = new Get_Online_Items_Model();
                 request.Page = new Page($this.variable.pageIndex, $this.variable.pageSize);
                 return request;
             },
@@ -127,7 +127,7 @@ ONLINE_ITEMS.prototype.loadEditForm = function (strJsondata) {
     var data = JSON.parse(strJsondata);
     $("#div-crud-modal").loading();
     $("#div-crud-modal .modal-body").html("");
-    $("#div-crud-modal .modal-body").load("/online-items/online-item-detail?groupId=" + data.ProductGroup_ID, function () {
+    $("#div-crud-modal .modal-body").load("/online-items/online-item-detail?productId=" + data.Product_Level2, function () {
         $("#div-crud-modal").loading("stop");
         $("[view-when='update']").fadeIn();
     });
@@ -160,11 +160,11 @@ ONLINE_ITEMS.prototype.get_Product_ByItem = function () {
         autoWidth: false,
         columns: column,
         ajax: {
-            url: '/online-items/get-product-by-item',
+            url: '/online-items/get-products-by-item',
             dataType: "JSON",
             type: 'POST',
             data: function () {
-                var request = new Get_Products_By_GroupId_Request();
+                var request = new Get_Products_By_Item_Model();
                 request.Page = new Page($this.variable.getProductByItemPageIndex, $this.variable.getProductByItemPageSize);
                 return request;
             },
@@ -192,13 +192,13 @@ ONLINE_ITEMS.prototype.getSaveItem_RequestValue = function () {
     var editor_Description = tinymce.get('txt_Description');
     obj.Product_ID = formVal.Product_ID;
     obj.Description = htmlEncode(editor_Description.getContent());
-    obj.ProductGroup_ID = formVal.ProductGroup_ID
+    obj.ProductId = formVal.ProductId
     return obj;
 }
 
 ONLINE_ITEMS.prototype.getItem_Image_RequestValue = function () {
     var obj = {};
-    obj.Product_Id = $("#ProductGroup_ID").val();
+    obj.Product_Id = $("#ProductId").val();
     obj.Product_Name = $("#Product_Name").val();
     return obj;
 }

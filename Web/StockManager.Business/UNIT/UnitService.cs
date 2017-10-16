@@ -1,9 +1,9 @@
 ﻿using AutoMapper;
 using Common;
 using Common.Enum;
+using StockManager.Data.Model.Data;
 using StockManager.Data.Repository;
 using StockManager.Entity;
-using StockManager.Entity.DataAccess;
 using StockManager.Entity.Service.Contract;
 using System;
 using System.Collections.Generic;

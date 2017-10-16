@@ -7,7 +7,7 @@ using StockManager.Entity.Service.Contract;
 using System;
 using System.Collections.Generic;
 using Common.Enum;
-using StockManager.Entity.DataAccess;
+using StockManager.Data.Model.Data;
 
 namespace StockManager.Business
 {

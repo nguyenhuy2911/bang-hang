@@ -22,28 +22,27 @@ HOME.prototype.regisEvent = function () {
 HOME.prototype.Get_Newest_Items = function () {
     var $this = this;
     $.ajax({
-        type: "POST",
+        type: "GET",
         url: "/get-newest-items",
         dataType: "json",
         beforeSend: function () {
-            $(".div-newest-items").html("")
+            $(".div-newest-items").html(loaddingHtml);
         },
         success: function (response) {
-            var item = "";
+            var items = "";
             if (response != null && response.Results != null) {
                 $.each(response.Results, function (index, Obj) {
                     var image = "images-handle/get-image?path=" + Obj.ImagePath + "&w=275&h=356";
-                    item += '<div class="col-lg-2 col-md-4 col-sm-6 col-xs-12">' +
+                    items += '<div class="col-lg-2 col-md-4 col-sm-6 col-xs-12">' +
 										'<div class="item-pro-color">' +
 											'<div class="product-thumb">' +
 												'<a href="/detail" class="product-thumb-link">' +
 													'<img data-color="black" class="active" src="' + image + '" alt="">' +
-
 												'</a>' +
-                                                '<a href="/home/quick-view?product_Group_Id=' + Obj.ProductGroup_ID + '" class="quickview-link plus fancybox.iframe"><span>Xem nhanh</span></a>' +
+                                                '<a href="/home/quick-view?product_Group_Id=' + Obj.Product_Level2 + '" class="quickview-link plus fancybox.iframe"><span>Xem nhanh</span></a>' +
                                             '</div>' +
                                                 '<div class="product-info">' +
-                                                    '<h3 class="product-title"><a href="/detail">' + Obj.ProductGroup_Name + '</a></h3>' +
+                                                    '<h3 class="product-title"><a href="/detail">' + Obj.Product_Name + '</a></h3>' +
                                                     '<div class="product-price">' +
                                                         '<ins><span>' + Obj.Sale_Price + '</span></ins>' +
                                                         //'<del><span>$400.00</span></del>' +
@@ -57,8 +56,8 @@ HOME.prototype.Get_Newest_Items = function () {
                                             '</div>' +
                                         '</div>';
                 });
-                if (item.length > 0) {
-                    item += '<div class="col-lg-2 col-md-4 col-sm-6 col-xs-12">' +
+                if (items.length > 0) {
+                    items += '<div class="col-lg-2 col-md-4 col-sm-6 col-xs-12">' +
 											'<div class="product-thumb">' +
 												'<a href="/product" class="product-thumb-link see-more">' +
                                                     '<i class="material-icons">add</i>' +
@@ -66,9 +65,8 @@ HOME.prototype.Get_Newest_Items = function () {
                                             '</div>' +
                                      '</div>';
                 }
-
-                $(".div-newest-items").append(item);
             }
+            $(".div-newest-items").html(items);
         }
     });
 }

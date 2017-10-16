@@ -1,4 +1,4 @@
-using StockManager.Entity.DataAccess;
+using StockManager.Data.Model.Data;
 using System.Data.Entity.ModelConfiguration;
 
 namespace StockManager.Data.Models.Mapping

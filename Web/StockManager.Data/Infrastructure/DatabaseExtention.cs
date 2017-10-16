@@ -48,10 +48,16 @@ namespace StockManager.Data.Infrastructure
         {
             if (field.PropertyType == typeof(int))
                 return value.ReturnZeroIfNull();
+            if (field.PropertyType == typeof(Int32))
+                return value.ReturnZeroIfNull();
+            if (field.PropertyType == typeof(Int64))
+                return value.ReturnZeroIfNull();
+            if (field.PropertyType == typeof(decimal))
+                return value.ReturnZeroIfNull();
             if (field.PropertyType == typeof(string))
                 return value.ReturnEmptyIfNull();
             if (field.PropertyType == typeof(bool))
-                return value.ReturnNullIfDbNull();
+                return value.ReturnFalseIfNull();
 
             return value.ReturnNullIfDbNull();
         }

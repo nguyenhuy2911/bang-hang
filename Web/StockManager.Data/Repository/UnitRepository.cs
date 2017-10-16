@@ -1,5 +1,5 @@
 ﻿using StockManager.Data.Infrastructure;
-using StockManager.Entity.DataAccess;
+using StockManager.Data.Model.Data;
 namespace StockManager.Data.Repository
 {
     public interface IUniRepository : IRepositoryBase<UNIT>

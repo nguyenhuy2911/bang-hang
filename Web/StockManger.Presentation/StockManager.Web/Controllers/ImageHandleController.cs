@@ -9,6 +9,7 @@ namespace StockManager.Web.Controllers
 {
 
     [RoutePrefix("images-handle")]
+    [OutputCache(CacheProfile = "SystemCache", Location = System.Web.UI.OutputCacheLocation.Server)]
     public class ImageHandleController : Controller
     {
         [HttpGet]

@@ -1,6 +1,6 @@
 ﻿using StockManager.Data.Infrastructure;
 using StockManager.Entity;
-using StockManager.Entity.DataAccess;
+using StockManager.Data.Model.Data;
 using System;
 using System.Collections.Generic;
 using System.Linq;

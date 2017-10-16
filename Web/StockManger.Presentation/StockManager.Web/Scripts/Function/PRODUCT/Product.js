@@ -191,8 +191,6 @@ PRODUCT.prototype.saveProduct = function () {
                 $this.Product_DataTables.draw();
                 $("[view-when='update']").fadeIn();
             }
-
-
         }
     })
     .done(function (response) {
