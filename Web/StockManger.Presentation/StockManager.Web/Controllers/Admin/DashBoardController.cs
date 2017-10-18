@@ -8,7 +8,7 @@ namespace StockManager.Web.Controllers.Admin
 {
     public class DashBoardController : Controller
     {
-        // GET: DashBoard
+        [OutputCache(CacheProfile = "SystemCache", Location = System.Web.UI.OutputCacheLocation.Server)]
         public ActionResult Index()
         {
             return View("~/Views/Admin/DASHBOARD/DashBoard.cshtml");

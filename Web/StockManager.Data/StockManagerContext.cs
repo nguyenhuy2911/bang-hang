@@ -33,7 +33,7 @@ namespace StockManager.Data
         public DbSet<PRODUCT_GROUP> Product_Groups { get; set; }
         public DbSet<PRODUCT_PRICE> Product_Prices { get; set; }
         public DbSet<Product_Type> Product_Types { get; set; }
-        public DbSet<PRODUCT_UNIT> Product_Units { get; set; }
+       // public DbSet<PRODUCT_UNIT> Product_Units { get; set; }
         public DbSet<PROVIDER> Providers { get; set; }
         public DbSet<REFTYPE> RefTypes { get; set; }
         public DbSet<REPORT> Reports { get; set; }
@@ -86,12 +86,10 @@ namespace StockManager.Data
             modelBuilder.Configurations.Add(new FORMMap());
             modelBuilder.Configurations.Add(new INVENTORYMap());
             modelBuilder.Configurations.Add(new INVENTORY_DETAILMap());
-            modelBuilder.Configurations.Add(new PRODUCTMap());
             modelBuilder.Configurations.Add(new PRODUCT_BUILDMap());
             modelBuilder.Configurations.Add(new PRODUCT_GROUPMap());
             modelBuilder.Configurations.Add(new PRODUCT_PRICEMap());
             modelBuilder.Configurations.Add(new Product_TypeMap());
-            modelBuilder.Configurations.Add(new PRODUCT_UNITMap());
             modelBuilder.Configurations.Add(new PROVIDERMap());
             modelBuilder.Configurations.Add(new REFTYPEMap());
             modelBuilder.Configurations.Add(new REPORTMap());
@@ -117,13 +115,11 @@ namespace StockManager.Data
             modelBuilder.Configurations.Add(new SYS_USER_RULEMap());
             modelBuilder.Configurations.Add(new sysdiagramMap());
             modelBuilder.Configurations.Add(new TRANS_REFMap());
-            modelBuilder.Configurations.Add(new UNITMap());
             modelBuilder.Configurations.Add(new UNITCONVERTMap());
             modelBuilder.Configurations.Add(new ImagesMap());
             modelBuilder.Configurations.Add(new OrderMap());
             modelBuilder.Configurations.Add(new OrderItemMap());
             modelBuilder.Configurations.Add(new ProductAttributeMap());
-            modelBuilder.Configurations.Add(new Product_ProductAttribute_Mapping_Map());
             modelBuilder.Configurations.Add(new Product_Type_AttributeMap());
         }
     }

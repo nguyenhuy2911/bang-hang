@@ -10,11 +10,26 @@ table.dataTable th {
   -moz-box-sizing: content-box;
   box-sizing: content-box;
 }
+
 table.dataTable.nowrap th,
 table.dataTable.nowrap td {
   white-space: nowrap;
 }
-
+    table.dataTable td.dt-body-right {
+        text-align: right;
+    }
+    table.dataTable td.dt-body-left {
+        text-align: left;
+    }
+    table.dataTable td.dt-body-center {
+        text-align: center;
+    }
+    table.dataTable td.dt-body-justify {
+        text-align: justify;
+    }
+    table.dataTable td.dt-body-nowrap {
+        white-space:nowrap;
+    }
 div.dataTables_wrapper div.dataTables_length label {
   font-weight: normal;
   text-align: left;

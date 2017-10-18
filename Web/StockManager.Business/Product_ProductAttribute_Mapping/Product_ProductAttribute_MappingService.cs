@@ -32,13 +32,13 @@ namespace StockManager.Business
             var response = new CRUD_Product_ProductAttribute_Mapping_Response();
             try
             {
-                var deleteDatas = _IProduct_ProductAttribute_MappingRepository.GetPage(new Page(), o => o.ProductId.Equals(request.ProductId) && o.Type.Equals(request.Type), o=>o.Id)?.Results;
+                var deleteDatas = _IProduct_ProductAttribute_MappingRepository.GetPage(new Page(), o => o.ProductId == request.ProductId && o.Type == request.Type, o => o.Id)?.Results;
                 if (deleteDatas != null)
                 {
                     deleteDatas.ForEach(x =>
                     {
                         _IProduct_ProductAttribute_MappingRepository.Delete(x.Id);
-                    });                   
+                    });
                 }
                 var createData = Mapper.Map<CRUD_Product_ProductAttribute_Mapping_Request, Product_ProductAttribute_Mapping>(request);
                 _IProduct_ProductAttribute_MappingRepository.Add(createData);

@@ -51,7 +51,7 @@ namespace StockManager.Data.Infrastructure
                 var current = entity.GetPropValue(property.Name);
                 var original = exitEntity.GetPropValue(property.Name);
                 if (current != null && current != original)
-                {                    
+                {
                     exitEntity.GetType().GetProperty(property.Name).SetValue(exitEntity, current);
                 }
             }
@@ -105,7 +105,7 @@ namespace StockManager.Data.Infrastructure
             };
             try
             {
-               
+
                 var result = dbset.ToList();
                 var totalRow = dbset.Count();
                 return
@@ -137,6 +137,18 @@ namespace StockManager.Data.Infrastructure
                 {
                     Results = getDataAsync,
                     TotalRow = getTotalRowAsync
+                };
+        }
+        public virtual ResponseBase<List<T>> GetPage(Page pager, Expression<Func<T, bool>> where, Expression<Func<T, object>> include, Expression<Func<T, object>> order, bool ascending = false)
+        {
+
+            var query = dbset.Where(where).Include(include).SortBy(order, ascending).Skip(pager.Skip).Take(pager.PageSize);
+
+            return
+                new ResponseBase<List<T>>()
+                {
+                    Results = query.ToList(),
+                    TotalRow = dbset.Count()
                 };
         }
 

@@ -12,12 +12,13 @@ namespace StockManager.Data.Infrastructure
     {
         void Add(T entity);
         void Update(T entity);
-        void Update(T entity, object entityId);      
+        void Update(T entity, object entityId);
         void Delete(T entity);
         void Delete(object id);
         ResponseBase<T> GetById(long id);
         ResponseBase<T> GetById(string id);
         ResponseBase<List<T>> GetAll();
-        ResponseBase<List<T>>  GetPage(Page pager, Expression<Func<T, bool>> where = null, Expression<Func<T, object>> order = null, bool ascending = false);
+        ResponseBase<List<T>> GetPage(Page pager, Expression<Func<T, bool>> where = null, Expression<Func<T, object>> order = null, bool ascending = false);
+        ResponseBase<List<T>> GetPage(Page pager, Expression<Func<T, bool>> where, Expression<Func<T, object>> include, Expression<Func<T, object>> order, bool ascending = false);
     }
 }

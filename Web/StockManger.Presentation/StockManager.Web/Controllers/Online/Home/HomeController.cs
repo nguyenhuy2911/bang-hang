@@ -30,7 +30,7 @@ namespace StockManager.Web.Online.Controllers
         private readonly IProductAttributeService _IProductAttributeService;
 
         [Route]
-        [OutputCache(CacheProfile = "SystemCache", Location = System.Web.UI.OutputCacheLocation.Server)]
+        [OutputCache(CacheProfile = "SystemCache", Location = System.Web.UI.OutputCacheLocation.Client)]
         public ActionResult Index()
         {
             return View("~/Views/Online/Home/Index.cshtml");
@@ -69,9 +69,7 @@ namespace StockManager.Web.Online.Controllers
                 var listImg = this._IImagesService.Get_Images_By_RelateId(getImgRequest)?.Results;
 
                 if (listImg != null && listImg.Count > 0)
-                    model.ListImage = listImg;
-
-                
+                    model.ListImage = listImg;                
 
                 model.ListProduct = products.Results;
                 model.List_Similar_Products = Get_Similar_Products(products.Results[0].Product_Level1);
@@ -83,7 +81,15 @@ namespace StockManager.Web.Online.Controllers
                     };
                     var attributes = this._IProductAttributeService.Get_ProductAttributes_By_ProductId(similar.Product_Level2)?.Results;
                     if (attributes != null && attributes.Count > 0)
-                        similar.ProductAttributes = attributes;
+                    {
+                        similar.ProductAttributes = new List<ProductAttribute_DTO>();
+                        foreach (var item in attributes)
+                        {
+
+                            similar.ProductAttributes.Add(item.ProductAttribute);
+                        }
+                    }
+                        
                 }
             }
             return View("~/Views/Online/Home/QuickView.cshtml", model);

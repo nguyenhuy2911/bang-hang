@@ -21,7 +21,6 @@ namespace StockManager.Web.Framework.Mapping.Profiles.DomainToService
             CreateMap<PRODUCT, Get_Products_By_Id_DTO>();
 
             CreateMap<ResponseBase<List<PRODUCT>>, Get_Products_By_GroupId_Response>();
-
             CreateMap<ResponseBase<List<PRODUCT_GROUP>>, Get_Product_Groups_Response>();
             CreateMap<PRODUCT_GROUP, Get_Product_Groups_DTO>();
 

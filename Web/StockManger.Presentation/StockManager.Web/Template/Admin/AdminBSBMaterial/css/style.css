@@ -3094,8 +3094,9 @@ body {
     -o-transition: all 0.5s;
     -webkit-transition: all 0.5s;
     transition: all 0.5s;
-    font-family: 'Cuprum', sans-serif;
-    font-size: 15px;
+    font-family: 'Roboto', sans-serif;
+   
+    font-size: 14px;
 }
 
 h1,
@@ -6146,8 +6147,9 @@ section.content {
     .table-bordered thead tr th {
         padding: 10px;
         border: 1px solid #eee;
-        font-family: 'Oswald', sans-serif;
+        font-family: 'Saira Extra Condensed', sans-serif;
         font-weight: 300;
+        font-size:20px;
         text-align: center;
     }
 

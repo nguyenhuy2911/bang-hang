@@ -206,6 +206,7 @@ namespace StockManager.Web.Controllers
         /* ============================================================================================================================================= */
 
         [Route]
+        [OutputCache(CacheProfile = "SystemCache", Location = System.Web.UI.OutputCacheLocation.Client)]
         public ActionResult Index()
         {
             var model = new Products_ViewModel();
@@ -222,6 +223,7 @@ namespace StockManager.Web.Controllers
         }
 
         [Route("product-create-form")]
+        [OutputCache(CacheProfile = "SystemCache", Location = System.Web.UI.OutputCacheLocation.Server)]
         public ActionResult Product_New_Form()
         {
             var model = Get_Products_CRUD_ViewModel(null);
@@ -230,6 +232,7 @@ namespace StockManager.Web.Controllers
 
         [HttpGet]
         [Route("product-edit-form")]
+        [OutputCache(CacheProfile = "SystemCache", Location = System.Web.UI.OutputCacheLocation.Server)]
         public ActionResult Product_Edit_Form(Get_Products_DTO product)
         {
             var model = Get_Products_CRUD_ViewModel(product);
@@ -325,7 +328,7 @@ namespace StockManager.Web.Controllers
                                                TypeName = o.Key.Attrtibute_TypeName,
                                                ProductAttributes = response.Results?.Where(p => p.Attrtibute_Type.Equals(o.Key.Attrtibute_Type)).Select(p => new Get_ProductAttributes_DTO
                                                {
-                                                   Id = p.Id,
+                                                   Id = p.Attribute_Id,
                                                    Name = p.Attrtibute_Name,
                                                    Type = p.Attrtibute_Type,
                                                    TypeName = p.Attrtibute_TypeName,

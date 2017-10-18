@@ -79,30 +79,29 @@
                                     <div class="product-price">
                                         <ins><span>@_firstProduct.Sale_Price</span></ins>
                                     </div>
-                                    @if (Model.List_Similar_Products.Count > 0)
+                                    @if (Model.List_Similar_Products != null && Model.List_Similar_Products.Count > 0)
                                     {
                                         if (Model.List_Similar_Products.All(p => p.ProductAttributes != null && p.ProductAttributes.Count > 0))
                                         {
-                                            bool exitAttribute = Model.List_Similar_Products.Any(p => p.ProductAttributes.Any(o => o.Attrtibute_Type.Equals(ATTRIBUTE_TYPE.COLOR)));
+                                            bool exitAttribute = Model.List_Similar_Products.Any(p => p.ProductAttributes.Any(o => o.Type == ATTRIBUTE_TYPE.COLOR.ToString()));
                                             if (exitAttribute)
                                             {
                                                 <div class="attr-detail attr-color">
                                                     <div class="attr-title">
-                                                        <strong><sup>*</sup>Màu:</strong><span class="current-color">White</span>
+                                                        <strong><sup>*</sup>Màu:</strong><span class="current-color">@Model.List_Similar_Products[0].ProductAttributes[0].Name</span>
                                                     </div>
                                                     <ul class="list-filter color-filter">
                                                         @foreach (var similar in Model.List_Similar_Products)
                                                         {
-                                                            foreach (var attribute in similar.ProductAttributes.Where(o => o.Attrtibute_TypeName.Equals(ATTRIBUTE_TYPE.COLOR)))
+                                                            foreach (var attribute in similar.ProductAttributes.Where(o => o.Type.Equals(ATTRIBUTE_TYPE.COLOR.ToString())))
                                                             {
-                                                                <li><a href="#" data-color="Red"><span style="background:#ff596d"></span></a></li>
+                                                                <li><a href="#" data-color="@attribute.Name" title="@attribute.Name"><span style="background:@attribute.Description"></span></a></li>
                                                             }
                                                         }
                                                     </ul>
                                                 </div>
                                             }
                                         }
-
                                     }
 
                                     <div class="attr-detail attr-size">
@@ -139,13 +138,6 @@
     </div>
     <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1/jquery.js"></script>
     <script src="http://cdnjs.cloudflare.com/ajax/libs/jquery-mousewheel/3.0.6/jquery.mousewheel.min.js"></script>
-    @Scripts.Render("~/quickview/js")
-    @*<script>
-            $(document).ready(function () {
-                $('#myCarousel').carousel({
-                    interval: 10000
-                })
-            });
-        </script>*@
+    @Scripts.Render("~/quickview/js")    
 </body>
 </html>

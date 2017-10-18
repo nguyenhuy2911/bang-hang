@@ -13,12 +13,13 @@ namespace StockManager.Web.Framework.Mapping.Profiles.DomainToService
     public class ProductAttribute_Domain_To_Service : DomainToServiceMappingProfile
     {
         public ProductAttribute_Domain_To_Service()
-        {           
+        {
+            CreateMap<ProductAttribute, ProductAttribute_DTO>();            
             CreateMap<ResponseBase<List<ProductAttribute>>, Get_ProductAttribute_Types_Response>();
             CreateMap<ProductAttribute_Type, Get_ProductAttribute_Types_DTO>();
             CreateMap<ResponseBase<List<ProductAttribute>>, Get_ProductAttributes_Response>();
             CreateMap<ProductAttribute, Get_ProductAttributes_DTO>();
-            CreateMap<Product_ProductAttribute_Mapping, Product_ProductAttribute_Mapping_DTO>();
+          //  CreateMap<Product_ProductAttribute_Mapping, Product_ProductAttribute_Mapping_DTO>();
         }
     }
 }

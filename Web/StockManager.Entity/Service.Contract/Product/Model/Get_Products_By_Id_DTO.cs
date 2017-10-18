@@ -10,8 +10,8 @@ namespace StockManager.Entity.Service.Contract
     {
         public Get_Products_By_Id_DTO()
         {
-            Product_ProductAttribute_Mapping = new List<Product_ProductAttribute_Mapping_DTO>();
+        
         }
-        public  List<Product_ProductAttribute_Mapping_DTO> Product_ProductAttribute_Mapping { get; set; }
+       
     }
 }

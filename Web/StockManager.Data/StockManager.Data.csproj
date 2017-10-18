@@ -122,7 +122,6 @@
     <Compile Include="Models\Data\Table_DTO\PRODUCT_PRICE.cs" />
     <Compile Include="Models\Data\Table_DTO\Product_ProductAttribute_Mapping.cs" />
     <Compile Include="Models\Data\Table_DTO\Product_Type.cs" />
-    <Compile Include="Models\Data\Table_DTO\PRODUCT_UNIT.cs" />
     <Compile Include="Models\Data\Table_DTO\PROVIDER.cs" />
     <Compile Include="Models\Data\Table_DTO\REFTYPE.cs" />
     <Compile Include="Models\Data\Table_DTO\REPORT.cs" />
@@ -152,7 +151,6 @@
     <Compile Include="Models\Data\Table_DTO\UNITCONVERT.cs" />
     <Compile Include="Models\Mapping\OrderItemMap.cs" />
     <Compile Include="Models\Mapping\Product_Type_AttributeMap.cs" />
-    <Compile Include="Models\Mapping\Product_ProductAttribute_Mapping_Map.cs" />
     <Compile Include="Models\Mapping\ProductAttributeMap.cs" />
     <Compile Include="Models\Mapping\OrderMap.cs" />
     <Compile Include="Models\Mapping\ImagesMap.cs" />
@@ -178,12 +176,10 @@
     <Compile Include="Models\Mapping\FORMMap.cs" />
     <Compile Include="Models\Mapping\INVENTORYMap.cs" />
     <Compile Include="Models\Mapping\INVENTORY_DETAILMap.cs" />
-    <Compile Include="Models\Mapping\PRODUCTMap.cs" />
     <Compile Include="Models\Mapping\PRODUCT_BUILDMap.cs" />
     <Compile Include="Models\Mapping\PRODUCT_GROUPMap.cs" />
     <Compile Include="Models\Mapping\PRODUCT_PRICEMap.cs" />
     <Compile Include="Models\Mapping\Product_TypeMap.cs" />
-    <Compile Include="Models\Mapping\PRODUCT_UNITMap.cs" />
     <Compile Include="Models\Mapping\PROVIDERMap.cs" />
     <Compile Include="Models\Mapping\REFTYPEMap.cs" />
     <Compile Include="Models\Mapping\REPORTMap.cs" />
@@ -210,7 +206,6 @@
     <Compile Include="Models\Mapping\SYS_USER_RULEMap.cs" />
     <Compile Include="Models\Mapping\TRANS_REFMap.cs" />
     <Compile Include="Models\Mapping\UNITCONVERTMap.cs" />
-    <Compile Include="Models\Mapping\UNITMap.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="StoreProcedure\STORENAME.cs" />
   </ItemGroup>

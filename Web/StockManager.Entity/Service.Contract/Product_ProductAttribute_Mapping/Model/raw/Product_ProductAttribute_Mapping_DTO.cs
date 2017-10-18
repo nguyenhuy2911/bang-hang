@@ -6,7 +6,6 @@ namespace StockManager.Entity.Service.Contract
         {
            
         }
-
             
         public int Id { get; set; }
 
@@ -32,5 +31,7 @@ namespace StockManager.Entity.Service.Contract
 
         public string DefaultValue { get; set; }
         public string Type { get; set; }
+
+        public ProductAttribute_DTO ProductAttribute { get; set; }
     }
 }

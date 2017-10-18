@@ -81,6 +81,40 @@ PRODUCT.prototype.getProducts = function () {
                 return $div.html();
             }
         }
+        if (objColumn.data == "Unit_ID") {
+            objColumn.render = function (data, type, row, meta) {
+                if (row.UNIT != null)
+                    return row.UNIT.Unit_Name;
+                else
+                    return '';
+
+            }
+        }
+        if (objColumn.data == "Product_Name") {
+            objColumn.render = function (data, type, row, meta) {
+                var html = "<label>" + data + "</label> <br />";
+                var htmlColor = "";
+                var htmlSize = "";
+                if (row.Product_ProductAttribute_Mapping != null) {
+                    row.Product_ProductAttribute_Mapping.forEach(function (item, index) {
+                        if (item.ProductAttribute.Type == "COLOR") {
+                            htmlColor +=
+                                        "<div class='list-filter color-filter'>" +
+                                                "<a title=\'" + item.ProductAttribute.Name + "\'> <span style='background:" + item.ProductAttribute.Description + "'></span> </a>" +
+                                        "</div>";
+                        }
+                        if (item.ProductAttribute.Type == "SIZE") {
+                            htmlSize +=
+                                    "<div class='list-filter'>" +
+                                           "<a title=\'" + item.ProductAttribute.Name + "\'> <span>" + item.ProductAttribute.Name + "</span> </a>" +
+                                    "</div>";
+                        }
+                    })
+                }
+                return html + htmlColor + htmlSize;
+            }
+        }
+
         columnRender.push(objColumn);
     })
     $this.Product_DataTables = $('#product_list_item').DataTable({
@@ -146,7 +180,7 @@ PRODUCT.prototype.loadEditForm = function (strJsondata) {
             $("[view-when='update']").fadeIn();
         }
     });
-    
+
 }
 
 PRODUCT.prototype.getSaveProduct_RequestValue = function () {
@@ -285,7 +319,7 @@ PRODUCT.prototype.Get_Attributes_By_ProductType = function () {
             if (datas == null) {
                 return;
             }
-            $("#div_attribute").empty();
+            $("#div_attribute").html("");
             var html = "";
             $.each(datas, function (index, obj) {
                 var attributeHtml = "";

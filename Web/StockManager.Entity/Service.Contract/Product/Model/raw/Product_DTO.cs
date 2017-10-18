@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.ComponentModel;
 
 namespace StockManager.Entity.Service.Contract
@@ -61,5 +62,8 @@ namespace StockManager.Entity.Service.Contract
         public int? Product_Level3 { get; set; }
         public int? Product_Level4 { get; set; }
         public int? Product_Level5 { get; set; }
+
+        public virtual Unit_DTO UNIT { get; set; }
+        public virtual List<Product_ProductAttribute_Mapping_DTO> Product_ProductAttribute_Mapping { get; set; }
     }
 }

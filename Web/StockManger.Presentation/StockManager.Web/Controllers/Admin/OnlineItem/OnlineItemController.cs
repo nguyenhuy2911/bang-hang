@@ -17,6 +17,7 @@ namespace StockManager.Web.Controllers.Admin.OnlineItem
     [RoutePrefix("online-items")]
     public class OnlineItemController : BaseController
     {
+
         public OnlineItemController(IProductService productService, IImagesService imagesService)
         {
             this._IProductService = productService;
@@ -69,7 +70,7 @@ namespace StockManager.Web.Controllers.Admin.OnlineItem
         }
 
         [Route("online-item-detail")]
-        [OutputCache(CacheProfile = "SystemCache", Location = System.Web.UI.OutputCacheLocation.Server)]
+       // [OutputCache(CacheProfile = "SystemCache", Location = System.Web.UI.OutputCacheLocation.Server)]
         public ActionResult Item_Detail_Form(int productId)
         {
             var model = new Online_Item_Detail_ViewModel();

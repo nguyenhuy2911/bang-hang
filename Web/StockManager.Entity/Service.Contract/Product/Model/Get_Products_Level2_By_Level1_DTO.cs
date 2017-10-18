@@ -3,7 +3,7 @@ using System.Collections.Generic;
 
 namespace StockManager.Entity.Service.Contract
 {
-    public partial class Get_Products_Level2_By_Level1_DTO
+    public class Get_Products_Level2_By_Level1_DTO
     {
         public Get_Products_Level2_By_Level1_DTO()
         {
@@ -15,7 +15,7 @@ namespace StockManager.Entity.Service.Contract
         public decimal Sale_Price { get; set; }
         public string ImagePath { get; set; }
         public bool Active { get; set; }
-        public List<Product_ProductAttribute_Mapping_DTO> ProductAttributes { get; set; }
+        public List<ProductAttribute_DTO> ProductAttributes { get; set; }
 
     }
 }

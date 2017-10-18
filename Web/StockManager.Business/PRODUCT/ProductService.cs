@@ -80,6 +80,18 @@ namespace StockManager.Business
             var response = new CRUD_Product_Response();
             try
             {
+                if (request.Product_Level1.Equals(0))
+                {
+                    request.Product_Level1 = request.Product_ID;
+                }
+                if (request.Product_Level2.Equals(0))
+                {
+                    request.Product_Level2 = request.Product_ID;
+                }
+                if (request.Product_Level3.Equals(0))
+                {
+                    request.Product_Level3 = request.Product_ID;
+                }
                 var productParam = Mapper.Map<CRUD_Product_Request, Product_Update_Parameter>(request);
                 var saveStatus = this._IProductRepository.Update_Product(productParam);
                 if (saveStatus > 0)
@@ -111,7 +123,7 @@ namespace StockManager.Business
 
         public Get_Products_Response GetProducts(GetProducts_Request request)
         {
-            var products = _IProductRepository.GetPage(request.Page, w => true, x => x.Product_ID);
+            var products = _IProductRepository.Get_Products(request.Page);
 
             var retData = Mapper.Map<ResponseBase<List<PRODUCT>>, Get_Products_Response>(products);
             if (retData != null && retData.Results != null)

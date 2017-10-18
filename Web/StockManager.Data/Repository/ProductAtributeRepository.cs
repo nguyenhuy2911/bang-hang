@@ -37,11 +37,11 @@ namespace StockManager.Data.Repository
 
         public ResponseBase<List<Product_ProductAttribute_Mapping>> Get_Product_Attribute_By_ProductId(int product_Id)
         {
-            var data = DataContext.Set<Product_ProductAttribute_Mapping>().Where(p => p.ProductId ==product_Id).ToList();
+            var query = DataContext.Set<Product_ProductAttribute_Mapping>().Where(p => p.ProductId ==product_Id);
             return new ResponseBase<List<Product_ProductAttribute_Mapping>>()
             {
-                Results = data,
-                TotalRow = 0
+                Results = query.ToList(),
+                TotalRow = query.Count()
             };
         }
     }

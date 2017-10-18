@@ -15,6 +15,7 @@ namespace StockManager.Web.Framework.Mapping.Profiles.DomainToService
         public Unit_Domain_To_Service()
         {
             CreateMap<ResponseBase<List<UNIT>>, Get_Unit_Response>();
+            CreateMap<UNIT, Unit_DTO>();            
             CreateMap<UNIT, Get_Unit_DTO>();
         }
     }
