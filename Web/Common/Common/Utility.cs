@@ -40,13 +40,16 @@ namespace Common
         }
 
         public static T convertNumber<T>(Object value)
-        {
-            
+        {            
             CultureInfo ci = new CultureInfo("en-US");
             var result = (T)Convert.ChangeType(value, typeof(T), ci);
             return result;
         }
 
+        public static string NumberToString(this Object value)
+        {
+            return string.Format(CultureInfo.InvariantCulture, "{0:0,0}", value);
+        }
        
     }
 }

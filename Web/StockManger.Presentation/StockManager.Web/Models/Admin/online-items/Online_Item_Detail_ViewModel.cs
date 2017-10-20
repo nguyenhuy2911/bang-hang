@@ -13,30 +13,29 @@ namespace StockManager.Web.Models.Admin
 
         public string Product_Name { get; set; }      
        
-        public string Description { get; set; }
-        
-        public string ListImgJson { get; set; }
+        public string Description { get; set; }        
+       
         public string Item_By_Group_GridHeader { get; set; }
     }
 
     public class Items_B_yGroup_Grid_Column
     {
-        [TableHeader(title = "Id")]
+        [TableHeader(title = "Id", className = "dt-body-center")]
         public string Product_ID { get; set; }
 
         [TableHeader(title = "Tên sản phẩm")]
         public string Product_Name { get; set; }
 
-        [TableHeader(title = "Giá")]
+        [TableHeader(title = "Giá", className = "dt-body-right")]
         public string Sale_Price { set; get; }
 
-        [TableHeader(title = "Khối lượng")]
+        [TableHeader(title = "Khối lượng", className = "dt-body-right")]
         public string Quantity { get; set; }
 
-        [TableHeader(title = "Đơn vị tính")]
-        public string Unit_Name { get; set; }
+        [TableHeader(title = "Đơn vị tính", className = "dt-body-center")]
+        public string Unit_ID { get; set; }
 
-        [TableHeader(title = "Online")]
+        [TableHeader(title = "Online", className = "dt-body-center")]
         public string Publish { get; set; }
     }
 }

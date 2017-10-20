@@ -22,23 +22,14 @@ namespace StockManager.Web.Controllers.Admin.OnlineItem
         {
             this._IProductService = productService;
             this._IImagesService = imagesService;
-        }
 
+        }
         private readonly IProductService _IProductService;
         private readonly IImagesService _IImagesService;
 
-        private List<Images_DTO> Get_ListImage_By_Product_GroupId(string product_GroupId)
-        {
-            var request = new Get_Images_By_RelateId_Request()
-            {
-                Page = new Page(0, 100),
-                RelateId = product_GroupId
-            };
-            return this._IImagesService.Get_Images_By_RelateId(request)?.Results;
-        }
 
         [Route]
-        [OutputCache(CacheProfile = "SystemCache", Location = System.Web.UI.OutputCacheLocation.Server)]
+        [OutputCache(CacheProfile = "SystemCache", Location = System.Web.UI.OutputCacheLocation.Client)]
         public ActionResult Index()
         {
             var model = new Online_Items_ViewModel();
@@ -47,9 +38,10 @@ namespace StockManager.Web.Controllers.Admin.OnlineItem
 
         [HttpPost]
         [Route("get-online-items")]
-        public string Get_Online_Items(Get_Products_Level2_Request request)
+        public string Get_Online_Items(Get_Product_Groups_Request request)
         {
-            var response = _IProductService.Get_Products_Level2(request);
+            var response = _IProductService.Get_Product_Groups(request);
+
             string json = JsonConvert.SerializeObject(response);
             return json;
         }
@@ -57,7 +49,7 @@ namespace StockManager.Web.Controllers.Admin.OnlineItem
         [HttpPost]
         [Route("get-products-by-item")]
         public string Get_Products_By_Item(Get_Products_By_GroupId_Request model)
-         {
+        {
             var request = new Get_Products_By_GroupId_Request
             {
                 Page = model.Page,
@@ -70,7 +62,7 @@ namespace StockManager.Web.Controllers.Admin.OnlineItem
         }
 
         [Route("online-item-detail")]
-       // [OutputCache(CacheProfile = "SystemCache", Location = System.Web.UI.OutputCacheLocation.Server)]
+        [OutputCache(CacheProfile = "SystemCache", Location = System.Web.UI.OutputCacheLocation.Client)]
         public ActionResult Item_Detail_Form(int productId)
         {
             var model = new Online_Item_Detail_ViewModel();
@@ -81,9 +73,6 @@ namespace StockManager.Web.Controllers.Admin.OnlineItem
 
             model.ProductId = productId;
             model.Product_Name = product?.Product_Name;
-            model.Description = WebUtility.HtmlDecode(product?.Description);
-            var listImages = this.Get_ListImage_By_Product_GroupId(productId.ToString());
-            model.ListImgJson = JsonConvert.SerializeObject(listImages);
             return View("~/Views/Admin/Online-Items/Online_Item_Crud_Form.cshtml", model);
         }
 

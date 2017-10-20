@@ -16,25 +16,19 @@ namespace StockManager.Web.Framework.Mapping.Profiles.DomainToService
         {
             CreateMap<ResponseBase<List<PRODUCT>>, Get_Products_Response>();
             CreateMap<PRODUCT, Get_Products_DTO>();
-
+            CreateMap<PRODUCT, Product_DTO>();
+            
             CreateMap<ResponseBase<PRODUCT>, Get_Product_By_Id_Response>();
-            CreateMap<PRODUCT, Get_Products_By_Id_DTO>();
 
             CreateMap<ResponseBase<List<PRODUCT>>, Get_Products_By_GroupId_Response>();
             CreateMap<ResponseBase<List<PRODUCT_GROUP>>, Get_Product_Groups_Response>();
-            CreateMap<PRODUCT_GROUP, Get_Product_Groups_DTO>();
-
-            CreateMap<ResponseBase<List<Product_GetList_Level2>>, Get_Products_Level2_Response>();
-            CreateMap<Product_GetList_Level2, Get_Products_Level2_DTO>();
-
-            CreateMap<ResponseBase<List<Product_GetList_By_Level1>>, Product_GetList_By_Level1_Response>();
-            CreateMap<Product_GetList_By_Level1, Product_GetList_By_Level1_DTO>();
-
-            CreateMap<ResponseBase<List<Product_GetList_Level2_By_Level1>>, Get_Products_Level2_By_Level1_Response>();
-            CreateMap<Product_GetList_Level2_By_Level1, Get_Products_Level2_By_Level1_DTO>();
+            CreateMap<PRODUCT_GROUP, Product_Group_DTO>();
 
             CreateMap<ResponseBase<List<Product_GetList_By_GroupId>>, Get_Products_By_GroupId_Response>();
             CreateMap<Product_GetList_By_GroupId, Get_Products_By_GroupId_DTO>();
+
+            CreateMap<ResponseBase<List<OnlineItem_GetList>>, Get_OnlineItem_GetList_Response>();
+            CreateMap<OnlineItem_GetList, OnlineItem_GetList_DTO>();
         }
     }
 }

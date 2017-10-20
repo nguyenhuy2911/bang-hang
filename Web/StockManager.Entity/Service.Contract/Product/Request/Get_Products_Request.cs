@@ -8,6 +8,7 @@
         }
         public Page Page { get; set; }
 
-        public int Product_Level2 { get; set; }
+        public int Publish { get; set; }
+
     }
 }

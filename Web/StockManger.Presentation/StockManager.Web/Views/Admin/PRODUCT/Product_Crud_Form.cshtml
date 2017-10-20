@@ -51,21 +51,11 @@
                                         <div class="col-sm-3">
                                             <div class="form-group">
                                                 <div class="form-line combobox">
-                                                    <label class="form-label">Sản phẩm cấp 1</label>
-                                                    @Html.DropDownListFor(m => m.Product_Level1, Model.Product_Level1_List, new { @class = "form-control show-tick" })
+                                                    <label class="form-label">Sản phẩm gốc</label>
+                                                    @Html.DropDownListFor(m => m.Product_Group_ID, Model.Product_Group_List, new { @class = "form-control show-tick" })
 
                                                 </div>
-                                                @Html.ValidationMessageFor(model => model.Product_Level1, null, new { @class = "error" })
-                                            </div>
-                                        </div>
-                                        <div class="col-sm-3">
-                                            <div class="form-group">
-                                                <div class="form-line combobox">
-                                                    <label class="form-label">Sản phẩm cấp 2</label>
-                                                    @Html.GroupDropDownListFor(m => m.Product_Level2, Model.Product_Level2_List, new { @class = "form-control show-tick" })
-
-                                                </div>
-                                                @Html.ValidationMessageFor(model => model.Product_Level2, null, new { @class = "error" })
+                                                @Html.ValidationMessageFor(model => model.Product_Group_ID, null, new { @class = "error" })
                                             </div>
                                         </div>
                                     </div>
@@ -128,43 +118,153 @@
                         <div class="card">
                             <div class="header">
                                 <h2>
-                                    Thuộc tính
-                                    <small>Chọn thuộc tính sản phẩm</small>
+                                    Thông tin bổ sung
+                                    <small>Nhập  Thông tin bổ sung</small>
                                 </h2>
                             </div>
                             <div class="body">
-                                <div id="div_attribute" class="row clearfix">
 
+                                <div class="row clearfix">
+                                    <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                                        <!-- Nav tabs -->
+                                        <ul class="nav nav-tabs tab-col-purple" role="tablist">
+                                            <li role="presentation" class="active">
+                                                <a href="#tab-image" data-toggle="tab">
+                                                    <i class="material-icons">insert_photo</i> Hình ảnh
+                                                </a>
+                                            </li>
+                                            <li role="presentation">
+                                                <a href="#tab-description" data-toggle="tab">
+                                                    <i class="material-icons">format_indent_decrease</i> Mô tả
+                                                </a>
+                                            </li>
+                                            <li role="presentation">
+                                                <a href="#tab-attribute" data-toggle="tab">
+                                                    <i class="material-icons">insert_photo</i> Thuộc tính
+                                                </a>
+                                            </li>
+                                        </ul>
+                                        <!-- Tab panes -->
+                                        <div class="tab-content">
+                                            <div role="tabpanel" class="tab-pane fade in active" id="tab-image">
+                                                <div id="divFileUpload" class="dropzone" method="post">
+                                                    <div class="dz-message">
+                                                        <div class="drag-icon-cph">
+                                                            <i class="material-icons">touch_app</i>
+                                                        </div>
+                                                        <h3>Kéo thả hình ảnh.</h3>
+                                                        <em></em>
+                                                    </div>
+                                                    <div class="fallback">
+                                                        <input id="file_product_img_upload" name="file" type="file" multiple />
+                                                    </div>
+                                                </div>
+                                                <input type="button" id="btnSubmit" class="btn btn-primary btn-lg" value="Upload">
+                                            </div>
+                                            <div role="tabpanel" class="tab-pane fade " id="tab-description">
+                                                <textarea id="txt_Description" name="Description" class="txt-description">@Html.Raw(Model.Description)</textarea>
+                                            </div>
+                                            <div role="tabpanel" class="tab-pane fade " id="tab-attribute">
+                                                <div id="div_attribute" class="row clearfix">
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
                         </div>
                     </div>
                 </div>
+
             </div>
         </div>
     </div>
 </div>
 
-
 <script type="text/javascript">
+    var imgJson = '@Model.ListImgJson';
+    var listImage = (imgJson != null && imgJson !="") ? JSON.parse(htmlDecode(imgJson)) : null;
     $(function () {
         $.AdminBSB.input.activate();
         $.AdminBSB.dropdownMenu.activate();
         $.AdminBSB.select.activate();
-
-        $("#Product_Level1").change(function () {
-            _PRODUCT.getProductsLevel2_By_Level1_Id(this);
-        });
-
+        _PRODUCT.Get_Attributes_By_ProductType();
         $("#Product_Type_ID").change(function () {
-            _PRODUCT.Get_Attributes_By_ProductType(this);
+            _PRODUCT.Get_Attributes_By_ProductType();
         });
-
         $("#frm-crud-product").submit(function (e) {
-            e.preventDefault(); //STOP default action
+            e.preventDefault();
             _PRODUCT.saveProduct();
         });
+        $.AdminBSB.Tinymce.setup("textarea.txt-description");
 
+        var myDropzone = new Dropzone("div#divFileUpload", {
+            autoProcessQueue: false,
+            params: _PRODUCT.getItem_Image_RequestValue(),
+            url: "/images/product-upload",
+            acceptedFiles: "image/jpeg, image/jpg, image/png",
+            parallelUploads: 20,
+            maxFiles: 20,
+            addRemoveLinks: true,
+            thumbnailWidth: 240, //I want to change width to 100% instead
+            thumbnailHeight: 240,
+            init: function () {
+                var thisDropzone = this;
+                $('#btnSubmit').on('click', function (event) {
+                    event.preventDefault();
+                    thisDropzone.processQueue();
+                });
+                if (listImage!= null) {
+                    $.each(listImage, function (index, item) {
+
+                        var mockFile = {
+                            name: item.Name,
+                            id: item.Id,
+                            path: item.Path,
+                            //  size: 9000000,
+                            accepted: true,
+                            kind: 'image'
+                        };
+                        // Call the default addedfile event handler
+                        thisDropzone.options.addedfile.call(thisDropzone, mockFile);
+
+                        // And optionally show the thumbnail of the file:ss
+                        thisDropzone.files.push(mockFile);
+                        thisDropzone.createThumbnailFromUrl(mockFile, "images-handle/get-image?path=" + item.Path + "&w=240&h=240", function () {
+                            // thisDropzone.emit("complete", mockFile);
+                        }, "anonymous");
+                        thisDropzone.emit("success", mockFile);
+                        thisDropzone.emit("complete", mockFile);
+                        //    thisDropzone.uploadFiles([mockFile])
+
+                    });
+                }
+
+            },
+            removedfile: function (file, _) {
+                $.ajax({
+                    type: "POST",
+                    url: "/images/delete-image",
+                    data: { id: file.id },
+                    dataType: "json",
+                    success: function (response) {
+                        if (response.StatusCode != 0)
+                            showErrorMessage(response.StatusMessage, "#div-crud-modal");
+                        else {
+                            showSuccessMessage(response.StatusMessage, "#div-crud-modal");
+                            var _ref;
+                            if (file.previewElement) {
+                                if ((_ref = file.previewElement) != null) {
+                                    _ref.parentNode.removeChild(file.previewElement);
+                                }
+                            }
+                        }
+                    }
+                });
+                return this._updateMaxFilesReachedClass();
+            },
+
+        });
     })
 </script>
 @Scripts.Render("~/bundles/jqueryval")

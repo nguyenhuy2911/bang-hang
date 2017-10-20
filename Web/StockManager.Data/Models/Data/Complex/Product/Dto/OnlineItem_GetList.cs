@@ -3,19 +3,18 @@ using System.Collections.Generic;
 
 namespace StockManager.Data.Model.Data
 {
-    public partial class Product_GetList_Level2
+    public partial class OnlineItem_GetList
     {
-        public Product_GetList_Level2()
+        public OnlineItem_GetList()
         {
            
         }
         public int ProductId { get; set; }
-        public int Product_Level1 { get; set; }
-        public int Product_Level2 { get; set; }
+        public int ProductGroup_ID { get; set; }
         public string Product_Name { get; set; }
         public decimal Sale_Price { get; set; }
         public string ImagePath { get; set; }
-        public bool Active { get; set; }
+        public bool Publish { get; set; }
 
     }
 }

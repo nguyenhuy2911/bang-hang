@@ -77,8 +77,7 @@ ONLINE_ITEMS.prototype.get_Online_Items = function () {
             }
         }
         if (objColumn.data == "Action") {
-            objColumn.render = function (data, type, row, meta) {
-
+            objColumn.render = function (data, type, row, meta) {              
                 var $btnEdit = $("<a data-toggle='modal' data-target='#div-crud-modal'>")
                                        .addClass("btn btn-link btn-link-primary")
                                        .append('<i class="material-icons">mode_edit</i>')
@@ -127,7 +126,7 @@ ONLINE_ITEMS.prototype.loadEditForm = function (strJsondata) {
     var data = JSON.parse(strJsondata);
     $("#div-crud-modal").loading();
     $("#div-crud-modal .modal-body").html("");
-    $("#div-crud-modal .modal-body").load("/online-items/online-item-detail?productId=" + data.Product_Level2, function () {
+    $("#div-crud-modal .modal-body").load("/online-items/online-item-detail?productId=" + data.ProductGroup_ID, function () {
         $("#div-crud-modal").loading("stop");
         $("[view-when='update']").fadeIn();
     });
@@ -148,6 +147,38 @@ ONLINE_ITEMS.prototype.get_Product_ByItem = function () {
                                    .attr("onClick", "_ONLINE_ITEMS.updatePublish_Status(this, \'" + row.Product_ID + "\')");
                 var $div = $("<div>").append($checkbox).append($lablel);
                 return $div.html();
+            }
+        }
+        if (objColumn.data == "Unit_ID") {
+            objColumn.render = function (data, type, row, meta) {
+                if (row.UNIT != null)
+                    return row.UNIT.Unit_Name;
+                else
+                    return '';
+            }
+        }
+        if (objColumn.data == "Product_Name") {
+            objColumn.render = function (data, type, row, meta) {
+                var html = "<label>" + data + "</label> <br />";
+                var htmlColor = "";
+                var htmlSize = "";
+                if (row.Product_ProductAttribute_Mapping != null) {
+                    row.Product_ProductAttribute_Mapping.forEach(function (item, index) {
+                        if (item.ProductAttribute.Type == "COLOR") {
+                            htmlColor +=
+                                        "<div class='list-filter color-filter'>" +
+                                                "<a title=\'" + item.ProductAttribute.Name + "\'> <span style='background:" + item.ProductAttribute.Description + "'></span> </a>" +
+                                        "</div>";
+                        }
+                        if (item.ProductAttribute.Type == "SIZE") {
+                            htmlSize +=
+                                    "<div class='list-filter'>" +
+                                           "<a title=\'" + item.ProductAttribute.Name + "\'> <span>" + item.ProductAttribute.Name + "</span> </a>" +
+                                    "</div>";
+                        }
+                    })
+                }
+                return html + htmlColor + htmlSize;
             }
         }
         columnRender.push(objColumn);
@@ -189,17 +220,10 @@ ONLINE_ITEMS.prototype.get_Product_ByItem = function () {
 ONLINE_ITEMS.prototype.getSaveItem_RequestValue = function () {
     var obj = new Products_CRUD_ViewModel();
     var formVal = $("#frm-crud-product").serializeFormJSON();
-    var editor_Description = tinymce.get('txt_Description');
+   
     obj.Product_ID = formVal.Product_ID;
     obj.Description = htmlEncode(editor_Description.getContent());
     obj.ProductId = formVal.ProductId
-    return obj;
-}
-
-ONLINE_ITEMS.prototype.getItem_Image_RequestValue = function () {
-    var obj = {};
-    obj.Product_Id = $("#ProductId").val();
-    obj.Product_Name = $("#Product_Name").val();
     return obj;
 }
 

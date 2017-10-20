@@ -9,7 +9,7 @@ namespace StockManager.Web.Models.Online
     public class QuickViewModel
     {
         public List<Get_Products_By_GroupId_DTO> ListProduct { get; set; }
-        public List<Get_Products_Level2_By_Level1_DTO> List_Similar_Products{ get; set; }
+        public List<Product_DTO> List_Similar_Products{ get; set; }
         public List<Images_DTO> ListImage { get; set; }
         
     }

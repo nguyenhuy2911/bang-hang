@@ -7,10 +7,7 @@ using StockManager.Entity;
 using StockManager.Entity.Service.Contract;
 using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Linq.Expressions;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace StockManager.Business
 {
@@ -39,7 +36,7 @@ namespace StockManager.Business
                 if (request.Active == (int)ACTIVE.ACTIVE)
                     condition = c => c.Active.Equals(true);
 
-                var units = _IUniRepository.GetPage(request.Page, condition, o=>o.Unit_Name);
+                var units = _IUniRepository.GetPage(request.Page, condition, o => o.Unit_Name);
                 retData = Mapper.Map<ResponseBase<List<UNIT>>, Get_Unit_Response>(units);
                 return retData;
             }
@@ -48,7 +45,7 @@ namespace StockManager.Business
                 retData = new Get_Unit_Response();
                 return retData;
             }
-            
+
         }
     }
 }

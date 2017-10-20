@@ -38,20 +38,16 @@ namespace StockManager.Web.Models.Admin
         [Required(ErrorMessage = "Đơn vị tính không được để trống")]
         public string Unit_ID { get; set; }
 
-        [Required(ErrorMessage = "Chọn sản phẩm cấp 1")]
-        public int Product_Level1 { get; set; }
-
-        [Required(ErrorMessage = "Chọn sản phẩm cấp 2")]
-        public int Product_Level2 { get; set; }
+        [Required(ErrorMessage = "Chọn sản phẩm gốc")]
+        public int Product_Group_ID { get; set; }
 
         [Required(ErrorMessage = "Chọn loại sản phẩm")]
         public int Product_Type_ID { get; set; }
-
+        public string Description { get; set; }
+        public string ListImgJson { get; set; }
         public List<SelectListItem> UnitList { get; set; }
-        public SelectList Product_Level1_List { get; set; }
-        public List<SelectList_Group> Product_Level2_List { get; set; }
+        public SelectList Product_Group_List { get; set; }
         public List<SelectListItem> Product_Type_List { get; set; }
-
         public List<Get_ProductAttribute_Types_DTO> AtributeType_List { get; set; }
 
     }

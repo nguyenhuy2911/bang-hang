@@ -50,44 +50,7 @@
                                             <table id="list_item_by_group" class="table table-bordered table-striped table-hover js-basic-example dataTable"></table>
                                         </div>
                                     </div>
-                                    <div class="row clearfix">
-                                        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
-                                            <!-- Nav tabs -->
-                                            <ul class="nav nav-tabs tab-col-purple" role="tablist">
-                                                <li role="presentation" class="active">
-                                                    <a href="#tab-image" data-toggle="tab">
-                                                        <i class="material-icons">insert_photo</i> Hình ảnh
-                                                    </a>
-                                                </li>
-                                                <li role="presentation">
-                                                    <a href="#tab-description" data-toggle="tab">
-                                                        <i class="material-icons">format_indent_decrease</i> Mô tả
-                                                    </a>
-                                                </li>
-                                            </ul>
-                                            <!-- Tab panes -->
-                                            <div class="tab-content">
-                                                <div role="tabpanel" class="tab-pane fade in active" id="tab-image">
-                                                    <div id="divFileUpload" class="dropzone" method="post">
-                                                        <div class="dz-message">
-                                                            <div class="drag-icon-cph">
-                                                                <i class="material-icons">touch_app</i>
-                                                            </div>
-                                                            <h3>Kéo thả hình ảnh.</h3>
-                                                            <em></em>
-                                                        </div>
-                                                        <div class="fallback">
-                                                            <input id="file_product_img_upload" name="file" type="file" multiple />
-                                                        </div>
-                                                    </div>
-                                                    <input type="button" id="btnSubmit" class="btn btn-primary btn-lg" value="Upload">
-                                                </div>
-                                                <div role="tabpanel" class="tab-pane fade " id="tab-description">
-                                                    <textarea id="txt_Description" name="Description" class="txt-description">@Html.Raw(Model.Description)</textarea>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
+                                  
                                 </div>
                             </div>
                         </div>
@@ -100,80 +63,11 @@
 </div>
 
 <script type="text/javascript">
-    var listImage = JSON.parse(htmlDecode('@Model.ListImgJson'));
     var item_By_Group_GridHeader = JSON.parse(htmlDecode('@Model.Item_By_Group_GridHeader'));
     $(function () {
         $.AdminBSB.input.activate();
         $.AdminBSB.dropdownMenu.activate();
         $.AdminBSB.select.activate();
-        $.AdminBSB.Tinymce.setup("textarea.txt-description");
-
-        var myDropzone = new Dropzone("div#divFileUpload", {
-            autoProcessQueue: false,
-            params: _ONLINE_ITEMS.getItem_Image_RequestValue(),
-            url: "/images/product-upload",
-            acceptedFiles: "image/jpeg, image/jpg, image/png",
-            parallelUploads: 20,
-            maxFiles: 20,
-            addRemoveLinks: true,
-            thumbnailWidth: 240, //I want to change width to 100% instead
-            thumbnailHeight: 240,
-            init: function () {
-                var thisDropzone = this;
-                $('#btnSubmit').on('click', function (event) {
-                    event.preventDefault();
-                    thisDropzone.processQueue();
-                });
-
-                $.each(listImage, function (index, item) {
-
-                    var mockFile = {
-                        name: item.Name,
-                        id: item.Id,
-                        path: item.Path,
-                        //  size: 9000000,
-                        accepted: true,
-                        kind: 'image'
-                    };
-                    // Call the default addedfile event handler
-                    thisDropzone.options.addedfile.call(thisDropzone, mockFile);
-
-                    // And optionally show the thumbnail of the file:ss
-                    thisDropzone.files.push(mockFile);
-                    thisDropzone.createThumbnailFromUrl(mockFile, "images-handle/get-image?path=" + item.Path + "&w=240&h=240", function () {
-                        // thisDropzone.emit("complete", mockFile);
-                    }, "anonymous");
-                    thisDropzone.emit("success", mockFile);
-                    thisDropzone.emit("complete", mockFile);
-                    //    thisDropzone.uploadFiles([mockFile])
-
-                });
-            },
-            removedfile: function (file, _) {
-                $.ajax({
-                    type: "POST",
-                    url: "/images/delete-image",
-                    data: { id: file.id },
-                    dataType: "json",
-                    success: function (response) {
-                        if (response.StatusCode != 0)
-                            showErrorMessage(response.StatusMessage, "#div-crud-modal");
-                        else {
-                            showSuccessMessage(response.StatusMessage, "#div-crud-modal");
-                            var _ref;
-                            if (file.previewElement) {
-                                if ((_ref = file.previewElement) != null) {
-                                    _ref.parentNode.removeChild(file.previewElement);
-                                }
-                            }
-                        }
-                    }
-                });
-                return this._updateMaxFilesReachedClass();
-            },
-
-        });
-
         $("#frm-crud-product").submit(function (e) {
             e.preventDefault();
             _ONLINE_ITEMS.saveItem();

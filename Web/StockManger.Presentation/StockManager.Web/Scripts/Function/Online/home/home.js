@@ -24,49 +24,12 @@ HOME.prototype.Get_Newest_Items = function () {
     $.ajax({
         type: "GET",
         url: "/get-newest-items",
-        dataType: "json",
         beforeSend: function () {
             $(".div-newest-items").html(loaddingHtml);
         },
-        success: function (response) {
-            var items = "";
-            if (response != null && response.Results != null) {
-                $.each(response.Results, function (index, Obj) {
-                    var image = "images-handle/get-image?path=" + Obj.ImagePath + "&w=275&h=356";
-                    items += '<div class="col-lg-2 col-md-4 col-sm-6 col-xs-12">' +
-										'<div class="item-pro-color">' +
-											'<div class="product-thumb">' +
-												'<a href="/detail" class="product-thumb-link">' +
-													'<img data-color="black" class="active" src="' + image + '" alt="">' +
-												'</a>' +
-                                                '<a href="/home/quick-view?product_Group_Id=' + Obj.Product_Level2 + '" class="quickview-link plus fancybox.iframe"><span>Xem nhanh</span></a>' +
-                                            '</div>' +
-                                                '<div class="product-info">' +
-                                                    '<h3 class="product-title"><a href="/detail">' + Obj.Product_Name + '</a></h3>' +
-                                                    '<div class="product-price">' +
-                                                        '<ins><span>' + Obj.Sale_Price + '</span></ins>' +
-                                                        //'<del><span>$400.00</span></del>' +
-                                                    '</div>' +
-                                                    '<div class="product-extra-link">' +
-                                                        '<a href="#" class="addcart-link_"><i class="fa fa-shopping-basket" aria-hidden="true"></i>Mua ngay<span>Mua ngay</span></a>' +
-                                                       // '<a href="#" class="wishlist-link"><i class="fa fa-heart" aria-hidden="true"></i><span>Wishlist</span></a>' +
-                                                       // '<a href="#" class="compare-link"><i class="fa fa-refresh" aria-hidden="true"></i><span>Compare</span></a>' +
-                                                    '</div>' +
-                                                '</div>' +
-                                            '</div>' +
-                                        '</div>';
-                });
-                if (items.length > 0) {
-                    items += '<div class="col-lg-2 col-md-4 col-sm-6 col-xs-12">' +
-											'<div class="product-thumb">' +
-												'<a href="/product" class="product-thumb-link see-more">' +
-                                                    '<i class="material-icons">add</i>' +
-                                                '</a>' +
-                                            '</div>' +
-                                     '</div>';
-                }
-            }
-            $(".div-newest-items").html(items);
+        success: function (html) {
+            $(".div-newest-items").html(html);
+           
         }
     });
 }

@@ -16,9 +16,7 @@ namespace StockManager.Data.Repository
         ResponseBase<List<PRODUCT>> Get_Products(Page page);
         ResponseBase<List<PRODUCT_GROUP>> Get_Product_Groups(Product_Group_GetList_Parameter parameterObj);
         ResponseBase<List<Product_GetList_By_GroupId>> Get_Products_By_GroupId(Product_Get_By_Product_Group_ID_Parameter parameterObj);
-        ResponseBase<List<Product_GetList_By_Level1>> Product_GetList_By_Level1(Product_GetList_By_Level1_Parameter parameterObj);
-        ResponseBase<List<Product_GetList_Level2>> Product_GetList_Level2(Product_GetList_Level2_Parameter parameterObj);
-        ResponseBase<List<Product_GetList_Level2_By_Level1>> Product_GetList_Level2_By_Level1(Product_GetList_Level2_By_Level1_Parameter parameterObj);
+        ResponseBase<List<OnlineItem_GetList>> Get_OnlineItem_GetList(OnlineItem_GetList_Parameter parameterObj);
         int Update_Product(Product_Update_Parameter parameter);
 
     }
@@ -69,40 +67,19 @@ namespace StockManager.Data.Repository
                 TotalRow = rowCount
             };
         }
-
-        public ResponseBase<List<Product_GetList_By_Level1>> Product_GetList_By_Level1(Product_GetList_By_Level1_Parameter parameterObj)
+     
+        public ResponseBase<List<OnlineItem_GetList>> Get_OnlineItem_GetList(OnlineItem_GetList_Parameter parameterObj)
         {
             int rowCount = 0;
-            var datas = DataContext.GetListData_By_Stored<Product_GetList_By_Level1, Product_GetList_By_Level1_Parameter>(STORENAME.PRODUCT_GetList_By_Level1, parameterObj, ref rowCount);
-            return new ResponseBase<List<Product_GetList_By_Level1>>()
+            var datas = DataContext.GetListData_By_Stored<OnlineItem_GetList, OnlineItem_GetList_Parameter>(STORENAME.OnlineItem_GetList, parameterObj, ref rowCount);
+            return new ResponseBase<List<OnlineItem_GetList>>()
             {
                 Results = datas,
                 TotalRow = rowCount
             };
         }
 
-        public ResponseBase<List<Product_GetList_Level2>> Product_GetList_Level2(Product_GetList_Level2_Parameter parameterObj)
-        {
-            int rowCount = 0;
-            var datas = DataContext.GetListData_By_Stored<Product_GetList_Level2, Product_GetList_Level2_Parameter>(STORENAME.PRODUCT_GetList_Level2, parameterObj, ref rowCount);
-            return new ResponseBase<List<Product_GetList_Level2>>()
-            {
-                Results = datas,
-                TotalRow = rowCount
-            };
-        }
-
-        public ResponseBase<List<Product_GetList_Level2_By_Level1>> Product_GetList_Level2_By_Level1(Product_GetList_Level2_By_Level1_Parameter parameterObj)
-        {
-            int rowCount = 0;
-            var datas = DataContext.GetListData_By_Stored<Product_GetList_Level2_By_Level1, Product_GetList_Level2_By_Level1_Parameter>(STORENAME.PRODUCT_GetList_Level2_By_Level1, parameterObj, ref rowCount);
-            return new ResponseBase<List<Product_GetList_Level2_By_Level1>>()
-            {
-                Results = datas,
-                TotalRow = rowCount
-            };
-        }
-
+       
         public int Update_Product(Product_Update_Parameter parameter)
         {
             var data = this.Update_ByStore<Product_Update_Parameter>(parameter, STORENAME.PRODUCT_Update);

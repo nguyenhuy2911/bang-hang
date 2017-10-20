@@ -29,7 +29,9 @@ namespace StockManager.Entity.Service.Contract
         [Required(ErrorMessage = "Đơn vị tính không được để trống")]
         public string Unit_ID { get; set; }
         public int? Product_Type_ID { get; set; }
-        public int Product_Group_ID { get; set; }
+
+        [Required(ErrorMessage = "Chọn sản phẩm gốc")]
+        public int? Product_Group_ID { get; set; }
         public int Product_Level1 { get; set; }
         public int Product_Level2 { get; set; }
         public int Product_Level3 { get; set; }

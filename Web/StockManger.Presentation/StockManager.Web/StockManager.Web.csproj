@@ -160,6 +160,7 @@
     <Compile Include="Models\INVENTORY\INVENTORY_New_UpDate_Form_Model.cs" />
     <Compile Include="Models\Admin\Product\Products_CRUD_ViewModel.cs" />
     <Compile Include="Models\Admin\Images\ProductImg_Upload_Modal.cs" />
+    <Compile Include="Models\Online\Home\NewestItemsModel.cs" />
     <Compile Include="Models\Online\Home\QuickViewModel.cs" />
     <Compile Include="Models\SelectList_Group.cs" />
     <Compile Include="Models\WAREHOUSETRANSFER\WAREHOUSETRANSFER_Form_Model.cs" />
@@ -4129,6 +4130,7 @@
     <Content Include="Views\Shared\Online\_Footer.cshtml" />
     <Content Include="Views\Online\Home\QuickView.cshtml" />
     <Content Include="Views\Online\Home\Detail.cshtml" />
+    <Content Include="Views\Online\Home\_Home_NewestItems.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

@@ -91,12 +91,10 @@
     <Compile Include="Models\Data\Complex\ProductType_Atribute\QueryParameters\ProductType_Attribute_Get_By_ProductType_Id.cs" />
     <Compile Include="Models\Data\Complex\Product\Dto\Product_GetList_By_GroupId.cs" />
     <Compile Include="Models\Data\Complex\Product\Dto\Product_GetList_By_Level1.cs" />
-    <Compile Include="Models\Data\Complex\Product\Dto\Product_GetList_Level2.cs" />
+    <Compile Include="Models\Data\Complex\Product\Dto\OnlineItem_GetList.cs" />
     <Compile Include="Models\Data\Complex\Product\Dto\Product_GetList_Level2_By_Level1.cs" />
     <Compile Include="Models\Data\Complex\Product\Dto\PRODUCT_GROUP.cs" />
-    <Compile Include="Models\Data\Complex\Product\QueryPrameters\Product_GetList_By_Level1_Parameter.cs" />
-    <Compile Include="Models\Data\Complex\Product\QueryPrameters\Product_GetList_Level2_Parameter.cs" />
-    <Compile Include="Models\Data\Complex\Product\QueryPrameters\Product_GetList_Level2_By_Level1_Parameter.cs" />
+    <Compile Include="Models\Data\Complex\Product\QueryPrameters\OnlineItem_GetList_Parameter.cs" />
     <Compile Include="Models\Data\Complex\Product\QueryPrameters\Product_Get_By_Product_Group_ID_Parameter.cs" />
     <Compile Include="Models\Data\Complex\Product\QueryPrameters\Product_Group_GetList_Parameter.cs" />
     <Compile Include="Models\Data\Complex\Product\QueryPrameters\Product_Update_Parameter.cs" />
