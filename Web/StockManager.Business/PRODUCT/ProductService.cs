@@ -8,7 +8,8 @@ using System;
 using System.Collections.Generic;
 using Common.Enum;
 using StockManager.Data.Model.Data;
-
+using System.Linq.Expressions;
+using Common;
 namespace StockManager.Business
 {
     public interface IProductService
@@ -139,11 +140,19 @@ namespace StockManager.Business
         public Get_Products_Response Get_Products_By_GroupId(Get_Products_By_GroupId_Request request)
         {
 
-            var _params = Mapper.Map<Get_Products_By_GroupId_Request, Product_Get_By_Product_Group_ID_Parameter>(request);
+            // var _params = Mapper.Map<Get_Products_By_GroupId_Request, Product_Get_By_Product_Group_ID_Parameter>(request);
             // param.Offset = request.Page.Skip;
             // param.Next = request.Page.PageSize;
             //var data = _IProductRepository.Get_Products_By_GroupId(_params);
-            var data = _IProductRepository.GetPage(request.Page, p => p.Product_Group_ID == request.Product_Group_ID, o => o.Product_ID, false);
+            Expression<Func<PRODUCT, bool>> condition = c => true;
+            if (!string.IsNullOrEmpty(request.Product_Group_ID.ToString()))
+                condition = condition.And(c => c.Product_Group_ID == request.Product_Group_ID);
+            if (request.Publish == (int)ACTIVE.ACTIVE)
+                condition = condition.And(c => c.Publish == true);
+            if (request.Publish == (int)ACTIVE.UNACTIVE)
+                condition = condition.And(c => c.Publish == false);
+
+            var data = _IProductRepository.GetPage(request.Page, condition, o => o.Product_ID, false);
             var retData = Mapper.Map<ResponseBase<List<PRODUCT>>, Get_Products_Response>(data);
             if (retData != null && retData.Results != null)
                 retData.StatusCode = (int)RESULT_STATUS_CODE.SUCCESS;

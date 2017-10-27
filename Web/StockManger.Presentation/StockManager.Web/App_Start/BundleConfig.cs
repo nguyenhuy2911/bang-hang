@@ -119,10 +119,11 @@ namespace StockManager.Web
                         "~/Content/site/online/css/color.css",
                         "~/Content/site/online/css/theme.css",
                         "~/Content/site/online/css/responsive.css",
-                        "~/Content/site/online/css/browser.css"
+                        "~/Content/site/online/css/browser.css",
+                        "~/Content/site/online/css/custom.css"
            ));
 
-            // ----------------------------- Common ----------------------------------------------- //
+            // ----------------------------- js ----------------------------------------------- //
 
             bundles.Add(new ScriptBundle("~/script/js").Include(
                         "~/Content/site/online/js/jquery.js",
@@ -131,6 +132,8 @@ namespace StockManager.Web
                         "~/Content/site/online/js/libs/jquery.fancybox.js",
                         "~/Content/site/online/js/libs/jquery-ui.min.js",
                         "~/Content/site/online/js/libs/owl.carousel.js",
+                        "~/Content/site/online/js/libs/jquery.jcarousellite.js",
+                        "~/Content/site/online/js/libs/jquery.elevatezoom.js",
                         "~/Content/site/online/js/libs/jquery.mCustomScrollbar.js",
                         "~/Content/site/online/js/libs/TimeCircles.js",
                         "~/Content/site/online/js/libs/bootstrap.min.js",

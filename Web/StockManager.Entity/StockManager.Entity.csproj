@@ -93,7 +93,6 @@
     <Compile Include="Service.Contract\Product\Request\CRUD_Product_Request.cs" />
     <Compile Include="Service.Contract\Product\Request\Get_Products_Request.cs" />
     <Compile Include="Service.Contract\Product\Response\Get_Products_Response.cs" />
-    <Compile Include="Service.Contract\Product\Model\Get_Products_DTO.cs" />
     <Compile Include="Infrastructure\ResponseBase.cs" />
     <Compile Include="Infrastructure\RequestBase.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

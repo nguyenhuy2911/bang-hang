@@ -10,19 +10,14 @@
         <div class="col-lg-2 col-md-4 col-sm-6 col-xs-12">
             <div class="item-pro-color">
                 <div class="product-thumb">
-
-                    <a href="/detail" class="product-thumb-link">
-
+                    <a href="/detail/@item.ProductId" class="product-thumb-link">
                         <img data-color="black" class="active" src="@image" alt="">
-
                     </a>
-                    <a href="/home/quick-view?productId=@item.ProductId" class="quickview-link plus fancybox.iframe"><span>Xem nhanh</span></a>
-
+                    <a href="/item/quick-view?product_Id=@item.ProductId" class="quickview-link plus fancybox.iframe"><span>Xem nhanh</span></a>
                 </div>
                 <div class="product-info">
-
                     <h3 class="product-title">
-                        <a href="/detail">@item.Product_Name </a>
+                        <a href="/detail/@item.ProductId">@item.Product_Name </a>
                     </h3>
                     <div class="product-price">
 
@@ -48,7 +43,7 @@
 
         <div class="product-thumb">
 
-            <a href="/product" class="product-thumb-link see-more">
+            <a href="/item" class="product-thumb-link see-more">
 
                 <i class="material-icons">add</i>
 

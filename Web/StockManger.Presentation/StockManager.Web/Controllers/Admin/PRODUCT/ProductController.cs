@@ -137,7 +137,7 @@ namespace StockManager.Web.Controllers
                 Unit_ID = model.Unit_ID,
                 Product_Type_ID = model.Product_Type_ID,
                 Product_Group_ID = model.Product_Group_ID,
-                Description = model.Description
+                Description = WebUtility.HtmlEncode(model.Description)
 
             };
             var response = _IProductService.CreateProduct(request);
@@ -162,7 +162,7 @@ namespace StockManager.Web.Controllers
                 Unit_ID = model.Unit_ID,
                 Product_Type_ID = model.Product_Type_ID,
                 Product_Group_ID = model.Product_Group_ID,
-                Description = model.Description
+                Description = WebUtility.HtmlEncode(model.Description)
             };
             var response = _IProductService.UpdateProduct(request);
             if (response?.StatusCode == (int)RESULT_STATUS_CODE.SUCCESS)

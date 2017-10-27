@@ -10,6 +10,7 @@ namespace StockManager.Entity.Service.Contract
     {        
         public string RelateId { get; set; }
         public Page Page { get; set; }
+        public string Type { get; set; }
 
     }
 }

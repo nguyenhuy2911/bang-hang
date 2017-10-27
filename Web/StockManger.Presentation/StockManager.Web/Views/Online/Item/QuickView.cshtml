@@ -1,0 +1,145 @@
+﻿@model StockManager.Web.Models.Online.ItemDetailViewModel
+@using StockManager.Entity.Service.Contract
+@using Common
+@using Common.Enum
+@{
+
+    var current_Product_Atributes = Model.Item.Product_ProductAttribute_Mapping.Select(p => p.ProductAttribute);
+    var current_Product_Color = current_Product_Atributes.Where(p => p.Type == ATTRIBUTE_TYPE.COLOR.ToString()).FirstOrDefault();
+    var current_Product_Size = current_Product_Atributes.Where(p => p.Type == ATTRIBUTE_TYPE.SIZE.ToString()).FirstOrDefault();
+}
+<html lang="en-US" class="">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="Kuteshop is new Html theme that we have designed to help you transform your store into a beautiful online showroom. This is a fully responsive Html theme, with multiple versions for homepage and multiple templates for sub pages as well">
+    <meta name="keywords" content="kuteshop,7uptheme">
+    <meta name="robots" content="noodp,index,follow">
+    <meta name="revisit-after" content="1 days">
+    <title>Xem nhanh</title>
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans:400,300,700" rel="stylesheet" type="text/css">
+    @Styles.Render("~/quickview/css")
+    <style type="text/css">
+        .fancybox-margin {
+            margin-right: 17px;
+        }
+    </style>
+</head>
+<body style="background: rgb(244, 244, 244); overflow-x: hidden;">
+    <div class="wrap">
+        <div id="content">
+            <div class="content-page">
+                <div class="container">
+                    <div class="product-quickview">
+                        <div class="row">
+                            <div class="col-md-5 col-sm-6 col-xs-12">
+                                <div class="detail-gallery">
+                                    <div class="mid">
+                                        @{
+                                            string bigImgSlider = Model.ListImage != null ? Model.ListImage[0].Path : "";
+                                        }
+                                        <img src="~/images-handle/get-image?path=@(bigImgSlider)&w=330&h=360" data-zoom-image="../images-handle/get-image?path=@(bigImgSlider)&w=430&h=460" alt="">
+                                    </div>
+                                    <div class="gallery-control">
+                                        <div id="detail-item-slider" class="owl-carousel">
+                                            <!-- Carousel items -->
+                                            @{
+                                                if (Model.ListImage != null)
+                                                {
+                                                    int count = 0;
+                                                    foreach (var image in Model.ListImage)
+                                                    {
+                                                        string active = "";
+                                                        active = count == 0 ? "active" : "";
+
+                                                        <div class="item @active">
+                                                            <div class="row-fluid">
+                                                                <a href="#" class="thumbnail" data-image="../images-handle/get-image?path=@(image.Path)&w=330&h=360" data-zoom-image="../images-handle/get-image?path=@(image.Path)&w=530&h=560">
+                                                                    <img src="~/images-handle/get-image?path=@(image.Path)&w=330&h=360" alt="" style="max-width:100%;">
+                                                                </a>
+                                                            </div>
+                                                        </div>
+                                                        count++;
+                                                    }
+                                                }
+                                            }
+                                        </div>
+                                    </div>
+
+                                </div>
+                                <!-- End Gallery -->
+                                
+                            </div>
+                            <div class="col-md-7 col-sm-6 col-xs-12">
+                                <div class="detail-info">
+                                    <h2 class="title-detail">@Model.Item.Product_Name.ToUpper()</h2>
+                                    <div class="product-price">
+                                        <ins><span>@Model.Item.Sale_Price.NumberToString()</span></ins>
+                                    </div>
+                                    @if (Model.List_Similar_Item != null && Model.List_Similar_Item.Count > 0)
+                                    {
+
+                                        <div class="attr-detail attr-color">
+                                            <div class="attr-title">                                               
+                                                <strong><sup>*</sup>Màu:</strong><span class="current-color">@current_Product_Color.Name</span>
+                                            </div>
+                                            <ul class="list-filter color-filter">
+                                                @foreach (var similar in Model.List_Similar_Item)
+                                                {
+                                                    var listAttribute = new List<ProductAttribute_DTO>();
+                                                    var color = new ProductAttribute_DTO();
+                                                    listAttribute.AddRange(similar.Product_ProductAttribute_Mapping.Select(p => p.ProductAttribute));
+                                                    string _active = similar.Product_ID == Model.Item.Product_ID ? "active" : "";
+                                                    if (listAttribute != null)
+                                                    {
+                                                        color = listAttribute.Where(p => p.Type == ATTRIBUTE_TYPE.COLOR.ToString()).FirstOrDefault();
+                                                    }
+                                                    <li class="@_active"><a href="#" data-value="@similar.Product_ID" data-color="@color.Name" title="@color.Name"><span style="background:@color.Description"></span></a></li>
+                                                }
+                                            </ul>
+                                        </div>
+                                     }
+                                    <div class="attr-detail attr-size">
+                                        <div class="attr-title">
+                                            <strong><sup>*</sup>Size:</strong><span class="current-size">M</span>
+                                        </div>
+                                        <ul class="list-filter size-filter">
+                                            @foreach (var saleItem in Model.List_All_Sale_Item)
+                                            {
+                                                var saleItem_Attributes = new List<ProductAttribute_DTO>();
+                                                var size = new ProductAttribute_DTO();
+                                                saleItem_Attributes.AddRange(saleItem.Product_ProductAttribute_Mapping.Select(p => p.ProductAttribute));
+                                                string _active = saleItem.Product_ID == Model.Item.Product_ID ? "active" : "";
+                                                if (saleItem_Attributes != null)
+                                                {
+                                                    size = saleItem_Attributes.Where(p => p.Type == ATTRIBUTE_TYPE.SIZE.ToString()).FirstOrDefault();
+                                                }
+                                                <li class="@_active"><a data-value="@saleItem.Product_ID" href="#">@size.Name</a></li>
+                                            }
+                                        </ul>
+                                    </div>
+                                    <div class="detail-extralink">
+                                        <div class="detail-qty border radius">
+                                            <a href="#" class="qty-down"><i class="fa fa-caret-down" aria-hidden="true"></i></a>
+                                            <span class="qty-val">1</span>
+                                            <a href="#" class="qty-up"><i class="fa fa-caret-up" aria-hidden="true"></i></a>
+                                        </div>
+                                        <div class="product-extra-link2">
+                                            <a class="addcart-link" href="#">Add to Cart</a>
+                                        </div>
+                                    </div>
+                                </div>
+                                <!-- Detail Info -->
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- End Content -->
+    </div>
+    <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1/jquery.js"></script>
+    <script src="http://cdnjs.cloudflare.com/ajax/libs/jquery-mousewheel/3.0.6/jquery.mousewheel.min.js"></script>
+    @Scripts.Render("~/quickview/js")
+</body>
+</html>

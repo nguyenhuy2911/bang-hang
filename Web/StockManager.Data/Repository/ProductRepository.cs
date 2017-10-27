@@ -30,7 +30,6 @@ namespace StockManager.Data.Repository
 
         public ResponseBase<List<PRODUCT>> Get_Products(Page page)
         {
-
             var query = dbset.Where(p => true)
                             .Include(p => p.UNIT)
                             .Include(p => p.Product_ProductAttribute_Mapping.Select(o => o.ProductAttribute))
@@ -38,6 +37,23 @@ namespace StockManager.Data.Repository
                             .Skip(page.Skip)
                             .Take(page.PageSize);
                             
+            int rowCount = dbset.Count();
+            return new ResponseBase<List<PRODUCT>>()
+            {
+                Results = query.ToList(),
+                TotalRow = rowCount
+            };
+        }
+
+        public ResponseBase<List<PRODUCT>> Get_Products_By_GroupId(Page page)
+        {
+            var query = dbset.Where(p => true)
+                            .Include(p => p.UNIT)
+                            .Include(p => p.Product_ProductAttribute_Mapping.Select(o => o.ProductAttribute))
+                            .SortBy(p => p.Product_ID, false)
+                            .Skip(page.Skip)
+                            .Take(page.PageSize);
+
             int rowCount = dbset.Count();
             return new ResponseBase<List<PRODUCT>>()
             {
@@ -78,13 +94,14 @@ namespace StockManager.Data.Repository
                 TotalRow = rowCount
             };
         }
-
-       
+               
         public int Update_Product(Product_Update_Parameter parameter)
         {
             var data = this.Update_ByStore<Product_Update_Parameter>(parameter, STORENAME.PRODUCT_Update);
             return data;
         }
+
+
     }
 }
 

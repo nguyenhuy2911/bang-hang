@@ -1,7 +1,6 @@
 ﻿
 <div id="header">
     <div class="header">
-        
         <!-- End Top Header -->
         <div class="main-header6">
             <div class="container">
@@ -9,7 +8,7 @@
                     <div class="col-md-3 col-sm-4 col-xs-12">
                         <div class="logo logo6">
                             <h1 class="hidden">Kute Shop wordpress theme</h1>
-                            <a href="/"><img src="images/home7/logo.png" alt=""></a>
+                            <a href="/"><img src="~/Content/images/Logo.jpg" alt=""></a>
                         </div>
                     </div>
                     <div class="col-md-9 col-sm-8 col-xs-12">
@@ -21,71 +20,11 @@
                                         <input value="" class="radius" type="submit">
                                     </div>
                                 </form>
-                            </div>
+                            </div>  
                             <div class="call-phone-number border radius">
                                 <strong>1800 2688</strong>
                             </div>
-                            <div class="mini-cart-box mini-cart6">
-                                <a class="mini-cart-link border radius" href="cart.html">
-                                    <span class="mini-cart-icon color"><i class="fa fa-shopping-basket" aria-hidden="true"></i></span>
-                                    <span class="mini-cart-number">0 item: <b class="color">$900.00</b></span>
-                                </a>
-                                <div class="mini-cart-content">
-                                    <h2>(2) ITEMS IN MY CART</h2>
-                                    <ul class="list-mini-cart-item list-unstyled">
-                                        <li>
-                                            <div class="mini-cart-edit">
-                                                <a class="delete-mini-cart-item" href="#"><i class="fa fa-trash-o"></i></a>
-                                                <a class="edit-mini-cart-item" href="#"><i class="fa fa-pencil"></i></a>
-                                            </div>
-                                            <div class="mini-cart-thumb">
-                                                <a href="#"><img alt="" src="images/home1/mini-cart-thumb.png"></a>
-                                            </div>
-                                            <div class="mini-cart-info">
-                                                <h3><a href="#">Burberry Pink &amp; black</a></h3>
-                                                <div class="info-price">
-                                                    <span>$59.52</span>
-                                                    <del>$17.96</del>
-                                                </div>
-                                                <div class="qty-product">
-                                                    <span class="qty-down">-</span>
-                                                    <span class="qty-num">1</span>
-                                                    <span class="qty-up">+</span>
-                                                </div>
-                                            </div>
-                                        </li>
-                                        <li>
-                                            <div class="mini-cart-edit">
-                                                <a class="delete-mini-cart-item" href="#"><i class="fa fa-trash-o"></i></a>
-                                                <a class="edit-mini-cart-item" href="#"><i class="fa fa-pencil"></i></a>
-                                            </div>
-                                            <div class="mini-cart-thumb">
-                                                <a href="#"><img alt="" src="images/home1/mini-cart-thumb.png"></a>
-                                            </div>
-                                            <div class="mini-cart-info">
-                                                <h3><a href="#">Burberry Pink &amp; black</a></h3>
-                                                <div class="info-price">
-                                                    <span>$59.52</span>
-                                                    <del>$17.96</del>
-                                                </div>
-                                                <div class="qty-product">
-                                                    <span class="qty-down">-</span>
-                                                    <span class="qty-num">1</span>
-                                                    <span class="qty-up">+</span>
-                                                </div>
-                                            </div>
-                                        </li>
-                                    </ul>
-                                    <div class="mini-cart-total">
-                                        <label>TOTAL</label>
-                                        <span>$24.28</span>
-                                    </div>
-                                    <div class="mini-cart-button">
-                                        <a class="mini-cart-view" href="#">view my cart </a>
-                                        <a class="mini-cart-checkout" href="#">Checkout</a>
-                                    </div>
-                                </div>
-                            </div>
+                           @Html.Action("HeaderMiniCartItem", "ShoppingCart")
                         </div>
                     </div>
                 </div>
@@ -95,16 +34,16 @@
         <div class="header-nav7">
             <div class="container">
                 <div class="row">
-                   
+
                     <div class="col-md-9 col-sm-12 col-xs-12">
                         <nav class="main-nav main-nav6 main-nav7">
                             <ul>
                                 <li class="menu-item-has-children">
-                                    <a href="/">Trang chủ</a>                                   
+                                    <a href="/">Trang chủ</a>
                                 </li>
                                 <li class="has-mega-menu">
                                     <a href="list-boxed-banner.html">Giới thiệu </a>
-                                   
+
                                     <!-- End Mega Menu -->
                                 </li>
                                 <li class="has-mega-menu">
@@ -229,12 +168,12 @@
                                 </li>
                                 <li class="has-mega-menu">
                                     <a href="list-boxed-banner.html">Tin tức </a>
-                                   
+
                                     <!-- End Mega Menu -->
                                 </li>
                                 <li class="has-mega-menu">
                                     <a href="list-boxed-banner.html">Liên hệ</a>
-                                   
+
                                     <!-- End Mega Menu -->
                                 </li>
                             </ul>

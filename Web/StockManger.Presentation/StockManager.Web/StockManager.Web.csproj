@@ -140,10 +140,13 @@
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
+    <Compile Include="Common\ConstantKey.cs" />
     <Compile Include="Controllers\Admin\DashBoardController.cs" />
     <Compile Include="Controllers\Admin\OnlineItem\OnlineItemController.cs" />
     <Compile Include="Controllers\Admin\Order\OrderController.cs" />
     <Compile Include="Controllers\BaseController.cs" />
+    <Compile Include="Controllers\Online\BreadCrumb\BreadCrumbController.cs" />
+    <Compile Include="Controllers\Online\Feature\FeatureController.cs" />
     <Compile Include="Controllers\Online\Home\HomeController.cs" />
     <Compile Include="Controllers\Admin\IM_AND_EXPORT\IMPORT\IMPORTController.cs" />
     <Compile Include="Controllers\Admin\INVENTORY\INVENTORYController.cs" />
@@ -152,6 +155,8 @@
     <Compile Include="Controllers\Admin\WAREHOUSETRANSFER\WAREHOUSETRANSFERController.cs" />
     <Compile Include="Controllers\Admin\Images\ImageController.cs" />
     <Compile Include="Controllers\ImageHandleController.cs" />
+    <Compile Include="Controllers\Online\Item\ItemController.cs" />
+    <Compile Include="Controllers\Online\ShoppingCart\ShoppingCartController.cs" />
     <Compile Include="HtmlHelper\CustomHtmlHelper.cs" />
     <Compile Include="Models\Admin\Online-items\Online_Items_ViewModel.cs" />
     <Compile Include="Models\Admin\Online-items\Online_Item_Detail_ViewModel.cs" />
@@ -161,7 +166,9 @@
     <Compile Include="Models\Admin\Product\Products_CRUD_ViewModel.cs" />
     <Compile Include="Models\Admin\Images\ProductImg_Upload_Modal.cs" />
     <Compile Include="Models\Online\Home\NewestItemsModel.cs" />
-    <Compile Include="Models\Online\Home\QuickViewModel.cs" />
+    <Compile Include="Models\Online\Item\ItemDetailViewModel.cs" />
+    <Compile Include="Models\Online\ShoppingCard\ShoppingCartItem.cs" />
+    <Compile Include="Models\Online\ShoppingCard\ShoppingCartModel.cs" />
     <Compile Include="Models\SelectList_Group.cs" />
     <Compile Include="Models\WAREHOUSETRANSFER\WAREHOUSETRANSFER_Form_Model.cs" />
     <Compile Include="Models\WAREHOUSETRANSFER\WAREHOUSETRANSFER_New_UpDate_Form_Model.cs" />
@@ -192,6 +199,7 @@
     <Content Include="Content\bootstrap.min.css" />
     <Content Include="Content\build.css" />
     <Content Include="Content\images\free.png" />
+    <Content Include="Content\images\Logo.jpg" />
     <Content Include="Content\images\plus-empty.png" />
     <Content Include="Content\images\slides\big_bunny_fake.jpg" />
     <Content Include="Content\images\slides\bridge.jpg" />
@@ -209,6 +217,7 @@
     <Content Include="Content\images\slides\thumbs\tree.jpg" />
     <Content Include="Content\images\slides\tree.jpg" />
     <Content Include="Content\site\online\css\color.css" />
+    <Content Include="Content\site\online\css\custom.css" />
     <Content Include="Content\site\online\css\fonts\fontawesome-webfont3e6e.html" />
     <Content Include="Content\site\online\css\fonts\fontawesome-webfont3e6e.svg" />
     <Content Include="Content\site\online\css\fonts\glyphicons-halflings-regular-2.html" />
@@ -549,6 +558,8 @@
     <Content Include="Scripts\Function\IMPORT\IMPORT_New.js" />
     <Content Include="Scripts\Function\online-items\online-items.js" />
     <Content Include="Scripts\Function\Online\home\home.js" />
+    <Content Include="Scripts\Function\Online\detail\detail.js" />
+    <Content Include="Scripts\Function\Online\shopping-cart\shoppingcart.js" />
     <Content Include="Scripts\Function\orders\orders.js" />
     <Content Include="Scripts\Function\product\Product.js" />
     <Content Include="Scripts\Function\VENDOR\VENDOR.js" />
@@ -4128,13 +4139,21 @@
     <Content Include="Views\Admin\Order\Index.cshtml" />
     <Content Include="Views\Shared\Online\_Header.cshtml" />
     <Content Include="Views\Shared\Online\_Footer.cshtml" />
-    <Content Include="Views\Online\Home\QuickView.cshtml" />
+    <Content Include="Views\Online\Item\QuickView.cshtml" />
     <Content Include="Views\Online\Home\Detail.cshtml" />
     <Content Include="Views\Online\Home\_Home_NewestItems.cshtml" />
+    <Content Include="Views\Online\Item\Index.cshtml" />
+    <Content Include="Views\Online\Item\Detail.cshtml" />
+    <Content Include="Views\Online\BreadCrumb\Index.cshtml" />
+    <Content Include="Views\Online\Feature\RelateItems.cshtml" />
+    <Content Include="Views\Online\Feature\ViewedItems.cshtml" />
+    <Content Include="Views\Online\ShoppingCart\HeaderMiniCartItem.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="uploads\img\product\" />
+    <Folder Include="Views\Feature\" />
+    <Folder Include="Views\Online\ViewedItems\" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Project_Readme.html" />
