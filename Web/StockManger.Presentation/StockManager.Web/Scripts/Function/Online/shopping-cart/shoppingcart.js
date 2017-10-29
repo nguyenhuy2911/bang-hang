@@ -20,34 +20,28 @@ SHOPPINGCART.prototype.regisEvent = function () {
 }
 
 
-SHOPPINGCART.prototype.addToCart = function (productId, btn) {
-
+SHOPPINGCART.prototype.addToCart = function (productId, quantity, btn) {
     $.ajax({
         type: 'POST',
         url: '/shoppingcart/add-to-cart',
         data: {
-            productId: productId
+            productId: productId,
+            quantity: quantity
         },
         dataType: 'json',
         beforeSend: function () {
-          //  $("#div-crud-modal").loading();
+            $(btn).button('loading');
         },
         error: function (response) {
-            $("#div-crud-modal").loading("stop");
+            console.log("error: ");
             console.log(response);
         },
         success: function (response) {
-            //if (response.StatusCode != 0)
-            //    showErrorMessage(response.StatusMessage, "#div-crud-modal");
-            //else {
-            //    showSuccessMessage(response.StatusMessage, "#div-crud-modal");
-            //    $("[view-when='update']").fadeIn();
-            //}
+
         }
     })
     .done(function (response) {
-        //$("#div-crud-modal").loading("stop");
-
+       $(btn).button('reset');
     });
 }
 

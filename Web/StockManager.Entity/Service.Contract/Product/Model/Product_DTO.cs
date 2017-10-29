@@ -6,7 +6,7 @@ namespace StockManager.Entity.Service.Contract
 {
     public class Product_DTO
     {
-        
+
         public int Product_ID { get; set; }
         public string Product_Name { get; set; }
         public string Product_NameEN { get; set; }
@@ -57,13 +57,10 @@ namespace StockManager.Entity.Service.Contract
         public Nullable<bool> Serial { get; set; }
         public bool Active { get; set; }
         public bool Publish { get; set; }
-        public int? Product_Level1 { get; set; }
-        public int? Product_Level2 { get; set; }
-        public int? Product_Level3 { get; set; }
-        public int? Product_Level4 { get; set; }
-        public int? Product_Level5 { get; set; }
-
+        public string ImgAvartar { get; set; }
         public virtual Unit_DTO UNIT { get; set; }
         public virtual List<Product_ProductAttribute_Mapping_DTO> Product_ProductAttribute_Mapping { get; set; }
+        public List<Images_DTO> ListImage { get; set; }
+        public List<ProductAttribute_DTO> ProductAttributes { get; set; }
     }
 }

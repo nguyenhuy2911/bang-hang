@@ -1,31 +1,45 @@
-﻿<div class="product-related border radius">
+﻿@model StockManager.Web.Models.Online.ViewedItemsModel
+@using Common
+<div class="product-related border radius">
     <h2 class="title18">Sản phẩm đã xem</h2>
     <div class="product-related-slider">
         <div class="wrap-item" data-itemscustom="[[0,1],[480,2],[1024,3],[1200,4]]" data-pagination="false" data-navigation="true">
-            <div class="item-pro-color">
-                <div class="product-thumb">
-                    <a href="detail.html" class="product-thumb-link">
-                        <img data-color="black" class="active" src="images/photos/fashion/2.jpg" alt="">
-                        <img data-color="purple" src="images/photos/fashion/1.jpg" alt="">
-                        <img data-color="blue" src="images/photos/fashion/3.jpg" alt="">
-                        <img data-color="cyan" src="images/photos/fashion/4.jpg" alt="">
-                    </a>
-                    <a href="quick-view.html" class="quickview-link plus fancybox.iframe"><span>quick view</span></a>
-                </div>
-                <div class="product-info">
-                    <div class="list-color">
-                        <a href="#" data-color="black" style="background:#404040"></a>
-                        <a href="#" data-color="purple" style="background:#ff8ff8"></a>
-                        <a href="#" data-color="blue" style="background:#868fff"></a>
-                        <a href="#" data-color="cyan" style="background:#80e6ff"></a>
+            @if (Model.Items != null && Model.Items.Count > 0)
+            {
+                foreach (var item in Model.Items)
+                {
+                    var image = "/images-handle/get-image?path=" + item.Product_Name + "&w=275&h=356";
+                    <div class="item-pro-color">
+                        <div class="product-thumb">
+                            <a href="/detail/@item.Product_ID" class="product-thumb-link">
+                                <img data-color="black" class="active" src="@image" alt="">
+                            </a>
+                            <a href="/item/quick-view?product_Id=@item.Product_ID" class="quickview-link plus fancybox.iframe"><span>Xem nhanh</span></a>
+                        </div>
+                        <div class="product-info">
+
+                            <h3 class="product-title">
+                                <a href="/detail/@item.Product_ID">@item.Product_Name </a>
+                            </h3>
+                            <div class="product-price">
+
+                                <ins><span> @item.Sale_Price.NumberToString() </span></ins>
+                                @* <del><span>$400.00</span></del>*@
+
+                            </div>
+                            <div class="product-extra-link">
+
+                                <a href="#" class="addcart-link_"><i class="fa fa-shopping-basket" aria-hidden="true"></i>Mua ngay<span>Mua ngay</span></a>
+                                @*<a href="#" class="wishlist-link"><i class="fa fa-heart" aria-hidden="true"></i><span>Wishlist</span></a>
+                                    <a href="#" class="compare-link"><i class="fa fa-refresh" aria-hidden="true"></i><span>Compare</span></a>*@
+
+                            </div>
+                        </div>
                     </div>
-                    <h3 class="product-title"><a href="detail.html">new favorite</a></h3>
-                    <div class="product-price">
-                        <ins><span>$360.00</span></ins>
-                        <del><span>$400.00</span></del>
-                    </div>
-                </div>
-            </div>
+                }
+
+            }
+
         </div>
     </div>
 </div>

@@ -10,6 +10,7 @@ using Common.Enum;
 using StockManager.Data.Model.Data;
 using System.Linq.Expressions;
 using Common;
+using System.Linq;
 namespace StockManager.Business
 {
     public interface IProductService
@@ -107,7 +108,6 @@ namespace StockManager.Business
         {
             var product = _IProductRepository.GetById(id);
             var retData = Mapper.Map<ResponseBase<PRODUCT>, Get_Product_By_Id_Response>(product);
-
             return retData;
         }
 
@@ -154,8 +154,15 @@ namespace StockManager.Business
 
             var data = _IProductRepository.GetPage(request.Page, condition, o => o.Product_ID, false);
             var retData = Mapper.Map<ResponseBase<List<PRODUCT>>, Get_Products_Response>(data);
+
+
             if (retData != null && retData.Results != null)
+            {
                 retData.StatusCode = (int)RESULT_STATUS_CODE.SUCCESS;
+                retData.Results.ForEach(x => {
+                    x.ProductAttributes = x.Product_ProductAttribute_Mapping.Select(o => o.ProductAttribute).ToList();
+                });
+            }
             else
                 retData.StatusCode = (int)RESULT_STATUS_CODE.NODATA;
             return retData;

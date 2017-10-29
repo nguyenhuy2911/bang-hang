@@ -2,6 +2,7 @@
 @using StockManager.Entity.Service.Contract
 @using Common
 @using Common.Enum
+@using Newtonsoft.Json;
 @{
     Layout = "~/Views/Shared/Online/_Layout.cshtml";
     ViewBag.Title = Model.Item.Product_Name;
@@ -24,7 +25,14 @@
                                 <div class="detail-gallery">
                                     <div class="mid">
                                         @{
-                                            string bigImgSlider = Model.ListImage != null ? Model.ListImage[0].Path : "";
+                                            var listImgSlider = Model.List_Similar_Item.Find(p => p.Product_ID == Model.Item.Product_ID).ListImage;
+                                            string bigImgSlider = "";
+
+                                            if (listImgSlider != null && listImgSlider.Count > 0)
+                                            {
+                                                bigImgSlider = listImgSlider.FirstOrDefault().Path;
+                                            }
+
                                         }
                                         <img src="~/images-handle/get-image?path=@(bigImgSlider)&w=330&h=360" data-zoom-image="../images-handle/get-image?path=@(bigImgSlider)&w=430&h=460" alt="">
                                     </div>
@@ -32,10 +40,10 @@
                                         <div id="detail-item-slider" class="owl-carousel">
                                             <!-- Carousel items -->
                                             @{
-                                                if (Model.ListImage != null)
+                                                if (listImgSlider != null)
                                                 {
                                                     int count = 0;
-                                                    foreach (var image in Model.ListImage)
+                                                    foreach (var image in listImgSlider)
                                                     {
                                                         string active = "";
                                                         active = count == 0 ? "active" : "";
@@ -71,34 +79,26 @@
                                             <ul class="list-filter color-filter">
                                                 @foreach (var similar in Model.List_Similar_Item)
                                                 {
-                                                    var listAttribute = new List<ProductAttribute_DTO>();
                                                     var color = new ProductAttribute_DTO();
-                                                    listAttribute.AddRange(similar.Product_ProductAttribute_Mapping.Select(p => p.ProductAttribute));
                                                     string _active = similar.Product_ID == Model.Item.Product_ID ? "active" : "";
-                                                    if (listAttribute != null)
-                                                    {
-                                                        color = listAttribute.Where(p => p.Type == ATTRIBUTE_TYPE.COLOR.ToString()).FirstOrDefault();
-                                                    }
-                                                    <li class="@_active"><a href="#" data-value="@similar.Product_ID" data-color="@color.Name" title="@color.Name"><span style="background:@color.Description"></span></a></li>
+                                                    color = similar.ProductAttributes.Where(p => p.Type == ATTRIBUTE_TYPE.COLOR.ToString()).FirstOrDefault();
+                                                    <li class="@_active"><a href="#" data-value="@similar.Product_ID" data-color="@color.Name" data-color-value="@color.Id" title="@color.Name"><span style="background:@color.Description"></span></a></li>
                                                 }
                                             </ul>
                                         </div>
                                     }
                                     <div class="attr-detail attr-size">
                                         <div class="attr-title">
-                                            <strong><sup>*</sup>Size:</strong><span class="current-size">M</span>
+                                            <strong><sup>*</sup>Size:</strong><span class="current-size">@current_Product_Size.Name</span>
                                         </div>
                                         <ul class="list-filter size-filter">
-                                            @foreach (var saleItem in Model.List_All_Sale_Item)
+                                            @foreach (var saleItem in Model.List_All_Sale_Item.Where(p => p.ProductAttributes.Where(o => o.Id == current_Product_Color.Id).Count() > 0))
                                             {
                                                 var saleItem_Attributes = new List<ProductAttribute_DTO>();
                                                 var size = new ProductAttribute_DTO();
-                                                saleItem_Attributes.AddRange(saleItem.Product_ProductAttribute_Mapping.Select(p => p.ProductAttribute));
+                                                size = saleItem.ProductAttributes.Where(p => p.Type == ATTRIBUTE_TYPE.SIZE.ToString()).FirstOrDefault();
                                                 string _active = saleItem.Product_ID == Model.Item.Product_ID ? "active" : "";
-                                                if (saleItem_Attributes != null)
-                                                {
-                                                    size = saleItem_Attributes.Where(p => p.Type == ATTRIBUTE_TYPE.SIZE.ToString()).FirstOrDefault();
-                                                }
+
                                                 <li class="@_active"><a data-value="@saleItem.Product_ID" href="#">@size.Name</a></li>
                                             }
                                         </ul>
@@ -110,7 +110,7 @@
                                             <a href="#" class="qty-up"><i class="fa fa-caret-up" aria-hidden="true"></i></a>
                                         </div>
                                         <div class="product-extra-link2">
-                                            <a class="addcart-link" href="#">Mua ngay</a>
+                                            <a class="addcart-link" href="javascript:void(0)" data-loading-text="<i class='fa fa-circle-o-notch fa-spin'></i> Đang thực hiện">Mua ngay</a>
                                         </div>
                                     </div>
                                 </div>
@@ -123,11 +123,11 @@
                         </ul>
                         <!-- Tab panes -->
                         <div class="tab-content">
-                            <div role="tabpanel" class="tab-pane active text-center" id="image">
+                            <div role="tabpanel" class="tab-pane active text-center" id="tab_image">
                                 @{
-                                    if (Model.ListImage != null)
+                                    if (listImgSlider != null && listImgSlider.Count > 0)
                                     {
-                                        foreach (var image in Model.ListImage)
+                                        foreach (var image in listImgSlider)
                                         {
                                             <img src="~/images-handle/get-image?path=@(image.Path)&w=330&h=360" alt="" style="max-width:100%;">
                                         }
@@ -147,3 +147,11 @@
         </div>
     </div>
 </div>
+@Scripts.Render("~/Script/Online/Item")
+<script>
+    var modelJson = '@JsonConvert.SerializeObject(Model)';
+    $(function () {
+        _DETAIL.setModel(modelJson);
+    });
+    
+</script>

@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Newtonsoft.Json;
+using System;
 using System.Collections.Generic;
 using System.Drawing.Imaging;
 using System.Globalization;
@@ -40,7 +41,7 @@ namespace Common
         }
 
         public static T convertNumber<T>(Object value)
-        {            
+        {
             CultureInfo ci = new CultureInfo("en-US");
             var result = (T)Convert.ChangeType(value, typeof(T), ci);
             return result;
@@ -48,8 +49,33 @@ namespace Common
 
         public static string NumberToString(this Object value)
         {
-            return string.Format(CultureInfo.InvariantCulture, "{0:0,0}", value);
+            if (value != null)
+            {
+                return string.Format(CultureInfo.InvariantCulture, "{0:0,0}", value);
+            }
+            else
+                return "0";
+
         }
-       
+
+        public static void SetCookie(string Key, Object Data)
+        {
+            string cookieString = JsonConvert.SerializeObject(Data);
+            var cookie = new HttpCookie(Key, cookieString);
+            cookie.Expires.AddDays(365);
+            HttpContext.Current.Response.Cookies.Add(cookie);
+        }
+
+        public static T GetDataFromCookie<T>(string Key)
+        {
+            var cookie = HttpContext.Current.Request.Cookies[Key];
+            if (cookie != null)
+            {
+                var data = JsonConvert.DeserializeObject<T>(cookie.Value);
+                return data;
+            }
+            else
+                return default(T);
+        }
     }
 }

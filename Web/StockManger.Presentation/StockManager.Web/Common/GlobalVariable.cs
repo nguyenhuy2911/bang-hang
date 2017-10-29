@@ -6,9 +6,8 @@ using System.Web;
 
 namespace StockManager.Web.Common
 {
-    public class ConstantKey
+    public class GlobalVariable
     {
-        public static string SessionCart = "ShoppingCart";
-        public static string Cookie_ViewedItem = "Cookie_ViewedItem";
+        public static List<Product_DTO> _listItem { get; set; }
     }
 }

@@ -36,7 +36,7 @@ namespace StockManager.Data.Repository
                             .SortBy(p => p.Product_ID, false)
                             .Skip(page.Skip)
                             .Take(page.PageSize);
-                            
+
             int rowCount = dbset.Count();
             return new ResponseBase<List<PRODUCT>>()
             {
@@ -62,6 +62,8 @@ namespace StockManager.Data.Repository
             };
         }
 
+        
+
         public ResponseBase<List<PRODUCT_GROUP>> Get_Product_Groups(Product_Group_GetList_Parameter parameterObj)
         {
             int rowCount = 0;
@@ -83,7 +85,7 @@ namespace StockManager.Data.Repository
                 TotalRow = rowCount
             };
         }
-     
+
         public ResponseBase<List<OnlineItem_GetList>> Get_OnlineItem_GetList(OnlineItem_GetList_Parameter parameterObj)
         {
             int rowCount = 0;
@@ -94,7 +96,7 @@ namespace StockManager.Data.Repository
                 TotalRow = rowCount
             };
         }
-               
+
         public int Update_Product(Product_Update_Parameter parameter)
         {
             var data = this.Update_ByStore<Product_Update_Parameter>(parameter, STORENAME.PRODUCT_Update);

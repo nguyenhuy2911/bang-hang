@@ -1,4 +1,5 @@
-﻿using Common.Enum;
+﻿using Common;
+using Common.Enum;
 using StockManager.Business;
 using StockManager.Entity;
 using StockManager.Entity.Service.Contract;
@@ -39,7 +40,23 @@ namespace StockManager.Web.Controllers
                 Page = new Page(0, int.MaxValue),
                 Publish = (int)ACTIVE.ALL
             };
-            return this._IProductService.Get_Products_By_GroupId(request)?.Results;
+            var data = this._IProductService.Get_Products_By_GroupId(request)?.Results;
+            if (data != null)
+            {
+                foreach (var item in data)
+                {
+                    var getImgRequest = new Get_Images_By_RelateId_Request
+                    {
+                        Page = new Entity.Page(0, int.MaxValue),
+                        RelateId = item.Product_ID.ToString(),
+                        Type = "PRODUCT"
+                    };
+                    var listImg = this._IImagesService.Get_Images_By_RelateId(getImgRequest)?.Results;
+                    item.ListImage = new List<Images_DTO>();
+                    item.ListImage = listImg;
+                }
+            }
+            return data;
         }
 
         public ActionResult Index()
@@ -69,20 +86,17 @@ namespace StockManager.Web.Controllers
             if (product != null)
             {
                 model.Item = product;
-                var getImgRequest = new Get_Images_By_RelateId_Request
-                {
-                    Page = new Entity.Page(0, int.MaxValue),
-                    RelateId = product_Id.ToString(),
-                    Type = "PRODUCT"
-                };
-                var listImg = this._IImagesService.Get_Images_By_RelateId(getImgRequest)?.Results;
-                if (listImg != null && listImg.Count > 0)
-                    model.ListImage = listImg;
                 var allSaleItems = Get_Products_ByGroupId(product.Product_Group_ID);
                 model.List_Similar_Item = allSaleItems.Where(p => p.Publish == true).ToList();
                 model.List_All_Sale_Item = allSaleItems;
             }
-            ConstantKey.ListItem = model.List_All_Sale_Item;
+            GlobalVariable._listItem = model.List_All_Sale_Item;
+            var listViewed = Utility.GetDataFromCookie<List<Product_DTO>>(ConstantKey.Cookie_ViewedItem);
+            if (listViewed == null)            
+                listViewed = new List<Product_DTO>();
+            
+            listViewed.Add(product);
+            Utility.SetCookie(ConstantKey.Cookie_ViewedItem, listViewed);
             return model;
         }
 

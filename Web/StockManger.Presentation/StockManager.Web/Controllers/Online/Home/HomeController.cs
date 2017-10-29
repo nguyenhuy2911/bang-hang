@@ -25,7 +25,7 @@ namespace StockManager.Web.Controllers
         private readonly IProductAttributeService _IProductAttributeService;
 
         [Route]
-        [OutputCache(CacheProfile = "SystemCache", Location = System.Web.UI.OutputCacheLocation.Client)]
+     //   [OutputCache(CacheProfile = "SystemCache", Location = System.Web.UI.OutputCacheLocation.Client)]
         public ActionResult Index()
         {
             return View("~/Views/Online/Home/Index.cshtml");

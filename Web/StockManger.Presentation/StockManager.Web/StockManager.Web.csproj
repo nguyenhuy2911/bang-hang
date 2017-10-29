@@ -141,6 +141,7 @@
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Common\ConstantKey.cs" />
+    <Compile Include="Common\GlobalVariable.cs" />
     <Compile Include="Controllers\Admin\DashBoardController.cs" />
     <Compile Include="Controllers\Admin\OnlineItem\OnlineItemController.cs" />
     <Compile Include="Controllers\Admin\Order\OrderController.cs" />
@@ -165,10 +166,12 @@
     <Compile Include="Models\INVENTORY\INVENTORY_New_UpDate_Form_Model.cs" />
     <Compile Include="Models\Admin\Product\Products_CRUD_ViewModel.cs" />
     <Compile Include="Models\Admin\Images\ProductImg_Upload_Modal.cs" />
+    <Compile Include="Models\Online\Feature\ViewedItemsModel.cs" />
     <Compile Include="Models\Online\Home\NewestItemsModel.cs" />
     <Compile Include="Models\Online\Item\ItemDetailViewModel.cs" />
-    <Compile Include="Models\Online\ShoppingCard\ShoppingCartItem.cs" />
-    <Compile Include="Models\Online\ShoppingCard\ShoppingCartModel.cs" />
+    <Compile Include="Models\Online\ShoppingCart\ShoppingCart.cs" />
+    <Compile Include="Models\Online\ShoppingCart\ShoppingCartItem.cs" />
+    <Compile Include="Models\Online\ShoppingCart\ShoppingCartModel.cs" />
     <Compile Include="Models\SelectList_Group.cs" />
     <Compile Include="Models\WAREHOUSETRANSFER\WAREHOUSETRANSFER_Form_Model.cs" />
     <Compile Include="Models\WAREHOUSETRANSFER\WAREHOUSETRANSFER_New_UpDate_Form_Model.cs" />
@@ -558,7 +561,7 @@
     <Content Include="Scripts\Function\IMPORT\IMPORT_New.js" />
     <Content Include="Scripts\Function\online-items\online-items.js" />
     <Content Include="Scripts\Function\Online\home\home.js" />
-    <Content Include="Scripts\Function\Online\detail\detail.js" />
+    <Content Include="Scripts\Function\Online\Item\Item.js" />
     <Content Include="Scripts\Function\Online\shopping-cart\shoppingcart.js" />
     <Content Include="Scripts\Function\orders\orders.js" />
     <Content Include="Scripts\Function\product\Product.js" />

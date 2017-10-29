@@ -184,6 +184,22 @@ namespace StockManager.Web
                                          "~/Scripts/Function/Online/home/home.js"
             ));
             // ------------------------------------ End ----------------------------------------------//
+
+            // ------------------------- ShoppingCart ----------------------------------------------//
+
+
+            bundles.Add(new ScriptBundle("~/Script/Online/ShoppingCart").Include(
+                                         "~/Scripts/Function/Online/shopping-cart/shoppingcart.js"
+            ));
+            // ------------------------------------ End ----------------------------------------------//
+
+            // ------------------------- Items ----------------------------------------------//
+
+
+            bundles.Add(new ScriptBundle("~/Script/Online/Item").Include(
+                                         "~/Scripts/Function/Online/Item/Item.js"
+            ));
+            // ------------------------------------ End ----------------------------------------------//
         }
     }
 }
